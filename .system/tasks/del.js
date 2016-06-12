@@ -1,5 +1,5 @@
-import gulp from 'gulp'
-import del from 'del'
+import gulp from 'gulp';
+import del from 'del';
 
 const
   NAME = 'del',
@@ -8,6 +8,9 @@ const
     'temp'
   ];
 
+/**
+ * Удалает собранную и временную папки
+ */
 export default () => {
   gulp.task(NAME, () => {
     return del(FILES)

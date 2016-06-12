@@ -1,15 +1,18 @@
-import gulp from 'gulp'
-import rebase from '../utility/rebase'
-import watch from '../utility/watch'
+import gulp from 'gulp';
+import rebase from '../utility/rebase';
+import watch from '../utility/watch';
 
 const
   NAME = 'font',
   FILES = [
     'source/**/font/*',
-    '!source/**/{_*,_*/**}'
+    '!source/**/{_*/**,_*}'
   ],
   THERE = 'public/font';
 
+/**
+ * Перемещает все шрифты
+ */
 export default () => {
   watch(NAME, FILES);
 

@@ -57,7 +57,7 @@ let addLibByType = (path) => {
   }
 };
 
-const production = process.env.NODE_ENV === 'production';
+const PRODUCTION = process.env.NODE_ENV === 'production';
 
 /**
  * Сортируем пути к библиотекам и добавляем в экспортируемую переменную lib
@@ -66,7 +66,7 @@ const production = process.env.NODE_ENV === 'production';
  */
 VENDORS.forEach((vendor) => {
   if (vendor[0]) { // require?
-    let path = production && vendor[2] ? vendor[2] : vendor[1];
+    let path = PRODUCTION && vendor[2] ? vendor[2] : vendor[1];
     addLibByType(path)
   }
 });

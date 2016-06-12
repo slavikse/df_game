@@ -1,7 +1,6 @@
-import gulp from 'gulp'
-import notify from '../utility/notify'
-import watch from '../utility/watch'
-import $ from 'gulp-load-plugins'
+import gulp from 'gulp';
+import rigger from 'gulp-rigger';
+import watch from '../utility/watch';
 
 const
   NAME = 'view',
@@ -9,19 +8,22 @@ const
     'source/*.html',
     '!source/_*'
   ],
-  wFILES = [
+  WATCH = [
     'source/**/*.html',
-    '!source/**/{_*,_*/**}'
+    '!source/**/{_*/**,_*}'
   ],
   THERE = 'public';
 
+/**
+ * Собирает разметку в 1 файл с помощью rigger
+ * Syntax: //= path/file.html
+ */
 export default () => {
-  watch(NAME, wFILES);
+  watch(NAME, WATCH);
 
   gulp.task(NAME, () => {
-    return gulp.task(NAME, () => {
-      gulp.src(FILES)
-        .pipe(gulp.dest(THERE))
-    })
+    return gulp.src(FILES)
+      .pipe(rigger())
+      .pipe(gulp.dest(THERE))
   })
 }
