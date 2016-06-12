@@ -8,29 +8,29 @@ import watch from '../utility/watch';
 import notify from '../utility/notify';
 
 const
-  NAME = 'style',
-  FILES = [
+  name = 'style',
+  files = [
     'source/main.css',
     'source/**/*.css',
     '!source/**/{lib/**,lazy/**,_*/**,_*,server/**}'
   ],
-  THERE = 'public';
+  there = 'public';
 
 /**
  * Собираем стили
  */
 export default () => {
-  watch(NAME, FILES);
+  watch(name, files);
 
-  gulp.task(NAME, () => {
-    return gulp.src(FILES)
+  gulp.task(name, () => {
+    return gulp.src(files)
       .pipe(plumber({errorHandler: notify}))
       .pipe(postcss([
         media,
         nesting
       ]))
       .pipe(concat('main.css'))
-      .pipe(gulp.dest(THERE))
+      .pipe(gulp.dest(there))
   })
 }
 

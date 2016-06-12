@@ -1,4 +1,4 @@
-const VENDORS = [ // [0]:require?, [1]:pathDev, [2]:pathProd
+const vendors = [ // [0]:require?, [1]:pathDev, [2]:pathProd
   [true, // normalize
     'node_modules/normalize.css/normalize.css'],
   [false, // ajax
@@ -57,16 +57,16 @@ let addLibByType = (path) => {
   }
 };
 
-const PRODUCTION = process.env.NODE_ENV === 'production';
+const production = process.env.NODE_ENV === 'production';
 
 /**
  * Сортируем пути к библиотекам и добавляем в экспортируемую переменную lib
- * @param VENDORS {Array} пути к библиотекам из npm
+ * @param vendors {Array} пути к библиотекам из npm
  * @param vendor {Array} путь к библиотеке из npm
  */
-VENDORS.forEach((vendor) => {
+vendors.forEach((vendor) => {
   if (vendor[0]) { // require?
-    let path = PRODUCTION && vendor[2] ? vendor[2] : vendor[1];
+    let path = production && vendor[2] ? vendor[2] : vendor[1];
     addLibByType(path)
   }
 });

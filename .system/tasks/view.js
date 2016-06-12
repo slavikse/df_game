@@ -3,27 +3,27 @@ import rigger from 'gulp-rigger';
 import watch from '../utility/watch';
 
 const
-  NAME = 'view',
-  FILES = [
+  name = 'view',
+  files = [
     'source/*.html',
     '!source/_*'
   ],
-  WATCH = [
+  wFiles = [
     'source/**/*.html',
     '!source/**/{_*/**,_*,server/**}'
   ],
-  THERE = 'public';
+  there = 'public';
 
 /**
  * Собирает разметку в 1 файл с помощью rigger
  * Syntax: //= path/file.html
  */
 export default () => {
-  watch(NAME, WATCH);
+  watch(name, wFiles);
 
-  gulp.task(NAME, () => {
-    return gulp.src(FILES)
+  gulp.task(name, () => {
+    return gulp.src(files)
       .pipe(rigger())
-      .pipe(gulp.dest(THERE))
+      .pipe(gulp.dest(there))
   })
 }

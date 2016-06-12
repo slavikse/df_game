@@ -4,18 +4,18 @@ import lib from '../add_lib';
 import watch from '../utility/watch';
 
 const
-  NAME = 'script_lib',
-  THERE = 'public';
+  name = 'script_lib',
+  there = 'public';
 
 /**
  * Собирает библиотеки для скриптов
  */
 export default () => {
-  watch(NAME, lib.script);
+  watch(name, lib.script);
 
-  gulp.task(NAME, () => {
+  gulp.task(name, () => {
     return gulp.src(lib.script)
       .pipe(concat('lib.js'))
-      .pipe(gulp.dest(THERE))
+      .pipe(gulp.dest(there))
   })
 }

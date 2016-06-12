@@ -4,18 +4,18 @@ import lib from '../add_lib';
 import watch from '../utility/watch';
 
 const
-  NAME = 'style_lib',
-  THERE = 'public';
+  name = 'style_lib',
+  there = 'public';
 
 /**
  * Собирает библиотеки для стилей
  */
 export default () => {
-  watch(NAME, lib.style);
+  watch(name, lib.style);
 
-  gulp.task(NAME, () => {
+  gulp.task(name, () => {
     return gulp.src(lib.style)
       .pipe(concat('lib.css'))
-      .pipe(gulp.dest(THERE))
+      .pipe(gulp.dest(there))
   })
 }

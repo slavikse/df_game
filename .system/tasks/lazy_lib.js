@@ -3,18 +3,18 @@ import lib from '../add_lib';
 import watch from '../utility/watch';
 
 const
-  NAME = 'lazy_lib',
-  THERE = 'public/lazy/lib';
+  name = 'lazy_lib',
+  there = 'public/lazy/lib';
 
 /**
  * Собирает библиотеки для ленивой загрузки
  */
 export default () => {
-  watch(NAME, lib.lazy);
+  watch(name, lib.lazy);
 
-  gulp.task(NAME, () => {
+  gulp.task(name, () => {
     return gulp.src(lib.lazy, {
-      since: gulp.lastRun(NAME)
-    }).pipe(gulp.dest(THERE))
+      since: gulp.lastRun(name)
+    }).pipe(gulp.dest(there))
   })
 }

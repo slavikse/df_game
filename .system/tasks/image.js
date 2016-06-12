@@ -3,23 +3,23 @@ import rename from 'gulp-rename';
 import watch from '../utility/watch';
 
 const
-  NAME = 'image',
-  FILES = [
+  name = 'image',
+  files = [
     'source/**/image/*',
     '!source/**/{_*/**,_*,server/**}'
   ],
-  THERE = 'public/image';
+  there = 'public/image';
 
 /**
  * Перемещает картинки
  */
 export default () => {
-  watch(NAME, FILES);
+  watch(name, files);
 
-  gulp.task(NAME, () => {
-    return gulp.src(FILES, {
-      since: gulp.lastRun(NAME)
+  gulp.task(name, () => {
+    return gulp.src(files, {
+      since: gulp.lastRun(name)
     }).pipe(rename({dirname: ''}))
-      .pipe(gulp.dest(THERE))
+      .pipe(gulp.dest(there))
   })
 }

@@ -6,22 +6,22 @@ import watch from '../utility/watch';
 import notify from '../utility/notify';
 
 const
-  NAME = 'resize',
-  FILES = [
+  name = 'resize',
+  files = [
     'source/**/resize/*',
     '!source/**/{_*/**,_*,server/**}'
   ],
-  THERE = 'public/image';
+  there = 'public/image';
 
 /**
  * Создаем из оригинала 2 изображения меньших размеров
  */
 export default () => {
-  watch(NAME, FILES);
+  watch(name, files);
 
-  gulp.task(NAME, () => {
-    return gulp.src(FILES, {
-      since: gulp.lastRun(NAME),
+  gulp.task(name, () => {
+    return gulp.src(files, {
+      since: gulp.lastRun(name),
       allowEmpty: true
     }).pipe(plumber({errorHandler: notify}))
       .pipe(rename({dirname: ''}))
@@ -44,6 +44,6 @@ export default () => {
       }, {
         stats: false,
         silent: true
-      })).pipe(gulp.dest(THERE))
+      })).pipe(gulp.dest(there))
   })
 }

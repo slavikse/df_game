@@ -2,19 +2,19 @@ import gulp from 'gulp';
 import watch from '../utility/watch';
 
 const
-  NAME = 'service_client',
-  FILES = ['source/{robots.txt,sitemap.xml,favicon.png}'],
-  THERE = 'public';
+  name = 'service_client',
+  files = ['source/{robots.txt,sitemap.xml,favicon.png}'],
+  there = 'public';
 
 /**
  * Перемещает сервисные файлы
  */
 export default () => {
-  watch(NAME, FILES);
+  watch(name, files);
 
-  gulp.task(NAME, () => {
-    return gulp.src(FILES, {
-      since: gulp.lastRun(NAME)
-    }).pipe(gulp.dest(THERE))
+  gulp.task(name, () => {
+    return gulp.src(files, {
+      since: gulp.lastRun(name)
+    }).pipe(gulp.dest(there))
   })
 }

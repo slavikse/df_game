@@ -2,8 +2,8 @@ import gulp from 'gulp';
 import del from 'del';
 
 const
-  NAME = 'del',
-  FILES = [
+  name = 'del',
+  files = [
     'public',
     'temp'
   ];
@@ -12,7 +12,7 @@ const
  * Удалает собранную и временную папки
  */
 export default () => {
-  gulp.task(NAME, () => {
-    return del(FILES)
+  gulp.task(name, () => {
+    return del(files)
   })
 }

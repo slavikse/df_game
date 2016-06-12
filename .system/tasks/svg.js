@@ -6,13 +6,13 @@ import watch from '../utility/watch';
 import notify from '../utility/notify';
 
 const
-  NAME = 'svg',
-  FILES = [
+  name = 'svg',
+  files = [
     'source/**/svg/*',
     '!source/**/{_*/**,_*,server/**}'
   ],
-  THERE = 'public/svg',
-  CONFIG = {
+  there = 'public/svg',
+  config = {
     mode: {
       symbol: {
         sprite: 'sprite.svg',
@@ -29,13 +29,13 @@ const
  * Создаем спрайт из svg
  */
 export default () => {
-  watch(NAME, FILES);
+  watch(name, files);
 
-  gulp.task(NAME, () => {
-    return gulp.src(FILES)
+  gulp.task(name, () => {
+    return gulp.src(files)
       .pipe(plumber({errorHandler: notify}))
       .pipe(rename({dirname: ''}))
-      .pipe(svgSprite(CONFIG))
-      .pipe(gulp.dest(THERE))
+      .pipe(svgSprite(config))
+      .pipe(gulp.dest(there))
   })
 }

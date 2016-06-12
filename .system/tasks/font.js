@@ -3,23 +3,23 @@ import rename from 'gulp-rename';
 import watch from '../utility/watch';
 
 const
-  NAME = 'font',
-  FILES = [
+  name = 'font',
+  files = [
     'source/**/font/*',
     '!source/**/{_*/**,_*,server/**}'
   ],
-  THERE = 'public/font';
+  there = 'public/font';
 
 /**
  * Перемещает все шрифты
  */
 export default () => {
-  watch(NAME, FILES);
+  watch(name, files);
 
-  gulp.task(NAME, () => {
-    return gulp.src(FILES, {
-      since: gulp.lastRun(NAME)
+  gulp.task(name, () => {
+    return gulp.src(files, {
+      since: gulp.lastRun(name)
     }).pipe(rename({dirname: ''}))
-      .pipe(gulp.dest(THERE))
+      .pipe(gulp.dest(there))
   })
 }
