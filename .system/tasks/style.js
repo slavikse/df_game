@@ -11,7 +11,7 @@ const
   FILES = [
     'source/main.css',
     'source/**/*.css',
-    '!source/**/{lib/*,lazy/*,_*/**,_*}'
+    '!source/**/{lib/**,lazy/**,_*/**,_*,server/**}'
   ],
   THERE = 'public';
 

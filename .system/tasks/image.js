@@ -6,7 +6,7 @@ const
   NAME = 'image',
   FILES = [
     'source/**/image/*',
-    '!source/**/{_*/**,_*}'
+    '!source/**/{_*/**,_*,server/**}'
   ],
   THERE = 'public/image';
 

@@ -9,7 +9,7 @@ const
   NAME = 'svg',
   FILES = [
     'source/**/svg/*',
-    '!source/**/{_*/**,_*}'
+    '!source/**/{_*/**,_*,server/**}'
   ],
   THERE = 'public/svg',
   CONFIG = {

@@ -6,7 +6,7 @@ const
   NAME = 'font',
   FILES = [
     'source/**/font/*',
-    '!source/**/{_*/**,_*}'
+    '!source/**/{_*/**,_*,server/**}'
   ],
   THERE = 'public/font';
 

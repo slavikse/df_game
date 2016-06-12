@@ -9,7 +9,7 @@ const
   NAME = 'resize',
   FILES = [
     'source/**/resize/*',
-    '!source/**/{_*/**,_*}'
+    '!source/**/{_*/**,_*,server/**}'
   ],
   THERE = 'public/image';
 

@@ -8,7 +8,7 @@ const
   NAME = 'sprite',
   FILES = [
     'source/**/sprite/*',
-    '!source/**/{_*/**,_*}'
+    '!source/**/{_*/**,_*,server/**}'
   ],
   THERE = {
     STYLE: 'temp',

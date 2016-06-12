@@ -10,7 +10,7 @@ const
   ],
   WATCH = [
     'source/**/*.html',
-    '!source/**/{_*/**,_*}'
+    '!source/**/{_*/**,_*,server/**}'
   ],
   THERE = 'public';
 
