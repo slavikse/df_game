@@ -20,6 +20,7 @@
     "gulp-imagemin": "3.0.1",
     "gulp-notify": "2.2.0",
     "gulp-plumber": "1.1.0",
+    "gulp-postcss": "6.1.1",
     "gulp-rename": "1.2.2",
     "gulp-responsive": "2.4.0",
     "gulp-rigger": "0.5.8",
@@ -31,6 +32,8 @@
     "layzr.js": "2.2.1",
     "my_libs": "github:slavikse/my_libs",
     "normalize.css": "4.1.1",
+    "postcss-media-minmax": "2.1.2",
+    "postcss-nesting": "2.3.1",
     "webpack": "1.13.1"
   }
 }
