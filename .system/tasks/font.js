@@ -19,8 +19,7 @@ export default () => {
   gulp.task(NAME, () => {
     return gulp.src(FILES, {
       since: gulp.lastRun(NAME)
-    })
-      .pipe(rename({dirname: ''}))
+    }).pipe(rename({dirname: ''}))
       .pipe(gulp.dest(THERE))
   })
 }

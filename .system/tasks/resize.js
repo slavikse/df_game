@@ -23,8 +23,7 @@ export default () => {
     return gulp.src(FILES, {
       since: gulp.lastRun(NAME),
       allowEmpty: true
-    })
-      .pipe(plumber({errorHandler: notify}))
+    }).pipe(plumber({errorHandler: notify}))
       .pipe(rename({dirname: ''}))
       .pipe(responsive({
         '*': [

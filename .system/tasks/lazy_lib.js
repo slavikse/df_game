@@ -15,7 +15,6 @@ export default () => {
   gulp.task(NAME, () => {
     return gulp.src(lib.lazy, {
       since: gulp.lastRun(NAME)
-    })
-      .pipe(gulp.dest(THERE))
+    }).pipe(gulp.dest(THERE))
   })
 }
