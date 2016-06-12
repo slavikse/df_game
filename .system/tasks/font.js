@@ -1,5 +1,5 @@
 import gulp from 'gulp';
-import rebase from '../utility/rebase';
+import rename from 'gulp-rename';
 import watch from '../utility/watch';
 
 const
@@ -19,8 +19,8 @@ export default () => {
   gulp.task(NAME, () => {
     return gulp.src(FILES, {
       since: gulp.lastRun(NAME)
-    }).pipe(gulp.dest(
-      (file) => rebase(file, THERE)
-    ))
+    })
+      .pipe(rename({dirname: ''}))
+      .pipe(gulp.dest(THERE))
   })
 }
