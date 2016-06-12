@@ -5,6 +5,7 @@ import lazyLib from './tasks/lazy_lib';
 import resize from './tasks/resize';
 import sprite from './tasks/sprite';
 import style from './tasks/style';
+import slyteLib from './tasks/style_lib';
 import svg from './tasks/svg';
 import view from './tasks/view';
 
@@ -16,6 +17,7 @@ export default () => {
   resize();
   sprite();
   style();
+  slyteLib();
   svg();
   view();
 }

@@ -3,8 +3,9 @@ import plumber from 'gulp-plumber';
 import postcss from 'gulp-postcss';
 import media from 'postcss-media-minmax';
 import nesting from 'postcss-nesting';
-import notify from '../utility/notify';
+import concat from 'gulp-concat';
 import watch from '../utility/watch';
+import notify from '../utility/notify';
 
 const
   NAME = 'style',
@@ -28,6 +29,7 @@ export default () => {
         media,
         nesting
       ]))
+      .pipe(concat('main.css'))
       .pipe(gulp.dest(THERE))
   })
 }

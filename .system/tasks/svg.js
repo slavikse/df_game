@@ -2,8 +2,8 @@ import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import rename from 'gulp-rename';
 import svgSprite from 'gulp-svg-sprite';
-import notify from '../utility/notify';
 import watch from '../utility/watch';
+import notify from '../utility/notify';
 
 const
   NAME = 'svg',
