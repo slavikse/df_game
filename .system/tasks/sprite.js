@@ -8,7 +8,7 @@ const
   name = 'sprite',
   files = [
     'source/**/sprite/*',
-    '!source/**/{_*/**,_*,server/**}'
+    '!source/**/{_*/**,_*}'
   ],
   there = {
     style: 'temp',

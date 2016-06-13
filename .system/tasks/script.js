@@ -2,8 +2,8 @@ import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import webpackStream from 'webpack-stream';
 import named from 'vinyl-named';
-import watch from '../utility/watch';
 import notify from '../utility/notify';
+import watch from '../utility/watch';
 
 const
   name = 'script',
@@ -18,9 +18,12 @@ const
   there = 'public',
 
   production = process.env.NODE_ENV === 'production',
+
   webpack = webpackStream.webpack,
   options = {
-    devtool: production ? null : 'cheap-inline-module-source-map',
+    devtool: production ?
+      null :
+      'cheap-inline-module-source-map',
     module: {
       loaders: [{
         loader: 'babel',

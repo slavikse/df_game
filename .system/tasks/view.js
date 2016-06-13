@@ -1,5 +1,7 @@
 import gulp from 'gulp';
+import plumber from 'gulp-plumber';
 import rigger from 'gulp-rigger';
+import notify from '../utility/notify';
 import watch from '../utility/watch';
 
 const
@@ -10,7 +12,7 @@ const
   ],
   wFiles = [
     'source/**/*.html',
-    '!source/**/{_*/**,_*,server/**}'
+    '!source/**/{_*/**,_*}'
   ],
   there = 'public';
 
@@ -23,6 +25,7 @@ export default () => {
 
   gulp.task(name, () => {
     return gulp.src(files)
+      .pipe(plumber({errorHandler: notify}))
       .pipe(rigger())
       .pipe(gulp.dest(there))
   })

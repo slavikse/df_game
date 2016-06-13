@@ -4,15 +4,15 @@ import postcss from 'gulp-postcss';
 import media from 'postcss-media-minmax';
 import nesting from 'postcss-nesting';
 import concat from 'gulp-concat';
-import watch from '../utility/watch';
 import notify from '../utility/notify';
+import watch from '../utility/watch';
 
 const
   name = 'style',
   files = [
     'source/main.css',
     'source/**/*.css',
-    '!source/**/{lib/**,lazy/**,_*/**,_*,server/**}'
+    '!source/**/{lib/**,lazy/**,_*/**,_*}'
   ],
   there = 'public';
 
@@ -40,6 +40,6 @@ export default () => {
  * */
 
 /*TODO
-  var autoprefixer = require('autoprefixer');
-  var cssnano = require('cssnano');
-*/
+ var autoprefixer = require('autoprefixer');
+ var cssnano = require('cssnano');
+ */

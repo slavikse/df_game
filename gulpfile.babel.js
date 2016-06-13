@@ -54,7 +54,6 @@ const
 
 let tasksWatch = [];
 tasksBuild.forEach((task) => {
-  // if (task === 'script') return;
   tasksWatch.push(`${task}_watch`)
 });
 
@@ -76,7 +75,6 @@ gulp.task('default',
       'watch'
     )
 );
-
 
 /* TODO доработать серверную сборку: проверить и все такое
  TODO на доработке. настройка forever. https://www.airpair.com/node.js/posts/top-10-mistakes-node-developers-make обновить браузер при обновлении сервера. сервер и bs на разных портах... как быть
