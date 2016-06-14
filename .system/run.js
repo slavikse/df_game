@@ -19,7 +19,6 @@ export default () => {
   lazyLib();
   resize();
   script();
-  scriptLib();
   serviceClient();
   sprite();
   style();

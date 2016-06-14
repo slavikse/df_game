@@ -3,27 +3,32 @@ import plumber from 'gulp-plumber';
 import webpackStream from 'webpack-stream';
 import named from 'vinyl-named';
 import notify from '../utility/notify';
-import watch from '../utility/watch';
+
+let firstBuildReady = false;
 
 const
   name = 'script',
-  files = [
-    'source/*.js',
-    '!source/_*'
-  ],
-  wFiles = [
-    'source/**/*.js',
-    '!source/**/{lib/**,lazy/**,_*/**,_*,server/**}'
-  ],
+  files = ['source/*.js'],
   there = 'public',
 
   production = process.env.NODE_ENV === 'production',
-
   webpack = webpackStream.webpack,
+
+  /**
+   * Сигнализирует о завершении первой сборки,
+   * чтобы gulp смог продолжить выполнение.
+   * Хотя webpack продолжит отслеживать файлы.
+   * @type {Object} сигнал о завершении первой сборки
+   */
+  done = err => {
+    firstBuildReady = true;
+
+    if (err) {
+      return 0
+    }
+  },
+
   options = {
-    devtool: production ?
-      null :
-      'cheap-inline-module-source-map',
     module: {
       loaders: [{
         loader: 'babel',
@@ -32,22 +37,38 @@ const
         }
       }]
     },
+
+    watch: !production,
+
     plugins: [
-      new webpack.NoErrorsPlugin()
-    ]
+      new webpack.NoErrorsPlugin(),
+      new webpack.optimize.CommonsChunkPlugin({
+        name: 'common',
+        minChunks: 2
+      })
+    ],
+
+    devtool: production ? null : 'cheap-inline-module-source-map'
   };
+
+if (production) {
+  options.plugins.push(new webpack.optimize.UglifyJsPlugin())
+}
 
 /**
  * Собираем скрипты с webpack
  */
 export default () => {
-  watch(name, wFiles);
-
-  gulp.task(name, () => {
+  gulp.task(name, cb => {
     return gulp.src(files)
       .pipe(plumber({errorHandler: notify}))
       .pipe(named())
-      .pipe(webpackStream(options))
+      .pipe(webpackStream(options, null, done))
       .pipe(gulp.dest(there))
+      .on('data', () => {
+        if (firstBuildReady) {
+          cb()
+        }
+      })
   })
 }

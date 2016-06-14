@@ -26,21 +26,19 @@ export default () => {
     }).pipe(plumber({errorHandler: notify}))
       .pipe(rename({dirname: ''}))
       .pipe(responsive({
-        '*': [
-          {
-            width: '100%' // lg 1200px
-          }, {
-            width: '70%', // md 992px
-            rename: {
-              suffix: '_tablet'
-            }
-          }, {
-            width: '40%', // xs 544px
-            rename: {
-              suffix: '_mobile'
-            }
+        '*': [{
+          width: '100%' // lg 1200px
+        }, {
+          width: '70%', // md 992px
+          rename: {
+            suffix: '_tablet'
           }
-        ]
+        }, {
+          width: '40%', // xs 544px
+          rename: {
+            suffix: '_mobile'
+          }
+        }]
       }, {
         stats: false,
         silent: true

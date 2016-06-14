@@ -21,7 +21,7 @@ const
 export default () => {
   watch(name, files);
 
-  gulp.task(name, (end) => {
+  gulp.task(name, end => {
     let spriteDate =
       gulp.src(files)
         .pipe(plumber({errorHandler: notify}))

@@ -8,7 +8,7 @@ const vendors = [ // [0]:require?, [1]:pathDev, [2]:pathProd
 
   [true, // reset css
     'node_modules/my_libs/style/reset.css'],
-  [true, // dom js
+  [false, // dom js
     'node_modules/my_libs/script/dom.js'],
   [false, // lazyload css
     'node_modules/my_libs/lazy_load/lazy_load.css'],
