@@ -19,6 +19,15 @@
 
 Спрайт (png):
   <i class="icon icon-home"></i>
+
+Responsive background image:
+  @media ...
+    background url('image/bg_img-1_tablet.jpg') 50% 50%/cover no-repeat
+
+Syntax:
+  @import "normalize.css"; <-- из npm
+  @media (500px <= width <= 1200px)
+  nested: sass like
 */
 
 .row {

@@ -1,10 +1,15 @@
-/* БЫСТРЫЕ КОМАНДЫ:
+/* ***** КОМАНДЫ ***** *\
+
   Запушить изменения:
-  git push -u origin master
+git push -u origin master
   
   Сборка на продакшн:
-  NODE_ENV=production gulp
-*/
+NODE_ENV=production gulp
+
+  Запустить туннель:
+NODE_ENV=tunnel gulp
+
+************************/
 
 import gulp from 'gulp'
 import register from './.system/register'
@@ -46,7 +51,7 @@ gulp.task('default',
       'build',
       'zip'
     ) :
-    gulp.series( // build
+    gulp.series( // development
       'del',
       'build',
       gulp.parallel(
@@ -56,4 +61,4 @@ gulp.task('default',
     )
 );
 
-//TODO какая то ошибка при завершении всех задач. проверить выполнение build в этом файле
+//TODO (не критично) какая то ошибка при завершении default задачи, возможно, во всем виновен webpack watch

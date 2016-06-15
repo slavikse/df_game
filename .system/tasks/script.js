@@ -1,8 +1,10 @@
 import gulp from 'gulp';
 import plumber from 'gulp-plumber';
-import webpackStream from 'webpack-stream';
-import named from 'vinyl-named';
 import notify from '../utility/notify';
+import named from 'vinyl-named';
+import webpackStream from 'webpack-stream';
+import util from 'gulp-util';
+import size from 'gulp-size';
 
 let firstBuildReady = false;
 
@@ -57,6 +59,7 @@ if (production) {
 
 /**
  * Собираем скрипты с webpack и es6
+ * Сжимает на продакшн
  */
 export default () => {
   gulp.task(name, cb => {
@@ -66,9 +69,10 @@ export default () => {
       .pipe(webpackStream(options, null, done))
       .pipe(gulp.dest(there))
       .on('data', () => {
-        if (firstBuildReady) {
-          cb()
-        }
-      })
+        if (firstBuildReady) { cb() }
+      }).pipe(production ? size({
+        title: name,
+        gzip: true
+      }) : util.noop())
   })
 }

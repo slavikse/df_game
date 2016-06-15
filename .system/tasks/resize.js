@@ -1,9 +1,9 @@
 import gulp from 'gulp';
+import watch from '../utility/watch';
 import plumber from 'gulp-plumber';
+import notify from '../utility/notify';
 import rename from 'gulp-rename';
 import responsive from 'gulp-responsive';
-import notify from '../utility/notify';
-import watch from '../utility/watch';
 
 const
   name = 'resize',

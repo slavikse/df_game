@@ -1,8 +1,8 @@
 import gulp from 'gulp';
-import plumber from 'gulp-plumber';
-import spritesmith from 'gulp.spritesmith';
 import watch from '../utility/watch';
+import plumber from 'gulp-plumber';
 import notify from '../utility/notify';
+import spritesmith from 'gulp.spritesmith';
 
 const
   name = 'sprite',

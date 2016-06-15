@@ -1,9 +1,9 @@
 import gulp from 'gulp';
+import watch from '../utility/watch';
 import plumber from 'gulp-plumber';
+import notify from '../utility/notify';
 import rename from 'gulp-rename';
 import svgSprite from 'gulp-svg-sprite';
-import notify from '../utility/notify';
-import watch from '../utility/watch';
 
 const
   name = 'svg',
@@ -31,7 +31,8 @@ const
   };
 
 /**
- * Создаем спрайт из svg и стили использвоания
+ * Создаем спрайт из svg и стили для использвоания
+ * Выдает уже пожатый, а svgo удаляет контент...
  */
 export default () => {
   watch(name, files);
@@ -44,5 +45,3 @@ export default () => {
       .pipe(gulp.dest(there))
   })
 }
-
-//TODO svgo

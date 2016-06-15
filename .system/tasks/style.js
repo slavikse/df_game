@@ -1,21 +1,26 @@
 import gulp from 'gulp';
+import watch from '../utility/watch';
 import plumber from 'gulp-plumber';
+import notify from '../utility/notify';
+import util from 'gulp-util';
 import sourcemaps from 'gulp-sourcemaps';
 import postcss from 'gulp-postcss';
 import atImport from 'postcss-import';
 import nested from 'postcss-nested';
 import media from 'postcss-media-minmax';
-import autoprefixer from 'autoprefixer';
-import notify from '../utility/notify';
-import watch from '../utility/watch';
+import csso from 'gulp-csso';
+import autoprefixer from 'gulp-autoprefixer';
+import size from 'gulp-size';
 
 const
+  production = process.env.NODE_ENV === 'production',
   name = 'style',
   files = ['source/*.css'],
   there = 'public';
 
 /**
  * Собираем стили с postcss
+ * Сжимает на продакшн
  */
 export default () => {
   watch(name, files);
@@ -23,25 +28,20 @@ export default () => {
   gulp.task(name, () => {
     return gulp.src(files)
       .pipe(plumber({errorHandler: notify}))
-      .pipe(sourcemaps.init()) // только для dev
+      .pipe(production ? util.noop() : sourcemaps.init())
       .pipe(postcss([
         atImport,
         nested,
-        media,
-        autoprefixer({ // только prod
-          browsers: ['last 20 versions']
-        })
+        media
       ]))
-      .pipe(sourcemaps.write())
+      .pipe(production ? autoprefixer({
+        browsers: ['last 20 versions']
+      }) : util.noop())
+      .pipe(production ? csso() : sourcemaps.write())
       .pipe(gulp.dest(there))
+      .pipe(production ? size({
+        title: name,
+        gzip: true
+      }) : util.noop())
   })
 }
-
-/* Syntax:
- * @media (500px <= width <= 1200px)
- * nested: a & b
- * */
-
-/*TODO
-  gulp-csso
-*/
