@@ -3,7 +3,7 @@ import del from 'del';
 
 const
   name = 'del',
-  files = [
+  folders = [
     'public',
     'temp'
   ];
@@ -13,6 +13,6 @@ const
  */
 export default () => {
   gulp.task(name, () => {
-    return del(files)
+    return del(folders)
   })
 }

@@ -21,8 +21,7 @@ export default () => {
 
   gulp.task(name, () => {
     return gulp.src(files, {
-      since: gulp.lastRun(name),
-      allowEmpty: true
+      since: gulp.lastRun(name)
     }).pipe(plumber({errorHandler: notify}))
       .pipe(rename({dirname: ''}))
       .pipe(responsive({

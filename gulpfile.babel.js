@@ -7,22 +7,20 @@
 */
 
 import gulp from 'gulp'
-import run from './.system/run'
+import register from './.system/register'
 
-run();
+register();
 
 const
   production = process.env.NODE_ENV === 'production',
   tasksBuild = [
     'font',
     'image',
-    'lazy_lib',
-    // 'resize',
+    'resize',
     'script',
-    'service_client',
-    // 'sprite',
+    'service',
+    'sprite',
     'style',
-    'style_lib',
     'svg',
     'view'
   ];
@@ -43,13 +41,19 @@ gulp.task('watch',
 
 gulp.task('default',
   production ?
-    gulp.series(
-      'del',
-      'build'
-    ) :
-    gulp.series(
+    gulp.series( // production
       'del',
       'build',
-      'watch'
+      'zip'
+    ) :
+    gulp.series( // build
+      'del',
+      'build',
+      gulp.parallel(
+        'bs',
+        'watch'
+      )
     )
 );
+
+//TODO какая то ошибка при завершении всех задач. проверить выполнение build в этом файле

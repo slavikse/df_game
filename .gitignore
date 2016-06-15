@@ -1,4 +1,6 @@
-node_modules
-public
-.idea
+node_modules/
+public/
+temp/
+zip/
+.idea/
 *.log

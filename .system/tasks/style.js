@@ -1,23 +1,21 @@
 import gulp from 'gulp';
 import plumber from 'gulp-plumber';
+import sourcemaps from 'gulp-sourcemaps';
 import postcss from 'gulp-postcss';
+import atImport from 'postcss-import';
+import nested from 'postcss-nested';
 import media from 'postcss-media-minmax';
-import nesting from 'postcss-nesting';
-import concat from 'gulp-concat';
+import autoprefixer from 'autoprefixer';
 import notify from '../utility/notify';
 import watch from '../utility/watch';
 
 const
   name = 'style',
-  files = [
-    'source/main.css',
-    'source/**/*.css',
-    '!source/**/{lib/**,lazy/**,_*/**,_*}'
-  ],
+  files = ['source/*.css'],
   there = 'public';
 
 /**
- * Собираем стили
+ * Собираем стили с postcss
  */
 export default () => {
   watch(name, files);
@@ -25,21 +23,25 @@ export default () => {
   gulp.task(name, () => {
     return gulp.src(files)
       .pipe(plumber({errorHandler: notify}))
+      .pipe(sourcemaps.init()) // только для dev
       .pipe(postcss([
+        atImport,
+        nested,
         media,
-        nesting
+        autoprefixer({ // только prod
+          browsers: ['last 20 versions']
+        })
       ]))
-      .pipe(concat('main.css'))
+      .pipe(sourcemaps.write())
       .pipe(gulp.dest(there))
   })
 }
 
 /* Syntax:
  * @media (500px <= width <= 1200px)
- * nesting: a & b
+ * nested: a & b
  * */
 
 /*TODO
- var autoprefixer = require('autoprefixer');
- var cssnano = require('cssnano');
- */
+  gulp-csso
+*/

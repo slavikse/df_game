@@ -56,7 +56,7 @@ if (production) {
 }
 
 /**
- * Собираем скрипты с webpack
+ * Собираем скрипты с webpack и es6
  */
 export default () => {
   gulp.task(name, cb => {

@@ -2,7 +2,7 @@ import gulp from 'gulp';
 import watch from '../utility/watch';
 
 const
-  name = 'service_client',
+  name = 'service',
   files = ['source/{robots.txt,sitemap.xml,favicon.png}'],
   there = 'public';
 

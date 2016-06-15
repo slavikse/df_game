@@ -12,7 +12,7 @@ const
   ],
   there = {
     style: 'temp',
-    image: 'temp/image'
+    image: 'public/image'
   };
 
 /**
@@ -26,9 +26,9 @@ export default () => {
       gulp.src(files)
         .pipe(plumber({errorHandler: notify}))
         .pipe(spritesmith({
-          imgname: 'sprite.png',
+          imgName: 'sprite.png',
           imgPath: 'image/sprite.png',
-          cssname: 'sprite.css'
+          cssName: 'sprite.css'
         }));
 
     spriteDate.css

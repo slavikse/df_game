@@ -12,11 +12,16 @@ const
     '!source/**/{_*/**,_*}'
   ],
   there = 'public/svg',
+
   config = {
     mode: {
       symbol: {
         sprite: 'sprite.svg',
-        dest: ''
+        example: false,
+        dest: '',
+        render: {
+          css: true
+        }
       }
     },
     svg: {
@@ -26,7 +31,7 @@ const
   };
 
 /**
- * Создаем спрайт из svg
+ * Создаем спрайт из svg и стили использвоания
  */
 export default () => {
   watch(name, files);
@@ -39,3 +44,5 @@ export default () => {
       .pipe(gulp.dest(there))
   })
 }
+
+//TODO svgo
