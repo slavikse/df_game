@@ -12,7 +12,7 @@ NODE_ENV=tunnel gulp
 ************************/
 
 import gulp from 'gulp'
-import register from './.system/register'
+import register from './.martyr/register'
 
 register();
 
@@ -61,4 +61,4 @@ gulp.task('default',
     )
 );
 
-//TODO (не критично) какая то ошибка при завершении default задачи, возможно, во всем виновен webpack watch
+//TODO (не критично) какая то ошибка при завершении watch задачи
