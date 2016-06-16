@@ -6,10 +6,7 @@ import spritesmith from 'gulp.spritesmith';
 
 const
   name = 'sprite',
-  files = [
-    'source/**/sprite/*',
-    '!source/**/{_*/**,_*}'
-  ],
+  files = ['source/**/sprite/*'],
   there = {
     style: 'temp',
     image: 'public/image'

@@ -9,11 +9,11 @@ import size from 'gulp-size';
 let firstBuildReady = false;
 
 const
+  production = process.env.NODE_ENV === 'production',
   name = 'script',
   files = ['source/*.js'],
   there = 'public',
 
-  production = process.env.NODE_ENV === 'production',
   webpack = webpackStream.webpack,
 
   /**
@@ -24,24 +24,17 @@ const
    */
   done = err => {
     firstBuildReady = true;
-
-    if (err) {
-      return 0
-    }
+    if (err) return 0
   },
 
   options = {
     module: {
       loaders: [{
         loader: 'babel',
-        query: {
-          presets: ['es2015']
-        }
+        query: {presets: ['es2015']}
       }]
     },
-
     watch: !production,
-
     plugins: [
       new webpack.NoErrorsPlugin(),
       new webpack.optimize.CommonsChunkPlugin({
@@ -49,13 +42,10 @@ const
         minChunks: 2
       })
     ],
-
     devtool: production ? null : 'cheap-inline-module-source-map'
   };
 
-if (production) {
-  options.plugins.push(new webpack.optimize.UglifyJsPlugin())
-}
+if (production) options.plugins.push(new webpack.optimize.UglifyJsPlugin());
 
 /**
  * Собираем скрипты с webpack и es6
@@ -69,10 +59,7 @@ export default () => {
       .pipe(webpackStream(options, null, done))
       .pipe(gulp.dest(there))
       .on('data', () => {
-        if (firstBuildReady) { cb() }
-      }).pipe(production ? size({
-        title: name,
-        gzip: true
-      }) : util.noop())
+        if (firstBuildReady) cb()
+      }).pipe(production ? size({title: name, gzip: true}) : util.noop())
   })
 }

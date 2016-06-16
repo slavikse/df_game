@@ -7,10 +7,7 @@ import svgSprite from 'gulp-svg-sprite';
 
 const
   name = 'svg',
-  files = [
-    'source/**/svg/*',
-    '!source/**/{_*/**,_*}'
-  ],
+  files = ['source/**/svg/*'],
   there = 'public/svg',
 
   config = {

@@ -8,10 +8,7 @@ import size from 'gulp-size';
 const
   production = process.env.NODE_ENV === 'production',
   name = 'image',
-  files = [
-    'source/**/image/*',
-    '!source/**/{_*/**,_*}'
-  ],
+  files = ['source/**/image/*'],
   there = 'public/image';
 
 /**
@@ -27,9 +24,6 @@ export default () => {
     }).pipe(rename({dirname: ''}))
       .pipe(production ? imagemin({progressive: true}) : util.noop())
       .pipe(gulp.dest(there))
-      .pipe(production ? size({
-        title: name,
-        gzip: true
-      }) : util.noop())
+      .pipe(production ? size({title: name, gzip: true}) : util.noop())
   })
 }

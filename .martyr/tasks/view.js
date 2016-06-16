@@ -10,14 +10,8 @@ import size from 'gulp-size';
 const
   production = process.env.NODE_ENV === 'production',
   name = 'view',
-  files = [
-    'source/*.html',
-    '!source/_*'
-  ],
-  wFiles = [
-    'source/**/*.html',
-    '!source/**/{_*/**,_*}'
-  ],
+  files = ['source/*.html'],
+  wFiles = ['source/**/*.html'],
   there = 'public';
 
 /**
@@ -44,9 +38,6 @@ export default () => {
         sortClassName: true
       }) : util.noop())
       .pipe(gulp.dest(there))
-      .pipe(production ? size({
-        title: name,
-        gzip: true
-      }) : util.noop())
+      .pipe(production ? size({title: name, gzip: true}) : util.noop())
   })
 }

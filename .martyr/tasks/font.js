@@ -8,10 +8,7 @@ import size from 'gulp-size';
 const
   production = process.env.NODE_ENV === 'production',
   name = 'font',
-  files = [
-    'source/**/font/*',
-    '!source/**/{_*/**,_*}'
-  ],
+  files = ['source/**/font/*'],
   there = 'public/font';
 
 /**
@@ -27,9 +24,6 @@ export default () => {
     }).pipe(rename({dirname: ''}))
       .pipe(production ? fontmin() : util.noop())
       .pipe(gulp.dest(there))
-      .pipe(production ? size({
-        title: name,
-        gzip: true
-      }) : util.noop())
+      .pipe(production ? size({title: name, gzip: true}) : util.noop())
   })
 }
