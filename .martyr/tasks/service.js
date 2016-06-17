@@ -4,10 +4,10 @@ import util from 'gulp-util';
 import imagemin from 'gulp-imagemin';
 
 const
-  production = process.env.NODE_ENV === 'production',
   name = 'service',
   files = ['source/{robots.txt,sitemap.xml,favicon.png}'],
-  there = 'public';
+  there = 'public',
+  production = process.env.NODE_ENV === 'production';
 
 /**
  * Перемещает сервисные файлы

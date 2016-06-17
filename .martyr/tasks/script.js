@@ -9,10 +9,10 @@ import size from 'gulp-size';
 let firstBuildReady = false;
 
 const
-  production = process.env.NODE_ENV === 'production',
   name = 'script',
   files = ['source/*.js'],
   there = 'public',
+  production = process.env.NODE_ENV === 'production',
 
   webpack = webpackStream.webpack,
 
@@ -20,7 +20,7 @@ const
    * Сигнализирует о завершении первой сборки,
    * чтобы gulp смог продолжить выполнение.
    * Хотя webpack продолжит отслеживать файлы.
-   * @type {Object} сигнал о завершении первой сборки
+   * @type {Object} ошибка при сборке, обрабатывает gulp
    */
   done = err => {
     firstBuildReady = true;
@@ -45,10 +45,11 @@ const
     devtool: production ? null : 'cheap-inline-module-source-map'
   };
 
-if (production) options.plugins.push(new webpack.optimize.UglifyJsPlugin());
+if (production) options.plugins.push(
+  new webpack.optimize.UglifyJsPlugin());
 
 /**
- * Собираем скрипты с webpack и es6
+ * Собирает скрипты с webpack и es6
  * Сжимает на продакшн
  */
 export default () => {

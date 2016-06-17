@@ -13,10 +13,10 @@ import autoprefixer from 'autoprefixer';
 import size from 'gulp-size';
 
 const
-  production = process.env.NODE_ENV === 'production',
   name = 'style',
   files = ['source/*.css'],
-  there = 'public';
+  there = 'public',
+  production = process.env.NODE_ENV === 'production';
 
 let options = [
   atImport,

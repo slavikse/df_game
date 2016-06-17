@@ -6,10 +6,10 @@ import fontmin from 'gulp-fontmin';
 import size from 'gulp-size';
 
 const
-  production = process.env.NODE_ENV === 'production',
   name = 'font',
   files = ['source/**/font/*'],
-  there = 'public/font';
+  there = 'public/font',
+  production = process.env.NODE_ENV === 'production';
 
 /**
  * Перемещает все шрифты

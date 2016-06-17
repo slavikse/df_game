@@ -4,24 +4,27 @@ import bs from 'browser-sync';
 bs.create();
 
 const
-  tunnel = process.env.NODE_ENV === 'tunnel',
   name = 'bs',
-  folder = ['public'];
+  folder = ['public'],
+  tunnel = process.env.NODE_ENV === 'tunnel';
 
 /**
  * Следит за изменениями в директории '/public' и
  * обновляет вкладку в браузере при изменениях.
- * Передав в консоль: NODE_ENV=tunnel gulp bs, запустит внешний туннель
+ * Передав в консоль: NODE_ENV=tunnel gulp bs, запустит туннель
  */
 export default () => {
-  gulp.task(name, () => {
+  gulp.task(name, cb => {
     bs.init({
       server: folder,
       tunnel: tunnel,
       ui: false
     });
 
-    return bs.watch(folder)
-      .on('change', bs.reload)
+    bs.watch(folder)
+      .on('change',
+        bs.reload);
+    
+    cb()
   })
 }

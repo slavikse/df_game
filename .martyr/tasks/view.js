@@ -8,11 +8,11 @@ import htmlmin from 'gulp-htmlmin';
 import size from 'gulp-size';
 
 const
-  production = process.env.NODE_ENV === 'production',
   name = 'view',
   files = ['source/*.html'],
   wFiles = ['source/**/*.html'],
-  there = 'public';
+  there = 'public',
+  production = process.env.NODE_ENV === 'production';
 
 /**
  * Собирает разметку в 1 файл с помощью rigger

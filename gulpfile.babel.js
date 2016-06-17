@@ -31,8 +31,8 @@ const
   ];
 
 let tasksWatch = [];
-tasksBuild.forEach((task) => {
-  if (task === 'script') { return } // webpack следит
+tasksBuild.forEach(task => {
+  if (task === 'script') return; // следит webpack
   tasksWatch.push(`${task}_watch`)
 });
 
@@ -55,12 +55,8 @@ gulp.task('default',
       'del',
       'build',
       gulp.parallel(
-        'bs',
-        'watch'
+        'watch',
+        'bs'
       )
     )
 );
-
-//TODO (не критично) какая то ошибка при завершении watch задачи
-// запускать каждую задачу с вотчером. искать виновного
-// возможно, вотчер нужно перенести в задачу. в конец

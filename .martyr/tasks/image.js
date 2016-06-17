@@ -6,10 +6,10 @@ import imagemin from 'gulp-imagemin';
 import size from 'gulp-size';
 
 const
-  production = process.env.NODE_ENV === 'production',
   name = 'image',
   files = ['source/**/image/*'],
-  there = 'public/image';
+  there = 'public/image',
+  production = process.env.NODE_ENV === 'production';
 
 /**
  * Перемещает картинки

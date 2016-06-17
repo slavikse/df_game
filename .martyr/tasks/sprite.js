@@ -18,7 +18,7 @@ const
 export default () => {
   watch(name, files);
 
-  gulp.task(name, end => {
+  gulp.task(name, cb => {
     let spriteDate =
       gulp.src(files)
         .pipe(plumber({errorHandler: notify}))
@@ -34,6 +34,6 @@ export default () => {
     spriteDate.img
       .pipe(gulp.dest(there.image));
 
-    end()
+    cb()
   })
 }
