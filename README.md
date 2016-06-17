@@ -2,7 +2,7 @@
 /!\ Быстрый старт с компонентной системой разработки проекта /!\   
 
 **Под капотом:**
-gulp, postcss, es2015, webpack, png + svg sprite, image resize, browser-sync, minify, zip.
+gulp, postcss, babel, webpack, png + svg sprite, image resize, browser-sync, minify, zip.
 
 # Установка
 ```sh
@@ -12,22 +12,24 @@ $ sudo npm i -g gulpjs/gulp-cli#4.0 &&
     cd my_project && npm i
 ```
 # Запуск
-```
+```sh
 $ gulp
 ```
 # Модульность
 **Правила сборки**:   
+
 * **Module**: НЕ вкладывать! Тем самым ФС отследит уникальность имени папки.   
-  *Имя папки (moduleName) === Имени файлов в папке:*   
+  *Имя папки (moduleName) === Имени файлов в папке плюс расширение:*   
   **ex:** moduleName/{moduleName.html,moduleName.css,moduleName.js}
 
 * **View**: логическая вложенность с помощью rigger.   
   **ex:** //= moduleName/moduleName.html   
 
-* **Style**: импортятся + npm. каскад + правило №1 = инкапсуляция стилей.   
+* **Style**: импортятся локально, а так же из npm.   
+    Каскад + правило НЕ вкладывать! = инкапсуляция стилей.   
   **ex:** .moduleName .text {...}
 
-* **Script**: бабелятся и пакуются + npm.
+* **Script**: ипрортятся локально, а так же из npm, бабелятся и пакуются.
 
 * **Image**: именование moduleName_imageName и кладуться в ```image/```  
   **ex:** подключаются: ``` src="image/moduleName_cat.jpg" ```

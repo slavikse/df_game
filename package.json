@@ -1,9 +1,8 @@
 {
   "name": "martyr",
-  "version": "1.0.0",
+  "version": "3.0.0",
   "description": "Мученик - машина, а не человек! Современный web стэк под капотом",
   "main": "gulpfile.babel.js",
-  "scripts": {},
   "author": "slavikse",
   "license": "MIT",
   "devDependencies": {
@@ -20,7 +19,6 @@
     "gulp-notify": "2.2.0",
     "gulp-plumber": "1.1.0",
     "gulp-postcss": "6.1.1",
-    "gulp-remember": "0.3.1",
     "gulp-rename": "1.2.2",
     "gulp-responsive": "2.4.0",
     "gulp-rigger": "0.5.8",
