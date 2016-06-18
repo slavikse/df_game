@@ -49,6 +49,7 @@ gulp.task('default',
     gulp.series( // production
       'del',
       'build',
+      'size',
       'zip'
     ) :
     gulp.series( // development

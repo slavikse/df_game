@@ -1,5 +1,6 @@
-@import "normalize.css";
-@import "my_libs/style/reset.css";
+@import "test/test.css";
+
+
 
 /*
 Стиль каскада:
@@ -11,7 +12,7 @@
   3. Оформление
   4. Прочее
 
-Ширина экрана:
+Ширины экранов:
   xs = 544px
   sm = 768px
   md = 992px
@@ -28,14 +29,9 @@ Syntax postcss plugins:
   @import "normalize.css"; <-- из npm
   @media (500px <= width <= 1200px)
   nested: sass like
-*/
 
-.row {
-  margin: 0 auto;
-  max-width: 1200px;
-}
-
-/* для спрайта png
+Для png спрайта:
 .icon {
   display: inline-block;
-} */
+}
+*/

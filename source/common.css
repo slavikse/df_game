@@ -1,0 +1,7 @@
+@import "normalize.css";
+@import "my_libs/style/reset.css";
+
+.row {
+  margin: 0 auto;
+  max-width: 1200px;
+}

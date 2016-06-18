@@ -3,11 +3,10 @@ import watch from '../utility/watch';
 import rename from 'gulp-rename';
 import util from 'gulp-util';
 import imagemin from 'gulp-imagemin';
-import size from 'gulp-size';
 
 const
   name = 'image',
-  files = ['source/**/image/*'],
+  files = 'source/**/image/*',
   there = 'public/image',
   production = process.env.NODE_ENV === 'production';
 
@@ -24,6 +23,5 @@ export default () => {
     }).pipe(rename({dirname: ''}))
       .pipe(production ? imagemin({progressive: true}) : util.noop())
       .pipe(gulp.dest(there))
-      .pipe(production ? size({title: name, gzip: true}) : util.noop())
   })
 }

@@ -6,11 +6,8 @@ import spritesmith from 'gulp.spritesmith';
 
 const
   name = 'sprite',
-  files = ['source/**/sprite/*'],
-  there = {
-    style: 'temp',
-    image: 'public/image'
-  };
+  files = 'source/**/sprite/*',
+  there = 'public/image';
 
 /**
  * Создает из изображений спрайт и стили для использования
@@ -18,22 +15,12 @@ const
 export default () => {
   watch(name, files);
 
-  gulp.task(name, cb => {
-    let spriteDate =
-      gulp.src(files)
-        .pipe(plumber({errorHandler: notify}))
-        .pipe(spritesmith({
-          imgName: 'sprite.png',
-          imgPath: 'image/sprite.png',
-          cssName: 'sprite.css'
-        }));
-
-    spriteDate.css
-      .pipe(gulp.dest(there.style));
-
-    spriteDate.img
-      .pipe(gulp.dest(there.image));
-
-    cb()
+  gulp.task(name, () => {
+    return gulp.src(files)
+      .pipe(plumber({errorHandler: notify}))
+      .pipe(spritesmith({
+        imgName: 'sprite.png',
+        cssName: 'sprite.css'
+      })).pipe(gulp.dest(there))
   })
 }

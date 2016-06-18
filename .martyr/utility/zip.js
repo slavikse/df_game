@@ -3,7 +3,7 @@ import zip from 'gulp-zip';
 
 const
   name = 'zip',
-  folder = ['public/**'],
+  folder = 'public/**',
   there = 'zip',
   time = new Date()
     .toLocaleString('ru');

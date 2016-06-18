@@ -7,7 +7,7 @@ import responsive from 'gulp-responsive';
 
 const
   name = 'resize',
-  files = ['source/**/resize/*'],
+  files = 'source/**/resize/*',
   there = 'public/image';
 
 /**

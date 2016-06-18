@@ -7,14 +7,14 @@ import svgSprite from 'gulp-svg-sprite';
 
 const
   name = 'svg',
-  files = ['source/**/svg/*'],
+  files = 'source/**/svg/*',
   there = 'public/svg',
 
   config = {
     mode: {
       symbol: {
         sprite: 'sprite.svg',
-        example: false,
+        example: true,
         dest: '',
         render: {
           css: true

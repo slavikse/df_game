@@ -3,14 +3,12 @@ import plumber from 'gulp-plumber';
 import notify from '../utility/notify';
 import named from 'vinyl-named';
 import webpackStream from 'webpack-stream';
-import util from 'gulp-util';
-import size from 'gulp-size';
 
 let firstBuildReady = false;
 
 const
   name = 'script',
-  files = ['source/*.js'],
+  files = 'source/*.js',
   there = 'public',
   production = process.env.NODE_ENV === 'production',
 
@@ -66,6 +64,6 @@ export default () => {
       .pipe(gulp.dest(there))
       .on('data', () => {
         if (firstBuildReady) cb()
-      }).pipe(production ? size({title: name, gzip: true}) : util.noop())
+      })
   })
 }

@@ -5,7 +5,7 @@ bs.create();
 
 const
   name = 'bs',
-  folder = ['public'],
+  folder = 'public',
   tunnel = process.env.NODE_ENV === 'tunnel';
 
 /**
@@ -24,7 +24,7 @@ export default () => {
     bs.watch(folder)
       .on('change',
         bs.reload);
-    
+
     cb()
   })
 }

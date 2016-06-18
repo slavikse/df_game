@@ -1,5 +1,3 @@
-import bs from './tasks/bs';
-import del from './tasks/del';
 import font from './tasks/font';
 import image from './tasks/image';
 import resize from './tasks/resize';
@@ -9,14 +7,16 @@ import sprite from './tasks/sprite';
 import style from './tasks/style';
 import svg from './tasks/svg';
 import view from './tasks/view';
-import zip from './tasks/zip';
+
+import bs from './utility/bs';
+import del from './utility/del';
+import size from './utility/size';
+import zip from './utility/zip';
 
 /**
  * Регистрируем все задачи
  */
 export default () => {
-  bs();
-  del();
   font();
   image();
   resize();
@@ -26,5 +26,9 @@ export default () => {
   style();
   svg();
   view();
+
+  bs();
+  del();
+  size();
   zip();
 }

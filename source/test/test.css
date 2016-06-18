@@ -1,0 +1,17 @@
+.test {
+  color: #805;
+
+  .text {
+    font-size: 22px;
+  }
+
+  .svg-test_logotypes-dims {
+    width: 110px;
+    height: 100px;
+  }
+
+  @media (400px <= width <= 1200px) {
+    color: red;
+  }
+
+}
