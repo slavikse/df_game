@@ -40,7 +40,7 @@ $ gulp
     data-srcset="image/resp_mobile.jpg 544w, image/resp_tablet.jpg 992w")   
 
 * **Sprite png**: именование moduleName_imageName и кладуться в ```sprite/```   
-  **ex:** стили для использования в ```./temp/sprite.css```
+  **ex:** стили для использования в ```./public/image/sprite.css```
 
 * **Sprite svg**: именование moduleName_imageName и кладуться в ```svg/```   
   **ex:** стили для использования в ```./public/svg/sprite.css```

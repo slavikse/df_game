@@ -10,6 +10,7 @@ import view from './tasks/view';
 
 import bs from './utility/bs';
 import del from './utility/del';
+import rev from './utility/rev';
 import size from './utility/size';
 import zip from './utility/zip';
 
@@ -29,6 +30,7 @@ export default () => {
 
   bs();
   del();
+  rev();
   size();
   zip();
 }

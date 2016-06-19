@@ -3,11 +3,11 @@ import watch from '../utility/watch';
 import plumber from 'gulp-plumber';
 import notify from '../utility/notify';
 import postcss from 'gulp-postcss';
-import atImport from 'postcss-import';
+import atImport from 'postcss-import'; /*TODO bug! не подхватывает изменения, только удаление или добавление*/
 import nested from 'postcss-nested';
 import media from 'postcss-media-minmax';
-import csso from 'postcss-csso';
 import autoprefixer from 'autoprefixer';
+import csso from 'postcss-csso';
 
 const
   name = 'style',

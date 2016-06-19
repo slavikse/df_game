@@ -3,7 +3,10 @@ import del from 'del';
 
 const
   name = 'del',
-  folder = 'public';
+  folder = [
+    'public',
+    'temp'
+  ];
 
 /**
  * Удалает собранную и временную папки

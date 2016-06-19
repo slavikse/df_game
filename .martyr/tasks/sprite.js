@@ -7,7 +7,7 @@ import spritesmith from 'gulp.spritesmith';
 const
   name = 'sprite',
   files = 'source/**/sprite/*',
-  there = 'public/image';
+  there = 'public';
 
 /**
  * Создает из изображений спрайт и стили для использования
@@ -19,8 +19,8 @@ export default () => {
     return gulp.src(files)
       .pipe(plumber({errorHandler: notify}))
       .pipe(spritesmith({
-        imgName: 'sprite.png',
-        cssName: 'sprite.css'
+        imgName: 'image/sprite.png',
+        cssName: 'sprite.png.css'
       })).pipe(gulp.dest(there))
   })
 }
