@@ -61,4 +61,6 @@ source/
       header.js
 ```
 # Запустить туннель
-**NODE_ENV=tunnel gulp**
+```sh
+$ NODE_ENV=tunnel gulp
+```
