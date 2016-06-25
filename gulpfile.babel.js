@@ -1,13 +1,13 @@
 /* ***** КОМАНДЫ ***** *\
 
- Запушить изменения:
- git push -u origin master
+  Запушить изменения:
+git push -u origin master
 
- Сборка на продакшн:
- NODE_ENV=production gulp
+  Сборка на продакшн:
+NODE_ENV=production gulp
 
- Запустить туннель:
- NODE_ENV=tunnel gulp
+  Запустить туннель:
+NODE_ENV=tunnel gulp
 
  ************************/
 
