@@ -1,4 +1,3 @@
-import font from './tasks/font';
 import image from './tasks/image';
 import resize from './tasks/resize';
 import script from './tasks/script';
@@ -18,7 +17,6 @@ import zip from './utility/zip';
  * Регистрируем все задачи
  */
 export default () => {
-  font();
   image();
   resize();
   script();

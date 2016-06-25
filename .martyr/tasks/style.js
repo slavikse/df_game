@@ -3,7 +3,7 @@ import watch from '../utility/watch';
 import plumber from 'gulp-plumber';
 import notify from '../utility/notify';
 import postcss from 'gulp-postcss';
-import atImport from 'postcss-import'; /*TODO bug! не подхватывает изменения, только удаление или добавление*/
+import atImport from 'postcss-import'; //TODO bug! не подхватывает изменения, только удаление или добавление
 import nested from 'postcss-nested';
 import media from 'postcss-media-minmax';
 import autoprefixer from 'autoprefixer';
@@ -24,7 +24,9 @@ let options = [
 
 if (production) {
   options.push(
-    autoprefixer({browsers: ['last 40 versions']}),
+    autoprefixer({
+      browsers: ['last 40 versions']
+    }),
     csso
   )
 }

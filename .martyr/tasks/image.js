@@ -1,8 +1,8 @@
 import gulp from 'gulp';
 import watch from '../utility/watch';
 import rename from 'gulp-rename';
-import util from 'gulp-util';
 import imagemin from 'gulp-imagemin';
+import util from 'gulp-util';
 
 const
   name = 'image',
@@ -21,7 +21,10 @@ export default () => {
     return gulp.src(files, {
       since: gulp.lastRun(name)
     }).pipe(rename({dirname: ''}))
-      .pipe(production ? imagemin({progressive: true}) : util.noop())
+      .pipe(production ?
+        imagemin({
+          progressive: true
+        }) : util.noop())
       .pipe(gulp.dest(there))
   })
 }

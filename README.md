@@ -7,7 +7,7 @@ gulp, postcss, babel, webpack, png + svg sprite, image resize, browser-sync, в�
 # Установка
 ```sh
 $ curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-$ sudo npm i -g gulpjs/gulp-cli#4.0 &&
+$ sudo npm i -g gulp-cli &&
     git clone https://github.com/slavikse/martyr.git my_project &&
     cd my_project && npm i
 ```
@@ -40,18 +40,16 @@ $ gulp
     data-srcset="image/resp_mobile.jpg 544w, image/resp_tablet.jpg 992w")   
 
 * **Sprite png**: именование moduleName_imageName и кладуться в ```sprite/```   
-  **ex:** стили для использования в ```./public/image/sprite.css```
+  **ex:** стили для использования в ```public/sprite.png.css```
 
 * **Sprite svg**: именование moduleName_imageName и кладуться в ```svg/```   
-  **ex:** стили для использования в ```./public/svg/sprite.css```
-
-* **Font**: кладуться в ```font/```
+  **ex:** стили для использования в ```public/sprite.css```   
+    и пример использования ```public/sprite.symbol.html```
 
 ```
 source/
   client/
     header/
-      font/
       image/
       resize/
       sprite/

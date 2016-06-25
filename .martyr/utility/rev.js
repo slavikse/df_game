@@ -6,10 +6,10 @@ import del from 'del';
 
 const
   name = 'rev',
-  files = 'public/**/*.{html,css,js}', // там где возможно нужно заменить имена подключаемых файлов
+  files = 'public/**/*.{html,css,js}', // где нужно заменить имена подключаемых файлов
   revFiles = [ // версионируемые файлы
     'public/**/*.{css,js}',
-    'public/**/sprite.{png,svg}', // генерируемые могут измениться, а статичные нет
+    'public/**/sprite.{png,svg}', // генерируемые могут измениться
     '!public/sprite*{html,css}' // генерируемые вспомогательные файлы
   ],
   there = 'public';
@@ -18,13 +18,14 @@ const
  * Имена файлов, которые нужно удалить,
  * так как после версионирования будут
  * записаны файлы с хэшами
+ * На продакшне так же будут удалены вспомогательные файлы
  */
-let oldRevFiles = [];
+let delFiles = [];
 
 gulp.task('getFileNames', () => {
   return gulp.src(revFiles)
     .pipe(named(file => {
-      oldRevFiles.push(`${there}/${file.relative}`)
+      delFiles.push(`${there}/${file.relative}`)
     }))
 });
 
@@ -36,16 +37,19 @@ gulp.task('revFiles', () => {
     .pipe(gulp.dest('temp'))
 });
 
-gulp.task('viewFiles', () => {
+gulp.task('replace', () => {
   return gulp.src(files)
     .pipe(revReplace({
       manifest: gulp.src('temp/rev-manifest.json')
-    }))
-    .pipe(gulp.dest(there))
+    })).pipe(gulp.dest(there))
 });
 
-gulp.task('delOldRevFiles', () => {
-  return del(oldRevFiles)
+gulp.task('delFiles', () => {
+  delFiles.push(
+    'public/sprite.css',
+    'public/sprite.png.css',
+    'public/sprite.symbol.html');
+  return del(delFiles)
 });
 
 /**
@@ -56,8 +60,8 @@ export default () => {
     gulp.series(
       'getFileNames',
       'revFiles',
-      'viewFiles',
-      'delOldRevFiles'
+      'replace',
+      'delFiles'
     )
   )
 }

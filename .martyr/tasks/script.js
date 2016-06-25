@@ -17,7 +17,7 @@ const
   /**
    * Сигнализирует о завершении первой сборки,
    * чтобы gulp смог продолжить выполнение.
-   * Хотя webpack продолжит отслеживать файлы.
+   * webpack продолжит отслеживать файлы.
    * @type {Object} ошибка при сборке, обрабатывает gulp
    */
   done = err => {
@@ -49,7 +49,8 @@ const
   };
 
 if (production) options.plugins.push(
-  new webpack.optimize.UglifyJsPlugin());
+  new webpack.optimize.UglifyJsPlugin()
+);
 
 /**
  * Собирает скрипты с webpack и es6

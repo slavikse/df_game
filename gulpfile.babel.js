@@ -1,25 +1,25 @@
 /* ***** КОМАНДЫ ***** *\
 
-  Запушить изменения:
-git push -u origin master
-  
-  Сборка на продакшн:
-NODE_ENV=production gulp
+ Запушить изменения:
+ git push -u origin master
 
-  Запустить туннель:
-NODE_ENV=tunnel gulp
+ Сборка на продакшн:
+ NODE_ENV=production gulp
 
-************************/
+ Запустить туннель:
+ NODE_ENV=tunnel gulp
+
+ ************************/
 
 import gulp from 'gulp'
 import register from './.martyr/register'
 
 register();
 
-const
-  production = process.env.NODE_ENV === 'production',
-  tasksBuild = [
-    'font',
+const production = process.env.NODE_ENV === 'production';
+
+gulp.task('build',
+  gulp.parallel(
     'image',
     'resize',
     'script',
@@ -28,32 +28,35 @@ const
     'style',
     'svg',
     'view'
-  ];
-
-let tasksWatch = [];
-tasksBuild.forEach(task => {
-  if (task === 'script') return; // следит webpack
-  tasksWatch.push(`${task}_watch`)
-});
-
-gulp.task('build',
-  gulp.parallel(tasksBuild)
+  )
 );
 
-gulp.task('watch',
-  gulp.parallel(tasksWatch)
+gulp.task('watch', // за script - следит webpack
+  gulp.parallel(
+    'image_watch',
+    'resize_watch',
+    'service_watch',
+    'sprite_watch',
+    'style_watch',
+    'svg_watch',
+    'view_watch'
+  )
 );
 
 gulp.task('default',
   production ?
-    gulp.series( // production
+    // production
+    gulp.series(
       'del',
       'build',
       'rev',
-      'size',
-      'zip'
+      gulp.parallel(
+        'size',
+        'zip'
+      )
     ) :
-    gulp.series( // development
+    // development
+    gulp.series(
       'del',
       'build',
       gulp.parallel(

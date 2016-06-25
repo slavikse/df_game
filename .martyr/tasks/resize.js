@@ -1,17 +1,19 @@
 import gulp from 'gulp';
 import watch from '../utility/watch';
-import plumber from 'gulp-plumber';
-import notify from '../utility/notify';
 import rename from 'gulp-rename';
 import responsive from 'gulp-responsive';
+import imagemin from 'gulp-imagemin';
+import util from 'gulp-util';
 
 const
   name = 'resize',
   files = 'source/**/resize/*',
-  there = 'public/image';
+  there = 'public/image',
+  production = process.env.NODE_ENV === 'production';
 
 /**
  * Создаем из оригинала 2 изображения меньших размеров
+ * Сжимает на продакшн
  */
 export default () => {
   watch(name, files);
@@ -19,8 +21,7 @@ export default () => {
   gulp.task(name, () => {
     return gulp.src(files, {
       since: gulp.lastRun(name)
-    }).pipe(plumber({errorHandler: notify}))
-      .pipe(rename({dirname: ''}))
+    }).pipe(rename({dirname: ''}))
       .pipe(responsive({
         '*': [{
           width: '100%' // lg 1200px
@@ -38,6 +39,10 @@ export default () => {
       }, {
         stats: false,
         silent: true
-      })).pipe(gulp.dest(there))
+      })).pipe(production ?
+        imagemin({
+          progressive: true
+        }) : util.noop())
+      .pipe(gulp.dest(there))
   })
 }
