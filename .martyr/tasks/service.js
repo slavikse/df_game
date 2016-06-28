@@ -13,8 +13,7 @@ export default () => {
   watch(name, files);
 
   gulp.task(name, () => {
-    return gulp.src(files, {
-      since: gulp.lastRun(name)
-    }).pipe(gulp.dest(there))
+    return gulp.src(files, {since: gulp.lastRun(name)})
+      .pipe(gulp.dest(there))
   })
 }

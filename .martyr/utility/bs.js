@@ -22,8 +22,7 @@ export default () => {
     });
 
     bs.watch(folder)
-      .on('change',
-        bs.reload);
+      .on('change', bs.reload);
 
     cb()
   })

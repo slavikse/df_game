@@ -18,13 +18,9 @@ export default () => {
   watch(name, files);
 
   gulp.task(name, () => {
-    return gulp.src(files, {
-      since: gulp.lastRun(name)
-    }).pipe(rename({dirname: ''}))
-      .pipe(production ?
-        imagemin({
-          progressive: true
-        }) : util.noop())
+    return gulp.src(files, {since: gulp.lastRun(name)})
+      .pipe(rename({dirname: ''}))
+      .pipe(production ? imagemin({progressive: true}) : util.noop())
       .pipe(gulp.dest(there))
   })
 }

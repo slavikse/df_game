@@ -48,12 +48,12 @@ const
     devtool: production ? null : 'cheap-inline-module-source-map'
   };
 
-if (production) options.plugins.push(
-  new webpack.optimize.UglifyJsPlugin()
-);
+if (production) {
+  options.plugins.push(new webpack.optimize.UglifyJsPlugin())
+}
 
 /**
- * Собирает скрипты с webpack и es6
+ * Собирает скрипты es2015 & React с webpack и babel
  * Сжимает на продакшн
  */
 export default () => {
@@ -64,7 +64,9 @@ export default () => {
       .pipe(webpackStream(options, null, done))
       .pipe(gulp.dest(there))
       .on('data', () => {
-        if (firstBuildReady) cb()
+        if (firstBuildReady) {
+          cb()
+        }
       })
   })
 }

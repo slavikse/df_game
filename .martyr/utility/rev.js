@@ -6,22 +6,24 @@ import del from 'del';
 
 const
   name = 'rev',
-  files = 'public/**/*.{html,css,js}', // где нужно заменить имена подключаемых файлов
+  files = 'public/**/*.{html,css,js}', // заменить подключаемые файлы на версионируемые
   revFiles = [ // версионируемые файлы
     'public/**/*.{css,js}',
-    'public/**/sprite.{png,svg}', // генерируемые могут измениться
-    '!public/sprite*{html,css}' // генерируемые вспомогательные файлы
+    'public/**/sprite.{png,svg}', // генерируемые картинки (спрайты) могут измениться
+    '!public/sprite*{html,css}' // подсказка использования спрайтов
   ],
   there = 'public';
 
 /**
- * Имена файлов, которые нужно удалить,
- * так как после версионирования будут
- * записаны файлы с хэшами
- * На продакшне так же будут удалены вспомогательные файлы
+ * Имена файлов, которые нужно удалить, так как после версионирования будут записаны 
+ * новые файлы с хэшами, а старые будут не нужны
+ * На продакшн будут удалены файлы с подсказками использования спрайтов
  */
 let delFiles = [];
 
+/**
+ * Собирает имена файлов в массив для удаления устаревших файлов
+ */
 gulp.task('getFileNames', () => {
   return gulp.src(revFiles)
     .pipe(named(file => {
@@ -29,6 +31,9 @@ gulp.task('getFileNames', () => {
     }))
 });
 
+/**
+ * Версионирует файлы и создает манифест переименования
+ */
 gulp.task('revFiles', () => {
   return gulp.src(revFiles)
     .pipe(rev())
@@ -37,13 +42,18 @@ gulp.task('revFiles', () => {
     .pipe(gulp.dest('temp'))
 });
 
+/**
+ * Переименовывает имена файлов согласно манифесту переименования
+ */
 gulp.task('replace', () => {
   return gulp.src(files)
-    .pipe(revReplace({
-      manifest: gulp.src('temp/rev-manifest.json')
-    })).pipe(gulp.dest(there))
+    .pipe(revReplace({manifest: gulp.src('temp/rev-manifest.json')}))
+    .pipe(gulp.dest(there))
 });
 
+/**
+ * Удаляет устаревшие (версионированные) файлы и подсказки использования спрайтов
+ */
 gulp.task('delFiles', () => {
   delFiles.push(
     'public/sprite.css',

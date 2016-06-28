@@ -33,7 +33,7 @@ if (production) {
  */
 export default () => {
   watch(name, wFiles);
-  
+
   gulp.task(name, () => {
     return gulp.src(files)
       .pipe(plumber({errorHandler: notify}))

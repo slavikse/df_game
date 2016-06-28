@@ -5,8 +5,7 @@ const
   name = 'zip',
   folder = 'public/**',
   there = 'zip',
-  time = new Date()
-    .toLocaleString('ru');
+  time = new Date().toLocaleString('ru');
 
 /**
  * Сожмет все файлы сборки в zip архив

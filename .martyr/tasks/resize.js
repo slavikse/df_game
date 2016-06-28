@@ -19,9 +19,8 @@ export default () => {
   watch(name, files);
 
   gulp.task(name, () => {
-    return gulp.src(files, {
-      since: gulp.lastRun(name)
-    }).pipe(rename({dirname: ''}))
+    return gulp.src(files, {since: gulp.lastRun(name)})
+      .pipe(rename({dirname: ''}))
       .pipe(responsive({
         '*': [{
           width: '100%' // lg 1200px
@@ -39,10 +38,8 @@ export default () => {
       }, {
         stats: false,
         silent: true
-      })).pipe(production ?
-        imagemin({
-          progressive: true
-        }) : util.noop())
+      }))
+      .pipe(production ? imagemin({progressive: true}) : util.noop())
       .pipe(gulp.dest(there))
   })
 }

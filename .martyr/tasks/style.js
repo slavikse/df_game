@@ -24,9 +24,7 @@ let options = [
 
 if (production) {
   options.push(
-    autoprefixer({
-      browsers: ['last 40 versions']
-    }),
+    autoprefixer({browsers: ['last 40 versions']}),
     csso
   )
 }

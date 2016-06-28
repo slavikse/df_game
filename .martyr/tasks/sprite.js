@@ -31,10 +31,7 @@ export default () => {
 
     let img = data.img
       .pipe(buffer())
-      .pipe(production ?
-        imagemin({
-          progressive: true
-        }) : util.noop())
+      .pipe(production ? imagemin({progressive: true}) : util.noop())
       .pipe(gulp.dest(there));
 
     return merge(css, img)
