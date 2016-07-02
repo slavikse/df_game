@@ -45,6 +45,8 @@ $ gulp
 * **Sprite svg**: именование moduleName_imageName и кладуться в ```svg/```   
   **ex:** стили для использования в ```public/sprite.css```   
     и пример использования ```public/sprite.symbol.html```
+    
+* **Font**: шрифты кладуться в ```font/```   
 
 ```
 source/
@@ -54,6 +56,7 @@ source/
       resize/
       sprite/
       svg/
+      font/
       header.html
       header.css
       header.js

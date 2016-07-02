@@ -28,13 +28,7 @@ const
   options = {
     module: {
       loaders: [{
-        loader: 'babel',
-        query: {
-          presets: [
-            'es2015',
-            'react'
-          ]
-        }
+        loader: 'babel'
       }]
     },
     watch: !production,
