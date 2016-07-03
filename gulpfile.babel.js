@@ -20,6 +20,7 @@ const production = process.env.NODE_ENV === 'production';
 
 gulp.task('build',
   gulp.parallel(
+    'font',
     'image',
     'resize',
     'script',
@@ -33,6 +34,7 @@ gulp.task('build',
 
 gulp.task('watch', // за script - следит webpack
   gulp.parallel(
+    'font_watch',
     'image_watch',
     'resize_watch',
     'service_watch',
