@@ -8,14 +8,14 @@
 
 
 /*
-Стиль каскада:
-  .block {.element,tag}
-
 Сортировка стилей:
   1. Позиционирование
   2. Блочная модель
   3. Оформление
   4. Прочее
+
+Стиль каскада:
+  .block {.element,tag}
 
 Ширины экранов:
   xs = 544px
@@ -32,28 +32,29 @@ Responsive background image:
 
 Syntax postcss plugins:
   @import "normalize.css"; <-- из npm
+  @import "./slyle.css"; <-- локальная
   @media (500px <= width <= 1200px)
   nested: sass like
 
 Для png спрайта:
-.icon {
-  display: inline-block;
-}
+  .icon {
+    display: inline-block;
+  }
 
 Подключение стороннего шрифта:
-@font-face {
-  font-family: 'PT Sans';
-  src: url('ptsans-regular.eot');
-  src: url('ptsans-regular.eot?#iefix') format('embedded-opentype'),
-       url('ptsans-regular.woff2') format('woff2'),
-       url('ptsans-regular.woff') format('woff'),
-       url('ptsans-regular.ttf') format('truetype'),
-       url('ptsans-regular.svg#PT Sans Regular') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
+  @font-face {
+    font-family: 'PT Sans';
+    src: url('ptsans-regular.eot');
+    src: url('ptsans-regular.eot?#iefix') format('embedded-opentype'),
+         url('ptsans-regular.woff2') format('woff2'),
+         url('ptsans-regular.woff') format('woff'),
+         url('ptsans-regular.ttf') format('truetype'),
+         url('ptsans-regular.svg#PT Sans Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+  }
 
-body {
-  font-family: "PT Sans";
-}
+  body {
+    font-family: "PT Sans";
+  }
 */

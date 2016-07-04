@@ -1,6 +1,5 @@
 {
   "presets": [
-    "es2015-loose",
-    "react"
+    "es2015-loose"
   ]
 }
