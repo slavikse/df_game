@@ -2,6 +2,7 @@
 /!\ Быстрый старт с компонентной системой разработки проекта /!\   
 
 **Под капотом:**
+(love)
 gulp, postcss, babel, webpack, png + svg sprite, image resize, browser-sync, версионирование, minify, zip.
 
 # Установка
