@@ -1,8 +1,7 @@
 # Для чего?
 /!\ Быстрый старт с компонентной системой разработки проекта /!\   
-
+[https://assets-cdn.github.com/images/icons/emoji/unicode/1f49e.png]
 **Под капотом:**
-(love)
 gulp, postcss, babel, webpack, png + svg sprite, image resize, browser-sync, версионирование, minify, zip.
 
 # Установка
