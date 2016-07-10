@@ -6,7 +6,6 @@
   max-width: 1200px;
 }
 
-
 /*
 Сортировка стилей:
   1. Позиционирование
@@ -15,7 +14,7 @@
   4. Прочее
 
 Стиль каскада:
-  .block {.element,tag}
+  .block { .class, tag }
 
 Ширины экранов:
   xs = 544px
@@ -25,6 +24,9 @@
 
 Спрайт (png):
   <i class="icon icon-home"></i>
+  .icon {
+    display: inline-block;
+  }
 
 Responsive background image:
   @media ...
@@ -35,11 +37,6 @@ Syntax postcss plugins:
   @import "./slyle.css"; <-- локальная
   @media (500px <= width <= 1200px)
   nested: sass like
-
-Для png спрайта:
-  .icon {
-    display: inline-block;
-  }
 
 Подключение стороннего шрифта:
   @font-face {
