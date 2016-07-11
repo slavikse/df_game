@@ -32,11 +32,12 @@ gulp.task('build',
   )
 );
 
-gulp.task('watch', // за script - следит webpack
+gulp.task('watch',
   gulp.parallel(
     'font_watch',
     'image_watch',
     'resize_watch',
+    // script_watch - webpack
     'service_watch',
     'sprite_watch',
     'style_watch',
@@ -47,6 +48,7 @@ gulp.task('watch', // за script - следит webpack
 
 gulp.task('default',
   production ?
+    
     // production
     gulp.series(
       'del',
@@ -57,6 +59,7 @@ gulp.task('default',
         'zip'
       )
     ) :
+    
     // development
     gulp.series(
       'del',
