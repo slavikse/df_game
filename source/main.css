@@ -16,6 +16,12 @@
 Стиль каскада:
   .block { .class, tag }
 
+Syntax postcss plugins:
+  @import "normalize.css"; <-- из npm
+  @import "./slyle.css"; <-- локальная
+  @media (500px <= width <= 1200px)
+  nested: sass like
+
 Ширины экранов:
   xs = 544px
   sm = 768px
@@ -30,13 +36,7 @@
 
 Responsive background image:
   @media ...
-    background url('image/bg_img-1_tablet.jpg') 50% 50%/cover no-repeat
-
-Syntax postcss plugins:
-  @import "normalize.css"; <-- из npm
-  @import "./slyle.css"; <-- локальная
-  @media (500px <= width <= 1200px)
-  nested: sass like
+    background url('image/bg_img_tablet.jpg') 50% 50%/cover no-repeat
 
 Подключение стороннего шрифта:
   @font-face {

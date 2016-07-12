@@ -37,7 +37,7 @@ gulp.task('watch',
     'font_watch',
     'image_watch',
     'resize_watch',
-    // script_watch - webpack
+    // script_watch -> webpack
     'service_watch',
     'sprite_watch',
     'style_watch',

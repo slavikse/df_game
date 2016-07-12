@@ -22,7 +22,10 @@ const
    */
   done = err => {
     firstBuildReady = true;
-    if (err) return 0
+
+    if (err) {
+      return null;
+    }
   },
 
   options = {

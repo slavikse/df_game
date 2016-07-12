@@ -2,7 +2,7 @@ import gulp from 'gulp';
 import watch from '../utility/watch';
 import plumber from 'gulp-plumber';
 import notify from '../utility/notify';
-import rigger from 'gulp-rigger';
+import include from 'gulp-include';
 import htmlmin from 'gulp-htmlmin';
 
 const
@@ -37,7 +37,7 @@ export default () => {
   gulp.task(name, () => {
     return gulp.src(files)
       .pipe(plumber({errorHandler: notify}))
-      .pipe(rigger())
+      .pipe(include())
       .pipe(htmlmin(options))
       .pipe(gulp.dest(there))
   })
