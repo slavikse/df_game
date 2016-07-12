@@ -10,8 +10,8 @@ const
 
 /**
  * Следит за изменениями в директории '/public' и
- * обновляет вкладку в браузере при изменениях.
- * Передав в консоль: NODE_ENV=tunnel gulp bs, запустит туннель
+ * обновляет вкладку в браузере при изменениях
+ * Запустит туннель, передав в консоль: NODE_ENV=tunnel gulp bs
  */
 export default () => {
   gulp.task(name, cb => {
@@ -21,9 +21,8 @@ export default () => {
       ui: false
     });
 
-    bs.watch(folder)
-      .on('change', bs.reload);
+    bs.watch(folder).on('change', bs.reload);
 
-    cb()
+    cb();
   })
 }

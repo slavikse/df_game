@@ -8,7 +8,8 @@ const
   time = new Date().toLocaleString('ru');
 
 /**
- * Сожмет все файлы сборки в zip архив
+ * Запакует файлы после сборки в zip
+ * Имени архива присваивает текущее время
  */
 export default () => {
   gulp.task(name, () => {

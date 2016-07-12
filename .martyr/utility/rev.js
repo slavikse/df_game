@@ -6,20 +6,24 @@ import del from 'del';
 
 const
   name = 'rev',
-  files = 'public/**/*.{html,css,js}', // заменить подключаемые файлы на версионируемые
+  files = 'public/**/*.{html,css,js}', // заменит подключаемые файлы на версионируемые
   revFiles = [ // версионируемые файлы
     'public/**/*.{css,js}',
-    'public/**/sprite.{png,svg}', // генерируемые картинки (спрайты) могут измениться
-    '!public/sprite*{html,css}' // подсказка использования спрайтов
+    'public/**/sprite.{png,svg}', // генерируемые картинки (спрайты)
+    '!public/sprite*{html,css}' // подсказки использования спрайтов
   ],
-  there = 'public';
+  there = 'public',
+  production = process.env.NODE_ENV === 'production';
 
 /**
- * Имена файлов, которые нужно удалить, так как после версионирования будут записаны 
- * новые файлы с хэшами, а старые будут не нужны
- * На продакшн будут удалены файлы с подсказками использования спрайтов
+ * Имена файлов, которые нужно удалить, так как после версионирования будут записаны новые файлы с хэшами
+ * Удаляет картинки нужные только для багфикса к плагину: gulp-responsive
  */
-let delFiles = [];
+let delFiles = [
+  'public/image/bugfix.png',
+  'public/image/bugfix_mobile.png',
+  'public/image/bugfix_tablet.png'
+];
 
 /**
  * Собирает имена файлов в массив для удаления устаревших файлов
@@ -52,19 +56,21 @@ gulp.task('replace', () => {
 });
 
 /**
- * Удаляет устаревшие (версионированные) файлы и подсказки использования спрайтов
+ * Удаляет устаревшие (после версионирования) файлы
+ * На продакшн так же: подсказки использования спрайтов
  */
 gulp.task('delFiles', () => {
-  delFiles.push(
-    'public/sprite.css',
-    'public/sprite.png.css',
-    'public/sprite.symbol.html');
-  return del(delFiles)
+  if (production) {
+    delFiles.push(
+      'public/sprite.css',
+      'public/sprite.png.css',
+      'public/sprite.symbol.html'
+    )
+  }
+  
+  return del(delFiles);
 });
 
-/**
- * Версионируется статика: css, js и sprite.{png,svg}
- */
 export default () => {
   gulp.task(name,
     gulp.series(

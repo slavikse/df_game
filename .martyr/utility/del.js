@@ -13,6 +13,6 @@ const
  */
 export default () => {
   gulp.task(name, () => {
-    return del(folder)
+    return del(folder);
   })
 }

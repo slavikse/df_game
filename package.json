@@ -1,6 +1,6 @@
 {
   "name": "martyr",
-  "version": "3.3.3",
+  "version": "3.5.0",
   "description": "Мученик - машина, а не человек! Современный веб стек технологий для сборки веб проектов",
   "main": "gulpfile.babel.js",
   "author": "slavikse",
@@ -30,9 +30,8 @@
     "gulp-util": "3.0.7",
     "gulp-zip": "3.2.0",
     "gulp.spritesmith": "6.2.1",
-    "layzr.js": "2.2.1",
     "merge-stream": "1.0.0",
-    "my_libs": "slavikse/my_libs",
+    "libs": "slavikse/libs",
     "normalize.css": "4.2.0",
     "postcss-csso": "1.1.2",
     "postcss-import": "8.1.2",

@@ -36,21 +36,23 @@ const
     },
     watch: !production,
     plugins: [
-      new webpack.NoErrorsPlugin(),
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'common',
-        minChunks: 2
-      })
+      new webpack.NoErrorsPlugin()
+      // new webpack.optimize.CommonsChunkPlugin({
+      //   name: 'common',
+      //   minChunks: 2
+      // })
     ],
     devtool: production ? null : 'cheap-inline-module-source-map'
   };
 
 if (production) {
-  options.plugins.push(new webpack.optimize.UglifyJsPlugin())
+  options.plugins.push(
+    new webpack.optimize.UglifyJsPlugin()
+  )
 }
 
 /**
- * Собирает скрипты es2015 & React с webpack и babel
+ * Собирает скрипты
  * Сжимает на продакшн
  */
 export default () => {
