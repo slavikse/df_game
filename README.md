@@ -21,8 +21,8 @@ $ gulp
   *Имя папки (module_name) === Имени файлов в папке:*   
   **ex:** module_name/{module_name.html,module_name.css,module_name.js}
 
-* **View**: логическая вложенность с помощью rigger.   
-  **ex:** //= module_name/module_name.html   
+* **View**: логическая вложенность с помощью gulp-include.   
+  **ex:** //=include module_name/module_name.html   
 
 * **Style**: импортятся локально + npm.   
     Каскад + правило НЕ вкладывать! = ❤ инкапсуляция стилей.   
