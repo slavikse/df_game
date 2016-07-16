@@ -1,7 +1,7 @@
 @import "normalize.css";
 @import "libs/reset_css";
 
-{/*
+/*
 Сортировка стилей:
   1. Позиционирование
   2. Блочная модель
@@ -49,9 +49,9 @@ Responsive background image:
   body {
     font-family: "PT Sans";
   }
-*/}
+*/
 
 .row {
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 1400px;
 }
