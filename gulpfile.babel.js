@@ -1,20 +1,16 @@
 /* ***** КОМАНДЫ ***** *\
-
-  Запушить изменения:
+Запушить изменения:
 git push -u origin master
 
-  Сборка на продакшн:
+Сборка на продакшн:
 NODE_ENV=production gulp
 
-  Запустить туннель:
+Запустить туннель:
 NODE_ENV=tunnel gulp
+************************/
 
- ************************/
-
-import gulp from 'gulp'
-import register from './.martyr/register'
-
-register();
+import gulp from 'gulp';
+import './.martyr/index';
 
 const production = process.env.NODE_ENV === 'production';
 
@@ -48,18 +44,18 @@ gulp.task('watch',
 
 gulp.task('default',
   production ?
-    
+
     // production
     gulp.series(
       'del',
       'build',
       'rev',
       gulp.parallel(
-        'size',
+        'gzip',
         'zip'
       )
     ) :
-    
+
     // development
     gulp.series(
       'del',

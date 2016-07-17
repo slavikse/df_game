@@ -11,5 +11,5 @@ export default (name, files) => {
     gulp.watch(files, gulp.series(name));
     
     cb();
-  })
+  });
 }

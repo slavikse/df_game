@@ -1,5 +1,4 @@
 import gulp from 'gulp';
-import watch from '../utility/watch';
 import plumber from 'gulp-plumber';
 import notify from '../utility/notify';
 import postcss from 'gulp-postcss';
@@ -8,6 +7,7 @@ import nested from 'postcss-nested';
 import media from 'postcss-media-minmax';
 import autoprefixer from 'autoprefixer';
 import csso from 'postcss-csso';
+import watch from '../utility/watch';
 
 const
   name = 'style',
@@ -30,16 +30,14 @@ if (production) {
 }
 
 /**
- * Собирает стили с postcss
+ * Собирает стили
  * Префиксит и сжимает на продакшн
  */
-export default () => {
-  watch(name, wFiles);
+gulp.task(name, () => {
+  return gulp.src(files)
+    .pipe(plumber({errorHandler: notify}))
+    .pipe(postcss(options))
+    .pipe(gulp.dest(there));
+});
 
-  gulp.task(name, () => {
-    return gulp.src(files)
-      .pipe(plumber({errorHandler: notify}))
-      .pipe(postcss(options))
-      .pipe(gulp.dest(there))
-  })
-}
+watch(name, wFiles);

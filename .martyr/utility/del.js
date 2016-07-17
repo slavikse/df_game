@@ -11,8 +11,6 @@ const
 /**
  * Удалает собранную и временную папки
  */
-export default () => {
-  gulp.task(name, () => {
-    return del(folder);
-  })
-}
+gulp.task(name, () => {
+  return del(folder);
+});

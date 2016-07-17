@@ -1,9 +1,9 @@
 import gulp from 'gulp';
-import watch from '../utility/watch';
 import plumber from 'gulp-plumber';
 import notify from '../utility/notify';
 import include from 'gulp-include';
 import htmlmin from 'gulp-htmlmin';
+import watch from '../utility/watch';
 
 const
   name = 'view',
@@ -31,14 +31,12 @@ if (production) {
  * Собирает разметку
  * Сжимает на продакшн
  */
-export default () => {
-  watch(name, wFiles);
+gulp.task(name, () => {
+  return gulp.src(files)
+    .pipe(plumber({errorHandler: notify}))
+    .pipe(include())
+    .pipe(htmlmin(options))
+    .pipe(gulp.dest(there));
+});
 
-  gulp.task(name, () => {
-    return gulp.src(files)
-      .pipe(plumber({errorHandler: notify}))
-      .pipe(include())
-      .pipe(htmlmin(options))
-      .pipe(gulp.dest(there))
-  })
-}
+watch(name, wFiles);

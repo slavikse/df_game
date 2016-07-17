@@ -1,7 +1,7 @@
 import gulp from 'gulp';
-import watch from '../utility/watch';
 import rename from 'gulp-rename';
 import svgSprite from 'gulp-svg-sprite';
+import watch from '../utility/watch';
 
 const
   name = 'svg',
@@ -29,13 +29,11 @@ const
  * Создает из svg спрайт и стили для использвоания
  * Выдает уже пожатый, а svgo удаляет контент...
  */
-export default () => {
-  watch(name, files);
+gulp.task(name, () => {
+  return gulp.src(files)
+    .pipe(rename({dirname: ''}))
+    .pipe(svgSprite(config))
+    .pipe(gulp.dest(there));
+});
 
-  gulp.task(name, () => {
-    return gulp.src(files)
-      .pipe(rename({dirname: ''}))
-      .pipe(svgSprite(config))
-      .pipe(gulp.dest(there))
-  })
-}
+watch(name, files);

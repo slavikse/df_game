@@ -67,17 +67,15 @@ gulp.task('delFiles', () => {
       'public/sprite.symbol.html'
     )
   }
-  
+
   return del(delFiles);
 });
 
-export default () => {
-  gulp.task(name,
-    gulp.series(
-      'getFileNames',
-      'revFiles',
-      'replace',
-      'delFiles'
-    )
+gulp.task(name,
+  gulp.series(
+    'getFileNames',
+    'revFiles',
+    'replace',
+    'delFiles'
   )
-}
+);

@@ -1,6 +1,13 @@
 @import "normalize.css";
 @import "libs/reset_css";
 
+.row {
+  margin: 0 auto;
+  max-width: 1400px;
+}
+
+
+
 /*
 Сортировка стилей:
   1. Позиционирование
@@ -50,8 +57,3 @@ Responsive background image:
     font-family: "PT Sans";
   }
 */
-
-.row {
-  margin: 0 auto;
-  max-width: 1400px;
-}

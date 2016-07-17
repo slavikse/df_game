@@ -1,6 +1,6 @@
 {
   "name": "martyr",
-  "version": "3.5.0",
+  "version": "3.5.1",
   "description": "Мученик - машина, а не человек! Современный веб стек технологий для сборки веб проектов",
   "main": "gulpfile.babel.js",
   "author": "slavikse",

@@ -9,11 +9,9 @@ const
 /**
  * Перемещает сервисные файлы
  */
-export default () => {
-  watch(name, files);
+gulp.task(name, () => {
+  return gulp.src(files, {since: gulp.lastRun(name)})
+    .pipe(gulp.dest(there));
+});
 
-  gulp.task(name, () => {
-    return gulp.src(files, {since: gulp.lastRun(name)})
-      .pipe(gulp.dest(there))
-  })
-}
+watch(name, files);

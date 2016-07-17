@@ -55,17 +55,15 @@ if (production) {
  * Собирает скрипты
  * Сжимает на продакшн
  */
-export default () => {
-  gulp.task(name, cb => {
-    return gulp.src(files)
-      .pipe(plumber({errorHandler: notify}))
-      .pipe(named())
-      .pipe(webpackStream(options, null, done))
-      .pipe(gulp.dest(there))
-      .on('data', () => {
-        if (firstBuildReady) {
-          cb()
-        }
-      })
-  })
-}
+gulp.task(name, cb => {
+  return gulp.src(files)
+    .pipe(plumber({errorHandler: notify}))
+    .pipe(named())
+    .pipe(webpackStream(options, null, done))
+    .pipe(gulp.dest(there))
+    .on('data', () => {
+      if (firstBuildReady) {
+        cb();
+      }
+    });
+});
