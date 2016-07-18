@@ -18,9 +18,14 @@
 Стиль каскада:
   .block { .class, tag }
 
+Рекомендации:
+  will-change: подготовит браузер к обновлению элемента
+  position absolute: выводит из потока
+  opacity, transform: самые дешевые операции
+
 Syntax postcss plugins:
-  @import "normalize.css"; <-- из npm
-  @import "./slyle.css"; <-- локальная
+  @import "normalize.css" из npm
+  @import "./style.css" локальная
   @media (500px <= width <= 1200px)
   nested: sass like
 
