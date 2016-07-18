@@ -20,7 +20,7 @@
 
 Рекомендации:
   will-change: подготовит браузер к обновлению элемента
-  position absolute: выводит из потока
+  absolute, z-index: выводит из общего потока
   opacity, transform: самые дешевые операции
 
 Syntax postcss plugins:
