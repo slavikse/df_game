@@ -5,6 +5,7 @@ import postcss from 'gulp-postcss';
 import atImport from 'postcss-import'; //TODO bug! не подхватывает изменения, только удаление или добавление
 import nested from 'postcss-nested';
 import media from 'postcss-media-minmax';
+import flexbugs from 'postcss-flexbugs-fixes';
 import autoprefixer from 'autoprefixer';
 import csso from 'postcss-csso';
 import watch from '../utility/watch';
@@ -24,6 +25,7 @@ let options = [
 
 if (production) {
   options.push(
+    flexbugs,
     autoprefixer({browsers: ['last 40 versions']}),
     csso
   )
