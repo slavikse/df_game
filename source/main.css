@@ -22,6 +22,7 @@
   will-change: подготовит браузер к обновлению элемента
   absolute, z-index: выводит из общего потока
   opacity, transform: самые дешевые операции
+  Псевдоклассы только для декораций
 
 Syntax postcss plugins:
   @import "normalize.css" из npm
