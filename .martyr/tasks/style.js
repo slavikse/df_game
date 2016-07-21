@@ -3,9 +3,6 @@ import plumber from 'gulp-plumber';
 import notify from '../utility/notify';
 import postcss from 'gulp-postcss';
 import atImport from 'postcss-import';
-import simpleVars from 'postcss-simple-vars';
-import conditionals from 'postcss-conditionals';
-import loop from 'postcss-for';
 import nested from 'postcss-nested';
 import media from 'postcss-media-minmax';
 import flexbugs from 'postcss-flexbugs-fixes';
@@ -22,9 +19,6 @@ const
 
 let options = [
   atImport,
-  simpleVars,
-  conditionals,
-  loop,
   nested,
   media
 ];

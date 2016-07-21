@@ -31,9 +31,6 @@ Syntax postcss plugins:
   @import "./style.css" локальная
   @media (500px <= width <= 1200px)
   nested: sass-like
-  variables: $var-name
-  conditionals: @if ... {} @else {}
-  loop: @for $i from 1 to 3 {}
 
 Ширины экранов:
   xs = 544px
