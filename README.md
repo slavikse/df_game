@@ -11,9 +11,10 @@ $ sudo npm i -g gulp-cli &&
     git clone https://github.com/slavikse/martyr.git my_project &&
     cd my_project && npm i
 ```
-# Запуск
+# Запуск: разработка, продакшн
 ```sh
 $ gulp
+$ NODE_ENV=production gulp
 ``` 
 # Модульность
 **Правила сборки**:   
@@ -49,16 +50,15 @@ $ gulp
 
 ```
 source/
-  client/
     header/
-      image/
-      resize/
-      sprite/
-      svg/
-      font/
-      header.html
-      header.css
-      header.js
+        image/
+        resize/
+        sprite/
+        svg/
+        font/
+        header.html
+        header.css
+        header.js
 ```
 # Запустить туннель
 ```sh
