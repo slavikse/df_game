@@ -12,7 +12,7 @@ $ sudo npm i -g gulp-cli &&
     cd my_project && npm i
 ```
 # Запуск
-Разработка: ```$ gulp```
+Разработка: ```$ gulp```   
 Продакшн: ```$ NODE_ENV=production gulp```
 
 # Модульность
