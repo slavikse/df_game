@@ -11,11 +11,10 @@ $ sudo npm i -g gulp-cli &&
     git clone https://github.com/slavikse/martyr.git my_project &&
     cd my_project && npm i
 ```
-# Запуск: разработка, продакшн
-```sh
-$ gulp
-$ NODE_ENV=production gulp
-``` 
+# Запуск
+Разработка: ```$ gulp```
+Продакшн: ```$ NODE_ENV=production gulp```
+
 # Модульность
 **Правила сборки**:   
 * **Module**: НЕ вкладывать! Тем самым ФС отследит уникальность имени папки.   
