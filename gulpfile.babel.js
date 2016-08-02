@@ -10,7 +10,7 @@ NODE_ENV=tunnel gulp
 ************************/
 
 import gulp from 'gulp';
-import './.martyr/index';
+import './.martyr';
 
 const production = process.env.NODE_ENV === 'production';
 
