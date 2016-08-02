@@ -8,4 +8,3 @@
  *  new FormData(document.forms.person) serialize данных из формы по name
  *  console.time/End для тестирования производительности
  */
-

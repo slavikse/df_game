@@ -26,7 +26,7 @@ let options = [
 if (production) {
   options.push(
     flexbugs,
-    autoprefixer({browsers: ['last 40 versions']}),
+    autoprefixer,
     csso
   )
 }
