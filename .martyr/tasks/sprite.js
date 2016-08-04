@@ -18,18 +18,18 @@ const
  */
 gulp.task(name, () => {
   let data = gulp.src(files)
-    .pipe(spritesmith({
-      cssName: 'sprite.png.css',
-      imgName: 'image/sprite.png'
-    }));
+  .pipe(spritesmith({
+    cssName: 'sprite.png.css',
+    imgName: 'image/sprite.png'
+  }));
 
   let css = data.css
-    .pipe(gulp.dest(there));
+  .pipe(gulp.dest(there));
 
   let img = data.img
-    .pipe(buffer())
-    .pipe(production ? imagemin({progressive: true}) : util.noop())
-    .pipe(gulp.dest(there));
+  .pipe(buffer())
+  .pipe(production ? imagemin({progressive: true}) : util.noop())
+  .pipe(gulp.dest(there));
 
   return merge(css, img);
 });

@@ -8,7 +8,7 @@ let firstBuildReady = false;
 
 const
   name = 'script',
-  files = 'source/*.js',
+  files = ['source/*.js', '!source/_*.js'],
   there = 'public',
   production = process.env.NODE_ENV === 'production',
 
@@ -57,13 +57,13 @@ if (production) {
  */
 gulp.task(name, cb => {
   return gulp.src(files)
-    .pipe(plumber({errorHandler: notify}))
-    .pipe(named())
-    .pipe(webpackStream(options, null, done))
-    .pipe(gulp.dest(there))
-    .on('data', () => {
-      if (firstBuildReady) {
-        cb();
-      }
-    });
+  .pipe(plumber({errorHandler: notify}))
+  .pipe(named())
+  .pipe(webpackStream(options, null, done))
+  .pipe(gulp.dest(there))
+  .on('data', () => {
+    if (firstBuildReady) {
+      cb();
+    }
+  });
 });

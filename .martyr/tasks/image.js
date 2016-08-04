@@ -16,9 +16,9 @@ const
  */
 gulp.task(name, () => {
   return gulp.src(files, {since: gulp.lastRun(name)})
-    .pipe(rename({dirname: ''}))
-    .pipe(production ? imagemin({progressive: true}) : util.noop())
-    .pipe(gulp.dest(there));
+  .pipe(rename({dirname: ''}))
+  .pipe(production ? imagemin({progressive: true}) : util.noop())
+  .pipe(gulp.dest(there));
 });
 
 watch(name, files);

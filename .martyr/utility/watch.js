@@ -9,7 +9,7 @@ import gulp from 'gulp';
 export default (name, files) => {
   gulp.task(`${name}_watch`, cb => {
     gulp.watch(files, gulp.series(name));
-    
+
     cb();
   });
 }

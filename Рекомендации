@@ -1,0 +1,101 @@
+
+------------------------ РАЗМЕТКА ---------------------------
+
+include test/test для логической вставки разметки
+Минимальная вложенность
+img[width height alt], a[title]
+LazyLoad image. template для отложенной загрузки модулей
+
+svg(class="svg-files")
+  use(xlink:href="svg/sprite.svg#logo")
+
+meta(name='application-name' content='Application Name')
+<meta http-equiv="x-dns-prefetch-control" content="on">
+<link rel="dns-prefetch" href="https://URI.com">
+<link rel="prefetch" href="secondary.js">
+
+Social: Facebook / Open Graph
+<meta property="fb:ADD_ID" content="123456789">
+<meta property="og:url" content="http://site.com">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Заголовок">
+<meta property="og:image" content="https://">
+<meta property="og:image:width" content="604">
+<meta property="og:image:height" content="338">
+<meta property="og:description" content="Описание">
+<meta property="og:site_name" content="Название сайта">
+<meta property="og:locale" content="ru_RU">
+<meta property="article:author" content="">
+
+Twitter
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@site_account">
+<meta name="twitter:creator" content="@individual_account">
+<meta name="twitter:url" content="https://example.com/page.html">
+<meta name="twitter:title" content="Content Title">
+<meta name="twitter:description" content="less than 200 characters">
+<meta name="twitter:image" content="https://example.com/image.jpg">
+
+
+--------------------------- СТИЛИ ----------------------------
+
+Сортировка стилей:
+  Позиционирование
+  Блочная модель
+  Оформление
+  Остальное
+
+Рекомендации:
+  Каскад: .block { .elem }, modules. Вложенность <= 2х. Поиск справа налево
+  will-change: переносит в композитный слой и обрабатывает на GPU
+  Layout: раскладка (width, left, ...), дорогая операция
+  Paint: отрисовка (color, opacity, ...), дешевая операция
+  Composite: компоновка, самая дешевая операция
+  Opacity, transform: самые дешевые операции
+  Псевдоклассы только для декораций
+
+Ширины экранов:
+  xs = 544px
+  sm = 768px
+  md = 992px
+  lg = 1200px
+
+Спрайт (png):
+  <i class="icon icon-home"></i>
+  .icon {
+    display: inline-block;
+  }
+
+Responsive background image:
+  @media ...
+    background url('image/bg_img_tablet.jpg') 50% 50%/cover no-repeat
+
+Подключение стороннего шрифта:
+  @font-face {
+    font-family: 'PT Sans';
+    src: url('ptsans-regular.eot');
+    src: url('ptsans-regular.eot?#iefix') format('embedded-opentype'),
+         url('ptsans-regular.woff2') format('woff2'),
+         url('ptsans-regular.woff') format('woff'),
+         url('ptsans-regular.ttf') format('truetype'),
+         url('ptsans-regular.svg#PT Sans Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  body {
+    font-family: "PT Sans";
+  }
+
+
+------------------------- СКРИПТЫ --------------------------
+
+Слабая связность. Чистые функции. Вложенность <= 2. Комментирование
+Сначала код, функции по мере использования в коде - ниже
+Import для вставки кода. Import from / export для вызова функции
+Объединять манипуляции с DOM. documentFragment
+Кэшировать. Вычисляемые стили вызывают перерасчет. Не переопределять типы
+requestAnimationFrame для перерисовок. Ответ на действие < ~16.6ms
+css-классы для изменения внешнего вида
+new FormData(document.forms.person) serialize данных из формы по name
+console.time/End для тестирования производительности

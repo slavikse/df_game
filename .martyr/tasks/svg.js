@@ -31,9 +31,9 @@ const
  */
 gulp.task(name, () => {
   return gulp.src(files)
-    .pipe(rename({dirname: ''}))
-    .pipe(svgSprite(config))
-    .pipe(gulp.dest(there));
+  .pipe(rename({dirname: ''}))
+  .pipe(svgSprite(config))
+  .pipe(gulp.dest(there));
 });
 
 watch(name, files);

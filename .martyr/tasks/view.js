@@ -1,14 +1,14 @@
 import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import notify from '../utility/notify';
-import include from 'gulp-include';
+import pug from 'gulp-pug';
 import htmlmin from 'gulp-htmlmin';
 import watch from '../utility/watch';
 
 const
   name = 'view',
-  files = 'source/*.html',
-  wFiles = 'source/**/*.html',
+  files = 'source/*.pug',
+  wFiles = 'source/**/*.pug',
   there = 'public',
   production = process.env.NODE_ENV === 'production';
 
@@ -33,10 +33,10 @@ if (production) {
  */
 gulp.task(name, () => {
   return gulp.src(files)
-    .pipe(plumber({errorHandler: notify}))
-    .pipe(include())
-    .pipe(htmlmin(options))
-    .pipe(gulp.dest(there));
+  .pipe(plumber({errorHandler: notify}))
+  .pipe(pug())
+  .pipe(htmlmin(options))
+  .pipe(gulp.dest(there));
 });
 
 watch(name, wFiles);

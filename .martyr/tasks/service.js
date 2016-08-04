@@ -11,7 +11,7 @@ const
  */
 gulp.task(name, () => {
   return gulp.src(files, {since: gulp.lastRun(name)})
-    .pipe(gulp.dest(there));
+  .pipe(gulp.dest(there));
 });
 
 watch(name, files);

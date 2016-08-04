@@ -30,9 +30,9 @@ let delFiles = [
  */
 gulp.task('getFileNames', () => {
   return gulp.src(revFiles)
-    .pipe(named(file => {
-      delFiles.push(`${there}/${file.relative}`)
-    }))
+  .pipe(named(file => {
+    delFiles.push(`${there}/${file.relative}`)
+  }))
 });
 
 /**
@@ -40,10 +40,10 @@ gulp.task('getFileNames', () => {
  */
 gulp.task('revFiles', () => {
   return gulp.src(revFiles)
-    .pipe(rev())
-    .pipe(gulp.dest(there))
-    .pipe(rev.manifest())
-    .pipe(gulp.dest('temp'))
+  .pipe(rev())
+  .pipe(gulp.dest(there))
+  .pipe(rev.manifest())
+  .pipe(gulp.dest('temp'))
 });
 
 /**
@@ -51,8 +51,8 @@ gulp.task('revFiles', () => {
  */
 gulp.task('replace', () => {
   return gulp.src(files)
-    .pipe(revReplace({manifest: gulp.src('temp/rev-manifest.json')}))
-    .pipe(gulp.dest(there))
+  .pipe(revReplace({manifest: gulp.src('temp/rev-manifest.json')}))
+  .pipe(gulp.dest(there))
 });
 
 /**

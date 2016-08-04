@@ -13,6 +13,6 @@ const
  */
 gulp.task(name, () => {
   return gulp.src(folder)
-    .pipe(zip(`${time}.zip`))
-    .pipe(gulp.dest(there));
+  .pipe(zip(`${time}.zip`))
+  .pipe(gulp.dest(there));
 });

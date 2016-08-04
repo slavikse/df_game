@@ -10,8 +10,8 @@ const
  */
 gulp.task(name, () => {
   return gulp.src(files)
-    .pipe(size({
-      showFiles: true,
-      gzip: true
-    }));
+  .pipe(size({
+    showFiles: true,
+    gzip: true
+  }));
 });
