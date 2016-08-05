@@ -34,4 +34,6 @@ gulp.task(name, () => {
   return merge(css, img);
 });
 
-watch(name, files);
+if (!production) {
+  watch(name, files);
+}

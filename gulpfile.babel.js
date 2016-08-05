@@ -28,19 +28,21 @@ gulp.task('build',
   )
 );
 
-gulp.task('watch',
-  gulp.parallel(
-    'font_watch',
-    'image_watch',
-    'resize_watch',
-    // script_watch -> webpack
-    'service_watch',
-    'sprite_watch',
-    'style_watch',
-    'svg_watch',
-    'view_watch'
+if (!production) {
+  gulp.task('watch',
+    gulp.parallel(
+      'font_watch',
+      'image_watch',
+      'resize_watch',
+      // script_watch -> webpack
+      'service_watch',
+      'sprite_watch',
+      'style_watch',
+      'svg_watch',
+      'view_watch'
+    )
   )
-);
+}
 
 gulp.task('default',
   production ?

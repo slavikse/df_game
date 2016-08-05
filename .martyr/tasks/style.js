@@ -22,9 +22,13 @@ gulp.task(name, () => {
   return gulp.src(files)
   .pipe(plumber({errorHandler: notify}))
   .pipe(stylus())
-  .pipe(production ? autoprefixer() : util.noop())
-  .pipe(production ? csso() : util.noop())
+  .pipe(production ? (
+    autoprefixer(),
+    csso()
+  ) : util.noop())
   .pipe(gulp.dest(there));
 });
 
-watch(name, wFiles);
+if (!production) {
+  watch(name, wFiles);
+}

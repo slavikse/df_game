@@ -21,4 +21,6 @@ gulp.task(name, () => {
   .pipe(gulp.dest(there));
 });
 
-watch(name, files);
+if (!production) {
+  watch(name, files);
+}

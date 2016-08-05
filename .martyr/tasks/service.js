@@ -4,7 +4,8 @@ import watch from '../utility/watch';
 const
   name = 'service',
   files = 'source/{robots.txt,sitemap.xml}',
-  there = 'public';
+  there = 'public',
+  production = process.env.NODE_ENV === 'production';
 
 /**
  * Перемещает сервисные файлы
@@ -14,4 +15,6 @@ gulp.task(name, () => {
   .pipe(gulp.dest(there));
 });
 
-watch(name, files);
+if (!production) {
+  watch(name, files);
+}

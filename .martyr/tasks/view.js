@@ -3,6 +3,7 @@ import plumber from 'gulp-plumber';
 import notify from '../utility/notify';
 import pug from 'gulp-pug';
 import htmlmin from 'gulp-htmlmin';
+import util from 'gulp-util';
 import watch from '../utility/watch';
 
 const
@@ -10,10 +11,7 @@ const
   files = 'source/*.pug',
   wFiles = 'source/**/*.pug',
   there = 'public',
-  production = process.env.NODE_ENV === 'production';
-
-let options = {};
-if (production) {
+  production = process.env.NODE_ENV === 'production',
   options = {
     removeComments: true,
     collapseWhitespace: true,
@@ -24,8 +22,7 @@ if (production) {
     removeEmptyAttributes: true,
     sortAttributes: true,
     sortClassName: true
-  }
-}
+  };
 
 /**
  * Собирает разметку
@@ -35,8 +32,10 @@ gulp.task(name, () => {
   return gulp.src(files)
   .pipe(plumber({errorHandler: notify}))
   .pipe(pug())
-  .pipe(htmlmin(options))
+  .pipe(production ? htmlmin(options) : util.noop())
   .pipe(gulp.dest(there));
 });
 
-watch(name, wFiles);
+if (!production) {
+  watch(name, wFiles);
+}

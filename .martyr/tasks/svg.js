@@ -7,16 +7,14 @@ const
   name = 'svg',
   files = 'source/**/svg/*',
   there = 'public',
-
+  production = process.env.NODE_ENV === 'production',
   config = {
     mode: {
       symbol: {
         sprite: 'svg/sprite.svg',
         example: true,
         dest: '',
-        render: {
-          css: true
-        }
+        render: {css: true}
       }
     },
     svg: {
@@ -36,4 +34,6 @@ gulp.task(name, () => {
   .pipe(gulp.dest(there));
 });
 
-watch(name, files);
+if (!production) {
+  watch(name, files);
+}

@@ -1,14 +1,14 @@
 {
   "name": "martyr",
-  "version": "3.6.0",
+  "version": "3.6.1",
   "description": "Мученик - машина, а не человек! Современный веб стек технологий для сборки веб проектов",
   "main": "gulpfile.babel.js",
   "author": "slavikse",
   "license": "MIT",
   "devDependencies": {
-    "babel-core": "6.11.4",
+    "babel-core": "6.13.1",
     "babel-loader": "6.2.4",
-    "babel-preset-es2015": "6.9.0",
+    "babel-preset-es2015": "6.13.1",
     "babel-preset-es2015-loose": "7.0.0",
     "browser-sync": "2.14.0",
     "del": "2.2.1",

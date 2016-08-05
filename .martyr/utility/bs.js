@@ -19,7 +19,8 @@ gulp.task(name, cb => {
     ui: false
   });
 
-  bs.watch(folder).on('change', bs.reload);
+  bs.watch(folder)
+  .on('change', bs.reload);
 
   cb();
 });

@@ -8,7 +8,7 @@ let firstBuildReady = false;
 
 const
   name = 'script',
-  files = ['source/*.js', '!source/_*.js'],
+  files = 'source/*.js',
   there = 'public',
   production = process.env.NODE_ENV === 'production',
 
