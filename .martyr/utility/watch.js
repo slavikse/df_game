@@ -7,7 +7,7 @@ import gulp from 'gulp';
  * @param files {String} отслеживаемая директория
  */
 export default (name, files) => {
-  gulp.task(`${name}_watch`, cb => {
+  gulp.task(`${name} watch`, cb => {
     gulp.watch(files, gulp.series(name));
 
     cb();

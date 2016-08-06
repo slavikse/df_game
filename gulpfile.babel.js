@@ -31,15 +31,15 @@ gulp.task('build',
 if (!production) {
   gulp.task('watch',
     gulp.parallel(
-      'font_watch',
-      'image_watch',
-      'resize_watch',
-      // script_watch -> webpack
-      'service_watch',
-      'sprite_watch',
-      'style_watch',
-      'svg_watch',
-      'view_watch'
+      'font watch',
+      'image watch',
+      'resize watch',
+      // script watch -> webpack
+      'service watch',
+      'sprite watch',
+      'style watch',
+      'svg watch',
+      'view watch'
     )
   )
 }
