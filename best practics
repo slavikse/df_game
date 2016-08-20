@@ -1,15 +1,13 @@
 
 ------------------------ РАЗМЕТКА ---------------------------
 
-include test/test для логической вставки разметки
+@include('home/home.html') для логической вставки
 Минимальная вложенность
+Семантические теги: header, nav, section, aside, footer
 img[width height alt], a[title]
-LazyLoad image. template для отложенной загрузки модулей
+template для отложенной загрузки модулей
 
-svg(class="svg-files")
-  use(xlink:href="svg/sprite.svg#logo")
-
-meta(name='application-name' content='Application Name')
+<meta name='application-name' content='Application Name'>
 <meta http-equiv="x-dns-prefetch-control" content="on">
 <link rel="dns-prefetch" href="https://URI.com">
 <link rel="prefetch" href="secondary.js">
@@ -46,7 +44,8 @@ Twitter
   Остальное
 
 Рекомендации:
-  Каскад: .block { .elem }, modules. Вложенность <= 2х. Поиск справа налево
+  Mobile first!
+  Каскад: .block { .elem }. Вложенность <= 2. Поиск справа налево
   will-change: переносит в композитный слой и обрабатывает на GPU
   Layout: раскладка (width, left, ...), дорогая операция
   Paint: отрисовка (color, opacity, ...), дешевая операция
@@ -60,31 +59,22 @@ Twitter
   md = 992px
   lg = 1200px
 
+Postcss:
+  .class {
+    @media (width >= 520px and width <= 800px) {
+      стили к классу
+    }
+  }
+
 Спрайт (png):
   <i class="icon icon-home"></i>
-  .icon {
-    display: inline-block;
-  }
+  .icon {display: inline-block}
 
 Responsive background image:
-  @media ...
-    background url('image/bg_img_tablet.jpg') 50% 50%/cover no-repeat
+  background: url("image/home_bg_mobile.jpg") 50% 50% / cover no-repeat;
 
-Подключение стороннего шрифта:
-  @font-face {
-    font-family: 'PT Sans';
-    src: url('ptsans-regular.eot');
-    src: url('ptsans-regular.eot?#iefix') format('embedded-opentype'),
-         url('ptsans-regular.woff2') format('woff2'),
-         url('ptsans-regular.woff') format('woff'),
-         url('ptsans-regular.ttf') format('truetype'),
-         url('ptsans-regular.svg#PT Sans Regular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-  }
-
-  body {
-    font-family: "PT Sans";
+  @media (width >= 544px) {
+    background-image: url("image/home_bg_tablet.jpg");
   }
 
 
@@ -95,7 +85,7 @@ Responsive background image:
 Import для вставки кода. Import from / export для вызова функции
 Объединять манипуляции с DOM. documentFragment
 Кэшировать. Вычисляемые стили вызывают перерасчет. Не переопределять типы
-requestAnimationFrame для перерисовок. Ответ на действие < ~16.6ms
+raf для перерисовок. Ответ на действие < ~16.6ms
 css-классы для изменения внешнего вида
 new FormData(document.forms.person) serialize данных из формы по name
 console.time/End для тестирования производительности

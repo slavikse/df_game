@@ -9,7 +9,6 @@ const
   tunnel = process.env.NODE_ENV === 'tunnel';
 
 /**
- * Следит за изменениями в директории '/public'
  * Запустит туннель, передав в консоль: NODE_ENV=tunnel gulp bs
  */
 gulp.task(name, cb => {

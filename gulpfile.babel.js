@@ -15,56 +15,48 @@ import './.martyr';
 const production = process.env.NODE_ENV === 'production';
 
 gulp.task('build',
-  gulp.parallel(
-    'font',
-    'image',
-    'resize',
-    'script',
+  gulp.series(
     'service',
-    'sprite',
+    'font',
+    'view',
     'style',
+    'script',
+    'sprite',
     'svg',
-    'view'
+    'image',
+    'resize'
   )
 );
 
 if (!production) {
   gulp.task('watch',
     gulp.parallel(
-      'font watch',
-      'image watch',
-      'resize watch',
-      // script watch -> webpack
       'service watch',
-      'sprite watch',
+      'font watch',
+      'view watch',
       'style watch',
+      // script watch -> webpack
       'svg watch',
-      'view watch'
+      'sprite watch',
+      'image watch',
+      'resize watch'
     )
   )
 }
 
 gulp.task('default',
-  production ?
-
-    // production
-    gulp.series(
-      'del',
-      'build',
-      'rev',
-      gulp.parallel(
+  gulp.series(
+    'del',
+    'build',
+    production ?
+      gulp.series(
+        'rev',
         'gzip',
         'zip'
-      )
-    ) :
-
-    // development
-    gulp.series(
-      'del',
-      'build',
+      ) :
       gulp.parallel(
         'watch',
         'bs'
       )
-    )
+  )
 );

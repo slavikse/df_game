@@ -2,7 +2,7 @@
 /!\ Быстрый старт с компонентной системой разработки проекта /!\   
 
 **Под капотом:**
-gulp, pug, stylus, webpack + babel = ❤ es2015, png + svg sprite, image resize, browser-sync, версионирование, minify, zip.
+gulp, sass, webpack + babel = ❤ es2015, png + svg sprite, image resize, browser-sync, версионирование, minify, zip.
 
 # Установка
 ```sh
@@ -19,10 +19,10 @@ $ sudo npm i -g gulp-cli &&
 **Правила сборки**:   
 * **Module**: НЕ вкладывать! Тем самым ФС отследит уникальность имени папки.   
   *Имя папки (module_name) === Имени файлов в папке:*   
-  **ex:** module_name/{module_name.pug,module_name.styl,module_name.js}
+  **ex:** module_name/{module_name.html,module_name.scss,module_name.js}
 
 * **View**: логическая вложенность.   
-  **ex:** include module_name/module_name.pug   
+  **ex:** @include('module_name/module_name.html')   
 
 * **Style**: импортятся локально.   
     Каскад + правило НЕ вкладывать! = ❤ инкапсуляция стилей.   
@@ -39,24 +39,24 @@ $ sudo npm i -g gulp-cli &&
     data-srcset="image/resp_mobile.jpg 544w, image/resp_tablet.jpg 992w")   
 
 * **Sprite png**: именование moduleName_imageName и кладуться в ```sprite/```   
-  **ex:** стили для использования в ```public/sprite.png.css```
+  **ex:** стили для использования в ```temp/sprite.png.css```
 
 * **Sprite svg**: именование moduleName_imageName и кладуться в ```svg/```   
-  **ex:** стили для использования в ```public/sprite.css```   
-    и пример использования ```public/sprite.symbol.html```
+  **ex:** стили для использования в ```temp/sprite.css```   
+    и пример использования ```temp/sprite.symbol.html```
     
 * **Font**: шрифты кладутся в ```font/```   
 
 ```
 source/
+    font/               // общий склад шрифтов
     header/
         image/
         resize/
         sprite/
         svg/
-        font/
         header.html
-        header.css
+        header.scss
         header.js
 ```
 # Запустить туннель

@@ -1,24 +1,45 @@
 import gulp from 'gulp';
+import plumber from 'gulp-plumber';
+import notify from '../utility/notify';
 import rename from 'gulp-rename';
-import imagemin from 'gulp-imagemin';
-import util from 'gulp-util';
+import changed from 'gulp-changed';
+import responsive from 'gulp-responsive';
 import watch from '../utility/watch';
 
 const
   name = 'image',
-  files = 'source/**/image/*',
+  files = ['source/**/image/*'],
   there = 'public/image',
-  production = process.env.NODE_ENV === 'production';
+  production = process.env.NODE_ENV === 'production',
+  config = {
+    '*': [{
+      width: '100%'
+    }]
+  };
 
-/**
- * Перемещает изображения
- * Сжимает на продакшн
- */
+let params = {
+  quality: 100,
+  progressive: false,
+  compressionLevel: 0,
+  stats: false,
+  silent: true,
+  errorOnEnlargement: false,
+  errorOnUnusedConfig: false
+};
+
+if (production) {
+  params.quality = 80;
+  params.progressive = true;
+  params.compressionLevel = 6;
+}
+
 gulp.task(name, () => {
-  return gulp.src(files, {since: gulp.lastRun(name)})
+  return gulp.src(files)
+  .pipe(plumber({errorHandler: notify}))
   .pipe(rename({dirname: ''}))
-  .pipe(production ? imagemin({progressive: true}) : util.noop())
-  .pipe(gulp.dest(there));
+  .pipe(changed(there))
+  .pipe(responsive(config, params))
+  .pipe(gulp.dest(there))
 });
 
 if (!production) {

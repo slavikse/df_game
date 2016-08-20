@@ -8,17 +8,15 @@ let firstBuildReady = false;
 
 const
   name = 'script',
-  files = 'source/*.js',
+  files = ['source/*.js'],
   there = 'public',
-  production = process.env.NODE_ENV === 'production',
-
   webpack = webpackStream.webpack,
+  production = process.env.NODE_ENV === 'production',
 
   /**
    * Сигнализирует о завершении первой сборки,
-   * чтобы gulp смог продолжить выполнение.
-   * webpack продолжит отслеживать файлы.
-   * @type {Object} ошибка при сборке, обрабатывает gulp
+   * чтобы gulp смог продолжить выполнение
+   * @type {Object} ошибку обрабатывает gulp
    */
   done = err => {
     firstBuildReady = true;
@@ -51,10 +49,6 @@ if (production) {
   )
 }
 
-/**
- * Собирает скрипты
- * Сжимает на продакшн
- */
 gulp.task(name, cb => {
   return gulp.src(files)
   .pipe(plumber({errorHandler: notify}))
@@ -65,5 +59,5 @@ gulp.task(name, cb => {
     if (firstBuildReady) {
       cb();
     }
-  });
+  })
 });
