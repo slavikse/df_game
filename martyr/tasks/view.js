@@ -13,8 +13,8 @@ import watch from '../utility/watch';
  */
 const
   name = 'view',
-  files = ['source/*.html'],
-  wFiles = ['source/**/*.html'],
+  files = 'source/*.html',
+  wFiles = 'source/**/*.html',
   there = 'public',
   production = process.env.NODE_ENV === 'production';
 

@@ -8,7 +8,7 @@ let firstBuildReady = false;
 
 const
   name = 'script',
-  files = ['source/*.js'],
+  files = 'source/*.js',
   there = 'public',
   webpack = webpackStream.webpack,
   production = process.env.NODE_ENV === 'production',

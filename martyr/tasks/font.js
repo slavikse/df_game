@@ -6,7 +6,7 @@ import watch from '../utility/watch';
 
 const
   name = 'font',
-  files = ['source/font/*'],
+  files = 'source/font/*',
   there = 'public/font',
   production = process.env.NODE_ENV === 'production';
 

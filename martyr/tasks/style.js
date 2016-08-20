@@ -12,8 +12,11 @@ import watch from '../utility/watch';
 
 const
   name = 'style',
-  files = ['source/*.css', '!source/_*.css'],
-  wFiles = ['source/**/*.css'],
+  files = [
+    'source/*.css',
+    '!source/_*.css'
+  ],
+  wFiles = 'source/**/*.css',
   there = 'public',
   production = process.env.NODE_ENV === 'production';
 

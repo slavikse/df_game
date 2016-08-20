@@ -6,7 +6,7 @@ import watch from '../utility/watch';
 
 const
   name = 'sprite',
-  files = ['source/**/sprite/*'],
+  files = 'source/**/sprite/*',
   there = 'temp',
   production = process.env.NODE_ENV === 'production';
 

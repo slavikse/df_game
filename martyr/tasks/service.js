@@ -4,7 +4,7 @@ import watch from '../utility/watch';
 
 const
   name = 'service',
-  files = ['source/{robots.txt,sitemap.xml}'],
+  files = 'source/{robots.txt,sitemap.xml}',
   there = 'public',
   production = process.env.NODE_ENV === 'production';
 

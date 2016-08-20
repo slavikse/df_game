@@ -8,7 +8,7 @@ import watch from '../utility/watch';
 
 const
   name = 'image',
-  files = ['source/**/image/*'],
+  files = 'source/**/image/*',
   there = 'public/image',
   production = process.env.NODE_ENV === 'production',
   config = {

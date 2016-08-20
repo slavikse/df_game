@@ -12,7 +12,7 @@ import watch from '../utility/watch';
  */
 const
   name = 'svg',
-  files = ['source/**/svg/*'],
+  files = 'source/**/svg/*',
   there = 'temp', /* 1 */
   production = process.env.NODE_ENV === 'production';
 

@@ -8,7 +8,7 @@ import watch from '../utility/watch';
 
 const
   name = 'resize',
-  files = ['source/**/resize/*'],
+  files = 'source/**/resize/*',
   there = 'public/image',
   production = process.env.NODE_ENV === 'production',
   config = {
