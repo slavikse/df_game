@@ -10,7 +10,7 @@
  ************************/
 
 import gulp from 'gulp';
-import './.martyr';
+import './martyr';
 
 const production = process.env.NODE_ENV === 'production';
 

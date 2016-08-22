@@ -28,7 +28,7 @@ let options = [
 
 if (production) {
   options.push(
-    flexFixed, // fixed IE bugs
+    flexFixed, // fixed IE10 bugs
     autoprefixer,
     csso
   )
