@@ -2,6 +2,7 @@ import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import notify from '../utility/notify';
 import include from 'gulp-file-include';
+import util from 'gulp-util';
 import htmlmin from 'gulp-htmlmin';
 import watch from '../utility/watch';
 
@@ -16,11 +17,7 @@ const
   files = 'source/*.html',
   wFiles = 'source/**/*.html',
   there = 'public',
-  production = process.env.NODE_ENV === 'production';
-
-let options = {};
-
-if (production) {
+  production = process.env.NODE_ENV === 'production',
   options = {
     collapseBooleanAttributes: true,
     collapseInlineTagWhitespace: true, /* 1 */
@@ -35,14 +32,13 @@ if (production) {
     removeRedundantAttributes: true, /* 4 */
     sortAttributes: true,
     sortClassName: true
-  }
-}
+  };
 
 gulp.task(name, () => {
   return gulp.src(files)
   .pipe(plumber({errorHandler: notify}))
   .pipe(include({prefix: '@'}))
-  .pipe(htmlmin(options))
+  .pipe(production ? htmlmin(options) : util.noop())
   .pipe(gulp.dest(there))
 });
 
