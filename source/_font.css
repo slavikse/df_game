@@ -9,6 +9,16 @@
 }
 
 @font-face {
+  font-family: 'Roboto';
+  src: local('Roboto Medium'), local('Roboto-Medium'),
+  url('font/robotomedium.woff2') format('woff2'),
+  url('font/robotomedium.woff') format('woff'),
+  url('font/robotomedium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'Pacifico';
   src: local('Pacifico'),
   url('font/pacifico.woff2') format('woff2'),

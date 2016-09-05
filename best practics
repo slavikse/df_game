@@ -6,6 +6,48 @@
 Семантические теги: header, nav, section, aside, footer
 img[width height alt], a[title]
 template для отложенной загрузки модулей
+пробел: &#32;
+
+PICTURE: frontender.info/responsive-images
+Объяснение: picture + source + srcset = picturefill
+если webp поддерживается, то первый source отобразит картинку для ширины большей 500px
+webp не поддерживается, то второй source отобразит картинку для ширины большей 500px
+если все правила выше проигнорированы, то третий source отобразит картинку если поддеживается webp
+и фолбек в случае, если ширина меньше 500px и webp не поддерживается, отобразит обычный jpg
+
+Простое использование:
+<picture>
+  <source srcset="image/meet_pers1.webp" type="image/webp">
+  <img src="image/meet_pers2.jpg" alt="...">
+</picture>
+
+Для разных экранов:
+<picture>
+  <source media="(min-width: 500px)" srcset="image/meet_pers1.webp" type="image/webp">
+  <source media="(min-width: 500px)" srcset="image/meet_pers1.jpg">
+  <source srcset="image/meet_pers2.webp" type="image/webp">
+  <img src="image/meet_pers2.jpg" alt="...">
+</picture>
+
+Для двойной плотности:
+<picture>
+  <source
+    media="(min-width: 500px)"
+    srcset="image/meet_pers1.webp 1x,
+            image/meet_pers1@2x.webp 2x"
+    type="image/webp">
+  <source
+    media="(min-width: 500px)"
+    srcset="image/meet_pers1.jpg,
+            image/meet_pers1@2x.jpg 2x">
+  <source
+    srcset="image/meet_pers2.webp 1x,
+            image/meet_pers2@2x.webp 2x"
+    type="image/webp">
+  <img
+    src="image/meet_pers2.jpg" alt="..."
+    srcset="image/meet_pers2@2x.jpg 2x">
+</picture>
 
 <meta name='application-name' content='Application Name'>
 <meta http-equiv="x-dns-prefetch-control" content="on">
@@ -45,25 +87,37 @@ Twitter
 
 Рекомендации:
   Mobile first!
+  Основной шрифт указывать первым в font-family у body (_reset.css) вместо Roboto
   Каскад: .block { .elem }. Вложенность <= 2. Поиск справа налево
-  will-change: переносит в композитный слой и обрабатывает на GPU
-  pointer-events: отключение реакции на курсор
+  will-change (только для сложной анимации): переносит в композитный слой и обрабатывает на GPU
   Layout: раскладка (width, left, ...), дорогая операция
   Paint: отрисовка (color, opacity, ...), дешевая операция
   Composite: компоновка, самая дешевая операция
   Opacity, transform: самые дешевые операции
   Псевдоклассы только для декораций
 
-Ширины экранов:
+Ширины экранов (основано на bstp4):
   xs = 544px
   sm = 768px
   md = 992px
   lg = 1200px
 
-Postcss:
-  .class {
-    @media (width >= 520px and width <= 800px) {
-      стили к классу
+Responsive background image:
+  .home-bg {
+    background: url("image/home_bg_mobile.jpg") 50% 50% / cover no-repeat;
+
+    @media (544px <= width <= 992px) {
+      background-image: url("image/home_bg_tablet.jpg");
+    }
+
+    @media (width >= 992px) {
+      background-image: url("image/home_bg.jpg");
+    }
+  }
+
+  @media (device-pixel-ratio: 2) {
+    .image {
+      background-image: url(image@2x.png);
     }
   }
 
@@ -71,15 +125,8 @@ Postcss:
   <i class="icon icon-home"></i>
   .icon {display: inline-block}
 
-Responsive background image:
-  background: url("image/home_bg_mobile.jpg") 50% 50% / cover no-repeat;
 
-  @media (width >= 544px) {
-    background-image: url("image/home_bg_tablet.jpg");
-  }
-
-
-------------------------- СКРИПТЫ --------------------------
+--------------------------- СКРИПТЫ ---------------------------
 
 Слабая связность. Чистые функции. Вложенность <= 2. Комментирование
 Сначала код, функции по мере использования в коде - ниже
@@ -90,3 +137,16 @@ raf для перерисовок. Ответ на действие < ~16.6ms
 css-классы для изменения внешнего вида
 new FormData(document.forms.person) serialize данных из формы по name
 console.time/End для тестирования производительности
+
+
+-------------- Спека для martyr по переходу на http2 ----------
+
+Поддержка http2 > 76%: caniuse.com/#search=http2
+Модуль содержит в себе все необходимые ему ресурсы
+Пример:
+  <section class="module">
+    <link href="module.css" rel="stylesheet">
+    ... разметка ...
+    <script async src="module.js"></script>
+  </section>
+Сборка спрайтов больше не актуальна, поэтому удаляются из сборщика

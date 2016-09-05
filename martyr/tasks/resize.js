@@ -34,7 +34,8 @@ let params = {
   stats: false,
   silent: true,
   errorOnEnlargement: false,
-  errorOnUnusedConfig: false
+  errorOnUnusedConfig: false,
+  withoutEnlargement: false
 };
 
 if (production) {
@@ -45,6 +46,8 @@ if (production) {
 
 /**
  * Создает из оригинала 2 изображения меньших размеров
+ * ПРИМЕЧАНИЕ: большие webp при сжатии с приемлемым качеством 95% показывают проигрыш Kb примерно в 2 раза,
+ *  перед jpeg при сжатии с приемлемым качеством 80%
  */
 gulp.task(name, () => {
   return gulp.src(files)
@@ -58,3 +61,36 @@ gulp.task(name, () => {
 if (!production) {
   watch(name, files);
 }
+
+// configWebp = {
+//   '*': [{
+//     width: '100%'
+//   }, {
+//     width: '100%',
+//     rename: {
+//       extname: '.webp'
+//     }
+//   }, {
+//     width: '70%',
+//     rename: {
+//       suffix: '_tablet'
+//     }
+//   }, {
+//     width: '70%',
+//     rename: {
+//       suffix: '_tablet',
+//       extname: '.webp'
+//     }
+//   }, {
+//     width: '40%',
+//     rename: {
+//       suffix: '_mobile'
+//     }
+//   }, {
+//     width: '40%',
+//     rename: {
+//       suffix: '_mobile',
+//       extname: '.webp'
+//     }
+//   }]
+// };

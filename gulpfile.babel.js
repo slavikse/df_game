@@ -7,7 +7,10 @@
 
  Запустить туннель:
  NODE_ENV=tunnel gulp
- ************************/
+
+ Сборка на продакшн и туннель:
+ NODE_ENV=production gulp && NODE_ENV=tunnel gulp bs
+ ***********************/
 
 import gulp from 'gulp';
 import './martyr';
@@ -16,15 +19,17 @@ const production = process.env.NODE_ENV === 'production';
 
 gulp.task('build',
   gulp.series(
-    'service',
-    'font',
-    'view',
-    'style',
-    'script',
     'sprite',
-    'svg',
-    'image',
-    'resize'
+    gulp.parallel(
+      'service',
+      'font',
+      'view',
+      'style',
+      'script',
+      'svg',
+      'image',
+      'resize'
+    )
   )
 );
 

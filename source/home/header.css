@@ -1,0 +1,55 @@
+.header-wrap {
+  border-bottom: 1px solid rgba(143, 142, 145, 0.5);
+}
+
+.header {
+  margin: 0 auto;
+  max-width: 1600px;
+  min-height: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+
+  .brand-part {
+    color: white;
+    font-size: 40px;
+  }
+
+  .brand-special {
+    font-family: 'Pacifico', sans-serif;
+    color: #1dde85;
+    font-size: 40px;
+    font-weight: 900;
+  }
+
+  .nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .link {
+    margin-bottom: 5px;
+    margin-left: 15px;
+    color: #fffcf4;
+    line-height: 36px;
+    text-transform: uppercase;
+    border-bottom: 1px solid transparent;
+    transition: 0.2s;
+
+    &:hover {
+      color: #1dde85;
+    }
+
+    @media (width >= 520px) {
+      margin-left: 40px;
+    }
+  }
+
+  .link:focus,
+  .active {
+    color: #1dde85;
+    border-bottom-color: #1dde85;
+  }
+}

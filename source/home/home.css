@@ -1,0 +1,54 @@
+@import "./header";
+
+.home-bg {
+  min-height: 600px;
+  background: url("image/home_bg_mobile.jpg") 50% 50% / cover no-repeat;
+
+  @media (544px <= width <= 992px) {
+    background-image: url("image/home_bg_tablet.jpg");
+  }
+
+  @media (width >= 992px) {
+    min-height: 800px;
+    background-image: url("image/home_bg.jpg");
+  }
+}
+
+.home {
+  margin-top: 90px;
+
+  @media (width >= 544px) {
+    margin-top: 150px;
+  }
+
+  @media (width >= 992px) {
+    margin-top: 260px;
+  }
+
+  .caption {
+    padding: 0 15px;
+    font-size: 36px;
+    font-family: Exo, sans-serif;
+    color: white;
+    text-align: center;
+
+    @media (width >= 544px) {
+      font-size: 48px;
+    }
+  }
+
+  .brand {
+    color: #1dde85;
+    font-family: 'Exo Black', sans-serif;
+  }
+
+  .desc {
+    margin: 30px auto 0;
+    padding: 0 15px;
+    max-width: 913px;
+    color: white;
+    font-size: 18px;
+    line-height: 36px;
+    text-align: center;
+  }
+}

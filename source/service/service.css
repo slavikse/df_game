@@ -1,0 +1,104 @@
+.service {
+  .caption {
+    margin-top: 115px;
+    padding: 0 15px;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 36px;
+    text-align: center;
+    color: #454546;
+  }
+
+  .brand {
+    color: #1dde85;
+  }
+
+  .desc {
+    margin: 40px auto 0;
+    padding: 0 15px;
+    max-width: 890px;
+    font-size: 18px;
+    line-height: 30px;
+    text-align: center;
+    color: #8f8e91;
+  }
+
+  .items {
+    margin: 50px auto 0;
+    max-width: 1600px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .item {
+    margin: 24px 15px;
+    padding-top: 38px;
+    max-width: 358px;
+    min-height: 250px;
+    border: 0.5px solid #8f8e91;
+    color: #454546;
+    text-align: center;
+    fill: #454546;
+    transition: border-color 0.2s, box-shadow 0.2s, fill 0.2s, color 0.2s;
+    will-change: box-shadow;
+
+    &:hover {
+      border-color: #1dde85;
+      box-shadow: 0 0 3px #1dde85;
+      fill: #1dde85;
+      color: #1dde85;
+    }
+
+    @media (width >= 600px) {
+      margin: 24px 25px;
+    }
+  }
+
+  .title {
+    font-size: 24px;
+    line-height: 45px;
+  }
+
+  .text {
+    margin-top: 15px;
+    padding: 0 10px;
+    color: #8f8e91;
+    line-height: 30px;
+    transition: 0.1s;
+  }
+
+  .item:hover .text {
+    color: #454546;
+  }
+
+  .svg-service_code-dims {
+    width: 38px;
+    height: 28px;
+  }
+
+  .svg-service_imac-dims {
+    width: 30px;
+    height: 26px;
+  }
+
+  .svg-service_wifi-dims {
+    width: 32px;
+    height: 29px;
+  }
+
+  .svg-service_view-dims {
+    width: 36px;
+    height: 21px;
+  }
+
+  .svg-service_camera-dims {
+    width: 32px;
+    height: 26px;
+  }
+
+  .svg-service_brightness-dims {
+    width: 32px;
+    height: 32px;
+  }
+}

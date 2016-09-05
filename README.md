@@ -2,7 +2,7 @@
 /!\ Быстрый старт с компонентной системой разработки проекта /!\   
 
 **Под капотом:**
-gulp, sass, webpack + babel = ❤ es2015, png + svg sprite, image resize, browser-sync, версионирование, minify, zip.
+gulp, postcss, webpack + babel = ❤ es2015, png + svg sprite, image resize, webp, browser-sync, версионирование, minify, zip.
 
 # Установка
 ```sh
@@ -18,8 +18,8 @@ $ sudo npm i -g gulp-cli &&
 # Модульность
 **Правила сборки**:   
 * **Module**: НЕ вкладывать! Тем самым ФС отследит уникальность имени папки.   
-  *Имя папки (module_name) === Имени файлов в папке:*   
-  **ex:** module_name/{module_name.html,module_name.scss,module_name.js}
+  *Имя папки (module_name) === Имена файлов в папке:*   
+  **ex:** module_name/{module_name.html,module_name.css,module_name.js}
 
 * **View**: логическая вложенность.   
   **ex:** @include('module_name/module_name.html')   

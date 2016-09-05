@@ -9,23 +9,28 @@ import watch from '../utility/watch';
 
 const
   name = 'image',
-  files = 'source/**/image/*',
+  files = [
+    'source/**/image/*',
+    'temp/image/sprite.*'
+  ],
   there = 'public/image',
   production = process.env.NODE_ENV === 'production',
   config = {
     '*': [{
       width: '100%'
     }]
-  },
-  params = {
-    quality: 80,
-    progressive: true,
-    compressionLevel: 6,
-    stats: false,
-    silent: true,
-    errorOnEnlargement: false,
-    errorOnUnusedConfig: false
   };
+
+let params = {
+  quality: 80,
+  progressive: true,
+  compressionLevel: 6,
+  stats: false,
+  silent: true,
+  errorOnEnlargement: false,
+  errorOnUnusedConfig: false,
+  withoutEnlargement: false
+};
 
 gulp.task(name, () => {
   return gulp.src(files)
@@ -39,3 +44,16 @@ gulp.task(name, () => {
 if (!production) {
   watch(name, files);
 }
+
+// configWebp = {
+//   '*': [{
+//     width: '100%'
+//   }, {
+//     width: '200%'
+//   }, {
+//     width: '100%',
+//     rename: {
+//       extname: '.webp'
+//     }
+//   }]
+// };

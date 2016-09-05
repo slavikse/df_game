@@ -7,14 +7,13 @@ import del from 'del';
 /**
  * 1. Пути до версионируемых файлов
  * 2. Версионируемые файлы
- * 3. Содержатся стили для использования шрифтов
  */
 const
   name = 'rev',
   pathRevFiles = 'public/**/*.{html,css,js}', /* 1 */
-  revFiles = [
-    'public/**/*.{css,js,svg,png,jpg}', /* 2 */
-    '!public/font/*' /* 3 */
+  revFiles = [/* 2 */
+    'public/**/*.*',
+    '!public/*.{html,txt,xml}'
   ],
   there = 'public';
 
@@ -34,9 +33,7 @@ let delFiles = [];
  */
 function getOldFileNames() {
   return gulp.src(revFiles)
-  .pipe(named(file => {
-    delFiles.push(`${there}/${file.relative}`);
-  }))
+  .pipe(named(file => delFiles.push(`${there}/${file.relative}`)))
 }
 
 /**
@@ -47,7 +44,7 @@ function revFilesFn() {
   .pipe(rev())
   .pipe(gulp.dest(there))
   .pipe(rev.manifest())
-  .pipe(gulp.dest('temp'));
+  .pipe(gulp.dest('temp'))
 }
 
 /**
@@ -55,15 +52,13 @@ function revFilesFn() {
  */
 function replace() {
   return gulp.src(pathRevFiles)
-  .pipe(revReplace({
-    manifest: gulp.src('temp/rev-manifest.json')
-  }))
-  .pipe(gulp.dest(there));
+  .pipe(revReplace({manifest: gulp.src('temp/rev-manifest.json')}))
+  .pipe(gulp.dest(there))
 }
 
 /**
  * Удаляет устаревшие (после версионирования) файлы
  */
 function delFilesFn() {
-  return del(delFiles);
+  return del(delFiles)
 }

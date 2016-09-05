@@ -1,8 +1,10 @@
 @import "./_reset";
-@import "./_font";
 
 @import "./home/home";
 @import "./service/service";
 @import "./meet/meet";
+@import "./pricing/pricing";
 @import "./say/say";
 @import "./footer/footer";
+
+@import "./_font";
