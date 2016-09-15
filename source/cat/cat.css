@@ -1,0 +1,45 @@
+/* котик */
+.cat {
+  position: absolute;
+  transition: 0.3s;
+  opacity: 0;
+  animation: cat-show 0.2s both;
+  will-change: opacity, transform;
+}
+
+@keyframes cat-show {
+  100% {
+    opacity: 1;
+  }
+}
+
+/* уворот котика от пули */
+.cat-dodge {
+  transform: rotate(45deg) skew(90deg) scale(0.5);
+}
+
+/* запугивающий тест по центру экрана */
+.cat-to-bad {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: red;
+  font-size: 2em;
+  opacity: 0;
+  background-color: rgba(73, 0, 0, 0.7);
+  z-index: -1000;
+  transition: 0.3s;
+  will-change: font-size, opacity;
+}
+
+/* покажет запугивающий текст после убийства котика :( */
+.cat-shoot-to-bad {
+  font-size: 12em;
+  opacity: 1;
+  z-index: 1000;
+}

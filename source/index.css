@@ -1,0 +1,42 @@
+@import "./_reset";
+@import "./_font";
+@import './cat/cat';
+@import './enemy/enemy';
+@import './shoot/shoot';
+@import './panel/panel';
+@import './../temp/sprite.png';
+
+* {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: 'Beer money', sans-serif;
+  background: url("image/forest_night_mobile.jpg") 50% 50% / cover no-repeat;
+  cursor: crosshair;
+  overflow: hidden; /* мобы могут появляться на краю */
+
+  @media (544px <= width <= 992px) {
+    background-image: url("image/forest_night_tablet.jpg");
+  }
+
+  @media (width >= 992px) {
+    background-image: url("image/forest_night.jpg");
+  }
+
+  audio,
+  .preload {
+    display: none;
+  }
+}
+
+body.dont-shoot {
+  cursor: cell;
+}

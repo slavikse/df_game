@@ -6,7 +6,7 @@
  NODE_ENV=production gulp
 
  Запустить туннель:
- NODE_ENV=tunnel gulp
+ NODE_ENV=tunnel gulp bs
 
  Сборка на продакшн и туннель:
  NODE_ENV=production gulp && NODE_ENV=tunnel gulp bs
@@ -21,14 +21,15 @@ gulp.task('build',
   gulp.series(
     'sprite',
     gulp.parallel(
-      'service',
       'font',
-      'view',
-      'style',
-      'script',
-      'svg',
       'image',
-      'resize'
+      'resize',
+      'script',
+      'service',
+      'sound',
+      'style',
+      'svg',
+      'view'
     )
   )
 );
@@ -36,15 +37,16 @@ gulp.task('build',
 if (!production) {
   gulp.task('watch',
     gulp.parallel(
-      'service watch',
       'font watch',
-      'view watch',
-      'style watch',
-      // script watch -> webpack
-      'svg watch',
-      'sprite watch',
       'image watch',
-      'resize watch'
+      'resize watch',
+      // script watch -> webpack
+      'service watch',
+      'sound watch',
+      'sprite watch',
+      'style watch',
+      'svg watch',
+      'view watch'
     )
   )
 }

@@ -1,0 +1,66 @@
+.revolver {
+  display: flex;
+  align-items: flex-end;
+
+  .reload {
+    font-size: 2em;
+    color: white;
+    z-index: 2000;
+  }
+
+  /* модель барабана от револьвера */
+  .drum {
+    position: relative;
+    transition: 0.2s; /* поворот при выстреле */
+    animation: 0.7s both ease-out; /* поворот для перезарядки */
+    will-change: transform;
+  }
+
+  /* крутит барабан при перезарядке на 360deg */
+  .drum-rotate {
+    animation-name: drum-rotate;
+  }
+
+  /* модель пули от револьвера */
+  .hole {
+    position: absolute;
+    transition: 0.1s;
+    will-change: opacity;
+  }
+
+  .hole1 {
+    top: 4px;
+    left: 30px;
+  }
+
+  .hole2 {
+    top: 17px;
+    right: 7px;
+  }
+
+  .hole3 {
+    bottom: 19px;
+    right: 7px;
+  }
+
+  .hole4 {
+    bottom: 6px;
+    left: 32px;
+  }
+
+  .hole5 {
+    bottom: 19px;
+    left: 7px;
+  }
+
+  .hole6 {
+    top: 18px;
+    left: 7px;
+  }
+}
+
+@keyframes drum-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,50 @@
+.health {
+  display: flex;
+  margin-left: 10px;
+  will-change: opacity, transform;
+}
+
+.health-blink {
+  animation: health-blink 0.2s alternate infinite both;
+}
+
+@keyframes health-blink {
+  100% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+}
+
+/* при низком здоровье, покрасневший экран */
+.health-critical-paused {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  background-color: rgba(255, 0, 0, 0.2);
+  will-change: opacity;
+}
+
+.health-critical {
+  animation: health-critical 0.3s alternate infinite both;
+}
+
+@keyframes health-critical {
+  100% {
+    opacity: 1;
+  }
+}
+
+/*
+.game-over {
+  animation: game-over 0.3s alternate infinite both;
+}
+
+@keyframes game-over {
+  100% {
+    background-color: rgba(255, 0, 0, 0.8);
+  }
+}
+*/

@@ -1,49 +1,8 @@
 @font-face {
-  font-family: 'Roboto';
-  src: local('Roboto'), local('Roboto-Regular'),
-  url('font/roboto.woff2') format('woff2'),
-  url('font/roboto.woff') format('woff'),
-  url('font/roboto.ttf') format('truetype');
+  font-family: 'Beer money';
+  src: local('beer money'), local('beermoney'),
+  url('font/beermoney.woff2') format('woff2'),
+  url('font/beermoney.woff') format('woff');
   font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Roboto';
-  src: local('Roboto Medium'), local('Roboto-Medium'),
-  url('font/robotomedium.woff2') format('woff2'),
-  url('font/robotomedium.woff') format('woff'),
-  url('font/robotomedium.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Pacifico';
-  src: local('Pacifico'),
-  url('font/pacifico.woff2') format('woff2'),
-  url('font/pacifico.woff') format('woff'),
-  url('font/pacifico.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Exo';
-  src: local('Exo Regular'), local('Exo-Regular'),
-  url('font/exoregular.woff2') format('woff2'),
-  url('font/exoregular.woff') format('woff'),
-  url('font/exoregular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Exo Black';
-  src: local('Exo Black'), local('Exo-Black'),
-  url('font/exoblack.woff2') format('woff2'),
-  url('font/exoblack.woff') format('woff'),
-  url('font/exoblack.ttf') format('truetype');
-  font-weight: 900;
   font-style: normal;
 }

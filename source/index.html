@@ -8,20 +8,21 @@
   <meta name="googlebot" content="index,follow">
   <meta name="description" content="A description of the page"> <!-- limit to 150 characters-->
 
-  <title>foinni</title>
-  <link href="main.css" rel="stylesheet">
-  <link href="image/favicon-32x32.png" rel="icon" sizes="32x32">
+  <title>forest.package</title>
+  <link href="index.css" rel="stylesheet">
+  <link href="image/f.p.png" rel="icon" sizes="32x32">
 </head>
 <body>
 
-@include('home/home.html') <!-- + header-->
-@include('service/service.html')
-@include('meet/meet.html')
-@include('pricing/pricing.html')
-@include('say/say.html')
-@include('footer/footer.html')
+@include('./cat/cat.html')
+@include('./panel/panel.html')
+
+<div class="event"></div>
+<div class="temp"></div>
+
+<audio src="sound/dark_ambient.mp3" autoplay loop></audio>
 
 <!--<script src="common.js" defer></script>-->
-<script src="main.js" defer></script>
+<script src="index.js" defer></script>
 </body>
 </html>
