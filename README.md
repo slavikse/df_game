@@ -2,7 +2,7 @@
 /!\ Быстрый старт с компонентной системой разработки проекта /!\   
 
 **Под капотом:**
-gulp, postcss, webpack + babel = ❤ es2015, png + svg sprite, image resize, webp, browser-sync, версионирование, minify, zip.
+gulp, postcss, webpack + babel = ❤ es2015, png + svg sprite, image resize, webp, browser-sync, версионирование, minify + audio (ffmpeg), zip.
 
 # Установка
 ```sh
@@ -44,7 +44,9 @@ $ sudo npm i -g gulp-cli &&
 * **Sprite svg**: именование moduleName_imageName и кладуться в ```svg/```   
   **ex:** стили для использования в ```temp/sprite.css```   
     и пример использования ```temp/sprite.symbol.html```
-    
+
+* **Sound**: именование moduleName_soundName и кладуться в ```sound/```
+
 * **Font**: шрифты кладутся в ```font/```   
 
 ```
@@ -55,6 +57,7 @@ source/
         resize/
         sprite/
         svg/
+        sound/
         header.html
         header.scss
         header.js

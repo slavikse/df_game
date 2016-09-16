@@ -40,7 +40,7 @@ const
       //   minChunks: 2
       // })
     ],
-    devtool: production ? null : 'cheap-inline-module-source-map'
+    devtool: production ? null : 'eval'
   };
 
 if (production) {
