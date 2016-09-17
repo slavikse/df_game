@@ -1,9 +1,9 @@
+import './tasks/audio';
 import './tasks/font';
 import './tasks/image';
 import './tasks/resize';
 import './tasks/script';
 import './tasks/service';
-import './tasks/sound';
 import './tasks/sprite';
 import './tasks/style';
 import './tasks/svg';

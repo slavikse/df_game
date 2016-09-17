@@ -17,10 +17,10 @@ const
     'image/blood2.png'
   ],
   dieSoundsURI = [ // пути до звуков смерти монстров
-    'sound/monster_die1.mp3',
-    'sound/monster_die2.mp3',
-    'sound/monster_die3.mp3',
-    'sound/monster_die4.mp3'
+    'audio/monster_die1.mp3',
+    'audio/monster_die2.mp3',
+    'audio/monster_die3.mp3',
+    'audio/monster_die4.mp3'
   ],
   eventScore = new CustomEvent('scoreChange', {
     detail: {increment: +5}

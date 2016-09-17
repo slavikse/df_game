@@ -2,6 +2,7 @@ import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import notify from '../utility/notify';
 import postcss from 'gulp-postcss';
+import cached from 'postcss-cached';
 import atImport from 'postcss-import';
 import nested from 'postcss-nested';
 import media from 'postcss-media-minmax';
@@ -21,6 +22,7 @@ const
   production = process.env.NODE_ENV === 'production';
 
 let options = [
+  cached,
   atImport,
   nested,
   media

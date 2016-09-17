@@ -3,8 +3,8 @@ import plumber from 'gulp-plumber';
 import notify from '../utility/notify';
 import rename from 'gulp-rename';
 import changed from 'gulp-changed';
-import util from 'gulp-util';
 import responsive from 'gulp-responsive';
+import util from 'gulp-util';
 import watch from '../utility/watch';
 
 const

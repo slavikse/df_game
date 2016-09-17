@@ -33,6 +33,7 @@
     "gulp-zip": "3.2.0",
     "gulp.spritesmith": "6.2.1",
     "libs": "slavikse/libs",
+    "postcss-cached": "0.0.4",
     "postcss-csso": "1.1.2",
     "postcss-flexbugs-fixes": "2.0.0",
     "postcss-import": "8.1.2",

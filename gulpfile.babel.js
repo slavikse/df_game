@@ -21,12 +21,12 @@ gulp.task('build',
   gulp.series(
     'sprite',
     gulp.parallel(
+      'audio',
       'font',
       'image',
       'resize',
       'script',
       'service',
-      'sound',
       'style',
       'svg',
       'view'
@@ -37,12 +37,12 @@ gulp.task('build',
 if (!production) {
   gulp.task('watch',
     gulp.parallel(
+      'audio watch',
       'font watch',
       'image watch',
       'resize watch',
       // script watch -> webpack
       'service watch',
-      'sound watch',
       'sprite watch',
       'style watch',
       'svg watch',

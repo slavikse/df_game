@@ -13,7 +13,7 @@ const
     'image/cat4.png'
   ],
   soundsURI = [ // пути до звуков при попадании в котика :(
-    'sound/to_bad.mp3'
+    'audio/to_bad.mp3'
   ],
   eventScore = new CustomEvent('scoreChange', {
     detail: {increment: -25}

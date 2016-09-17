@@ -8,12 +8,12 @@ const
     'image/shootfire32.png'
   ],
   soundsURI = [ // пути до звуков выстрелов
-    'sound/shoot1.mp3',
-    'sound/shoot2.mp3',
-    'sound/shoot3.mp3',
-    'sound/shoot4.mp3',
-    'sound/shoot5.mp3',
-    'sound/shoot6.mp3'
+    'audio/shoot1.mp3',
+    'audio/shoot2.mp3',
+    'audio/shoot3.mp3',
+    'audio/shoot4.mp3',
+    'audio/shoot5.mp3',
+    'audio/shoot6.mp3'
   ],
   eventShoot = new Event('shoot'),
   eventCatShoot = new Event('catShoot'),

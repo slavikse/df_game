@@ -2,8 +2,8 @@ import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import notify from '../utility/notify';
 import include from 'gulp-file-include';
-import util from 'gulp-util';
 import htmlmin from 'gulp-htmlmin';
+import util from 'gulp-util';
 import watch from '../utility/watch';
 
 /**

@@ -9,10 +9,10 @@ const
   bullets = $drum.children,
   bulletFull = 6,
   reloadSoundURI = [ // путь до звука перезарядки барабана
-    'sound/reload.mp3'
+    'audio/reload.mp3'
   ],
   emptySoundsURI = [ // путь до звука щелчка при пустом барабане
-    'sound/idle.mp3'
+    'audio/idle.mp3'
   ],
   supportTransform = supportCSS('transform');
 
