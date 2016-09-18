@@ -1,5 +1,6 @@
 const
   $nextWaveTime = document.querySelector('.next-wave-time'),
+  $event = document.querySelector('.event'),
   nextTimeFull = 5;
 
 let nextTimeCurrent = nextTimeFull;
@@ -19,4 +20,4 @@ function nextWaveTime() {
   });
 }
 
-export default nextWave;
+$event.addEventListener('nextWaveTimer', nextWave);

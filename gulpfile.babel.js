@@ -5,6 +5,9 @@
  Сборка на продакшн:
  NODE_ENV=production gulp
 
+ Запустить дев туннель:
+ NODE_ENV=tunnel gulp
+
  Запустить туннель:
  NODE_ENV=tunnel gulp bs
 

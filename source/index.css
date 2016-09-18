@@ -1,10 +1,11 @@
-@import "./_reset";
-@import "./_font";
-@import './cat/cat';
-@import './enemy/enemy';
-@import './shoot/shoot';
-@import './panel/panel';
-@import './../temp/sprite.png';
+@import "./_reset.css";
+@import "./_font.css";
+@import './resource_preload/resource_preload.css';
+@import './cat/cat.css';
+@import './enemy/enemy.css';
+@import './shoot/shoot.css';
+@import './panel/panel.css';
+@import './../temp/sprite.png.css';
 
 * {
   -webkit-user-select: none;

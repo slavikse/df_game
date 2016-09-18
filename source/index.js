@@ -1,21 +1,29 @@
-import loopCreateCat from './cat/cat';
-import loopCreateEnemy from './enemy/enemy';
-import noise from './helper/noise';
-import './shoot/shoot';
-import './panel/panel';
-import './revolver/revolver';
-// import {preloadSound, preloadImage} from './helper/preload';
+import preloadResources from './resource_preload/resource_preload.js';
+import loopCreateCat from './cat/cat.js';
+import loopCreateEnemy from './enemy/enemy.js';
+import noise from './helper/noise.js';
+import './shoot/shoot.js';
+import './panel/panel.js';
 
-loopCreateCat();
-loopCreateEnemy();
+const
+  $event = document.querySelector('.event'),
+  eventNextWaveTimer = new Event('nextWaveTimer');
 
+preloadResources();
 
+$event.addEventListener('gameLoaded', () => {
+  $event.dispatchEvent(eventNextWaveTimer);
+  loopCreateCat();
+  loopCreateEnemy();
+});
+
+/** god mod */
 window.god = false;
 
 window.addEventListener('keyup', e => {
   if (e.keyCode === 71) { // G
     window.god = true;
-    noise(['sound/god_mode.mp3']);
+    noise(['audio/god_mode.mp3']);
   }
 });
 

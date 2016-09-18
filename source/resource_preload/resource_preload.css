@@ -1,0 +1,27 @@
+.resource-preload {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background-color: black;
+  z-index: 5000;
+}
+
+.resource-preload-progress {
+  height: 15px;
+  transition: 0.2s;
+  background-color: green;
+  will-change: width;
+}
+
+.preload-end {
+  transition: 0.4s;
+  animation: 0.4s preload-end both;
+}
+
+@keyframes preload-end {
+  100% {
+    opacity: 0;
+  }
+}
