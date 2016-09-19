@@ -1,0 +1,12 @@
+body {
+  background: url("image/forest_night_mobile.jpg") 50% 50% / cover no-repeat;
+
+  @media (544px <= width <= 992px) {
+    background-image: url("image/forest_night_tablet.jpg");
+  }
+
+  @media (width >= 992px) {
+    background-image: url("image/forest_night.jpg");
+  }
+}
+//TODO светлый лес пока не нажали кнопку играть. по нажатию плавно сменять фоны прозрачностью

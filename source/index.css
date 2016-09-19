@@ -20,21 +20,16 @@ body {
 
 body {
   font-family: 'Beer money', sans-serif;
-  background: url("image/forest_night_mobile.jpg") 50% 50% / cover no-repeat;
+  background: url("image/forest_day_mobile.jpg") 50% 50% / cover no-repeat;
   cursor: crosshair;
   overflow: hidden; /* мобы могут появляться на краю */
 
   @media (544px <= width <= 992px) {
-    background-image: url("image/forest_night_tablet.jpg");
+    background-image: url("image/forest_day_tablet.jpg");
   }
 
   @media (width >= 992px) {
-    background-image: url("image/forest_night.jpg");
-  }
-
-  audio,
-  .preload {
-    display: none;
+    background-image: url("image/forest_day.jpg");
   }
 }
 

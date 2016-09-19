@@ -3,7 +3,7 @@ const
   $progress = document.querySelector('.resource-preload-progress'),
   $event = document.querySelector('.event'),
   resource = {
-    audios: [ // 14
+    audios: [
       'audio/heartbeat.mp3',
       'audio/idle.mp3',
       'audio/monster_die1.mp3',
@@ -19,7 +19,7 @@ const
       'audio/shoot6.mp3',
       'audio/to_bad.mp3'
     ],
-    images: [ // 12
+    images: [
       'image/blood1.png',
       'image/blood2.png',
       'image/cat1.png',
@@ -38,7 +38,7 @@ const
 
 let
   loadCurrent = 0,
-  loadAll = resource.audios.length + resource.images.length, // 26
+  loadAll = resource.audios.length + resource.images.length,
   stepLoadProgress = 100 / loadAll; // в % соотношении
 
 function resourcePreload() {
