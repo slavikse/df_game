@@ -1,6 +1,5 @@
 import gulp from 'gulp';
 import changed from 'gulp-changed';
-import watch from '../utility/watch';
 
 const
   name = 'service',
@@ -15,5 +14,5 @@ gulp.task(name, () => {
 });
 
 if (!production) {
-  watch(name, files);
+  gulp.watch(files, gulp.series(name));
 }

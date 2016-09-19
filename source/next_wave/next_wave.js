@@ -10,14 +10,12 @@ function nextWave() {
 }
 
 function nextWaveTime() {
-  if (nextTimeCurrent < 0) {
+  nextTimeCurrent -= 1;
+  $nextWaveTime.textContent = nextTimeCurrent;
+
+  if (nextTimeCurrent < 1) {
     nextTimeCurrent = nextTimeFull;
   }
-
-  requestAnimationFrame(() => {
-    $nextWaveTime.textContent = nextTimeCurrent;
-    nextTimeCurrent -= 1;
-  });
 }
 
 $event.addEventListener('nextWaveTimer', nextWave);

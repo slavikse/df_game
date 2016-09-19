@@ -1,4 +1,40 @@
-body {
+.start-screen {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .new-game {
+    font-size: 6em;
+    color: #a7bf1d;
+    text-shadow: 0 0 14px #103600;
+    cursor: pointer;
+    z-index: 1000;
+    transition: 0.4s;
+    transform: translateY(40%);
+    will-change: color, text-shadow;
+
+    &-start {
+      animation: 0.15s linear new-game infinite alternate both;
+    }
+  }
+}
+
+@keyframes new-game {
+  100% {
+    color: #bf5018;
+    text-shadow: 0 0 14px #680400;
+  }
+}
+
+.forest-night {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: 5s;
   background: url("image/forest_night_mobile.jpg") 50% 50% / cover no-repeat;
 
   @media (544px <= width <= 992px) {
@@ -9,4 +45,3 @@ body {
     background-image: url("image/forest_night.jpg");
   }
 }
-//TODO светлый лес пока не нажали кнопку играть. по нажатию плавно сменять фоны прозрачностью

@@ -1,10 +1,9 @@
+import 'libs/polyfill_custom_event';
 import preloadResources from './resource_preload/resource_preload.js';
 import './start_screen/start_screen.js';
 import noise from './helper/noise.js';
-import './shoot/shoot.js';
-import './panel/panel.js';
 
-preloadResources(); // по загрузке создаст событие, которое слушает стартовый экран
+preloadResources(); // по загрузки создаст событие, которое слушает стартовый экран
 
 /** god mod */
 window.god = false;

@@ -1,7 +1,11 @@
 const
-  $preloader = document.querySelector('.resource-preload'),
-  $progress = document.querySelector('.resource-preload-progress'),
-  $event = document.querySelector('.event'),
+  $preload = document.querySelector('.preload'),
+  $progress = $preload.querySelector('.preload-progress'),
+
+  $screens = document.querySelector('.preload-screens'),
+  $screensTop = $screens.querySelector('.preload-screens-top'),
+  $screensBottom = $screens.querySelector('.preload-screens-bottom'),
+
   resource = {
     audios: [
       'audio/heartbeat.mp3',
@@ -17,7 +21,8 @@ const
       'audio/shoot4.mp3',
       'audio/shoot5.mp3',
       'audio/shoot6.mp3',
-      'audio/to_bad.mp3'
+      'audio/to_bad.mp3',
+      'audio/dark_ambient.mp3'
     ],
     images: [
       'image/blood1.png',
@@ -33,8 +38,20 @@ const
       'image/shootfire32.png',
       'image/sprite.png'
     ]
-  },
-  eventGameLoaded = new Event('gameLoaded');
+  };
+
+const winWidth = window.innerWidth;
+let preloadImageForestNight = 'image/forest_night_mobile.jpg';
+
+if (winWidth >= 544 && winWidth <= 992) {
+  preloadImageForestNight = 'image/forest_night_tablet.jpg';
+}
+
+if (winWidth >= 1200) {
+  preloadImageForestNight = 'image/forest_night.jpg';
+}
+
+resource.images.push(preloadImageForestNight);
 
 let
   loadCurrent = 0,
@@ -64,18 +81,27 @@ function preparationImages() {
 }
 
 function loadingProgress() {
-  loadCurrent += 1;
-  $progress.style.width = `${stepLoadProgress * loadCurrent}%`;
+  requestAnimationFrame(() => {
+    loadCurrent += 1;
+    let progress = (stepLoadProgress * loadCurrent).toFixed(2) + '%';
+    $progress.textContent = progress;
+    $progress.style.width = progress;
+  });
 }
 
 function load() {
   window.removeEventListener('load', load);
-  $event.dispatchEvent(eventGameLoaded);
-  $preloader.classList.add('preload-end');
+
+  $progress.parentNode.style.opacity = 0;
+  $screensTop.classList.add('preload-screens-top-end');
+  $screensBottom.classList.add('preload-screens-bottom-end');
 
   setTimeout(() => {
-    $preloader.remove();
-  }, 450);
+    requestAnimationFrame(() => {
+      $screens.remove();
+      $preload.remove();
+    });
+  }, 250); /* animation 0.2s + 0.05 запас */
 }
 
 window.addEventListener('load', load);

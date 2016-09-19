@@ -9,7 +9,6 @@ import media from 'postcss-media-minmax';
 import flexFixed from 'postcss-flexbugs-fixes';
 import autoprefixer from 'autoprefixer';
 import csso from 'postcss-csso';
-import watch from '../utility/watch';
 
 const
   name = 'style',
@@ -44,5 +43,5 @@ gulp.task(name, () => {
 });
 
 if (!production) {
-  watch(name, wFiles);
+  gulp.watch(wFiles, gulp.series(name));
 }

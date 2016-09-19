@@ -22,10 +22,9 @@ const
 function shoot(e) {
   let target = e.target;
 
-  /** TODO GOD */
+  /** GOD MOD */
   if (!window.god) {
-    /** револьвер */
-    $event.dispatchEvent(eventShoot);
+    $event.dispatchEvent(eventShoot); /** слушает револьвер */
   }
 
   /** нельзя стрелять */
@@ -62,8 +61,7 @@ function shoot(e) {
 
   /** выстрел по котику :( */
   if (target.classList.contains('cat')) {
-    $event.dispatchEvent(eventCatShoot);
-    return;
+    $event.dispatchEvent(eventCatShoot); /* слушает котик */
   }
 }
 
@@ -92,4 +90,4 @@ function createShootElement(x, y) {
   return shoot;
 }
 
-window.addEventListener('click', shoot);
+export default shoot;

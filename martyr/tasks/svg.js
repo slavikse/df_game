@@ -1,10 +1,7 @@
 import gulp from 'gulp';
-import plumber from 'gulp-plumber';
-import notify from '../utility/notify';
 import rename from 'gulp-rename';
 import replace from 'gulp-replace';
 import svgSprite from 'gulp-svg-sprite';
-import watch from '../utility/watch';
 
 /**
  * 1. Путь для примеров использования svg спрайта
@@ -47,7 +44,6 @@ if (production) {
  */
 function createSvg() {
   return gulp.src(files)
-  .pipe(plumber({errorHandler: notify}))
   .pipe(rename({dirname: ''}))
   .pipe(replace(/fill=".*?"/gi, '')) /* 1 */
   .pipe(svgSprite(config))
@@ -72,5 +68,5 @@ gulp.task(name,
 );
 
 if (!production) {
-  watch(name, files);
+  gulp.watch(files, gulp.series(name));
 }

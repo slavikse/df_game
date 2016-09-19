@@ -5,14 +5,15 @@
  Сборка на продакшн:
  NODE_ENV=production gulp
 
+ Сборка на продакшн + туннель:
+ NODE_ENV=production gulp && NODE_ENV=tunnel gulp bs
+
  Запустить дев туннель:
  NODE_ENV=tunnel gulp
 
  Запустить туннель:
  NODE_ENV=tunnel gulp bs
 
- Сборка на продакшн и туннель:
- NODE_ENV=production gulp && NODE_ENV=tunnel gulp bs
  ***********************/
 
 import gulp from 'gulp';
@@ -37,23 +38,6 @@ gulp.task('build',
   )
 );
 
-if (!production) {
-  gulp.task('watch',
-    gulp.parallel(
-      'audio watch',
-      'font watch',
-      'image watch',
-      'resize watch',
-      // script watch -> webpack
-      'service watch',
-      'sprite watch',
-      'style watch',
-      'svg watch',
-      'view watch'
-    )
-  )
-}
-
 gulp.task('default',
   gulp.series(
     'del',
@@ -64,8 +48,7 @@ gulp.task('default',
         'gzip',
         'zip'
       ) :
-      gulp.parallel(
-        'watch',
+      gulp.series(
         'bs'
       )
   )

@@ -29,7 +29,7 @@ const
 let enemyCount = 0; // текущее кол-во монстров на игровом поле
 
 function loopCreateEnemy() {
-  setInterval(createEnemy, 6000); // 5 сек. из за отложенного добавления в dom (raf)
+  setInterval(createEnemy, 5000);
 }
 
 function createEnemy() {

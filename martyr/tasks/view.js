@@ -4,7 +4,6 @@ import notify from '../utility/notify';
 import include from 'gulp-file-include';
 import htmlmin from 'gulp-htmlmin';
 import util from 'gulp-util';
-import watch from '../utility/watch';
 
 /**
  * 1. Spaces collapsing between display:inline
@@ -40,5 +39,5 @@ gulp.task(name, () => {
 });
 
 if (!production) {
-  watch(name, wFiles);
+  gulp.watch(wFiles, gulp.series(name));
 }

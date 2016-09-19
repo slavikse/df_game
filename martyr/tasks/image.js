@@ -1,11 +1,8 @@
 import gulp from 'gulp';
-import plumber from 'gulp-plumber';
-import notify from '../utility/notify';
 import rename from 'gulp-rename';
 import changed from 'gulp-changed';
 import responsive from 'gulp-responsive';
 import util from 'gulp-util';
-import watch from '../utility/watch';
 
 const
   name = 'image',
@@ -34,7 +31,6 @@ let params = {
 
 gulp.task(name, () => {
   return gulp.src(files)
-  .pipe(plumber({errorHandler: notify}))
   .pipe(rename({dirname: ''}))
   .pipe(changed(there))
   .pipe(production ? responsive(config, params) : util.noop())
@@ -42,7 +38,7 @@ gulp.task(name, () => {
 });
 
 if (!production) {
-  watch(name, files);
+  gulp.watch(files, gulp.series(name));
 }
 
 // configWebp = {

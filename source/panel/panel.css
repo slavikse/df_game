@@ -12,4 +12,7 @@
   justify-content: space-between;
   align-items: flex-end;
   width: 100%;
+
+  opacity: 0; /* панель появится когда будет начата игра */
+  transition: 3s;
 }

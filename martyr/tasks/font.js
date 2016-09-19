@@ -2,7 +2,6 @@ import gulp from 'gulp';
 import changed from 'gulp-changed';
 import fontmin from 'gulp-fontmin';
 import util from 'gulp-util';
-import watch from '../utility/watch';
 
 const
   name = 'font',
@@ -18,5 +17,5 @@ gulp.task(name, () => {
 });
 
 if (!production) {
-  watch(name, files);
+  gulp.watch(files, gulp.series(name));
 }
