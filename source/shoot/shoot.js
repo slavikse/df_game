@@ -24,7 +24,8 @@ function shoot(e) {
 
   /** GOD MOD */
   if (!window.god) {
-    $event.dispatchEvent(eventShoot); /** слушает револьвер */
+    $event.dispatchEvent(eventShoot);
+    /** слушает револьвер */
   }
 
   /** нельзя стрелять */
@@ -84,7 +85,7 @@ function createShootElement(x, y) {
   shoot.classList.add('shoot');
   shoot.style.top = `${y}px`;
   shoot.style.left = `${x}px`;
-  shoot.setAttribute('src', imagesURI[0]);
+  shoot.src = imagesURI[0];
   shoot.draggable = false;
 
   return shoot;
