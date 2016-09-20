@@ -15,6 +15,8 @@ const
   eventNextWaveTimer = new Event('nextWaveTimer');
 
 function initGame() {
+  $newGame.removeEventListener('click', initGame);
+
   noise(['audio/intro.mp3']);
   $newGame.classList.add('new-game-start');
 
@@ -22,8 +24,8 @@ function initGame() {
   startGame();
 
   $event.dispatchEvent(eventNextWaveTimer);
-  loopCreateCat();
   loopCreateEnemy();
+  loopCreateCat();
 }
 
 function initInterface() {
@@ -42,7 +44,7 @@ function initInterface() {
 
 function startGame() {
   setTimeout(() => {
-    $body.setAttribute('src', ''); // освобождаем память
+    $body.style.backgroundImage = ''; // освобождаем память
     $ambient.setAttribute('src', 'audio/dark_ambient.mp3');
   }, 5000);
 }

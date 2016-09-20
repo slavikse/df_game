@@ -2,19 +2,19 @@
   display: flex;
   font-size: 2.5em;
   color: white;
-}
 
-.score-count {
-  display: inline-block;
-  width: 80px;
-  text-align: center;
-  animation: 0.1s;
-  transition: linear 0.1s;
-  will-change: transform;
-}
+  &-count {
+    display: inline-block;
+    width: 80px;
+    text-align: center;
+    animation: 0.1s;
+    transition: linear 0.1s;
+    will-change: transform;
+  }
 
-.score-change-animate {
-  animation-name: score-change;
+  &-change-animate {
+    animation-name: score-change;
+  }
 }
 
 @keyframes score-change {

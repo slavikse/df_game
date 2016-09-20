@@ -29,7 +29,7 @@ body {
     background-image: url("image/forest_day_tablet.jpg");
   }
 
-  @media (width >= 992px) {
+  @media (width > 992px) {
     background-image: url("image/forest_day.jpg");
   }
 }

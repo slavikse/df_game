@@ -1,13 +1,13 @@
-import './tasks/audio';
-import './tasks/font';
-import './tasks/image';
-import './tasks/resize';
-import './tasks/script';
-import './tasks/service';
-import './tasks/sprite';
-import './tasks/style';
-import './tasks/svg';
-import './tasks/view';
+import './build/audio';
+import './build/font';
+import './build/image';
+import './build/resize';
+import './build/script';
+import './build/service';
+import './build/sprite';
+import './build/style';
+import './build/svg';
+import './build/view';
 
 import './utility/bs';
 import './utility/del';

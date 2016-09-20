@@ -4,7 +4,7 @@
   transition: 0.3s;
   opacity: 0;
   animation: cat-show 0.2s both;
-  will-change: opacity, transform;
+  will-change: transform;
 }
 
 @keyframes cat-show {
@@ -34,7 +34,6 @@
   background-color: rgba(73, 0, 0, 0.7);
   z-index: -1000;
   transition: 0.3s;
-  will-change: font-size, opacity;
 }
 
 /* покажет запугивающий текст после убийства котика :( */

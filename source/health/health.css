@@ -1,7 +1,11 @@
 .health {
   display: flex;
   margin-left: 10px;
-  will-change: opacity, transform;
+  will-change: transform;
+
+  &-item {
+    margin: 0 5px;
+  }
 }
 
 .health-blink {
@@ -24,7 +28,6 @@
   left: 0;
   opacity: 0;
   background-color: rgba(255, 0, 0, 0.2);
-  will-change: opacity;
 }
 
 .health-critical {

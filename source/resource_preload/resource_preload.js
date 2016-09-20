@@ -47,7 +47,7 @@ if (winWidth >= 544 && winWidth <= 992) {
   preloadImageForestNight = 'image/forest_night_tablet.jpg';
 }
 
-if (winWidth >= 1200) {
+if (winWidth > 992) {
   preloadImageForestNight = 'image/forest_night.jpg';
 }
 
@@ -81,12 +81,10 @@ function preparationImages() {
 }
 
 function loadingProgress() {
-  requestAnimationFrame(() => {
-    loadCurrent += 1;
-    let progress = (stepLoadProgress * loadCurrent).toFixed(2) + '%';
-    $progress.textContent = progress;
-    $progress.style.width = progress;
-  });
+  loadCurrent += 1;
+  let progress = (stepLoadProgress * loadCurrent).toFixed(2) + '%';
+  $progress.textContent = progress;
+  $progress.style.width = progress;
 }
 
 function load() {
@@ -97,11 +95,9 @@ function load() {
   $screensBottom.classList.add('preload-screens-bottom-end');
 
   setTimeout(() => {
-    requestAnimationFrame(() => {
-      $screens.remove();
-      $preload.remove();
-    });
-  }, 250); /* animation 0.2s + 0.05 запас */
+    $screens.remove();
+    $preload.remove();
+  }, 250); // animation 0.2s + 0.05 запас
 }
 
 window.addEventListener('load', load);

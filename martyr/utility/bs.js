@@ -8,9 +8,6 @@ const
   folder = 'public',
   tunnel = process.env.NODE_ENV === 'tunnel';
 
-/**
- * Запустит туннель, передав в консоль: NODE_ENV=tunnel gulp bs
- */
 gulp.task(name, cb => {
   bs.init({
     server: folder,

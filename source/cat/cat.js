@@ -38,15 +38,11 @@ function createCat() {
 
   /** удаление кисы из dom */
   timerID = setTimeout(() => {
-    requestAnimationFrame(() => {
-      cat.remove();
-    });
+    cat.remove();
   }, 3000);
 
   /** добавление в dom */
-  requestAnimationFrame(() => {
-    $temp.appendChild(cat);
-  });
+  $temp.appendChild(cat);
 }
 
 function createCatElement() {
@@ -59,7 +55,7 @@ function createCatElement() {
   cat.classList.add('cat');
   cat.style.top = `${y}px`;
   cat.style.left = `${x}px`;
-  cat.src = imagesURI[random];
+  cat.setAttribute('src', imagesURI[random]);
   cat.draggable = false;
 }
 
@@ -68,9 +64,7 @@ function dodge() {
   cat.classList.add('cat-dodge');
 
   setTimeout(() => {
-    requestAnimationFrame(() => {
-      cat.remove();
-    });
+    cat.remove();
   }, 300);
 }
 

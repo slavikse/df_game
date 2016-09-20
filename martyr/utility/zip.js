@@ -7,12 +7,8 @@ const
   there = 'zip',
   time = new Date().toLocaleString('ru');
 
-/**
- * Запакует файлы после сборки в zip
- * Имени архива присваивает текущее время
- */
 gulp.task(name, () => {
   return gulp.src(folder)
   .pipe(zip(`${time}.zip`))
-  .pipe(gulp.dest(there));
+  .pipe(gulp.dest(there))
 });

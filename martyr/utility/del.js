@@ -8,9 +8,6 @@ const
     'temp'
   ];
 
-/**
- * Удалает собранную и временную папки
- */
 gulp.task(name, () => {
   return del(folder);
 });

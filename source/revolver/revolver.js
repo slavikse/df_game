@@ -39,11 +39,9 @@ function shoot() {
 
 /** поворот барабана при выстреле */
 function drumTurn() {
-  requestAnimationFrame(() => {
-    bullets[bulletCount].style.opacity = 0; // скрывает пулю в барабане
-    bulletCount += 1;
-    $drum.style[supportTransform] = `rotate(-${bulletCount * 60}deg)`;
-  });
+  bullets[bulletCount].style.opacity = 0; // скрывает пулю в барабане
+  bulletCount += 1;
+  $drum.style[supportTransform] = `rotate(-${bulletCount * 60}deg)`;
 }
 
 function drumRotate() {
@@ -63,7 +61,7 @@ function drumRotate() {
 function drumReload() {
   bulletCount = 0;
   bulletReloadCurrent = bulletFull - 1;
-  reloadIntervalID = setInterval(bulletReload, 110);
+  reloadIntervalID = setInterval(bulletReload, 100);
 }
 
 function bulletReload() {
@@ -82,9 +80,7 @@ function reloaded() {
   $drum.classList.remove('drum-rotate');
   $body.classList.remove('dont-shoot');
 
-  requestAnimationFrame(() => {
-    $drum.style[supportTransform] = 'rotate(0deg)';
-  });
+  $drum.style[supportTransform] = 'rotate(0deg)';
 }
 
 function RKeyHandler(e) {

@@ -61,7 +61,7 @@ function shoot(e) {
 
   /** выстрел по котику :( */
   if (target.classList.contains('cat')) {
-    $event.dispatchEvent(eventCatShoot); /* слушает котик */
+    $event.dispatchEvent(eventCatShoot); // слушает котик
   }
 }
 
@@ -76,7 +76,7 @@ function createShoot(x, y) {
     requestAnimationFrame(() => {
       shoot.remove();
     });
-  }, 100);
+  }, 60);
 }
 
 function createShootElement(x, y) {
@@ -84,7 +84,7 @@ function createShootElement(x, y) {
   shoot.classList.add('shoot');
   shoot.style.top = `${y}px`;
   shoot.style.left = `${x}px`;
-  shoot.src = imagesURI[0];
+  shoot.setAttribute('src', imagesURI[0]);
   shoot.draggable = false;
 
   return shoot;

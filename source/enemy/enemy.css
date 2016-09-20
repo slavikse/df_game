@@ -3,7 +3,7 @@
   opacity: 0;
   transition: 0.1s;
   animation: enemy-show 0.2s both;
-  will-change: opacity, transform;
+  will-change: transform;
 }
 
 @keyframes enemy-show {

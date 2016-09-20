@@ -14,7 +14,7 @@
     z-index: 1000;
     transition: 0.4s;
     transform: translateY(40%);
-    will-change: color, text-shadow;
+    will-change: text-shadow;
 
     &-start {
       animation: 0.15s linear new-game infinite alternate both;
@@ -41,7 +41,7 @@
     background-image: url("image/forest_night_tablet.jpg");
   }
 
-  @media (width >= 992px) {
+  @media (width > 992px) {
     background-image: url("image/forest_night.jpg");
   }
 }
