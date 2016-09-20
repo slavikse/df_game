@@ -23,17 +23,19 @@ const production = process.env.NODE_ENV === 'production';
 
 gulp.task('build',
   gulp.series(
-    'sprite',
     gulp.parallel(
+      'sprite', // зависят: style - подхватывает стили, image - подхватывает спрайт
       'audio',
       'font',
-      'image',
       'resize',
       'script',
       'service',
-      'style',
       'svg',
       'view'
+    ),
+    gulp.parallel(
+      'image',
+      'style'
     )
   )
 );
