@@ -37,12 +37,16 @@ function createEnemy() {
 
   for (let i = 0, len = enemyCreateCount; i < len; i++) {
     let enemy = createEnemyElement();
+
+
     fragment.appendChild(enemy);
   }
 
   enemyCountChange(enemyCreateCount);
 
-  $temp.appendChild(fragment);
+  requestAnimationFrame(() => {
+    $temp.appendChild(fragment);
+  });
 }
 
 function createEnemyElement() {
@@ -55,7 +59,7 @@ function createEnemyElement() {
   enemy.classList.add('enemy');
   enemy.style.top = `${y}px`;
   enemy.style.left = `${x}px`;
-  enemy.setAttribute('src', imagesURI[random]);
+  enemy.src = imagesURI[random];
   enemy.draggable = false;
 
   return enemy;
@@ -66,17 +70,23 @@ function enemyKill(enemy) {
   enemyCountChange(-1);
 
   setTimeout(() => {
-    enemy.remove();
+    requestAnimationFrame(() => {
+      enemy.remove();
+    });
   }, 100);
 }
 
 function createBlood(enemy) {
   let blood = createBloodElement(enemy);
 
-  $temp.appendChild(blood);
+  requestAnimationFrame(() => {
+    $temp.appendChild(blood);
+  });
 
   setTimeout(() => {
-    blood.remove();
+    requestAnimationFrame(() => {
+      blood.remove();
+    });
   }, 100);
 }
 
@@ -90,15 +100,17 @@ function createBloodElement(enemy) {
   blood.classList.add('enemy-blood');
   blood.style.top = `${y}px`;
   blood.style.left = `${x}px`;
-  blood.setAttribute('src', bloodsURI[random]);
+  blood.src = bloodsURI[random];
   blood.draggable = false;
 
   return blood;
 }
 
 function enemyCountChange(change) {
-  enemyCount += change;
-  $enemyCount.textContent = enemyCount;
+  requestAnimationFrame(() => {
+    enemyCount += change;
+    $enemyCount.textContent = enemyCount;
+  });
 }
 
 $event.addEventListener('enemyShoot', detail => {

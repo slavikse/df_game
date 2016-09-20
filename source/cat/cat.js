@@ -31,18 +31,19 @@ function loopCreateCat() {
 function createCat() {
   createCatElement();
 
-  /** скрытие кисы */
   setTimeout(() => {
     cat.classList.add('cat-dodge');
   }, 2850);
 
-  /** удаление кисы из dom */
   timerID = setTimeout(() => {
-    cat.remove();
+    requestAnimationFrame(() => {
+      cat.remove();
+    });
   }, 3000);
 
-  /** добавление в dom */
-  $temp.appendChild(cat);
+  requestAnimationFrame(() => {
+    $temp.appendChild(cat);
+  });
 }
 
 function createCatElement() {
@@ -55,7 +56,7 @@ function createCatElement() {
   cat.classList.add('cat');
   cat.style.top = `${y}px`;
   cat.style.left = `${x}px`;
-  cat.setAttribute('src', imagesURI[random]);
+  cat.src = imagesURI[random];
   cat.draggable = false;
 }
 
@@ -64,7 +65,9 @@ function dodge() {
   cat.classList.add('cat-dodge');
 
   setTimeout(() => {
-    cat.remove();
+    requestAnimationFrame(() => {
+      cat.remove();
+    });
   }, 300);
 }
 
