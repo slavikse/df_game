@@ -3,93 +3,51 @@ import noise from './../helper/noise';
 
 const
   $body = document.querySelector('body'),
-  $event = document.querySelector('.event'), // создается событие при киле котика :(
-  $temp = document.querySelector('.temp'), // для вставки в dom
-  $shootToBad = document.querySelector('.cat-to-bad'), // уведомляшка при киле котика :(
-  imagesURI = [ // пути до моделей котиков :)
-    'image/cat1.png', // с прозрачностью
-    'image/cat2.png',
-    'image/cat3.png',
-    'image/cat4.png'
-  ],
-  soundsURI = [ // пути до звуков при попадании в котика :(
-    'audio/to_bad.mp3'
-  ],
-  eventScore = new CustomEvent('scoreChange', {
-    detail: {increment: -25}
-  }),
-  eventEnemyCreate = new Event('enemyCreate');
+  $event = $body.querySelector('.event'),
+  $catPosition = $body.querySelector('.cat-position'),
+  $toBad = $body.querySelector('.cat-to-bad'),
+  eventScore = new CustomEvent('scoreChange', {detail: {increment: -25}}),
+  eventEnemyCreate = new Event('enemyCreate'),
+  width = window.innerWidth - 150,
+  height = window.innerHeight - 150 - 100; // 150 - размеры моделек монстров, 100 - под скорбоард
 
-let
-  cat = null,
-  timerID = null;
-
-function loopCreateCat() {
-  setInterval(createCat, 10000);
-}
-
-function createCat() {
-  createCatElement();
+function catShow() {
+  setInterval(changePosition, 5000);
 
   setTimeout(() => {
-    cat.classList.add('cat-dodge');
-  }, 2850);
-
-  timerID = setTimeout(() => {
-    requestAnimationFrame(() => {
-      cat.remove();
-    });
-  }, 3000);
-
-  requestAnimationFrame(() => {
-    $temp.appendChild(cat);
-  });
+    $catPosition.style.opacity = 1;
+  }, 5500);
 }
 
-function createCatElement() {
-  let
-    random = range(0, imagesURI.length - 1),
-    x = range(0, window.innerWidth - 120),
-    y = range(0, window.innerHeight - 120 - 100); // 120 - размеры моделек монстров, 100 - под скорбоард
+function changePosition() {
+  const
+    x = range(0, width),
+    y = range(0, height);
 
-  cat = document.createElement('img');
-  cat.classList.add('cat');
-  cat.style.top = `${y}px`;
-  cat.style.left = `${x}px`;
-  cat.src = imagesURI[random];
-  cat.draggable = false;
+  $catPosition.style.transform = `translate(${x}px, ${y}px)`;
 }
 
-/** уворот котика от выстрела */
-function dodge() {
-  cat.classList.add('cat-dodge');
-
-  setTimeout(() => {
-    requestAnimationFrame(() => {
-      cat.remove();
-    });
-  }, 300);
-}
-
-/** надпись на ввесь экран при попытке подстрелить котика */
 function toBad() {
-  noise(soundsURI);
+  noise('audio/to_bad.mp3');
 
   $body.classList.add('dont-shoot');
-  $shootToBad.classList.add('cat-shoot-to-bad');
+  $toBad.style.animationName = 'cat-to-bad-show';
+  $catPosition.children[0].style.animationName = 'cat-flip';
 
   setTimeout(() => {
     $body.classList.remove('dont-shoot');
-    $shootToBad.classList.remove('cat-shoot-to-bad');
+    $toBad.style.animationName = '';
+    $catPosition.children[0].style.animationName = '';
+
+    changePosition(); // котик сменит позицию после флипа
   }, 1400);
 }
 
 $event.addEventListener('catShoot', () => {
-  clearTimeout(timerID);
-  dodge();
   toBad();
+
   $event.dispatchEvent(eventScore);
   $event.dispatchEvent(eventEnemyCreate);
 });
 
-export default loopCreateCat;
+export default catShow;

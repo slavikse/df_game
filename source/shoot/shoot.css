@@ -3,4 +3,5 @@
   position: absolute;
   transform: translate(-50%, -50%);
   will-change: transform;
+  z-index: 15000;
 }

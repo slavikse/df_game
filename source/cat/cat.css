@@ -1,44 +1,49 @@
-/* котик */
 .cat {
-  position: absolute;
-  transition: 0.3s;
-  opacity: 0;
-  animation: cat-show 0.2s both;
+  backface-visibility: visible;
+  animation: 1.4s both; /* flip */
   will-change: transform;
-}
 
-@keyframes cat-show {
-  100% {
-    opacity: 1;
+  &-position {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.4s, transform 0.4s;
+    will-change: opacity, transform;
+    z-index: 100; /* обеспечивает перекрытие, чтобы попадать в котика */
+  }
+
+  &-to-bad {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: red;
+    font-size: 8em;
+    background-color: rgba(73, 0, 0, 0.7);
+    opacity: 0;
+    z-index: -3000;
+    animation: 1.4s; /* to-bad */
+    will-change: opacity, font-size;
   }
 }
 
-/* уворот котика от пули */
-.cat-dodge {
-  transform: rotate(45deg) skew(90deg) scale(0.5);
+@keyframes cat-flip {
+  50%,
+  100% {
+    transform: rotateY(1080deg);
+  }
 }
 
-/* запугивающий тест по центру экрана */
-.cat-to-bad {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: red;
-  font-size: 2em;
-  opacity: 0;
-  background-color: rgba(73, 0, 0, 0.7);
-  z-index: -1000;
-  transition: 0.3s;
-}
+@keyframes cat-to-bad-show {
+  40%,
+  70% {
+    opacity: 1;
+    font-size: 15em;
+    z-index: 3000;
+  }
 
-/* покажет запугивающий текст после убийства котика :( */
-.cat-shoot-to-bad {
-  font-size: 12em;
-  opacity: 1;
-  z-index: 1000;
+  100% {
+    font-size: 25em;
+  }
 }

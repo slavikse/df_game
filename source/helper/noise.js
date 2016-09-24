@@ -2,14 +2,19 @@ import range from 'libs/range';
 
 /**
  * Воспроизводит случайный звук из переданных
- * @param audiosURI {Array} пути до звуков
+ * @param audiosURI {Array,String} пути до звуков
  */
 function noise(audiosURI) {
-  const
-    random = range(0, audiosURI.length - 1),
-    audio = document.createElement('audio');
+  let
+    audio = document.createElement('audio'),
+    uri = audiosURI;
 
-  audio.setAttribute('src', audiosURI[random]);
+  if (Array.isArray(audiosURI)) {
+    let random = range(0, audiosURI.length - 1);
+    uri = audiosURI[random];
+  }
+
+  audio.setAttribute('src', uri);
   audio.play();
 }
 

@@ -1,4 +1,3 @@
-import 'libs/polyfill_custom_event';
 import preloadResources from './resource_preload/resource_preload.js';
 import './start_screen/start_screen.js';
 import noise from './helper/noise.js';
@@ -11,7 +10,7 @@ window.god = false;
 window.addEventListener('keyup', e => {
   if (e.keyCode === 71) { // G
     window.god = true;
-    noise(['audio/god_mode.mp3']);
+    noise('audio/god_mode.mp3');
   }
 });
 
@@ -21,7 +20,7 @@ window.addEventListener('keyup', e => {
 // svg4everybody();
 
 /**
- * A responsive image polyfill for <picture>, srcset, sizes: IE11- [~12kb minify]
+ * A responsive sprite polyfill for <picture>, srcset, sizes: IE11- [~12kb minify]
  * При использовании webp поправить конфиг в сборке изображений
  */
 // import picturefill from 'picturefill';

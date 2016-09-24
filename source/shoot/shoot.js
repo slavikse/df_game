@@ -4,17 +4,6 @@ const
   $body = document.querySelector('body'),
   $temp = document.querySelector('.temp'),
   $event = document.querySelector('.event'),
-  imagesURI = [ // путь до модельки огня от выстрела
-    'image/shootfire32.png'
-  ],
-  soundsURI = [ // пути до звуков выстрелов
-    'audio/shoot1.mp3',
-    'audio/shoot2.mp3',
-    'audio/shoot3.mp3',
-    'audio/shoot4.mp3',
-    'audio/shoot5.mp3',
-    'audio/shoot6.mp3'
-  ],
   eventShoot = new Event('shoot'),
   eventCatShoot = new Event('catShoot'),
   eventEnemyShoot = new CustomEvent('enemyShoot');
@@ -24,29 +13,19 @@ function shoot(e) {
 
   /** GOD MOD */
   if (!window.god) {
-    $event.dispatchEvent(eventShoot);
     /** слушает револьвер */
+    $event.dispatchEvent(eventShoot);
   }
+
+  // $event.dispatchEvent(new CustomEvent('damage'));
 
   /** нельзя стрелять */
   if ($body.classList.contains('dont-shoot')) {
     return;
   }
 
-  /**
-   * health api
-   */
-
-  // let eventGamage = new Event('damage');
-  // $event.dispatchEvent(eventGamage);
-
-  /**
-   * / health api
-   */
-
-
   createShoot(e.pageX, e.pageY);
-  noise(soundsURI);
+  noise('audio/shoot.mp3');
 
   /** выстрел по монстру */
   if (target.classList.contains('enemy')) {
@@ -80,12 +59,13 @@ function createShoot(x, y) {
   }, 60);
 }
 
+/*TODO в dom  и перемещать как котю. поместить в спрайт и в bgi */
 function createShootElement(x, y) {
   let shoot = document.createElement('img');
   shoot.classList.add('shoot');
   shoot.style.top = `${y}px`;
   shoot.style.left = `${x}px`;
-  shoot.src = imagesURI[0];
+  shoot.src = 'image/shootfire32.png';
   shoot.draggable = false;
 
   return shoot;

@@ -2,108 +2,94 @@ import range from 'libs/range';
 import noise from './../helper/noise';
 
 const
+  $enemyPosition = document.querySelector('.enemy-position'),
   $event = document.querySelector('.event'),
   $temp = document.querySelector('.temp'),
   $enemyCount = document.querySelector('.enemy-count'),
-  enemyCreateCount = 5,
-  imagesURI = [ // пути до моделей монстров
-    'image/monster1.png',
-    'image/monster2.png',
-    'image/monster3.png',
-    'image/monster4.png'
+  enemyCloneCount = 5,
+  imagesClasses = [
+    'icon-monster1',
+    'icon-monster2',
+    'icon-monster3',
+    'icon-monster4'
   ],
-  bloodsURI = [ // пути до моделей крови
-    'image/blood1.png',
-    'image/blood2.png'
-  ],
+  imagesClassesLength = imagesClasses.length - 1,
   dieSoundsURI = [ // пути до звуков смерти монстров
     'audio/monster_die1.mp3',
     'audio/monster_die2.mp3',
     'audio/monster_die3.mp3',
     'audio/monster_die4.mp3'
   ],
-  eventScore = new CustomEvent('scoreChange', {
-    detail: {increment: +5}
-  });
+  width = window.innerWidth - 150,
+  height = window.innerHeight - 150 - 100, // 150 - размеры моделек монстров, 100 - под скорбоард;
+  eventScore = new CustomEvent('scoreChange', {detail: {increment: +5}}),
+  eventDamage = new Event('damage');
 
-let enemyCount = 0; // текущее кол-во монстров на игровом поле
+let
+  enemyCount = 0, // текущее кол-во монстров на игровом поле
+  enemyDamageTimer = null;
 
-function loopCreateEnemy() {
-  setInterval(createEnemy, 5000);
+function loopCloneEnemy() {
+  setInterval(cloneEnemy, 5000);
 }
 
-function createEnemy() {
+function cloneEnemy() {
   let fragment = document.createDocumentFragment();
 
-  for (let i = 0, len = enemyCreateCount; i < len; i++) {
-    let enemy = createEnemyElement();
-
-
-    fragment.appendChild(enemy);
+  for (let i = 0, len = enemyCloneCount; i < len; i++) {
+    let clone = $enemyPosition.cloneNode(true);
+    setPosition(clone);
+    setImage(clone);
+    setDamage(clone);
+    fragment.appendChild(clone);
   }
 
-  enemyCountChange(enemyCreateCount);
+  enemyCountChange(enemyCloneCount);
 
   requestAnimationFrame(() => {
     $temp.appendChild(fragment);
   });
 }
 
-function createEnemyElement() {
-  let
-    enemy = document.createElement('img'),
-    random = range(0, imagesURI.length - 1),
-    x = range(0, window.innerWidth - 120),
-    y = range(0, window.innerHeight - 120 - 100); // 120 - размеры моделек монстров, 100 - под скорбоард
+function setPosition(clone) {
+  const
+    x = range(0, width),
+    y = range(0, height);
 
-  enemy.classList.add('enemy');
-  enemy.style.top = `${y}px`;
-  enemy.style.left = `${x}px`;
-  enemy.src = imagesURI[random];
-  enemy.draggable = false;
-
-  return enemy;
+  clone.style.transform = `translate(${x}px, ${y}px)`;
 }
 
-function enemyKill(enemy) {
+function setImage(clone) {
+  const random = range(0, imagesClassesLength);
+  clone.children[0].classList.add(imagesClasses[random]);
+}
+
+function setDamage(clone) {
+  const timerDamage = range(10, 18);
+  clone.children[1].style.animationDuration = `${timerDamage}s`;
+
+  /** enemy сохраняет таймер */
+  clone.children[0].enemyDamageTimer = setTimeout(() => {
+    $event.dispatchEvent(eventDamage);
+  }, timerDamage * 1000);
+}
+
+function enemyShoot(enemy) {
+  removeDamage(enemy);
   enemy.classList.add('enemy-shoot', 'is-kill');
+  enemy.style.animationName = 'enemy-flip';
   enemyCountChange(-1);
 
   setTimeout(() => {
     requestAnimationFrame(() => {
       enemy.remove();
     });
-  }, 100);
+  }, 400); // 50% от времени анимации
 }
 
-function createBlood(enemy) {
-  let blood = createBloodElement(enemy);
-
-  requestAnimationFrame(() => {
-    $temp.appendChild(blood);
-  });
-
-  setTimeout(() => {
-    requestAnimationFrame(() => {
-      blood.remove();
-    });
-  }, 100);
-}
-
-function createBloodElement(enemy) {
-  let
-    blood = document.createElement('img'),
-    random = range(0, bloodsURI.length - 1),
-    x = enemy.pageX,
-    y = enemy.pageY;
-
-  blood.classList.add('enemy-blood');
-  blood.style.top = `${y}px`;
-  blood.style.left = `${x}px`;
-  blood.src = bloodsURI[random];
-  blood.draggable = false;
-
-  return blood;
+function removeDamage(enemy) {
+  clearTimeout(enemy.enemyDamageTimer);
+  enemy.nextElementSibling.remove(); // полоска урона
 }
 
 function enemyCountChange(change) {
@@ -114,18 +100,15 @@ function enemyCountChange(change) {
 }
 
 $event.addEventListener('enemyShoot', detail => {
-  let enemy = detail.enemy;
-
   noise(dieSoundsURI);
-  enemyKill(enemy.target);
-  createBlood(enemy);
+  enemyShoot(detail.enemy.target);
 
   $event.dispatchEvent(eventScore);
 });
 
 /** выстрел по котику вызывает волну монстров */
 $event.addEventListener('enemyCreate', () => {
-  createEnemy();
+  cloneEnemy();
 });
 
-export default loopCreateEnemy;
+export default loopCloneEnemy;

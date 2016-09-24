@@ -1,9 +1,9 @@
 const
-  $healths = document.querySelector('.health').children, // сердечки здоровья
-  $healthCriticalPaused = document.querySelector('.health-critical-paused'), // предупреждающий фон. мало хп
-  $heartbeat = document.querySelector('.heartbeat'), // звук биения
+  $healths = document.querySelector('.health').children,
+  $healthCriticalPaused = document.querySelector('.health-critical-paused'), // расположен в панеле
+  $heartbeat = document.querySelector('.heartbeat'),
   $event = document.querySelector('.event'),
-  healthStateClasses = [ // иконки сердца
+  healthStateClasses = [
     'icon-heart_abadon', // пустое
     'icon-heart_half', // половинка
     'icon-heart' // целое
@@ -19,20 +19,33 @@ function damage() {
   $healths[health].className = healthStateClasses[healthState];
   healthState -= 1;
 
-  /** последняя половинка сердца закончилась */
+  hit();
+
+  /* последняя половинка сердца закончилась */
   if (healthState < 0) {
     resetHealthState();
   }
 
-  /** последняя половинка сердца последнего сердца */
+  /* последняя половинка сердца последнего сердца */
   if (health < 1 && healthState < 1) {
     lowHealth();
   }
 
-  /** game over */
+  /* game over */
   if (health < 0) {
     gameOver();
   }
+}
+
+/* экран краснеет от урона на пару ms */
+function hit() {
+  $healthCriticalPaused.classList.add('health-critical');
+
+  /** TODO звук получения урона */
+
+  setTimeout(() => {
+    $healthCriticalPaused.classList.remove('health-critical');
+  }, 500);
 }
 
 function resetHealthState() {
@@ -40,7 +53,7 @@ function resetHealthState() {
   healthState = healthStateFull;
 }
 
-/** моргание сердца. осталось половинка последнего сердца */
+/* моргание последней половинки сердца */
 function lowHealth() {
   $healths[health].classList.add('health-blink');
   $healthCriticalPaused.classList.add('health-critical');
@@ -48,19 +61,18 @@ function lowHealth() {
 }
 
 function gameOver() {
-  console.log('game-over');
-  // $healthCriticalPaused.textContent = 'game-over';
-  // $healthCriticalPaused.classList.add('game-over'); // при критическом здоровье вешается класс
+  $healthCriticalPaused.textContent = 'game-over';
+  $healthCriticalPaused.classList.add('game-over'); // при критическом здоровье вешается класс
+}
+
+function regeneration() {
+
 }
 
 function HKeyHandler(e) {
   if (e.keyCode === 72) { // H
     regeneration();
   }
-}
-
-function regeneration() {
-
 }
 
 $event.addEventListener('damage', damage);

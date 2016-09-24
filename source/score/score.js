@@ -15,10 +15,10 @@ function scoreChange(e) {
 }
 
 function scoreJump() {
-  $scoreCount.classList.add('score-change-animate');
+  $scoreCount.classList.add('score-change');
 
   setTimeout(() => {
-    $scoreCount.classList.remove('score-change-animate');
+    $scoreCount.classList.remove('score-change');
   }, 100); // animate
 }
 

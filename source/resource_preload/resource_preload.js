@@ -15,26 +15,11 @@ const
       'audio/monster_die3.mp3',
       'audio/monster_die4.mp3',
       'audio/reload.mp3',
-      'audio/shoot1.mp3',
-      'audio/shoot2.mp3',
-      'audio/shoot3.mp3',
-      'audio/shoot4.mp3',
-      'audio/shoot5.mp3',
-      'audio/shoot6.mp3',
+      'audio/shoot.mp3',
       'audio/to_bad.mp3',
       'audio/dark_ambient.mp3'
     ],
     images: [
-      'image/blood1.png',
-      'image/blood2.png',
-      'image/cat1.png',
-      'image/cat2.png',
-      'image/cat3.png',
-      'image/cat4.png',
-      'image/monster1.png',
-      'image/monster2.png',
-      'image/monster3.png',
-      'image/monster4.png',
       'image/shootfire32.png',
       'image/sprite.png'
     ]

@@ -1,20 +1,15 @@
-import supportCSS from 'libs/support_css';
 import noise from './../helper/noise';
 
 const
   $body = document.querySelector('body'),
-  $drum = document.querySelector('.drum'),
-  $event = document.querySelector('.event'),
-  $reload = document.querySelector('.reload'),
-  bullets = $drum.children,
+  $event = $body.querySelector('.event'),
+  $revolver = $body.querySelector('.revolver'),
+  $drum = $revolver.querySelector('.drum'),
+  $bullets = $drum.children,
+  $reload = $revolver.querySelector('.reload'),
   bulletFull = 6,
-  reloadSoundURI = [ // путь до звука перезарядки барабана
-    'audio/reload.mp3'
-  ],
-  emptySoundsURI = [ // путь до звука щелчка при пустом барабане
-    'audio/idle.mp3'
-  ],
-  supportTransform = supportCSS('transform');
+  reloadSoundURI = ['audio/reload.mp3'],
+  emptySoundsURI = [];
 
 let
   bulletCount = 0,
@@ -25,23 +20,19 @@ let
 function shoot() {
   /** пули закончились
    * или нельзя стрелять */
-  if (
-    bulletCount >= bulletFull ||
-    $body.classList.contains('dont-shoot')
-  ) {
-    $body.classList.add('dont-shoot'); // ставит класс повторно, если стрелять нельзя
-    noise(emptySoundsURI);
+  if (bulletCount >= bulletFull || $body.classList.contains('dont-shoot')) {
+    $body.classList.add('dont-shoot');
+    noise('audio/idle.mp3');
     return;
   }
 
   drumTurn();
 }
 
-/** поворот барабана при выстреле */
 function drumTurn() {
-  bullets[bulletCount].style.opacity = 0; // скрывает пулю в барабане
+  $bullets[bulletCount].style.opacity = 0;
   bulletCount += 1;
-  $drum.style[supportTransform] = `rotate(-${bulletCount * 60}deg)`;
+  $drum.style.transform = `rotate(-${bulletCount * 60}deg)`; // поворот барабана при выстреле
 }
 
 function drumRotate() {
@@ -52,8 +43,8 @@ function drumRotate() {
   isDrumRotate = true;
   noise(reloadSoundURI);
 
-  $drum.classList.add('drum-rotate');
   $body.classList.add('dont-shoot');
+  $drum.classList.add('drum-rotate');
 
   drumReload();
 }
@@ -65,7 +56,7 @@ function drumReload() {
 }
 
 function bulletReload() {
-  bullets[bulletReloadCurrent].style.opacity = 1;
+  $bullets[bulletReloadCurrent].style.opacity = 1;
   bulletReloadCurrent -= 1;
 
   if (bulletReloadCurrent < 0) {
@@ -77,14 +68,14 @@ function reloaded() {
   clearInterval(reloadIntervalID);
   isDrumRotate = false;
 
-  $drum.classList.remove('drum-rotate');
   $body.classList.remove('dont-shoot');
+  $drum.classList.remove('drum-rotate');
 
-  $drum.style[supportTransform] = 'rotate(0deg)';
+  $drum.style.transform = 'rotate(0deg)';
 }
 
 function RKeyHandler(e) {
-  if (e.keyCode === 82) { // R
+  if (e.keyCode === 82) {
     drumRotate();
   }
 }

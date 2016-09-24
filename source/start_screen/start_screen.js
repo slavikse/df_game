@@ -1,7 +1,7 @@
 import shoot from './../shoot/shoot.js';
 import './../panel/panel.js';
-import loopCreateCat from './../cat/cat.js';
-import loopCreateEnemy from './../enemy/enemy.js';
+import catShow from './../cat/cat.js';
+import loopCloneEnemy from './../enemy/enemy.js';
 import noise from './../helper/noise.js';
 
 const
@@ -17,15 +17,16 @@ const
 function initGame() {
   $newGame.removeEventListener('click', initGame);
 
-  noise(['audio/intro.mp3']);
+  noise('audio/intro.mp3');
   $newGame.classList.add('new-game-start');
 
   initInterface();
   startGame();
 
   $event.dispatchEvent(eventNextWaveTimer);
-  loopCreateEnemy();
-  loopCreateCat();
+
+  loopCloneEnemy();
+  catShow();
 }
 
 function initInterface() {

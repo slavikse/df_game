@@ -130,6 +130,7 @@ Import для вставки кода. Import from / export для вызова 
 raf для манипуляций в DOM. Ответ на действие < ~16.6ms
 new FormData(document.forms.person) serialize данных из формы по name
 console.time/End для тестирования производительности функций
+transitionEnd
 
 
 -------------- Спека для martyr по переходу на http2 ----------
