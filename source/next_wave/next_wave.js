@@ -3,19 +3,26 @@ const
   $event = document.querySelector('.event'),
   nextTimeFull = 5;
 
-let nextTimeCurrent = nextTimeFull;
+let
+  nextWaveInterval = null,
+  nextTimeCurrent = nextTimeFull;
 
 function nextWave() {
-  setInterval(nextWaveTime, 1000);
+  nextWaveInterval = setInterval(nextWaveTime, 1000);
 }
 
 function nextWaveTime() {
   nextTimeCurrent -= 1;
-  $nextWaveTime.textContent = nextTimeCurrent; // без raf
+  $nextWaveTime.textContent = nextTimeCurrent;
 
   if (nextTimeCurrent < 1) {
     nextTimeCurrent = nextTimeFull;
   }
 }
 
+function stopTimer() {
+  clearInterval(nextWaveInterval);
+}
+
 $event.addEventListener('nextWaveTimer', nextWave);
+$event.addEventListener('stopGame', stopTimer);

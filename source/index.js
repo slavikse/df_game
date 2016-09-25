@@ -1,6 +1,7 @@
 import preloadResources from './resource_preload/resource_preload.js';
 import './start_screen/start_screen.js';
 import noise from './helper/noise.js';
+import './result/result.js';
 
 preloadResources(); // по загрузки создаст событие, которое слушает стартовый экран
 

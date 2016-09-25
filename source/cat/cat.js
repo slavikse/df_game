@@ -4,10 +4,11 @@ import throttle from 'libs/throttle';
 
 const
   $body = document.querySelector('body'),
-  $event = $body.querySelector('.event'),
   $catPosition = $body.querySelector('.cat-position'),
   $cat = $catPosition.querySelector('.cat'),
   $toBad = $body.querySelector('.cat-to-bad'),
+  $event = $body.querySelector('.event'),
+  eventFirstAidDropped = new Event('firstAidDropped'),
   eventScoreChange = new CustomEvent('scoreChange', {detail: {change: -25}}),
   eventEnemyCreate = new Event('enemyCreate');
 
@@ -27,6 +28,7 @@ function catShow() {
 
   setTimeout(() => {
     catHideThenShow();
+    randomDroppedFirstAid();
   }, 15000);
 }
 
@@ -48,6 +50,14 @@ function catHideThenShow() {
   }, 15000);
 }
 
+function randomDroppedFirstAid() {
+  const random = range(0, 4); // шанс 20%
+
+  if (random === 3) {
+    $event.dispatchEvent(eventFirstAidDropped);
+  }
+}
+
 function toBad() {
   noise('audio/to_bad.mp3');
 
@@ -60,6 +70,11 @@ function toBad() {
     $toBad.style.animationName = '';
     $cat.style.animationName = '';
   }, 1400);
+}
+
+function stopCat() {
+  clearInterval(catChangePositionInterval);
+  $cat.remove();
 }
 
 $event.addEventListener('catShoot', () => {
@@ -79,5 +94,6 @@ const resize = throttle(() => {
 }, 200);
 
 window.addEventListener('resize', resize);
+$event.addEventListener('stopGame', stopCat);
 
 export default catShow;

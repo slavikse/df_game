@@ -67,4 +67,10 @@ function createShootElement(x, y) {
   return shoot;
 }
 
+function stopShoot() {
+  window.removeEventListener('click', shoot);
+}
+
+$event.addEventListener('stopGame', stopShoot);
+
 export default shoot;

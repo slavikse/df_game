@@ -1,12 +1,7 @@
 .revolver {
   display: flex;
   align-items: flex-end;
-
-  .reload {
-    font-size: 2em;
-    color: white;
-    z-index: 2000;
-  }
+  z-index: 1000;
 
   .drum {
     position: relative;

@@ -6,6 +6,7 @@
 @import './enemy/enemy.css';
 @import './shoot/shoot.css';
 @import './panel/panel.css';
+@import './result/result.css';
 @import './../temp/sprite.png.css';
 
 * {

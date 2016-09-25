@@ -25,12 +25,13 @@ const
   eventDamage = new Event('damage');
 
 let
+  cloneEnemyInterval = null,
   width = window.innerWidth - 150,
   height = window.innerHeight - 150 - 100, // 150 - размеры моделек монстров, 100 - под скорбоард;
   enemyCount = 0;
 
 function loopCloneEnemy() {
-  setInterval(cloneEnemy, 5000);
+  cloneEnemyInterval = setInterval(cloneEnemy, 5000);
 }
 
 function cloneEnemy() {
@@ -94,6 +95,11 @@ function removeEnemy(enemy) {
   }, 200);
 }
 
+function stopEnemy() {
+  clearInterval(cloneEnemyInterval);
+  $temp.remove();
+}
+
 /* в скор борд */
 function enemyCountChange(change) {
   enemyCount += change;
@@ -117,5 +123,6 @@ const resize = throttle(() => {
 }, 200);
 
 window.addEventListener('resize', resize);
+$event.addEventListener('stopGame', stopEnemy);
 
 export default loopCloneEnemy;

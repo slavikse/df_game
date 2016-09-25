@@ -2,11 +2,10 @@ import noise from './../helper/noise';
 
 const
   $body = document.querySelector('body'),
-  $event = $body.querySelector('.event'),
   $revolver = $body.querySelector('.revolver'),
   $drum = $revolver.querySelector('.drum'),
+  $event = $body.querySelector('.event'),
   $bullets = $drum.children,
-  $reload = $revolver.querySelector('.reload'),
   bulletFull = 6,
   reloadSoundURI = ['audio/reload.mp3'],
   emptySoundsURI = [];
@@ -82,4 +81,4 @@ function RKeyHandler(e) {
 
 $event.addEventListener('shoot', shoot);
 window.addEventListener('keyup', RKeyHandler);
-$reload.addEventListener('click', drumRotate);
+$revolver.addEventListener('click', drumRotate);
