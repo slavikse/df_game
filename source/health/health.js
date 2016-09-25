@@ -1,68 +1,51 @@
+import noise from '../helper/noise';
+
 const
   $healths = document.querySelector('.health').children,
-  $healthCriticalPaused = document.querySelector('.health-critical-paused'), // расположен в панеле
-  $heartbeat = document.querySelector('.heartbeat'),
+  $healthCritical = document.querySelector('.health-critical'),
   $event = document.querySelector('.event'),
   healthStateClasses = [
     'icon-heart_abadon', // пустое
     'icon-heart_half', // половинка
     'icon-heart' // целое
   ],
-  healthFull = 2, // 3 сердца [0-2]
-  healthStateFull = 1, // состояние сердца из [0-1] потому, что изначально сердце целое
-  healthAllState = healthStateClasses.length - 1; // кол-во всех состояний сердца: пустое, половинка, полное [0-2]
+  healthFull = 2, // 3 состояния сердца [0-2]
+  healthStateFull = 1; // состояние сердца из [0-1] потому, что изначально сердце целое
 
-let health = healthFull,
+let
+  health = healthFull,
   healthState = healthStateFull;
 
 function damage() {
-  $healths[health].className = healthStateClasses[healthState];
-  healthState -= 1;
-
   hit();
 
   /* последняя половинка сердца закончилась */
   if (healthState < 0) {
-    resetHealthState();
+    health -= 1;
+    healthState = healthStateFull;
   }
 
-  /* последняя половинка сердца последнего сердца */
-  if (health < 1 && healthState < 1) {
-    lowHealth();
-  }
-
-  /* game over */
   if (health < 0) {
     gameOver();
   }
 }
 
-/* экран краснеет от урона на пару ms */
 function hit() {
-  $healthCriticalPaused.classList.add('health-critical');
-
-  /** TODO звук получения урона */
+  $healths[health].className = healthStateClasses[healthState];
+  $healths[health].style.animationName = 'health-blink';
+  $healthCritical.style.animationName = 'health-critical';
+  noise('audio/heartbeat.mp3');
+  healthState -= 1;
 
   setTimeout(() => {
-    $healthCriticalPaused.classList.remove('health-critical');
-  }, 500);
-}
-
-function resetHealthState() {
-  health -= 1;
-  healthState = healthStateFull;
-}
-
-/* моргание последней половинки сердца */
-function lowHealth() {
-  $healths[health].classList.add('health-blink');
-  $healthCriticalPaused.classList.add('health-critical');
-  $heartbeat.play();
+    $healths[health].style.animationName = '';
+    $healthCritical.style.animationName = '';
+  }, 1200); // 2 анимации по 600 ms
 }
 
 function gameOver() {
-  $healthCriticalPaused.textContent = 'game-over';
-  $healthCriticalPaused.classList.add('game-over'); // при критическом здоровье вешается класс
+  console.log('game over');
+  // $body.classList.add('game-over');
 }
 
 function regeneration() {

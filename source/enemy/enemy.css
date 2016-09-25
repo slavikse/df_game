@@ -1,17 +1,12 @@
-.enemy {
-  backface-visibility: visible;
-  animation: 0.8s both; /* flip */
-  will-change: transform;
+.enemy-position {
+  position: absolute;
+  overflow: hidden; /* полоска таймера до нанесения урона */
+  opacity: 0;
+  animation: 0.4s enemy-show both;
+  z-index: 100;
+  will-change: opacity;
 
-  &-position {
-    position: absolute;
-    overflow: hidden; /* полоска таймера до нанесения урона */
-    opacity: 0;
-    animation: 0.4s enemy-show both;
-    will-change: opacity;
-  }
-
-  &-damage {
+  .enemy-damage {
     position: absolute;
     left: 0;
     bottom: 0;
@@ -22,18 +17,24 @@
     will-change: transform;
   }
 
-  /* в скорборд */
-  &-title {
-    display: flex;
-    font-size: 2.5em;
-    color: white;
+  .enemy {
+    backface-visibility: visible;
+    animation: 0.2s both; /* flip */
+    will-change: transform;
   }
+}
 
-  &-count {
-    width: 80px;
-    height: 40px;
-    text-align: center;
-  }
+/* в скор борд */
+.enemy-title {
+  display: flex;
+  font-size: 2.5em;
+  color: white;
+}
+
+.enemy-count {
+  width: 80px;
+  height: 40px;
+  text-align: center;
 }
 
 @keyframes enemy-show {
@@ -43,8 +44,8 @@
 }
 
 @keyframes enemy-flip {
-  50% {
-    transform: rotateY(810deg); /* ребро */
+  100% {
+    transform: rotateY(90deg); /* ребро */
   }
 }
 

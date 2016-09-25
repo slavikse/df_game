@@ -10,10 +10,8 @@ function nextWave() {
 }
 
 function nextWaveTime() {
-  requestAnimationFrame(() => {
-    nextTimeCurrent -= 1;
-    $nextWaveTime.textContent = nextTimeCurrent;
-  });
+  nextTimeCurrent -= 1;
+  $nextWaveTime.textContent = nextTimeCurrent; // без raf
 
   if (nextTimeCurrent < 1) {
     nextTimeCurrent = nextTimeFull;

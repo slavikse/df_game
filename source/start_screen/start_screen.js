@@ -22,11 +22,6 @@ function initGame() {
 
   initInterface();
   startGame();
-
-  $event.dispatchEvent(eventNextWaveTimer);
-
-  loopCloneEnemy();
-  catShow();
 }
 
 function initInterface() {
@@ -45,9 +40,14 @@ function initInterface() {
 
 function startGame() {
   setTimeout(() => {
-    $body.style.backgroundImage = ''; // освобождаем память
+    $body.style.backgroundImage = 'none'; // освобождаем память
     $ambient.setAttribute('src', 'audio/dark_ambient.mp3');
   }, 5000);
+
+  loopCloneEnemy();
+  catShow();
+
+  $event.dispatchEvent(eventNextWaveTimer);
 }
 
 $newGame.addEventListener('click', initGame);

@@ -6,7 +6,7 @@ const
   $event = document.querySelector('.event'),
   eventShoot = new Event('shoot'),
   eventCatShoot = new Event('catShoot'),
-  eventEnemyShoot = new CustomEvent('enemyShoot');
+  eventEnemyKill = new CustomEvent('enemyKill');
 
 function shoot(e) {
   let target = e.target;
@@ -29,8 +29,8 @@ function shoot(e) {
 
   /** выстрел по монстру */
   if (target.classList.contains('enemy')) {
-    eventEnemyShoot.enemy = e;
-    $event.dispatchEvent(eventEnemyShoot);
+    eventEnemyKill.enemy = e;
+    $event.dispatchEvent(eventEnemyKill);
     return;
   }
 
@@ -48,14 +48,10 @@ function shoot(e) {
 function createShoot(x, y) {
   let shoot = createShootElement(x, y);
 
-  requestAnimationFrame(() => {
-    $temp.appendChild(shoot);
-  });
+  $temp.appendChild(shoot);
 
   setTimeout(() => {
-    requestAnimationFrame(() => {
-      shoot.remove();
-    });
+    shoot.remove();
   }, 60);
 }
 

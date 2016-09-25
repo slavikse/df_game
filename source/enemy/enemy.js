@@ -1,5 +1,6 @@
 import range from 'libs/range';
 import noise from './../helper/noise';
+import throttle from 'libs/throttle';
 
 const
   $enemyPosition = document.querySelector('.enemy-position'),
@@ -14,20 +15,19 @@ const
     'icon-monster4'
   ],
   imagesClassesLength = imagesClasses.length - 1,
-  dieSoundsURI = [ // пути до звуков смерти монстров
+  dieSoundsURI = [
     'audio/monster_die1.mp3',
     'audio/monster_die2.mp3',
     'audio/monster_die3.mp3',
     'audio/monster_die4.mp3'
   ],
-  width = window.innerWidth - 150,
-  height = window.innerHeight - 150 - 100, // 150 - размеры моделек монстров, 100 - под скорбоард;
-  eventScore = new CustomEvent('scoreChange', {detail: {increment: +5}}),
+  eventScoreChange = new CustomEvent('scoreChange', {detail: {change: +5}}),
   eventDamage = new Event('damage');
 
 let
-  enemyCount = 0, // текущее кол-во монстров на игровом поле
-  enemyDamageTimer = null;
+  width = window.innerWidth - 150,
+  height = window.innerHeight - 150 - 100, // 150 - размеры моделек монстров, 100 - под скорбоард;
+  enemyCount = 0;
 
 function loopCloneEnemy() {
   setInterval(cloneEnemy, 5000);
@@ -44,11 +44,9 @@ function cloneEnemy() {
     fragment.appendChild(clone);
   }
 
-  enemyCountChange(enemyCloneCount);
+  $temp.appendChild(fragment);
 
-  requestAnimationFrame(() => {
-    $temp.appendChild(fragment);
-  });
+  enemyCountChange(enemyCloneCount);
 }
 
 function setPosition(clone) {
@@ -61,54 +59,63 @@ function setPosition(clone) {
 
 function setImage(clone) {
   const random = range(0, imagesClassesLength);
-  clone.children[0].classList.add(imagesClasses[random]);
+  clone.children[1].classList.add(imagesClasses[random]);
 }
 
 function setDamage(clone) {
-  const timerDamage = range(10, 18);
-  clone.children[1].style.animationDuration = `${timerDamage}s`;
+  const timerDamage = range(6, 10);
+  clone.children[0].style.animationDuration = `${timerDamage}s`; // damage node
 
-  /** enemy сохраняет таймер */
-  clone.children[0].enemyDamageTimer = setTimeout(() => {
+  /** enemy сохраняет свой таймер урона */
+  clone.children[1].enemyDamageTimer = setTimeout(() => { // enemy node
     $event.dispatchEvent(eventDamage);
+    enemyKill(clone.children[1]); // enemy node
   }, timerDamage * 1000);
 }
 
-function enemyShoot(enemy) {
-  removeDamage(enemy);
-  enemy.classList.add('enemy-shoot', 'is-kill');
-  enemy.style.animationName = 'enemy-flip';
-  enemyCountChange(-1);
+function enemyKill(enemy) {
+  enemy.classList.add('is-kill');
 
-  setTimeout(() => {
-    requestAnimationFrame(() => {
-      enemy.remove();
-    });
-  }, 400); // 50% от времени анимации
+  removeDamage(enemy);
+  removeEnemy(enemy);
+  enemyCountChange(-1);
 }
 
 function removeDamage(enemy) {
   clearTimeout(enemy.enemyDamageTimer);
-  enemy.nextElementSibling.remove(); // полоска урона
+  enemy.previousElementSibling.remove(); // полоска урона
 }
 
+function removeEnemy(enemy) {
+  enemy.style.animationName = 'enemy-flip';
+
+  setTimeout(() => {
+    enemy.remove();
+  }, 200);
+}
+
+/* в скор борд */
 function enemyCountChange(change) {
-  requestAnimationFrame(() => {
-    enemyCount += change;
-    $enemyCount.textContent = enemyCount;
-  });
+  enemyCount += change;
+  $enemyCount.textContent = enemyCount;
 }
 
-$event.addEventListener('enemyShoot', detail => {
+$event.addEventListener('enemyKill', e => {
   noise(dieSoundsURI);
-  enemyShoot(detail.enemy.target);
+  enemyKill(e.enemy.target);
 
-  $event.dispatchEvent(eventScore);
+  $event.dispatchEvent(eventScoreChange);
 });
 
-/** выстрел по котику вызывает волну монстров */
 $event.addEventListener('enemyCreate', () => {
   cloneEnemy();
 });
+
+const resize = throttle(() => {
+  width = window.innerWidth - 150;
+  height = window.innerHeight - 150 - 100;
+}, 200);
+
+window.addEventListener('resize', resize);
 
 export default loopCloneEnemy;

@@ -5,3 +5,5 @@
   will-change: transform;
   z-index: 15000;
 }
+
+/*TODO триггерит перерисовку всей страницы??? */

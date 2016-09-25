@@ -66,12 +66,10 @@ function preparationImages() {
 }
 
 function loadingProgress() {
-  requestAnimationFrame(() => {
-    loadCurrent += 1;
-    let progress = (stepLoadProgress * loadCurrent).toFixed(2) + '%';
-    $progress.textContent = progress;
-    $progress.style.width = progress;
-  });
+  loadCurrent += 1;
+  let progress = (stepLoadProgress * loadCurrent).toFixed(2) + '%';
+  $progress.textContent = progress;
+  $progress.style.width = progress;
 }
 
 function load() {
@@ -82,10 +80,8 @@ function load() {
   $screensBottom.classList.add('preload-screens-bottom-end');
 
   setTimeout(() => {
-    requestAnimationFrame(() => {
-      $screens.remove();
-      $preload.remove();
-    });
+    $screens.remove();
+    $preload.remove();
   }, 250); // animation 0.2s + 0.05 запас
 }
 

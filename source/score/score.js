@@ -5,11 +5,8 @@ const
 let scoreCount = 0;
 
 function scoreChange(e) {
-  scoreCount += e.detail.increment;
-
-  requestAnimationFrame(() => {
-    $scoreCount.textContent = scoreCount;
-  });
+  scoreCount += e.detail.change;
+  $scoreCount.textContent = scoreCount;
 
   scoreJump();
 }
