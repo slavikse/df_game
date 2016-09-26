@@ -67,9 +67,6 @@ function hit() {
 }
 
 function useFirstAid() {
-
-  console.log('1');
-
   if (firstAid < 0) {
     return;
   }
