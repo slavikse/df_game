@@ -52,6 +52,7 @@ function hit() {
   $healths[health].className = healthStateClasses[healthState];
   $healths[health].style.animationName = 'health-blink';
   $healthCritical.style.animationName = 'health-critical';
+
   noise('audio/heartbeat.mp3');
   healthState -= 1;
 
@@ -89,7 +90,7 @@ function regeneration() {
 
   setTimeout(() => {
     $body.classList.remove('dont-shoot');
-  }, 400);
+  }, 400); // анимация
 }
 
 function addFirstAid() {
@@ -103,7 +104,7 @@ function addFirstAid() {
 
   setTimeout(() => {
     $firstAid[firstAid].style.animationName = '';
-  }, 600);
+  }, 600); // анимация
 }
 
 function gameOver() {

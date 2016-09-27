@@ -69,7 +69,7 @@ function toBad() {
     $body.classList.remove('dont-shoot');
     $toBad.style.animationName = '';
     $cat.style.animationName = '';
-  }, 1400);
+  }, 1400); // анимация
 }
 
 function stopCat() {

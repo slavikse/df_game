@@ -15,7 +15,7 @@ function nextWaveTime() {
   nextTimeCurrent -= 1;
   $nextWaveTime.textContent = nextTimeCurrent;
 
-  if (nextTimeCurrent < 1) {
+  if (nextTimeCurrent <= 0) {
     nextTimeCurrent = nextTimeFull;
   }
 }

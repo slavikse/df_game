@@ -26,8 +26,8 @@ const
 
 let
   cloneEnemyInterval = null,
-  width = window.innerWidth - 150,
-  height = window.innerHeight - 150 - 100, // 150 - размеры моделек монстров, 100 - под скорбоард;
+  width = window.innerWidth - 150, // ширина врага
+  height = window.innerHeight - 150 - 100, // высота врага и панели;
   enemyCount = 0;
 
 function loopCloneEnemy() {
@@ -60,7 +60,7 @@ function setPosition(clone) {
 
 function setImage(clone) {
   const random = range(0, imagesClassesLength);
-  clone.children[1].classList.add(imagesClasses[random]);
+  clone.children[1].classList.add(imagesClasses[random]); // enemy node
 }
 
 function setDamage(clone) {
@@ -92,7 +92,7 @@ function removeEnemy(enemy) {
 
   setTimeout(() => {
     enemy.remove();
-  }, 200);
+  }, 200); // анимация
 }
 
 function stopEnemy() {
