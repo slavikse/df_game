@@ -7,4 +7,4 @@ function result() {
   console.log('result');
 }
 
-$event.addEventListener('result', result);
+$event.addEventListener('gameOver', result);

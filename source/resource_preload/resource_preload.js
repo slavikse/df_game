@@ -9,6 +9,7 @@ const
   resource = {
     audios: [
       'audio/heartbeat.mp3',
+      'audio/heal.mp3',
       'audio/idle.mp3',
       'audio/monster_die1.mp3',
       'audio/monster_die2.mp3',
@@ -20,7 +21,6 @@ const
       'audio/dark_ambient.mp3'
     ],
     images: [
-      'image/shootfire32.png',
       'image/sprite.png'
     ]
   };

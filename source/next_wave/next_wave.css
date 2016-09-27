@@ -3,4 +3,5 @@
   font-size: 4em;
   line-height: 2;
   text-align: center;
+  will-change: contents;
 }

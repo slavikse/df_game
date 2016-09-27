@@ -5,8 +5,8 @@ const
   $healthWrap = $body.querySelector('.health-wrap'),
   $firstAid = $healthWrap.querySelector('.first-aid').children,
   $healths = $healthWrap.querySelector('.health').children,
-  $healthCritical = $body.querySelector('.health-critical'),
   $event = $body.querySelector('.event'),
+  $eventRegeneration = new Event('regeneration'),
   firstAidStateClasses = [
     'icon-first_aid_circuit', // пустая
     'icon-first_aid' // целая
@@ -31,9 +31,7 @@ function damage() {
     return;
   }
 
-  hit();
-
-  /* последняя половинка сердца закончилась */
+  /** последняя половинка сердца закончилась */
   if (healthState < 0) {
     health -= 1;
     healthState = healthStateFull;
@@ -41,7 +39,10 @@ function damage() {
 
   if (health < 0) {
     gameOver();
+    return;
   }
+
+  hit();
 }
 
 function hit() {
@@ -51,7 +52,6 @@ function hit() {
 
   $healths[health].className = healthStateClasses[healthState];
   $healths[health].style.animationName = 'health-blink';
-  $healthCritical.style.animationName = 'health-critical';
 
   noise('audio/heartbeat.mp3');
   healthState -= 1;
@@ -63,12 +63,17 @@ function hit() {
     }
 
     $healths[health].style.animationName = '';
-    $healthCritical.style.animationName = '';
   }, 1200); // 2 анимации по 600 ms
 }
 
 function useFirstAid() {
-  if (firstAid < 0) {
+  if (
+    firstAid < 0 || (
+      /** нельзя использовать хилку, когда полное хп */
+      health === healthFull &&
+      healthState === healthStateFull
+    )
+  ) {
     return;
   }
 
@@ -80,6 +85,7 @@ function useFirstAid() {
 
 function regeneration() {
   $body.classList.add('dont-shoot');
+  $event.dispatchEvent($eventRegeneration);
 
   health = healthFull;
   healthState = healthStateFull;
@@ -111,11 +117,7 @@ function gameOver() {
   window.removeEventListener('keyup', HKeyHandler);
   window.removeEventListener('keyup', TKeyHandler);
 
-  $healthCritical.classList.add('game-over');
-  $healthCritical.style.animationName = 'game-over';
-
-  $event.dispatchEvent(new Event('stopGame'));
-  $event.dispatchEvent(new Event('result'));
+  $event.dispatchEvent(new Event('gameOver'));
 }
 
 function HKeyHandler(e) {
@@ -132,6 +134,6 @@ function TKeyHandler(e) {
 
 $event.addEventListener('firstAidDropped', addFirstAid);
 $event.addEventListener('damage', damage);
+$healthWrap.addEventListener('click', useFirstAid);
 window.addEventListener('keyup', HKeyHandler);
 window.addEventListener('keyup', TKeyHandler);
-$healthWrap.addEventListener('click', useFirstAid);

@@ -72,7 +72,7 @@ function toBad() {
   }, 1400); // анимация
 }
 
-function stopCat() {
+function gameOver() {
   clearInterval(catChangePositionInterval);
   $cat.remove();
 }
@@ -94,6 +94,6 @@ const resize = throttle(() => {
 }, 200);
 
 window.addEventListener('resize', resize);
-$event.addEventListener('stopGame', stopCat);
+$event.addEventListener('gameOver', gameOver);
 
 export default catShow;

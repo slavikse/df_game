@@ -1,7 +1,7 @@
 .health-wrap {
   display: flex;
   flex-direction: column;
-  margin-left: 10px;
+  margin-left: 5px;
   z-index: 1000;
 }
 
@@ -10,7 +10,7 @@
   margin-bottom: 10px;
 
   div {
-    margin: 0 5px;
+    margin: 0 2px;
     animation: 0.6s alternate both; /* first-aid-blink */
     will-change: transform;
   }
@@ -26,7 +26,7 @@
   display: flex;
 
   div {
-    margin: 0 5px;
+    margin: 0 2px;
     animation: 0.6s alternate 2 both; /* health-blink */
     will-change: opacity, transform;
   }
@@ -36,39 +36,5 @@
   50% {
     opacity: 0;
     transform: scale(1.5);
-  }
-}
-
-.health-critical {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  background-color: rgba(255, 0, 0, 0.2);
-  animation: 0.6s alternate infinite both; /* health-critical */
-  z-index: 0;
-  will-change: opacity, z-index;
-}
-
-@keyframes health-critical {
-  50% {
-    opacity: 1;
-    z-index: 100;
-  }
-}
-
-.game-over {
-  opacity: 1;
-  animation: 1.5s linear both; /* game-over */
-  z-index: 5000;
-}
-
-@keyframes game-over {
-  50% {
-    background-color: rgba(55, 7, 0, 0.8);
-  }
-
-  100% {
-    background-color: rgb(0, 0, 0);
   }
 }

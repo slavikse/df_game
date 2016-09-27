@@ -4,73 +4,118 @@ const
   $body = document.querySelector('body'),
   $revolver = $body.querySelector('.revolver'),
   $drum = $revolver.querySelector('.drum'),
+  $ammunition = $revolver.querySelector('.ammunition'),
+  $shoot = $body.querySelector('.revolver-shoot'),
   $event = $body.querySelector('.event'),
   $bullets = $drum.children,
-  bulletFull = 6,
-  reloadSoundURI = ['audio/reload.mp3'],
-  emptySoundsURI = [];
+  ammunitionFull = 14,
+  bulletFull = 6;
 
 let
   bulletCount = 0,
-  bulletReloadCurrent = 0,
-  isDrumRotate = false,
-  reloadIntervalID = null;
+  ammunitionCount = ammunitionFull,
+  restDrum = bulletFull, // остаток в барабане
+  isDrumRotate = false;
 
-function shoot() {
-  /** пули закончились
+function shoot(e) {
+  /** пули закончились в абойме
    * или нельзя стрелять */
-  if (bulletCount >= bulletFull || $body.classList.contains('dont-shoot')) {
+  if (
+    bulletCount >= bulletFull ||
+    bulletCount >= restDrum ||
+    $body.classList.contains('dont-shoot')
+  ) {
     $body.classList.add('dont-shoot');
     noise('audio/idle.mp3');
     return;
   }
 
+  noise('audio/shoot.mp3');
+  shootPositionChange(e.shoot.x, e.shoot.y);
   drumTurn();
+}
+
+function shootPositionChange(x, y) {
+  $shoot.style.opacity = 1;
+  $shoot.style.transform = `translate(${x}px, ${y}px)`;
+
+  setTimeout(() => {
+    $shoot.style.opacity = 0;
+  }, 60);
 }
 
 function drumTurn() {
   $bullets[bulletCount].style.opacity = 0;
   bulletCount += 1;
-  $drum.style.transform = `rotate(-${bulletCount * 60}deg)`; // поворот барабана при выстреле
+  $drum.style.transform = `rotate(-${bulletCount * 60}deg)`;
 }
 
 function drumRotate() {
-  if (isDrumRotate) {
+  /** барабан еще крутится
+   * патрон для перезарядки нет */
+  if (
+    isDrumRotate ||
+    ammunitionCount <= 0
+  ) {
     return;
   }
 
   isDrumRotate = true;
-  noise(reloadSoundURI);
+  noise('audio/reload.mp3');
 
   $body.classList.add('dont-shoot');
-  $drum.classList.add('drum-rotate');
+  $drum.style.animationName = 'drum-rotate';
 
   drumReload();
 }
 
 function drumReload() {
+  let
+    lastReload = false,
+    bulletCountTMP = bulletCount;
+
+  /** если в запасе патрон меньше, чем нужно перезарядить, то перезарядится сколько есть */
+  if (bulletCount > ammunitionCount) {
+    bulletCount = ammunitionCount;
+    lastReload = true;
+  }
+
+  ammunitionChange(-bulletCount);
+
+  if (lastReload) {
+    resetDrum();
+    bulletCount += bulletFull - bulletCountTMP; // остаток в абойме
+    restDrum = bulletCount;
+  }
+
+  /** синхронизация со звуком перезарядки и анимацией */
+  setTimeout(reloaded, 600);
+
+  /** перезарядит только выстреленные */
+  for (let i = 0, len = bulletCount; i < len; i++) {
+    $bullets[i].style.opacity = 1;
+  }
+
   bulletCount = 0;
-  bulletReloadCurrent = bulletFull - 1;
-  reloadIntervalID = setInterval(bulletReload, 100);
 }
 
-function bulletReload() {
-  $bullets[bulletReloadCurrent].style.opacity = 1;
-  bulletReloadCurrent -= 1;
-
-  if (bulletReloadCurrent < 0) {
-    reloaded();
-  }
+function ammunitionChange(change) {
+  ammunitionCount += change;
+  $ammunition.textContent = ammunitionCount;
 }
 
 function reloaded() {
-  clearInterval(reloadIntervalID);
   isDrumRotate = false;
 
   $body.classList.remove('dont-shoot');
-  $drum.classList.remove('drum-rotate');
-
+  $drum.style.animationName = '';
   $drum.style.transform = 'rotate(0deg)';
+}
+
+function resetDrum() {
+  for (let i = 0, len = bulletFull; i < len; i++) {
+    $bullets[i].style.opacity = 0;
+  }
 }
 
 function RKeyHandler(e) {

@@ -1,0 +1,11 @@
+.enemy-title {
+  display: flex;
+  font-size: 2.5em;
+  color: white;
+}
+
+.enemy-count {
+  width: 80px;
+  height: 40px;
+  text-align: center;
+}

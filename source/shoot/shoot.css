@@ -1,9 +1,0 @@
-/* огонь после выстрела */
-.shoot {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  will-change: transform;
-  z-index: 15000;
-}
-
-/*TODO триггерит перерисовку всей страницы??? */

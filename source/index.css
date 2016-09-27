@@ -4,7 +4,7 @@
 @import './start_screen/start_screen.css';
 @import './cat/cat.css';
 @import './enemy/enemy.css';
-@import './shoot/shoot.css';
+@import './health/health_notice.css';
 @import './panel/panel.css';
 @import './result/result.css';
 @import './../temp/sprite.png.css';

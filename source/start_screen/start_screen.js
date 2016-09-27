@@ -1,8 +1,8 @@
-import shoot from './../shoot/shoot.js';
-import './../panel/panel.js';
-import catShow from './../cat/cat.js';
-import loopCloneEnemy from './../enemy/enemy.js';
-import noise from './../helper/noise.js';
+import './../panel/panel';
+import catShow from './../cat/cat';
+import loopCloneEnemy from './../enemy/enemy';
+import noise from './../helper/noise';
+import shoot from './../shoot/shoot';
 
 const
   $body = document.querySelector('body'),
@@ -12,7 +12,7 @@ const
   $panel = document.querySelector('.panel'),
   $ambient = document.querySelector('.ambient'),
   $forestNight = document.querySelector('.forest-night'),
-  eventNextWaveTimer = new Event('nextWaveTimer');
+  eventStartGame = new Event('startGame');
 
 function initGame() {
   $newGame.removeEventListener('click', initGame);
@@ -47,7 +47,7 @@ function startGame() {
   loopCloneEnemy();
   catShow();
 
-  $event.dispatchEvent(eventNextWaveTimer);
+  $event.dispatchEvent(eventStartGame);
 }
 
 $newGame.addEventListener('click', initGame);

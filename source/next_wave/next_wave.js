@@ -20,9 +20,9 @@ function nextWaveTime() {
   }
 }
 
-function stopTimer() {
+function gameOver() {
   clearInterval(nextWaveInterval);
 }
 
-$event.addEventListener('nextWaveTimer', nextWave);
-$event.addEventListener('stopGame', stopTimer);
+$event.addEventListener('startGame', nextWave);
+$event.addEventListener('gameOver', gameOver);

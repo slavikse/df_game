@@ -6,13 +6,8 @@
     display: inline-block;
     width: 80px;
     text-align: center;
-    animation: 0.1s;
-    transition: transform 0.1s;
-    will-change: transform;
-  }
-
-  &-change {
-    animation-name: score-change;
+    animation: 0.1s linear; /* score-change */
+    will-change: transform, contens;
   }
 }
 
