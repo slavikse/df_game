@@ -1,8 +1,8 @@
+import './helper/prepare_audio_sprite';
 import preloadResources from './resource_preload/resource_preload';
 import './start_screen/start_screen';
 import noise from './helper/noise';
 import './result/result';
-import './health/health_notice';
 
 preloadResources(); // по загрузки создаст событие, которое слушает стартовый экран
 

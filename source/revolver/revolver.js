@@ -8,30 +8,37 @@ const
   $shoot = $body.querySelector('.revolver-shoot'),
   $event = $body.querySelector('.event'),
   $bullets = $drum.children,
-  ammunitionFull = 14,
-  bulletFull = 6;
+  ammunitionFull = 30,
+  bulletFull = 6,
+  audioSprite = window.audioSprite,
+  audioSpriteJson = window.audioSpriteJson;
 
 let
-  bulletCount = 0,
+  bulletCount = 0, // текущая пуля для выстрела в барабане из 6
   ammunitionCount = ammunitionFull,
   restDrum = bulletFull, // остаток в барабане
   isDrumRotate = false;
 
 function shoot(e) {
-  /** пули закончились в абойме
-   * или нельзя стрелять */
+  /** пули закончились в абойме или
+   * нельзя стрелять */
   if (
-    bulletCount >= bulletFull ||
     bulletCount >= restDrum ||
     $body.classList.contains('dont-shoot')
   ) {
     $body.classList.add('dont-shoot');
-    noise('audio/idle.mp3');
+    noise(audioSprite, audioSpriteJson.idle);
     return;
   }
 
-  noise('audio/shoot.mp3');
+  noise(audioSprite, audioSpriteJson.shoot);
   shootPositionChange(e.shoot.x, e.shoot.y);
+
+  /** GOD MOD */
+  if (window.god) {
+    return;
+  }
+
   drumTurn();
 }
 
@@ -51,12 +58,15 @@ function drumTurn() {
 }
 
 function drumRotate() {
-  /** барабан еще крутится
+  /** барабан перезаряжен или
+   * барабан еще крутится или
    * патрон для перезарядки нет */
   if (
+    bulletCount === 0 ||
     isDrumRotate ||
     ammunitionCount <= 0
   ) {
+    noise('audio/idle.mp3');
     return;
   }
 
@@ -74,7 +84,9 @@ function drumReload() {
     lastReload = false,
     bulletCountTMP = bulletCount;
 
-  /** если в запасе патрон меньше, чем нужно перезарядить, то перезарядится сколько есть */
+  /** если в запасе патрон меньше,
+   * чем нужно перезарядить,
+   * то перезарядится сколько есть */
   if (bulletCount > ammunitionCount) {
     bulletCount = ammunitionCount;
     lastReload = true;
@@ -84,17 +96,15 @@ function drumReload() {
 
   if (lastReload) {
     resetDrum();
-    bulletCount += bulletFull - bulletCountTMP; // остаток в абойме
+
+    /** сколько есть для перезарядки + остаток в абойме */
+    bulletCount += bulletFull - bulletCountTMP;
     restDrum = bulletCount;
   }
 
-  /** синхронизация со звуком перезарядки и анимацией */
+  reload(bulletCount);
   setTimeout(reloaded, 600);
-
-  /** перезарядит только выстреленные */
-  for (let i = 0, len = bulletCount; i < len; i++) {
-    $bullets[i].style.opacity = 1;
-  }
+  /** синхронизация со звуком перезарядки и анимацией */
 
   bulletCount = 0;
 }
@@ -102,6 +112,12 @@ function drumReload() {
 function ammunitionChange(change) {
   ammunitionCount += change;
   $ammunition.textContent = ammunitionCount;
+}
+
+function reload(bulletCount) {
+  for (let i = 0, len = bulletCount; i < len; i++) {
+    $bullets[i].style.opacity = 1;
+  }
 }
 
 function reloaded() {

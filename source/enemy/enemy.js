@@ -6,7 +6,7 @@ const
   $enemyPosition = document.querySelector('.enemy-position'),
   $event = document.querySelector('.event'),
   $temp = document.querySelector('.temp'),
-  enemyCloneCount = 5,
+  enemyCloneCount = 7,
   imagesClasses = [
     'icon-monster1',
     'icon-monster2',
@@ -14,7 +14,7 @@ const
     'icon-monster4'
   ],
   imagesClassesLength = imagesClasses.length - 1,
-  dieSoundsURI = [
+  dieAudiosURI = [
     'audio/monster_die1.mp3',
     'audio/monster_die2.mp3',
     'audio/monster_die3.mp3',
@@ -64,7 +64,8 @@ function setDamage(clone) {
 
   damage.style.animationDuration = `${timerDamage}s`;
 
-  /** enemy сохраняет свой таймер урона для дальнейшего его удаления */
+  /** enemy сохраняет свой таймер урона
+   * для дальнейшего его удаления */
   clone.damageTimer = setTimeout(() => {
     $event.dispatchEvent(eventDamage);
     removeEnemy(clone);
@@ -104,7 +105,7 @@ $event.addEventListener('enemyKill', e => {
   const enemyClone = e.enemy.parentNode;
 
   removeEnemy(enemyClone);
-  noise(dieSoundsURI);
+  noise(dieAudiosURI);
 
   $event.dispatchEvent(eventEnemyKill);
   $event.dispatchEvent(eventScoreChange);

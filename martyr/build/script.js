@@ -28,9 +28,10 @@ const
 
   options = {
     module: {
-      loaders: [{
-        loader: 'babel'
-      }]
+      loaders: [
+        {test: /\.js$/, loader: 'babel'},
+        {test: /\.json$/, loader: 'json'}
+      ]
     },
     watch: !production,
     plugins: [

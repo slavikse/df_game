@@ -1,4 +1,5 @@
 import './build/audio';
+import './build/audio_sprite';
 import './build/font';
 import './build/image';
 import './build/resize';

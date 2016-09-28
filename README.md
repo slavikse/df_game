@@ -38,13 +38,15 @@ $ sudo npm i -g gulp-cli &&
     data-srcset="image/resp_mobile.jpg 544w, image/resp_tablet.jpg 992w")   
 
 * **Sprite png**: именование moduleName_imageName и кладуться в ```sprite/```   
-  **ex:** стили для использования в ```temp/sprite.png.css```
+  **ex:** классы для использования в ```temp/sprite.png.css```
 
 * **Sprite svg**: именование moduleName_imageName и кладуться в ```svg/```   
   **ex:** стили для использования в ```temp/sprite.css```   
     и пример использования ```temp/sprite.symbol.html```
 
-* **Sound**: именование moduleName_soundName и кладуться в ```sound/```
+* **Audio**: именование moduleName_soundName и кладуться в ```audio/```
+
+* **Audio Sprite**: именование moduleName_soundName и кладуться в ```audio_sprite/```
 
 * **Font**: шрифты кладутся в ```font/```   
 

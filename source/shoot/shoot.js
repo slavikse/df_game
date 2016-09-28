@@ -12,33 +12,26 @@ function shoot(e) {
     x = e.pageX,
     y = e.pageY;
 
-  /** GOD MOD */
-  if (!window.god) {
-    eventShoot.shoot = {x, y};
-    /** выстрелы без перезарядки и бессмертие */
-    $event.dispatchEvent(eventShoot);
-  }
+  eventShoot.shoot = {x, y};
+  $event.dispatchEvent(eventShoot);
 
   // $event.dispatchEvent(new Event('damage'));
 
-  /** нельзя стрелять */
-  if ($body.classList.contains('dont-shoot')) {
-    return;
-  }
-
-  /** выстрел по убитому врагу */
-  if (target.classList.contains('enemy-kill')) {
-    return;
-  }
+  /** стрелять нельзя или
+   * выстрел по убитому врагу */
+  if (
+    $body.classList.contains('dont-shoot') ||
+    target.classList.contains('enemy-kill')
+  ) {
+  } else
 
   /** выстрел по монстру */
   if (target.classList.contains('enemy')) {
     eventEnemyKill.enemy = e.target;
     $event.dispatchEvent(eventEnemyKill);
-    return;
-  }
+  } else
 
-  /** выстрел по котику :( */
+  /** выстрел по котику */
   if (target.classList.contains('cat')) {
     $event.dispatchEvent(eventCatShoot);
   }

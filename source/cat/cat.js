@@ -59,7 +59,9 @@ function randomDroppedFirstAid() {
 }
 
 function toBad() {
-  noise('audio/to_bad.mp3');
+  noise(window.audioSprite, window.audioSpriteJson.to_bad);
+
+  // noise('audio/to_bad.mp3');
 
   $body.classList.add('dont-shoot');
   $toBad.style.animationName = 'cat-to-bad-show';

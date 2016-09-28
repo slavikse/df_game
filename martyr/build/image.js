@@ -8,7 +8,7 @@ const
   name = 'image',
   files = [
     'source/**/image/*',
-    'temp/image/sprite.*'
+    'temp/image/sprite.png*'
   ],
   there = 'public/image',
   production = process.env.NODE_ENV === 'production',

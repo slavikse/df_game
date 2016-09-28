@@ -8,17 +8,15 @@ const
 
   resource = {
     audios: [
-      'audio/heartbeat.mp3',
-      'audio/heal.mp3',
-      'audio/idle.mp3',
-      'audio/monster_die1.mp3',
-      'audio/monster_die2.mp3',
-      'audio/monster_die3.mp3',
-      'audio/monster_die4.mp3',
-      'audio/reload.mp3',
-      'audio/shoot.mp3',
-      'audio/to_bad.mp3',
-      'audio/dark_ambient.mp3'
+      // 'audio/idle.mp3',
+      // 'audio/monster_die1.mp3',
+      // 'audio/monster_die2.mp3',
+      // 'audio/monster_die3.mp3',
+      // 'audio/monster_die4.mp3',
+      // 'audio/reload.mp3',
+      // 'audio/shoot.mp3',
+      // 'audio/to_bad.mp3',
+      // 'audio/dark_ambient.mp3'
     ],
     images: [
       'image/sprite.png'

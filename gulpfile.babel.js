@@ -23,6 +23,7 @@ const production = process.env.NODE_ENV === 'production';
 
 gulp.task('build',
   gulp.series(
+    'audio_sprite', // зависит: audio - подхватывает спрайт
     'audio',
     'font',
     'resize',

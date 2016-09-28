@@ -3,6 +3,19 @@
   align-items: flex-end;
   z-index: 1000;
 
+  .ammunition-wrap {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+  }
+
+  .ammunition {
+    font-size: 2.5em;
+    text-align: center;
+    color: white;
+    will-change: contents;
+  }
+
   .drum {
     position: relative;
     transition: transform 0.2s; /* поворот при выстреле */
@@ -45,12 +58,6 @@
   100% {
     transform: rotate(360deg);
   }
-}
-
-.ammunition {
-  font-size: 2.5em;
-  color: white;
-  will-change: contents;
 }
 
 /* огонь после выстрела. в panel.html */
