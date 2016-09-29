@@ -66,12 +66,12 @@ function drumRotate() {
     isDrumRotate ||
     ammunitionCount <= 0
   ) {
-    noise('audio/idle.mp3');
+    noise(audioSprite, audioSpriteJson.idle);
     return;
   }
 
   isDrumRotate = true;
-  noise('audio/reload.mp3');
+  noise(audioSprite, audioSpriteJson.reload);
 
   $body.classList.add('dont-shoot');
   $drum.style.animationName = 'drum-rotate';

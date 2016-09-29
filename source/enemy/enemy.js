@@ -14,16 +14,18 @@ const
     'icon-monster4'
   ],
   imagesClassesLength = imagesClasses.length - 1,
-  dieAudiosURI = [
-    'audio/monster_die1.mp3',
-    'audio/monster_die2.mp3',
-    'audio/monster_die3.mp3',
-    'audio/monster_die4.mp3'
-  ],
   eventEnemyCountCloneChange = new CustomEvent('enemyCountChange', {detail: {change: enemyCloneCount}}),
   eventEnemyKill = new CustomEvent('enemyCountChange', {detail: {change: -1}}),
   eventScoreChange = new CustomEvent('scoreChange', {detail: {change: 5}}),
-  eventDamage = new Event('damage');
+  eventDamage = new Event('damage'),
+  audioSprite = window.audioSprite,
+  audioSpriteJson = window.audioSpriteJson,
+  dieAudios = [
+    audioSpriteJson.monster_die1,
+    audioSpriteJson.monster_die2,
+    audioSpriteJson.monster_die3,
+    audioSpriteJson.monster_die4,
+  ];
 
 let
   cloneEnemyInterval = null,
@@ -82,6 +84,7 @@ function setImage(clone) {
 
 function removeEnemy(enemyClone) {
   clearTimeout(enemyClone.damageTimer);
+  $event.dispatchEvent(eventEnemyKill);
 
   let
     damage = enemyClone.children[0],
@@ -105,10 +108,9 @@ $event.addEventListener('enemyKill', e => {
   const enemyClone = e.enemy.parentNode;
 
   removeEnemy(enemyClone);
-  noise(dieAudiosURI);
-
-  $event.dispatchEvent(eventEnemyKill);
   $event.dispatchEvent(eventScoreChange);
+
+  noise(audioSprite, dieAudios);
 });
 
 $event.addEventListener('enemyCreate', () => {

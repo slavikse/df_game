@@ -10,7 +10,9 @@ const
   $event = $body.querySelector('.event'),
   eventFirstAidDropped = new Event('firstAidDropped'),
   eventScoreChange = new CustomEvent('scoreChange', {detail: {change: -25}}),
-  eventEnemyCreate = new Event('enemyCreate');
+  eventEnemyCreate = new Event('enemyCreate'),
+  audioSprite = window.audioSprite,
+  audioSpriteJson = window.audioSpriteJson;
 
 let
   catChangePositionInterval = null,
@@ -59,9 +61,7 @@ function randomDroppedFirstAid() {
 }
 
 function toBad() {
-  noise(window.audioSprite, window.audioSpriteJson.to_bad);
-
-  // noise('audio/to_bad.mp3');
+  noise(audioSprite, audioSpriteJson.to_bad);
 
   $body.classList.add('dont-shoot');
   $toBad.style.animationName = 'cat-to-bad-show';

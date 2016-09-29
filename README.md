@@ -1,11 +1,12 @@
 # Для чего?  
 /!\ Мученик - машина, а не человек! Современный стек технологий для сборки веб проектов /!\    
 **Под капотом:**
-gulp, postcss, webpack + babel = ❤ es2015, png + svg sprite, image resize, webp, browser-sync, версионирование, minify + audio (ffmpeg), zip.
+gulp, webpack + babel = ❤ es2015, postcss, png + svg sprite, image resize, browser-sync, версионирование, audio спрайт + minify (ffmpeg), zip.
 
 # Установка
 ```sh
 $ curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+$ sudo apt install ffmpeg
 $ sudo npm i -g gulp-cli &&
     git clone https://github.com/slavikse/martyr.git my_project &&
     cd my_project && npm i
@@ -15,55 +16,55 @@ $ sudo npm i -g gulp-cli &&
 Продакшн: ```$ NODE_ENV=production gulp```
 
 # Модульность
-**Правила сборки**:   
-* **Module**: НЕ вкладывать! Тем самым ФС отследит уникальность имени папки.   
+**Правила**:   
+* **Module**: не вкладывать остальное сделает fs   
   *Имя папки (module_name) === Имена файлов в папке:*   
   **ex:** module_name/{module_name.html,module_name.css,module_name.js}
 
-* **View**: логическая вложенность.   
+* **View**: логическая вложенность   
   **ex:** @include('module_name/module_name.html')   
 
-* **Style**: импортятся локально.   
-    Каскад + правило НЕ вкладывать! = ❤ инкапсуляция стилей.   
+* **Style**: каскад + не вкладывать = ❤ инкапсуляция стилей   
   **ex:** .module-name .text {...}
 
-* **Script**: импортятся локально + npm, бабелятся и пакуются.
+* **Script**: webpack, babel 
 
-* **Image**: именование moduleName_imageName и кладуться в ```image/```  
+* **Image**: расположение ```image/```  
   **ex:** подключаются: ``` src="image/moduleName_cat.jpg" ```
   
-* **Resize**: именование moduleName_imageName и кладуться в ```resize/```.   
-  Из большого изображения создаются 2 меньших: для tablet и mobile.    
-  **ex:** подключаются (с layzr.js):  
-    data-srcset="image/resp_mobile.jpg 544w, image/resp_tablet.jpg 992w")   
-
-* **Sprite png**: именование moduleName_imageName и кладуться в ```sprite/```   
+* **Resize**: расположение ```resize/```   
+  Из большого изображения создаются 2 меньших: для _tablet и _mobile    
+  
+* **Sprite png**: расположение ```sprite/```   
   **ex:** классы для использования в ```temp/sprite.png.css```
 
-* **Sprite svg**: именование moduleName_imageName и кладуться в ```svg/```   
+* **Sprite svg**: расположение ```svg/```   
   **ex:** стили для использования в ```temp/sprite.css```   
     и пример использования ```temp/sprite.symbol.html```
 
-* **Audio**: именование moduleName_soundName и кладуться в ```audio/```
+* **Audio**: расположение ```audio/```
 
-* **Audio Sprite**: именование moduleName_soundName и кладуться в ```audio_sprite/```
+* **Audio Sprite**: расположение ```audio_sprite/```   
+  **ex:** информация о спрайте ```temp/audio/audio_sprite.json```
 
-* **Font**: шрифты кладутся в ```font/```   
+* **Font**: расположение ```font/```   
 
 ```
 source/
-    font/               // общий склад шрифтов
+    font/               
     header/
+        audio/
+        audio_sprite/
         image/
         resize/
         sprite/
         svg/
-        sound/
+        header.css
         header.html
-        header.scss
         header.js
 ```
 # Запустить туннель
 ```sh
 $ NODE_ENV=tunnel gulp
 ```
+# MIT License

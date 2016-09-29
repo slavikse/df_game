@@ -1,8 +1,8 @@
-@import './../health/health';
-@import './../score/score';
-@import './../next_wave/next_wave';
-@import './../enemy/enemy_count';
-@import './../revolver/revolver';
+@import '../health/health';
+@import '../score/score';
+@import '../next_wave/next_wave';
+@import '../enemy/enemy_count';
+@import '../revolver/revolver';
 
 .panel {
   position: absolute;
