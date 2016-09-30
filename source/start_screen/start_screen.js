@@ -1,8 +1,8 @@
 import './../panel/panel';
 import catShow from './../cat/cat';
-import loopCloneEnemy from './../enemy/enemy';
-import noise from './../helper/noise';
+import './../enemy/enemy';
 import shoot from './../shoot/shoot';
+import noise from './../helper/noise';
 
 const
   $body = document.querySelector('body'),
@@ -17,8 +17,8 @@ const
 function initGame() {
   $newGame.removeEventListener('click', initGame);
 
-  noise('audio/intro.mp3');
   $newGame.classList.add('new-game-start');
+  noise('audio/intro.mp3');
 
   initInterface();
   startGame();
@@ -42,9 +42,8 @@ function startGame() {
   setTimeout(() => {
     $body.style.backgroundImage = 'none'; // освобождаем память
     $ambient.setAttribute('src', 'audio/dark_ambient.mp3');
-  }, 5000);
+  }, 6000);
 
-  loopCloneEnemy();
   catShow();
 
   $event.dispatchEvent(eventStartGame);

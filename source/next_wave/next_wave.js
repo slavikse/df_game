@@ -1,27 +1,33 @@
 const
   $nextWaveTime = document.querySelector('.next-wave-time'),
   $event = document.querySelector('.event'),
-  nextTimeFull = 5;
+  nextTimeFull = 4,
+  eventEnemyCreate = new Event('enemyCreate');
 
 let
-  nextWaveInterval = null,
+  nextWaveTimeout,
   nextTimeCurrent = nextTimeFull;
 
+$nextWaveTime.style.animationName = 'pulsar';
+
 function nextWave() {
-  nextWaveInterval = setInterval(nextWaveTime, 1000);
+  if (nextTimeCurrent < 0) {
+    nextTimeCurrent = nextTimeFull;
+    // $event.dispatchEvent(eventEnemyCreate);
+  }
+
+  nextWaveTimeout = setTimeout(timer, 1000);
 }
 
-function nextWaveTime() {
-  nextTimeCurrent -= 1;
+function timer() {
   $nextWaveTime.textContent = nextTimeCurrent;
+  nextTimeCurrent -= 1;
 
-  if (nextTimeCurrent <= 0) {
-    nextTimeCurrent = nextTimeFull;
-  }
+  nextWave();
 }
 
 function gameOver() {
-  clearInterval(nextWaveInterval);
+  clearTimeout(nextWaveTimeout);
 }
 
 $event.addEventListener('startGame', nextWave);

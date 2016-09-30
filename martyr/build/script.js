@@ -35,7 +35,7 @@ const
     },
     watch: !production,
     watchOptions: {
-      aggregateTimeout: 50
+      aggregateTimeout: 100
     },
     devtool: production ? null : 'cheap-eval-source-map',
     plugins: [

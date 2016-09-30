@@ -16,7 +16,7 @@ const
   playingFieldResize = throttle(playingField, 200);
 
 let
-  catChangePositionInterval,
+  catChangePositionTimeout,
   catHidden = true,
   playingFieldWidth,
   playingFieldHeight;
@@ -24,12 +24,13 @@ let
 playingField();
 
 function catShow() {
-  catChangePositionInterval = setInterval(changePosition, 5000);
+  catChangePositionTimeout = setTimeout(changePosition, 5000);
 
+  /** покажет после того, как сменит позицию */
   setTimeout(() => {
     $catPosition.classList.add('cat-show');
     catHidden = false;
-  }, 5500);
+  }, 5200);
 
   setTimeout(() => {
     catHideThenShow();
@@ -43,10 +44,11 @@ function changePosition() {
     y = range(0, playingFieldHeight);
 
   $catPosition.style.transform = `translate(${x}px, ${y}px)`;
+  catChangePositionTimeout = setTimeout(changePosition, 5000);
 }
 
 function catHideThenShow() {
-  clearInterval(catChangePositionInterval);
+  clearTimeout(catChangePositionTimeout);
   $catPosition.classList.remove('cat-show');
   catHidden = true;
 
@@ -89,7 +91,7 @@ function toBad() {
 }
 
 function gameOver() {
-  clearInterval(catChangePositionInterval);
+  clearTimeout(catChangePositionTimeout);
   $cat.remove();
 }
 

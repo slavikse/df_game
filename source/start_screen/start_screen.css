@@ -1,3 +1,7 @@
+@import '../cat/cat';
+@import '../enemy/enemy';
+@import '../panel/panel';
+
 .start-screen {
   position: absolute;
   width: 100%;

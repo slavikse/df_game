@@ -29,15 +29,10 @@ const
   playingFieldResize = throttle(playingField, 200);
 
 let
-  cloneEnemyInterval,
   playingFieldWidth,
   playingFieldHeight;
 
 playingField();
-
-function loopCloneEnemy() {
-  cloneEnemyInterval = setInterval(cloneEnemy, 5000);
-}
 
 function cloneEnemy() {
   let fragment = document.createDocumentFragment();
@@ -118,7 +113,6 @@ function enemyKill(e) {
 }
 
 function gameOver() {
-  clearInterval(cloneEnemyInterval);
   $temp.remove();
 }
 
@@ -136,5 +130,3 @@ $event.addEventListener('enemyCreate', cloneEnemy);
 $event.addEventListener('enemyKill', enemyKill);
 $event.addEventListener('gameOver', gameOver);
 window.addEventListener('resize', playingFieldResize);
-
-export default loopCloneEnemy;

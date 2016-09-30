@@ -15,7 +15,7 @@ function shoot(e) {
   eventShoot.shoot = {x, y};
   $event.dispatchEvent(eventShoot);
 
-  // $event.dispatchEvent(new Event('damage'));
+  $event.dispatchEvent(new Event('damage'));
 
   /** стрелять нельзя или
    * выстрел по убитому врагу */
