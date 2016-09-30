@@ -1,7 +1,7 @@
 .cat-position {
   position: absolute;
   opacity: 0;
-  transition: opacity 0.4s, transform 0.4s;
+  transition: opacity 0.4s, transform 0.4s; /* opacity - появление/скрытие, transform - перемещение по полю */
   will-change: opacity, transform, z-index;
 }
 
@@ -11,8 +11,8 @@
 }
 
 .cat {
-  backface-visibility: visible;
   animation: 1.4s both; /* flip */
+  backface-visibility: visible;
   will-change: transform;
 }
 

@@ -12,13 +12,16 @@ const
   eventScoreChange = new CustomEvent('scoreChange', {detail: {change: -25}}),
   eventEnemyCreate = new Event('enemyCreate'),
   audioSprite = window.audioSprite,
-  audioSpriteJson = window.audioSpriteJson;
+  audioToBad = window.audioSpriteJson.to_bad,
+  playingFieldResize = throttle(playingField, 200);
 
 let
-  catChangePositionInterval = null,
+  catChangePositionInterval,
   catHidden = true,
-  width = window.innerWidth - 94, // ширина котика
-  height = window.innerHeight - 148 - 100; // высота котика и панели
+  playingFieldWidth,
+  playingFieldHeight;
+
+playingField();
 
 function catShow() {
   catChangePositionInterval = setInterval(changePosition, 5000);
@@ -36,8 +39,8 @@ function catShow() {
 
 function changePosition() {
   const
-    x = range(0, width),
-    y = range(0, height);
+    x = range(0, playingFieldWidth),
+    y = range(0, playingFieldHeight);
 
   $catPosition.style.transform = `translate(${x}px, ${y}px)`;
 }
@@ -60,8 +63,19 @@ function randomDroppedFirstAid() {
   }
 }
 
+function catShoot() {
+  if (catHidden) {
+    return;
+  }
+
+  toBad();
+
+  $event.dispatchEvent(eventScoreChange);
+  $event.dispatchEvent(eventEnemyCreate);
+}
+
 function toBad() {
-  noise(audioSprite, audioSpriteJson.to_bad);
+  noise(audioSprite, audioToBad);
 
   $body.classList.add('dont-shoot');
   $toBad.style.animationName = 'cat-to-bad-show';
@@ -79,23 +93,18 @@ function gameOver() {
   $cat.remove();
 }
 
-$event.addEventListener('catShoot', () => {
-  if (catHidden) {
-    return;
-  }
+function playingField() {
+  const
+    catWidth = 94,
+    catHeight = 148,
+    panelHeight = 100;
 
-  toBad();
+  playingFieldWidth = window.innerWidth - catWidth;
+  playingFieldHeight = window.innerHeight - catHeight - panelHeight;
+}
 
-  $event.dispatchEvent(eventScoreChange);
-  $event.dispatchEvent(eventEnemyCreate);
-});
-
-const resize = throttle(() => {
-  width = window.innerWidth - 94;
-  height = window.innerHeight - 148 - 100;
-}, 200);
-
-window.addEventListener('resize', resize);
+$event.addEventListener('catShoot', catShoot);
 $event.addEventListener('gameOver', gameOver);
+window.addEventListener('resize', playingFieldResize);
 
 export default catShow;

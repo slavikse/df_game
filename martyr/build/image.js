@@ -18,7 +18,7 @@ const
     }]
   };
 
-let params = {
+const params = {
   quality: 80,
   progressive: true,
   compressionLevel: 6,

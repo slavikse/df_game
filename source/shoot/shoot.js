@@ -1,6 +1,6 @@
 const
   $body = document.querySelector('body'),
-  $event = document.querySelector('.event'),
+  $event = $body.querySelector('.event'),
   eventCatShoot = new Event('catShoot'),
   eventEnemyKill = new Event('enemyKill');
 

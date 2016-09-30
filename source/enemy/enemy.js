@@ -14,7 +14,7 @@ const
     'icon-monster4'
   ],
   imagesClassesLength = imagesClasses.length - 1,
-  eventEnemyCountCloneChange = new CustomEvent('enemyCountChange', {detail: {change: enemyCloneCount}}),
+  eventEnemyCountChange = new CustomEvent('enemyCountChange', {detail: {change: enemyCloneCount}}),
   eventEnemyKill = new CustomEvent('enemyCountChange', {detail: {change: -1}}),
   eventScoreChange = new CustomEvent('scoreChange', {detail: {change: 5}}),
   eventDamage = new Event('damage'),
@@ -25,12 +25,15 @@ const
     audioSpriteJson.monster_die2,
     audioSpriteJson.monster_die3,
     audioSpriteJson.monster_die4,
-  ];
+  ],
+  playingFieldResize = throttle(playingField, 200);
 
 let
-  cloneEnemyInterval = null,
-  width = window.innerWidth - 150, // ширина врага
-  height = window.innerHeight - 150 - 100; // высота врага и панели;
+  cloneEnemyInterval,
+  playingFieldWidth,
+  playingFieldHeight;
+
+playingField();
 
 function loopCloneEnemy() {
   cloneEnemyInterval = setInterval(cloneEnemy, 5000);
@@ -41,37 +44,24 @@ function cloneEnemy() {
 
   for (let i = 0, len = enemyCloneCount; i < len; i++) {
     let clone = $enemyPosition.cloneNode(true);
-    setPosition(clone);
-    setImage(clone);
-    setDamage(clone);
+    clone = setPosition(clone);
+    clone = setImage(clone);
+    clone = setDamage(clone);
     fragment.appendChild(clone);
   }
 
   $temp.appendChild(fragment);
-  $event.dispatchEvent(eventEnemyCountCloneChange);
+  $event.dispatchEvent(eventEnemyCountChange);
 }
 
 function setPosition(clone) {
   const
-    x = range(0, width),
-    y = range(0, height);
+    x = range(0, playingFieldWidth),
+    y = range(0, playingFieldHeight);
 
   clone.style.transform = `translate(${x}px, ${y}px)`;
-}
 
-function setDamage(clone) {
-  const
-    timerDamage = range(6, 10),
-    damage = clone.children[0];
-
-  damage.style.animationDuration = `${timerDamage}s`;
-
-  /** enemy сохраняет свой таймер урона
-   * для дальнейшего его удаления */
-  clone.damageTimer = setTimeout(() => {
-    $event.dispatchEvent(eventDamage);
-    removeEnemy(clone);
-  }, timerDamage * 1000);
+  return clone;
 }
 
 function setImage(clone) {
@@ -80,23 +70,51 @@ function setImage(clone) {
     random = range(0, imagesClassesLength);
 
   enemy.classList.add(imagesClasses[random]);
+
+  return clone;
 }
 
-function removeEnemy(enemyClone) {
-  clearTimeout(enemyClone.damageTimer);
+function setDamage(clone) {
+  const
+    damageTimer = range(6, 10),
+    damageNode = clone.children[0];
+
+  damageNode.style.animationDuration = `${damageTimer}s`;
+
+  /** enemy сохраняет свой таймер урона
+   * для дальнейшего его удаления */
+  clone.damageTimer = setTimeout(() => {
+    $event.dispatchEvent(eventDamage);
+    removeEnemy(clone);
+  }, damageTimer * 1000);
+
+  return clone;
+}
+
+function removeEnemy(clone) {
+  let
+    damageNode = clone.children[0],
+    enemyNode = clone.children[1];
+
+  clearTimeout(clone.damageTimer);
   $event.dispatchEvent(eventEnemyKill);
 
-  let
-    damage = enemyClone.children[0],
-    enemy = enemyClone.children[1];
-
-  damage.remove();
-  enemy.classList.add('enemy-kill');
-  enemyClone.style.zIndex = 0; // для возможности стрелять по тем, кто под убитым
+  damageNode.remove();
+  enemyNode.classList.add('enemy-kill');
+  clone.style.zIndex = 0; // для возможности стрелять по тем, кто под убитым
 
   setTimeout(() => {
-    enemyClone.remove();
+    clone.remove();
   }, 500); // анимация. половина от 1s
+}
+
+function enemyKill(e) {
+  const clone = e.enemy.parentNode;
+
+  removeEnemy(clone);
+  noise(audioSprite, dieAudios);
+
+  $event.dispatchEvent(eventScoreChange);
 }
 
 function gameOver() {
@@ -104,25 +122,19 @@ function gameOver() {
   $temp.remove();
 }
 
-$event.addEventListener('enemyKill', e => {
-  const enemyClone = e.enemy.parentNode;
+function playingField() {
+  const
+    enemyWidth = 94,
+    enemyHeight = 148,
+    panelHeight = 100;
 
-  removeEnemy(enemyClone);
-  $event.dispatchEvent(eventScoreChange);
+  playingFieldWidth = window.innerWidth - enemyWidth;
+  playingFieldHeight = window.innerHeight - enemyHeight - panelHeight;
+}
 
-  noise(audioSprite, dieAudios);
-});
-
-$event.addEventListener('enemyCreate', () => {
-  cloneEnemy();
-});
-
-const resize = throttle(() => {
-  width = window.innerWidth - 150;
-  height = window.innerHeight - 150 - 100;
-}, 200);
-
-window.addEventListener('resize', resize);
+$event.addEventListener('enemyCreate', cloneEnemy);
+$event.addEventListener('enemyKill', enemyKill);
 $event.addEventListener('gameOver', gameOver);
+window.addEventListener('resize', playingFieldResize);
 
 export default loopCloneEnemy;

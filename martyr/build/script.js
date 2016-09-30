@@ -34,14 +34,17 @@ const
       ]
     },
     watch: !production,
+    watchOptions: {
+      aggregateTimeout: 50
+    },
+    devtool: production ? null : 'cheap-eval-source-map',
     plugins: [
       new webpack.NoErrorsPlugin()
       // new webpack.optimize.CommonsChunkPlugin({
       //   name: 'common',
       //   minChunks: 2
       // })
-    ],
-    devtool: production ? null : 'eval'
+    ]
   };
 
 if (production) {

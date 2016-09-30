@@ -2,15 +2,14 @@ import range from 'libs/range';
 
 /**
  * Воспроизводит звук или случайный звук если передано несколько в audioURI
- * Получая параметры, войсер узнает, что передан спрайт
- * @param audioURI {Array,String} пути до звуков или звука
+ * Получая параметры, войсер узнает, что передан спрайт и воспроизводит случайный если передан не один
+ * @param audioURI {Array,String} пути до звука или звуков
  * @param audioParam {Object,Array} параметры воспроизведения, может быть несколько
- * @returns {Element} для внешней манипуляции
+ * @returns {Object} для внешней манипуляции
  */
 function noise(audioURI, audioParam = false) {
-  let
-    audio = document.createElement('audio'),
-    uri = getRandom(audioURI);
+  const uri = getRandom(audioURI);
+  let audio = new Audio();
 
   if (audioParam) {
     audio = setAudioParam(audio, audioParam);
@@ -23,9 +22,8 @@ function noise(audioURI, audioParam = false) {
 }
 
 function setAudioParam(audio, audioParam) {
-  let param = getRandom(audioParam);
-
   let
+    param = getRandom(audioParam),
     start = param.start,
     end = param.end,
     playTime = (end - start).toFixed(2) * 1000;
@@ -34,6 +32,7 @@ function setAudioParam(audio, audioParam) {
 
   setTimeout(() => {
     audio.pause();
+    audio = null;
   }, playTime);
 
   return audio;

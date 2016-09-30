@@ -4,7 +4,7 @@
   opacity: 0;
   animation: 0.4s enemy-position-show both;
   z-index: 100;
-  will-change: opacity;
+  will-change: opacity, z-index;
 }
 
 @keyframes enemy-position-show {

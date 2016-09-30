@@ -1,20 +1,20 @@
 /* ***** КОМАНДЫ ***** *\
- Запушить изменения:
- git push -u origin master
+Запушить изменения:
+git push -u origin master
 
- Сборка на продакшн:
- NODE_ENV=production gulp
+Сборка на продакшн:
+NODE_ENV=production gulp
 
- Сборка на продакшн + туннель:
- NODE_ENV=production gulp && NODE_ENV=tunnel gulp bs
+Сборка на продакшн + туннель:
+NODE_ENV=production gulp && NODE_ENV=tunnel gulp bs
 
- Запустить дев туннель:
- NODE_ENV=tunnel gulp
+Запустить дев туннель:
+NODE_ENV=tunnel gulp
 
- Запустить туннель:
- NODE_ENV=tunnel gulp bs
+Запустить туннель:
+NODE_ENV=tunnel gulp bs
 
- ***********************/
+***********************/
 
 import gulp from 'gulp';
 import './martyr';
