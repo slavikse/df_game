@@ -20,7 +20,13 @@ function scoreJump() {
 }
 
 function gameOver() {
+  const bestScore = localStorage.getItem('best-score');
+
   localStorage.setItem('score', scoreCount);
+
+  if (scoreCount > bestScore) {
+    localStorage.setItem('best-score', scoreCount);
+  }
 }
 
 $event.addEventListener('scoreChange', scoreChange);

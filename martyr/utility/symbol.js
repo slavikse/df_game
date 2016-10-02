@@ -72,7 +72,7 @@ function symbol(cb) {
   });
 
   symbols = uniqueArray(symbols).sort();
-  console.log(...symbols, ' ', symbols.length);
+  console.log(...symbols);
 
   cb();
 }

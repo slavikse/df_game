@@ -19,12 +19,17 @@
   &-title {
     color: red;
     font-size: 5em;
-    text-transform: uppercase;
   }
 
   &-count-frame {
     color: white;
-    font-size: 8em;
-    text-shadow: 0 0 10px #023800;
+    font-size: 4em;
+  }
+
+  .restart {
+    color: #05ae00;
+    font-size: 3em;
+    text-decoration: underline;
+    cursor: pointer;
   }
 }

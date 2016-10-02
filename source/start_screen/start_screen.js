@@ -7,6 +7,8 @@ import noise from './../helper/noise';
 const
   $body = document.querySelector('body'),
   $event = $body.querySelector('.event'),
+  $bestScoreFrame = $body.querySelector('.best-score-frame'),
+  $bestScore = $bestScoreFrame.querySelector('.best-score'),
   $startScreen = $body.querySelector('.start-screen'),
   $newGame = $startScreen.querySelector('.new-game'),
   $panel = $body.querySelector('.panel'),
@@ -14,8 +16,12 @@ const
   $forestNight = $body.querySelector('.forest-night'),
   eventStartGame = new Event('startGame');
 
+$bestScore.textContent = localStorage.getItem('best-score') || 0;
+
 function initGame() {
   $newGame.removeEventListener('click', initGame);
+
+  $bestScoreFrame.style.animationName = 'new-game';
   $newGame.style.animationName = 'new-game';
   noise('audio/intro.mp3');
 
@@ -28,6 +34,7 @@ function initInterface() {
   $forestNight.style.opacity = 1;
 
   setTimeout(() => {
+    $bestScoreFrame.style.opacity = 0;
     $newGame.style.opacity = 0;
   }, 800);
 
