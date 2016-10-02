@@ -12,6 +12,10 @@ function shoot(e) {
     x = e.pageX,
     y = e.pageY;
 
+  /**
+   * TODO курсор надо чуть чуть сдвигать,
+   * иначе при выстреле в туже точку,
+   * ничего не происходит */
   eventShoot.shoot = {x, y};
   $event.dispatchEvent(eventShoot);
 

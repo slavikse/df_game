@@ -1,23 +1,22 @@
-import './../panel/panel';
 import catShow from './../cat/cat';
 import './../enemy/enemy';
+import './../panel/panel';
 import shoot from './../shoot/shoot';
 import noise from './../helper/noise';
 
 const
   $body = document.querySelector('body'),
-  $event = document.querySelector('.event'),
-  $startScreen = document.querySelector('.start-screen'),
+  $event = $body.querySelector('.event'),
+  $startScreen = $body.querySelector('.start-screen'),
   $newGame = $startScreen.querySelector('.new-game'),
-  $panel = document.querySelector('.panel'),
-  $ambient = document.querySelector('.ambient'),
-  $forestNight = document.querySelector('.forest-night'),
+  $panel = $body.querySelector('.panel'),
+  $ambient = $body.querySelector('.ambient'),
+  $forestNight = $body.querySelector('.forest-night'),
   eventStartGame = new Event('startGame');
 
 function initGame() {
   $newGame.removeEventListener('click', initGame);
-
-  $newGame.classList.add('new-game-start');
+  $newGame.style.animationName = 'new-game';
   noise('audio/intro.mp3');
 
   initInterface();
@@ -35,17 +34,16 @@ function initInterface() {
   setTimeout(() => {
     $startScreen.remove();
     window.addEventListener('click', shoot);
-  }, 1000);
+  }, 1000); // 200ms анимация
 }
 
 function startGame() {
   setTimeout(() => {
     $body.style.backgroundImage = 'none'; // освобождаем память
     $ambient.setAttribute('src', 'audio/dark_ambient.mp3');
-  }, 6000);
+  }, 3000);
 
   catShow();
-
   $event.dispatchEvent(eventStartGame);
 }
 

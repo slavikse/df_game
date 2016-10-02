@@ -64,8 +64,7 @@ function useFirstAid() {
       /** полное хп */
       health === healthFull &&
       healthState === healthStateFull
-    )
-  ) {
+    )) {
     return;
   }
 

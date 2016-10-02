@@ -5,13 +5,22 @@
   font-size: 4em;
   line-height: 1.1;
   text-align: center;
-  text-shadow: 0 0 0 #fff;
-  will-change: contents, text-shadow;
+  backface-visibility: visible;
   animation: 1s infinite; /* pulsar */
+  will-change: contents, text-shadow, transform;
 }
 
 @keyframes pulsar {
-  80% {
+  20% {
     text-shadow: 0 0 100px #fff;
+  }
+
+  80%,
+  100% {
+    transform: rotateY(360deg);
+  }
+
+  100% {
+    text-shadow: 0 0 0 #fff;
   }
 }

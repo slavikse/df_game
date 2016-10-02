@@ -19,4 +19,10 @@ function scoreJump() {
   }, 100); // animate
 }
 
+function gameOver() {
+  localStorage.setItem('score', scoreCount);
+}
+
 $event.addEventListener('scoreChange', scoreChange);
+$event.addEventListener('gameOver', gameOver);
+window.onbeforeunload = gameOver;

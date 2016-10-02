@@ -8,16 +8,23 @@
   height: 100%;
   opacity: 0;
   z-index: -5000;
-}
+  transition: 1.5s opacity;
+  will-change: opacity, z-index;
 
-.result-title {
-  color: red;
-  font-size: 5em;
-  text-transform: uppercase;
-}
+  &-show {
+    opacity: 1;
+    z-index: 6000;
+  }
 
-.result-count {
-  color: white;
-  font-size: 8em;
-  text-shadow: 0 0 10px #023800;
+  &-title {
+    color: red;
+    font-size: 5em;
+    text-transform: uppercase;
+  }
+
+  &-count-frame {
+    color: white;
+    font-size: 8em;
+    text-shadow: 0 0 10px #023800;
+  }
 }

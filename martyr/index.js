@@ -14,4 +14,5 @@ import './utility/bs';
 import './utility/del';
 import './utility/gzip';
 import './utility/rev';
+import './utility/symbol';
 import './utility/zip';

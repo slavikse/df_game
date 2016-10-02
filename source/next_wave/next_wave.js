@@ -5,7 +5,7 @@ const
   eventEnemyCreate = new Event('enemyCreate');
 
 let
-  nextWaveTimeout,
+  nextWaveTimeout = null,
   nextTimeCurrent = nextTimeFull;
 
 $nextWaveTime.style.animationName = 'pulsar';
@@ -13,7 +13,7 @@ $nextWaveTime.style.animationName = 'pulsar';
 function nextWave() {
   if (nextTimeCurrent < 0) {
     nextTimeCurrent = nextTimeFull;
-    // $event.dispatchEvent(eventEnemyCreate);
+    $event.dispatchEvent(eventEnemyCreate);
   }
 
   nextWaveTimeout = setTimeout(timer, 1000);

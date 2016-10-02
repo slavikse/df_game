@@ -1,63 +1,104 @@
-.preload-progress-wrap {
-  width: 100%;
-  background-color: #1B5E20;
-  z-index: 5000;
-}
-
-.preload-progress {
-  height: 16px;
-  width: 0;
-  color: white;
-  text-align: right;
-  font-family: sans-serif;
-  background-color: #2c9b35;
-  box-shadow: 0 0 20px #103f00;
-  transition: 0.2s;
-  will-change: width;
-}
-
-.preload {
+.preload-screen {
   position: absolute;
   width: 100%;
   height: 100%;
+  background-color: #000;
+  transition: 0.4s opacity;
+  z-index: 4000;
+}
+
+.loader-frame {
+  position: absolute;
   display: flex;
   align-items: center;
-}
-
-.preload-screens {
-  position: absolute;
+  justify-content: center;
   width: 100%;
   height: 100%;
-  z-index: 4000;
+  z-index: 5000;
 
-  &-top {
-    height: 50%;
-    background-color: #000000;
+  svg { /* FF bug fix */
+    position: absolute;
+    z-index: -100;
+    pointer-events: none;
+  }
+}
 
-    &-end {
-      animation: 0.2s linear preload-screens-top-end both;
-    }
+.loader {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  height: 120px;
+  transform: translateY(40%);
+  -webkit-filter: url("#goo");
+  filter: url("#goo");
+
+  &::after {
+    position: absolute;
+    top: 30px;
+    left: 220px;
+    margin: 0 auto;
+    display: block;
+    width: 60px;
+    height: 60px;
+    background: #ffffff;
+    border-radius: 50%;
+    animation: scale 1s ease-in-out infinite;
+    will-change: transform;
+    content: '';
   }
 
-  &-bottom {
-    bottom: 0;
-    height: 50%;
-    background-color: #000000;
+  div {
+    position: absolute;
+    top: 45px;
+    left: 235px;
+    width: 30px;
+    height: 30px;
+    background: #ffffff;
+    border-radius: 50%;
+    animation: move 1s ease-in-out infinite alternate;
+    will-change: transform;
 
-    &-end {
-      animation: 0.2s linear preload-screens-bottom-end both;
+    &::after,
+    &::before {
+      position: absolute;
+      display: block;
+      width: 30px;
+      height: 30px;
+      background: #ffffff;
+      border-radius: 50%;
+      content: '';
+    }
+
+    &::before {
+      left: -75px;
+    }
+
+    &::after {
+      left: 75px;
     }
   }
 }
 
-@keyframes preload-screens-top-end {
-  100% {
-    transform: translateY(-100%);
+@keyframes scale {
+  10% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.25);
+  }
+
+  90% {
+    transform: scale(1);
   }
 }
 
-@keyframes preload-screens-bottom-end {
+@keyframes move {
+  0% {
+    transform: translateX(-150px);
+  }
+
   100% {
-    transform: translateY(100%);
+    transform: translateX(150px);
   }
 }

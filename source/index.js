@@ -1,10 +1,9 @@
 import './helper/prepare_audio_sprite';
-import preloadResources from './resource_preload/resource_preload';
+import './resource_preload/resource_preload';
 import './start_screen/start_screen';
-import noise from './helper/noise';
 import './result/result';
 
-preloadResources(); // по загрузки создаст событие, которое слушает стартовый экран
+// загрузив игру, создаст событие, которое слушает стартовый экран
 
 /** god mod */
 window.god = false;
@@ -12,7 +11,6 @@ window.god = false;
 window.addEventListener('keyup', e => {
   if (e.keyCode === 71) { // G
     window.god = true;
-    noise('audio/god_mode.mp3');
   }
 });
 

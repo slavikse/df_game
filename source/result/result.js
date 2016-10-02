@@ -4,7 +4,8 @@ const
   $event = document.querySelector('.event');
 
 function result() {
-  console.log('result');
+  $result.classList.add('result-show');
+  $resultCount.textContent = localStorage.getItem('score');
 }
 
 $event.addEventListener('gameOver', result);

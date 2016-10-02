@@ -18,11 +18,8 @@
     z-index: 1000;
     transition: 0.4s;
     transform: translateY(40%);
-    will-change: text-shadow;
-
-    &-start {
-      animation: 0.15s linear new-game infinite alternate both;
-    }
+    animation: 0.15s linear infinite alternate both; /* new-game */
+    will-change: color, text-shadow;
   }
 }
 
@@ -38,7 +35,7 @@
   width: 100%;
   height: 100%;
   opacity: 0;
-  transition: 5s;
+  transition: 2.5s;
   background: url("image/forest_night_mobile.jpg") 50% 50% / cover no-repeat;
 
   @media (544px <= width <= 992px) {

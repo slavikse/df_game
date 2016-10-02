@@ -43,6 +43,7 @@ gulp.task('default',
     'build',
     production ?
       gulp.series(
+        'symbol',
         'rev',
         'gzip',
         'zip'

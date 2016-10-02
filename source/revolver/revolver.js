@@ -11,7 +11,10 @@ const
   ammunitionFull = 30,
   bulletFull = 6,
   audioSprite = window.audioSprite,
-  audioSpriteJson = window.audioSpriteJson;
+  audioSpriteJson = window.audioSpriteJson,
+  audioShoot = audioSpriteJson.shoot,
+  audioIdle = audioSpriteJson.idle,
+  audioReload = audioSpriteJson.reload;
 
 let
   bulletCount = 0, // текущая пуля для выстрела в барабане из 6
@@ -27,11 +30,11 @@ function shoot(e) {
     $body.classList.contains('dont-shoot')
   ) {
     $body.classList.add('dont-shoot');
-    noise(audioSprite, audioSpriteJson.idle);
+    noise(audioSprite, audioIdle);
     return;
   }
 
-  noise(audioSprite, audioSpriteJson.shoot);
+  noise(audioSprite, audioShoot);
   shootPositionChange(e.shoot.x, e.shoot.y);
 
   /** GOD MOD */
@@ -66,15 +69,15 @@ function drumRotate() {
     isDrumRotate ||
     ammunitionCount <= 0
   ) {
-    noise(audioSprite, audioSpriteJson.idle);
+    noise(audioSprite, audioIdle);
     return;
   }
 
-  isDrumRotate = true;
-  noise(audioSprite, audioSpriteJson.reload);
-
   $body.classList.add('dont-shoot');
   $drum.style.animationName = 'drum-rotate';
+
+  isDrumRotate = true;
+  noise(audioSprite, audioReload);
 
   drumReload();
 }
@@ -95,16 +98,17 @@ function drumReload() {
   ammunitionChange(-bulletCount);
 
   if (lastReload) {
-    resetDrum();
+    hiddenBullets(true);
 
-    /** сколько есть для перезарядки + остаток в абойме */
+    /** сколько есть для перезарядки + остаток в барабане */
     bulletCount += bulletFull - bulletCountTMP;
     restDrum = bulletCount;
   }
 
-  reload(bulletCount);
-  setTimeout(reloaded, 600);
+  hiddenBullets(false);
+
   /** синхронизация со звуком перезарядки и анимацией */
+  setTimeout(reloaded, 600);
 
   bulletCount = 0;
 }
@@ -114,9 +118,15 @@ function ammunitionChange(change) {
   $ammunition.textContent = ammunitionCount;
 }
 
-function reload(bulletCount) {
-  for (let i = 0, len = bulletCount; i < len; i++) {
-    $bullets[i].style.opacity = 1;
+function hiddenBullets(visible) {
+  let hidden = 1;
+
+  if (visible) {
+    hidden = 0;
+  }
+
+  for (let i = 0, len = bulletFull; i < len; i++) {
+    $bullets[i].style.opacity = hidden;
   }
 }
 
@@ -126,12 +136,6 @@ function reloaded() {
   $body.classList.remove('dont-shoot');
   $drum.style.animationName = '';
   $drum.style.transform = 'rotate(0deg)';
-}
-
-function resetDrum() {
-  for (let i = 0, len = bulletFull; i < len; i++) {
-    $bullets[i].style.opacity = 0;
-  }
 }
 
 function RKeyHandler(e) {
