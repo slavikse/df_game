@@ -1,14 +1,14 @@
 import noise from './../helper/noise';
 
 const
-  $body = document.querySelector('body'),
+  $body = document.body,
   $revolver = $body.querySelector('.revolver'),
   $drum = $revolver.querySelector('.drum'),
   $ammunition = $revolver.querySelector('.ammunition'),
   $shoot = $body.querySelector('.revolver-shoot'),
   $event = $body.querySelector('.event'),
   $bullets = $drum.children,
-  ammunitionFull = 30,
+  ammunitionFull = 99,
   bulletFull = 6,
   audioSprite = window.audioSprite,
   audioSpriteJson = window.audioSpriteJson,
@@ -17,16 +17,18 @@ const
   audioReload = audioSpriteJson.reload;
 
 let
-  bulletCount = 0, // текущая пуля для выстрела в барабане из 6
+  bulletsNeedReload = 0, // текущая пуля для выстрела в барабане из 6
   ammunitionCount = ammunitionFull,
   restDrum = bulletFull, // остаток в барабане
   isDrumRotate = false;
+
+$ammunition.textContent = ammunitionFull;
 
 function shoot(e) {
   /** пули закончились в абойме или
    * нельзя стрелять */
   if (
-    bulletCount >= restDrum ||
+    bulletsNeedReload >= restDrum ||
     $body.classList.contains('dont-shoot')
   ) {
     $body.classList.add('dont-shoot');
@@ -55,9 +57,9 @@ function shootPositionChange(x, y) {
 }
 
 function drumTurn() {
-  $bullets[bulletCount].style.opacity = 0;
-  bulletCount += 1;
-  $drum.style.transform = `rotate(-${bulletCount * 60}deg)`;
+  $bullets[bulletsNeedReload].style.opacity = 0;
+  bulletsNeedReload += 1;
+  $drum.style.transform = `rotate(-${bulletsNeedReload * 60}deg)`;
 }
 
 function drumRotate() {
@@ -65,7 +67,7 @@ function drumRotate() {
    * барабан еще крутится или
    * патрон для перезарядки нет */
   if (
-    bulletCount === 0 ||
+    bulletsNeedReload === 0 ||
     isDrumRotate ||
     ammunitionCount <= 0
   ) {
@@ -83,34 +85,26 @@ function drumRotate() {
 }
 
 function drumReload() {
-  let
-    lastReload = false,
-    bulletCountTMP = bulletCount;
-
   /** если в запасе патрон меньше,
    * чем нужно перезарядить,
    * то перезарядится сколько есть */
-  if (bulletCount > ammunitionCount) {
-    bulletCount = ammunitionCount;
-    lastReload = true;
-  }
-
-  ammunitionChange(-bulletCount);
-
-  if (lastReload) {
-    hiddenBullets(true);
-
+  if (bulletsNeedReload > ammunitionCount) {
     /** сколько есть для перезарядки + остаток в барабане */
-    bulletCount += bulletFull - bulletCountTMP;
-    restDrum = bulletCount;
+    bulletsNeedReload = bulletFull - bulletsNeedReload + ammunitionCount;
+    restDrum = bulletsNeedReload;
+
+    bulletsHidden();
+    ammunitionChange(-ammunitionCount);
+  } else {
+    ammunitionChange(-bulletsNeedReload);
   }
 
-  hiddenBullets(false);
+  bulletsReload(bulletsNeedReload);
 
   /** синхронизация со звуком перезарядки и анимацией */
   setTimeout(reloaded, 600);
 
-  bulletCount = 0;
+  bulletsNeedReload = 0;
 }
 
 function ammunitionChange(change) {
@@ -118,15 +112,15 @@ function ammunitionChange(change) {
   $ammunition.textContent = ammunitionCount;
 }
 
-function hiddenBullets(visible) {
-  let hidden = 1;
-
-  if (visible) {
-    hidden = 0;
+function bulletsReload(reloadBullet) {
+  for (let i = 0, len = reloadBullet; i < len; i++) {
+    $bullets[i].style.opacity = 1;
   }
+}
 
+function bulletsHidden() {
   for (let i = 0, len = bulletFull; i < len; i++) {
-    $bullets[i].style.opacity = hidden;
+    $bullets[i].style.opacity = 0;
   }
 }
 

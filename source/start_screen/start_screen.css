@@ -11,12 +11,25 @@
   justify-content: center;
   align-items: center;
 
+  .nick {
+    position: relative;
+    z-index: 3000;
+    width: 100%;
+    color: white;
+    font-size: 3em;
+    text-align: center;
+    text-shadow: 0 0 8px #000;
+    background-color: rgba(4, 130, 0, 0.4);
+    transition: opacity 0.8s;
+    will-change: opacity;
+  }
+
   .best-score-frame {
     color: white;
     font-size: 4em;
     text-shadow: 0 0 8px #103600;
-    animation: 0.15s linear infinite alternate both; /* new-game */
-    will-change: color, text-shadow;
+    transition: opacity 0.8s;
+    will-change: opacity;
   }
 
   .new-game {

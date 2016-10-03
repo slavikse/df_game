@@ -2,7 +2,7 @@ import noise from '../helper/noise';
 import './health_notice';
 
 const
-  $body = document.querySelector('body'),
+  $body = document.body,
   $healthWrap = $body.querySelector('.health-wrap'),
   $firstAid = $healthWrap.querySelector('.first-aid').children,
   $healths = $healthWrap.querySelector('.health').children,

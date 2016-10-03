@@ -1,5 +1,5 @@
 const
-  $body = document.querySelector('body'),
+  $body = document.body,
   $event = $body.querySelector('.event'),
   eventCatShoot = new Event('catShoot'),
   eventEnemyKill = new Event('enemyKill');
@@ -19,7 +19,7 @@ function shoot(e) {
   eventShoot.shoot = {x, y};
   $event.dispatchEvent(eventShoot);
 
-  $event.dispatchEvent(new Event('damage'));
+  // $event.dispatchEvent(new Event('damage'));
 
   /** стрелять нельзя или
    * выстрел по убитому врагу */

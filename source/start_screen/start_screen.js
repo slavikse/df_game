@@ -5,26 +5,54 @@ import shoot from './../shoot/shoot';
 import noise from './../helper/noise';
 
 const
-  $body = document.querySelector('body'),
+  $body = document.body,
   $event = $body.querySelector('.event'),
-  $bestScoreFrame = $body.querySelector('.best-score-frame'),
-  $bestScore = $bestScoreFrame.querySelector('.best-score'),
   $startScreen = $body.querySelector('.start-screen'),
+  $nick = $startScreen.querySelector('.nick'),
+  $bestScoreFrame = $startScreen.querySelector('.best-score-frame'),
+  $bestScore = $bestScoreFrame.querySelector('.best-score'),
   $newGame = $startScreen.querySelector('.new-game'),
   $panel = $body.querySelector('.panel'),
   $ambient = $body.querySelector('.ambient'),
   $forestNight = $body.querySelector('.forest-night'),
   eventStartGame = new Event('startGame');
 
-$bestScore.textContent = localStorage.getItem('best-score') || 0;
+initStartScreen();
+
+function initStartScreen() {
+  getNick();
+  getBestScore();
+}
+
+function setNick() {
+  let nick = $nick.value;
+  localStorage.setItem('nick', nick);
+}
+
+function getNick() {
+  const nick = localStorage.getItem('nick') || '';
+
+  if (nick) {
+    $nick.value = nick;
+  }
+
+  $nick.select();
+}
+
+function getBestScore() {
+  $bestScore.textContent = localStorage.getItem('best-score') || 0;
+}
 
 function initGame() {
   $newGame.removeEventListener('click', initGame);
+  window.removeEventListener('keyup', initGame);
 
-  $bestScoreFrame.style.animationName = 'new-game';
+  $nick.style.opacity = '0';
+  $bestScoreFrame.style.opacity = '0';
   $newGame.style.animationName = 'new-game';
   noise('audio/intro.mp3');
 
+  setNick();
   initInterface();
   startGame();
 }
@@ -34,7 +62,6 @@ function initInterface() {
   $forestNight.style.opacity = 1;
 
   setTimeout(() => {
-    $bestScoreFrame.style.opacity = 0;
     $newGame.style.opacity = 0;
   }, 800);
 
@@ -54,4 +81,13 @@ function startGame() {
   $event.dispatchEvent(eventStartGame);
 }
 
+function enterKeyHandler(e) {
+  if (e.keyCode !== 13) {
+    return;
+  }
+
+  initGame();
+}
+
 $newGame.addEventListener('click', initGame);
+window.addEventListener('keyup', enterKeyHandler);

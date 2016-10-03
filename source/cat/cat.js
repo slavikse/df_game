@@ -3,7 +3,7 @@ import noise from './../helper/noise';
 import throttle from 'libs/throttle';
 
 const
-  $body = document.querySelector('body'),
+  $body = document.body,
   $catPosition = $body.querySelector('.cat-position'),
   $cat = $catPosition.querySelector('.cat'),
   $toBad = $body.querySelector('.cat-to-bad'),
