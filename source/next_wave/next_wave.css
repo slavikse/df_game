@@ -6,12 +6,12 @@
   line-height: 1.1;
   text-align: center;
   text-shadow: 0 0 0 #fff;
-  animation: 1s infinite -0.2s; /* pulsar */
+  animation: 1s infinite; /* rotate */
   will-change: contents, transform, text-shadow;
 }
 
-@keyframes pulsar {
-  0% {
+@keyframes rotate {
+  100% {
     transform: rotateX(90deg);
     text-shadow: 0 0 50px #fff;
   }

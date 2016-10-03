@@ -32,16 +32,23 @@
 
 .enemy {
   backface-visibility: visible;
-  animation: 1s both; /* enemy-flip */
+  animation: 1s alternate both; /* enemy-kill */
   will-change: transform;
 }
 
-.enemy-kill {
-  animation-name: enemy-flip;
-}
+@keyframes enemy-kill {
+  0% {
+    transform: rotateY(0deg);
+  }
 
-@keyframes enemy-flip {
   50% {
     transform: rotateY(810deg);
+  }
+}
+
+@keyframes dodge {
+  10%,
+  80% {
+    transform: skewY(15deg) rotateY(60deg);
   }
 }

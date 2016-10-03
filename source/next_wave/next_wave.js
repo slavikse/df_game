@@ -8,7 +8,7 @@ let
   nextWaveTimeout = null,
   nextTimeCurrent = nextTimeFull;
 
-$nextWaveTime.style.animationName = 'pulsar';
+$nextWaveTime.style.animationName = 'rotate';
 
 function nextWave() {
   if (nextTimeCurrent < 0) {

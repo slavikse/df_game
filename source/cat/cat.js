@@ -78,6 +78,7 @@ function catShoot() {
 
 function toBad() {
   noise(audioSprite, audioToBad);
+  catHideThenShow();
 
   $body.classList.add('dont-shoot');
   $toBad.style.animationName = 'cat-to-bad-show';

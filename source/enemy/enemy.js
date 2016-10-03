@@ -6,7 +6,7 @@ const
   $enemyPosition = document.querySelector('.enemy-position'),
   $event = document.querySelector('.event'),
   $temp = document.querySelector('.temp'),
-  enemyCloneCount = 7,
+  enemyCloneCount = 2,
   imagesClasses = [
     'icon-monster1',
     'icon-monster2',
@@ -72,7 +72,8 @@ function setImage(clone) {
 function setDamage(clone) {
   const
     damageTimer = range(6, 10),
-    damageNode = clone.children[0];
+    damageNode = clone.children[0],
+    enemyNode = clone.children[1];
 
   damageNode.style.animationDuration = `${damageTimer}s`;
 
@@ -80,22 +81,18 @@ function setDamage(clone) {
    * для дальнейшего его удаления */
   clone.damageTimer = setTimeout(() => {
     $event.dispatchEvent(eventDamage);
-    removeEnemy(clone);
+    removeEnemy(clone, damageNode, enemyNode);
   }, damageTimer * 1000);
 
   return clone;
 }
 
-function removeEnemy(clone) {
-  let
-    damageNode = clone.children[0],
-    enemyNode = clone.children[1];
-
+function removeEnemy(clone, damageNode, enemyNode) {
   clearTimeout(clone.damageTimer);
   $event.dispatchEvent(eventEnemyKill);
 
+  enemyNode.style.animationName = 'enemy-kill';
   damageNode.remove();
-  enemyNode.classList.add('enemy-kill');
   clone.style.zIndex = 0; // для возможности стрелять по тем, кто под убитым
 
   setTimeout(() => {
@@ -104,12 +101,37 @@ function removeEnemy(clone) {
 }
 
 function enemyKill(e) {
-  const clone = e.enemy.parentNode;
+  const
+    clone = e.enemy.parentNode,
+    damageNode = clone.children[0],
+    enemyNode = clone.children[1];
 
-  removeEnemy(clone);
+  if (miss(enemyNode)) {
+    return;
+  }
+
+  removeEnemy(clone, damageNode, enemyNode);
   noise(audioSprite, dieAudios);
 
   $event.dispatchEvent(eventScoreChange);
+}
+
+function miss(enemyNode) {
+  if (!enemyNode) {
+    return true;
+  }
+
+  const isMiss = range(0, 99) > 40; // 10% промаха
+
+  if (isMiss) {
+    enemyNode.style.animationName = 'dodge';
+
+    setTimeout(() => {
+      enemyNode.style.animationName = '';
+    }, 1000);
+  }
+
+  return isMiss;
 }
 
 function gameOver() {
