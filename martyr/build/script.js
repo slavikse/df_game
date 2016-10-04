@@ -39,7 +39,7 @@ const
     },
     devtool: production ? null : 'cheap-eval-source-map',
     plugins: [
-      new webpack.NoErrorsPlugin()
+      new webpack.NoErrorsPlugin(),
       // new webpack.optimize.CommonsChunkPlugin({
       //   name: 'common',
       //   minChunks: 2

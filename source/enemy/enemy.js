@@ -6,7 +6,7 @@ const
   $enemyPosition = document.querySelector('.enemy-position'),
   $event = document.querySelector('.event'),
   $temp = document.querySelector('.temp'),
-  enemyCloneCount = 2,
+  enemyCloneCount = 6,
   imagesClasses = [
     'icon-monster1',
     'icon-monster2',
@@ -106,32 +106,10 @@ function enemyKill(e) {
     damageNode = clone.children[0],
     enemyNode = clone.children[1];
 
-  if (miss(enemyNode)) {
-    return;
-  }
-
   removeEnemy(clone, damageNode, enemyNode);
   noise(audioSprite, dieAudios);
 
   $event.dispatchEvent(eventScoreChange);
-}
-
-function miss(enemyNode) {
-  if (!enemyNode) {
-    return true;
-  }
-
-  const isMiss = range(0, 99) > 40; // 10% промаха
-
-  if (isMiss) {
-    enemyNode.style.animationName = 'dodge';
-
-    setTimeout(() => {
-      enemyNode.style.animationName = '';
-    }, 1000);
-  }
-
-  return isMiss;
 }
 
 function gameOver() {

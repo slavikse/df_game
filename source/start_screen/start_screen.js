@@ -44,6 +44,15 @@ function getBestScore() {
 }
 
 function initGame() {
+  /** god mod */
+  window.god = false;
+
+  window.addEventListener('keyup', e => {
+    if (e.keyCode === 71) { // G
+      window.god = true;
+    }
+  });
+
   $newGame.removeEventListener('click', initGame);
   window.removeEventListener('keyup', initGame);
 
