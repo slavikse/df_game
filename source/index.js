@@ -5,3 +5,5 @@ import './start_screen/start_screen';
 import './result/result';
 
 // загрузив игру, создаст событие, которое слушает стартовый экран
+
+// let env = process.env.NODE_ENV;

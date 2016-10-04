@@ -35,11 +35,15 @@ const
     },
     watch: !production,
     watchOptions: {
-      aggregateTimeout: 100
+      aggregateTimeout: 10
     },
     devtool: production ? null : 'cheap-eval-source-map',
     plugins: [
       new webpack.NoErrorsPlugin(),
+      new webpack.HotModuleReplacementPlugin(),
+      // new webpack.EnvironmentPlugin([
+      //   "NODE_ENV"
+      // ]),
       // new webpack.optimize.CommonsChunkPlugin({
       //   name: 'common',
       //   minChunks: 2
