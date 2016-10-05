@@ -1,0 +1,49 @@
+.shop {
+  position: absolute;
+  z-index: 5000;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(4, 130, 0, 0.6);
+  transform: translateY(-100%);
+  transition: transform 0.4s;
+  will-change: transform;
+
+  .money {
+    font-size: 4em;
+    color: black;
+    text-align: center;
+  }
+
+  .items {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    width: 60%;
+  }
+
+  .item {
+    margin: 10px;
+    width: 150px;
+    height: 100px;
+    background-color: red;
+    cursor: pointer;
+    transition: transform 0.4s, background-color 0.4s;
+    backface-visibility: visible;
+    outline: 0;
+
+    &:focus {
+      transform: rotate(180deg);
+      background-color: #6260ff;
+    }
+  }
+
+  .close-shop {
+    z-index: 6000;
+    text-align: center;
+    font-size: 5em;
+    color: white;
+    background-color: rgba(4, 130, 0, 0.6);
+    cursor: pointer;
+  }
+}

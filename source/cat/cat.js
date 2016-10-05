@@ -29,7 +29,7 @@ function cat() {
   }, 5100);
 
   setTimeout(() => {
-    catHide();
+    catHideAndShow();
     droppedFirstAid();
   }, 15100);
 }
@@ -43,13 +43,17 @@ function changePosition() {
   catTimeout = setTimeout(changePosition, 5000);
 }
 
+function catHideAndShow() {
+  catHide();
+
+  catTimeout = setTimeout(() => {
+    cat();
+  }, 10100);
+}
+
 function catHide() {
   clearTimeout(catTimeout);
   $catPosition.classList.remove('cat-show');
-
-  setTimeout(() => {
-    cat();
-  }, 10100);
 }
 
 function droppedFirstAid() {
@@ -68,7 +72,7 @@ function catShoot() {
   document.dispatchEvent(eventScoreChange);
   document.dispatchEvent(eventEnemyCreate);
 
-  catHide();
+  catHideAndShow();
   toBad();
 }
 
@@ -103,5 +107,7 @@ function gameOver() {
 
 document.addEventListener('startGame', cat);
 document.addEventListener('catShoot', catShoot);
+document.addEventListener('waveEnd', catHide);
+document.addEventListener('closeShop', cat);
 document.addEventListener('resize', playingFieldResize);
 document.addEventListener('gameOver', gameOver);

@@ -6,6 +6,7 @@ import './cat/cat';
 import './enemy/enemy';
 import './panel/panel';
 import './result/result';
+import './shop/shop';
 
 const NODE_ENV = process.env.NODE_ENV;
 

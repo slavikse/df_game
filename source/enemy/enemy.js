@@ -44,8 +44,8 @@ function cloneEnemy() {
     fragment.appendChild(clone);
   }
 
-  document.dispatchEvent(eventEnemyCountChange);
   $temp.appendChild(fragment);
+  document.dispatchEvent(eventEnemyCountChange);
 }
 
 function setPosition(clone) {
@@ -134,5 +134,6 @@ function gameOver() {
 
 document.addEventListener('enemyCreate', cloneEnemy);
 document.addEventListener('enemyKill', enemyKill);
+document.addEventListener('closeShop', cloneEnemy);
 document.addEventListener('resize', playingFieldResize);
 document.addEventListener('gameOver', gameOver);

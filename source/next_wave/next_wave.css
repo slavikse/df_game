@@ -1,4 +1,4 @@
-.next-wave-time {
+.next-wave-timer {
   width: 56px;
   height: 72px;
   color: white;
@@ -6,11 +6,11 @@
   line-height: 1.1;
   text-align: center;
   text-shadow: 0 0 0 #fff;
-  animation: 1s infinite 0.2s; /* rotate */
+  animation: 1s infinite 0.2s; /* blink */
   will-change: contents, transform;
 }
 
-@keyframes rotate {
+@keyframes blink {
   100% {
     transform: rotateX(90deg);
     text-shadow: 0 0 50px #fff;
