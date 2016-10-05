@@ -39,7 +39,6 @@
     cursor: pointer;
     z-index: 1000;
     animation: 0.15s linear infinite alternate both; /* new-game */
-    will-change: color, text-shadow;
   }
 }
 

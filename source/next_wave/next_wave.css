@@ -7,7 +7,7 @@
   text-align: center;
   text-shadow: 0 0 0 #fff;
   animation: 1s infinite 0.2s; /* rotate */
-  will-change: contents, transform, text-shadow;
+  will-change: contents, transform;
 }
 
 @keyframes rotate {

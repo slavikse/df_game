@@ -9,7 +9,7 @@
   opacity: 0;
   z-index: -5000;
   transition: 1.5s opacity;
-  will-change: opacity, z-index;
+  will-change: opacity;
 
   &-show {
     opacity: 1;

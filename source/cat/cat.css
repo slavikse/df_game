@@ -2,7 +2,7 @@
   position: absolute;
   opacity: 0;
   transition: opacity 0.4s, transform 0.4s; /* opacity - появление/скрытие, transform - перемещение по полю */
-  will-change: opacity, transform, z-index;
+  will-change: opacity, transform;
 }
 
 .cat-show {
@@ -35,16 +35,20 @@
   background-color: rgba(73, 0, 0, 0.7);
   opacity: 0;
   z-index: -3000;
-  animation: 1.4s; /* cat-to-bad-show */
-  will-change: opacity, z-index, font-size;
+  animation: 1.4s; /* cat-to-bad */
+  will-change: opacity;
 }
 
-@keyframes cat-to-bad-show {
+@keyframes cat-to-bad {
+  0%,
+  100% {
+    z-index: 3000;
+  }
+
   30%,
   70% {
-    font-size: 15em;
     opacity: 1;
-    z-index: 3000;
+    font-size: 15em;
   }
 
   100% {

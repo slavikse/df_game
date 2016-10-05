@@ -40,13 +40,13 @@ function cloneEnemy() {
   for (let i = 0, len = enemyCloneCount; i < len; i++) {
     let clone = $enemyPosition.cloneNode(true);
     clone = setPosition(clone);
-    clone = setImage(clone);
     clone = setDamage(clone);
+    clone = setImage(clone);
     fragment.appendChild(clone);
   }
 
-  $temp.appendChild(fragment);
   $event.dispatchEvent(eventEnemyCountChange);
+  $temp.appendChild(fragment);
 }
 
 function setPosition(clone) {
@@ -55,16 +55,6 @@ function setPosition(clone) {
     y = range(0, playingFieldHeight);
 
   clone.style.transform = `translate(${x}px, ${y}px)`;
-
-  return clone;
-}
-
-function setImage(clone) {
-  const
-    enemy = clone.children[1],
-    random = range(0, imagesClassesLength);
-
-  enemy.classList.add(imagesClasses[random]);
 
   return clone;
 }
@@ -87,7 +77,24 @@ function setDamage(clone) {
   return clone;
 }
 
+function setImage(clone) {
+  const
+    enemyNode = clone.children[1],
+    random = range(0, imagesClassesLength);
+
+  enemyNode.classList.add(imagesClasses[random]);
+
+  return clone;
+}
+
 function removeEnemy(clone, damageNode, enemyNode) {
+  /**
+   * выстрел по врагу в момент удаления (+ таймера урона)
+   */
+  if (!enemyNode) {
+    return;
+  }
+
   clearTimeout(clone.damageTimer);
   $event.dispatchEvent(eventEnemyKill);
 
@@ -112,10 +119,6 @@ function enemyKill(e) {
   $event.dispatchEvent(eventScoreChange);
 }
 
-function gameOver() {
-  $temp.remove();
-}
-
 function playingField() {
   const
     enemyWidth = 94,
@@ -126,7 +129,11 @@ function playingField() {
   playingFieldHeight = window.innerHeight - enemyHeight - panelHeight;
 }
 
+function gameOver() {
+  $temp.remove();
+}
+
 $event.addEventListener('enemyCreate', cloneEnemy);
 $event.addEventListener('enemyKill', enemyKill);
-$event.addEventListener('gameOver', gameOver);
 window.addEventListener('resize', playingFieldResize);
+$event.addEventListener('gameOver', gameOver);

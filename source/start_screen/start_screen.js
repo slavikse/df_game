@@ -1,6 +1,3 @@
-import catShow from './../cat/cat';
-import './../enemy/enemy';
-import './../panel/panel';
 import shoot from './../shoot/shoot';
 import noise from './../helper/noise';
 
@@ -30,7 +27,7 @@ function setNick() {
 }
 
 function getNick() {
-  const nick = localStorage.getItem('nick') || '';
+  const nick = localStorage.getItem('nick');
 
   if (nick) {
     $nick.value = nick;
@@ -44,7 +41,9 @@ function getBestScore() {
 }
 
 function initGame() {
+
   /** god mod */
+
   window.god = false;
 
   window.addEventListener('keyup', e => {
@@ -52,6 +51,8 @@ function initGame() {
       window.god = true;
     }
   });
+
+  /** / god mod */
 
   $newGame.removeEventListener('click', initGame);
   window.removeEventListener('keyup', initGame);
@@ -61,15 +62,6 @@ function initGame() {
   $newGame.style.animationName = 'new-game';
   noise('audio/intro.mp3');
 
-  setNick();
-  initInterface();
-  startGame();
-}
-
-function initInterface() {
-  $panel.style.opacity = 1;
-  $forestNight.style.opacity = 1;
-
   setTimeout(() => {
     $newGame.style.opacity = 0;
   }, 800);
@@ -78,16 +70,21 @@ function initInterface() {
     $startScreen.remove();
     window.addEventListener('click', shoot);
   }, 1000); // 200ms анимация
-}
 
-function startGame() {
   setTimeout(() => {
     $body.style.backgroundImage = 'none'; // освобождаем память
     $ambient.setAttribute('src', 'audio/dark_ambient.mp3');
   }, 3000);
 
-  catShow();
+  setNick();
+  initInterface();
+
   $event.dispatchEvent(eventStartGame);
+}
+
+function initInterface() {
+  $panel.style.opacity = 1;
+  $forestNight.style.opacity = 1;
 }
 
 function enterKeyHandler(e) {

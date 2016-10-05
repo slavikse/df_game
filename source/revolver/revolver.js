@@ -132,12 +132,16 @@ function reloaded() {
   $drum.style.transform = 'rotate(0deg)';
 }
 
+function startGame() {
+  $event.addEventListener('shoot', shoot);
+  window.addEventListener('keyup', RKeyHandler);
+  $revolver.addEventListener('click', drumRotate);
+}
+
 function RKeyHandler(e) {
   if (e.keyCode === 82) {
     drumRotate();
   }
 }
 
-$event.addEventListener('shoot', shoot);
-window.addEventListener('keyup', RKeyHandler);
-$revolver.addEventListener('click', drumRotate);
+$event.addEventListener('startGame', startGame);
