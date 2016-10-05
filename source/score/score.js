@@ -1,6 +1,4 @@
-const
-  $event = document.querySelector('.event'),
-  $scoreCount = document.querySelector('.score-count');
+const $scoreCount = document.querySelector('.score-count');
 
 let scoreCount = 0;
 
@@ -29,6 +27,6 @@ function gameOver() {
   }
 }
 
-$event.addEventListener('scoreChange', scoreChange);
-$event.addEventListener('gameOver', gameOver);
-window.onbeforeunload = gameOver;
+document.addEventListener('scoreChange', scoreChange);
+document.addEventListener('gameOver', gameOver);
+document.onbeforeunload = gameOver;

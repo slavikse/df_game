@@ -1,8 +1,7 @@
 const
   $result = document.querySelector('.result'),
   $resultCount = $result.querySelector('.result-count'),
-  $restart = $result.querySelector('.restart'),
-  $event = document.querySelector('.event');
+  $restart = $result.querySelector('.restart');
 
 function result() {
   $result.classList.add('result-show');
@@ -15,4 +14,4 @@ function restart() {
 }
 
 $restart.addEventListener('click', restart);
-$event.addEventListener('gameOver', result);
+document.addEventListener('gameOver', result);

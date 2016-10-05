@@ -2,7 +2,6 @@ import noise from '../helper/noise';
 
 const
   $healthNotice = document.querySelector('.health-notice'),
-  $event = document.querySelector('.event'),
   audioSprite = window.audioSprite,
   audioSpriteJson = window.audioSpriteJson,
   healAudiosURI = [
@@ -41,15 +40,15 @@ function regeneration() {
 function gameOver() {
   clearTimeout(healthNoticeTimer);
 
-  $event.removeEventListener('damage', damage);
-  $event.removeEventListener('regeneration', regeneration);
-  $event.removeEventListener('gameOver', gameOver);
+  document.removeEventListener('damage', damage);
+  document.removeEventListener('regeneration', regeneration);
+  document.removeEventListener('gameOver', gameOver);
 
   noise(audioSprite, audioSpriteJson.death_scream);
   $healthNotice.style.animationName = '';
   $healthNotice.classList.add('game-over');
 }
 
-$event.addEventListener('damage', damage);
-$event.addEventListener('regeneration', regeneration);
-$event.addEventListener('gameOver', gameOver);
+document.addEventListener('damage', damage);
+document.addEventListener('regeneration', regeneration);
+document.addEventListener('gameOver', gameOver);

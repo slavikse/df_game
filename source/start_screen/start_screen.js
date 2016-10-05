@@ -3,7 +3,6 @@ import noise from './../helper/noise';
 
 const
   $body = document.body,
-  $event = $body.querySelector('.event'),
   $startScreen = $body.querySelector('.start-screen'),
   $nick = $startScreen.querySelector('.nick'),
   $bestScoreFrame = $startScreen.querySelector('.best-score-frame'),
@@ -46,7 +45,7 @@ function initGame() {
 
   window.god = false;
 
-  window.addEventListener('keyup', e => {
+  document.addEventListener('keyup', e => {
     if (e.keyCode === 71) { // G
       window.god = true;
     }
@@ -55,11 +54,12 @@ function initGame() {
   /** / god mod */
 
   $newGame.removeEventListener('click', initGame);
-  window.removeEventListener('keyup', initGame);
+  document.removeEventListener('keyup', initGame);
 
   $nick.style.opacity = '0';
   $bestScoreFrame.style.opacity = '0';
   $newGame.style.animationName = 'new-game';
+
   noise('audio/intro.mp3');
 
   setTimeout(() => {
@@ -68,7 +68,7 @@ function initGame() {
 
   setTimeout(() => {
     $startScreen.remove();
-    window.addEventListener('click', shoot);
+    document.addEventListener('click', shoot);
   }, 1000); // 200ms анимация
 
   setTimeout(() => {
@@ -79,7 +79,7 @@ function initGame() {
   setNick();
   initInterface();
 
-  $event.dispatchEvent(eventStartGame);
+  document.dispatchEvent(eventStartGame);
 }
 
 function initInterface() {
@@ -96,4 +96,4 @@ function enterKeyHandler(e) {
 }
 
 $newGame.addEventListener('click', initGame);
-window.addEventListener('keyup', enterKeyHandler);
+document.addEventListener('keyup', enterKeyHandler);

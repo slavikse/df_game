@@ -6,7 +6,6 @@ const
   $drum = $revolver.querySelector('.drum'),
   $ammunition = $revolver.querySelector('.ammunition'),
   $shoot = $body.querySelector('.revolver-shoot'),
-  $event = $body.querySelector('.event'),
   $bullets = $drum.children,
   ammunitionFull = 99,
   bulletFull = 6,
@@ -40,9 +39,12 @@ function shoot(e) {
   shootPositionChange(e.shoot.x, e.shoot.y);
 
   /** GOD MOD */
+
   if (window.god) {
     return;
   }
+
+  /** / GOD MOD */
 
   drumTurn();
 }
@@ -85,6 +87,8 @@ function drumRotate() {
 }
 
 function drumReload() {
+  let bulletsNeedReloadTmp = bulletsNeedReload;
+
   /** если в запасе патрон меньше,
    * чем нужно перезарядить,
    * то перезарядится сколько есть */
@@ -94,11 +98,12 @@ function drumReload() {
     restDrum = bulletsNeedReload;
 
     bulletsHidden();
-    ammunitionChange(-ammunitionCount);
+    bulletsNeedReloadTmp = ammunitionCount;
   } else {
-    ammunitionChange(-bulletsNeedReload);
+    bulletsNeedReloadTmp = bulletsNeedReload;
   }
 
+  ammunitionChange(-bulletsNeedReloadTmp);
   bulletsReload(bulletsNeedReload);
 
   /** синхронизация со звуком перезарядки и анимацией */
@@ -133,8 +138,8 @@ function reloaded() {
 }
 
 function startGame() {
-  $event.addEventListener('shoot', shoot);
-  window.addEventListener('keyup', RKeyHandler);
+  document.addEventListener('shoot', shoot);
+  document.addEventListener('keyup', RKeyHandler);
   $revolver.addEventListener('click', drumRotate);
 }
 
@@ -144,4 +149,4 @@ function RKeyHandler(e) {
   }
 }
 
-$event.addEventListener('startGame', startGame);
+document.addEventListener('startGame', startGame);

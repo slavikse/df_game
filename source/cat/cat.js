@@ -7,7 +7,6 @@ const
   $catPosition = $body.querySelector('.cat-position'),
   $cat = $catPosition.querySelector('.cat'),
   $toBad = $body.querySelector('.cat-to-bad'),
-  $event = $body.querySelector('.event'),
   eventScoreChange = new CustomEvent('scoreChange', {detail: {change: -25}}),
   eventEnemyCreate = new Event('enemyCreate'),
   eventFirstAidDropped = new Event('firstAidDropped'),
@@ -57,7 +56,7 @@ function droppedFirstAid() {
   const random = range(0, 4); // шанс 20%
 
   if (random === 3) {
-    $event.dispatchEvent(eventFirstAidDropped);
+    document.dispatchEvent(eventFirstAidDropped);
   }
 }
 
@@ -66,8 +65,8 @@ function catShoot() {
     return;
   }
 
-  $event.dispatchEvent(eventScoreChange);
-  $event.dispatchEvent(eventEnemyCreate);
+  document.dispatchEvent(eventScoreChange);
+  document.dispatchEvent(eventEnemyCreate);
 
   catHide();
   toBad();
@@ -102,7 +101,7 @@ function gameOver() {
   $cat.remove();
 }
 
-$event.addEventListener('startGame', cat);
-$event.addEventListener('catShoot', catShoot);
-window.addEventListener('resize', playingFieldResize);
-$event.addEventListener('gameOver', gameOver);
+document.addEventListener('startGame', cat);
+document.addEventListener('catShoot', catShoot);
+document.addEventListener('resize', playingFieldResize);
+document.addEventListener('gameOver', gameOver);

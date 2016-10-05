@@ -6,7 +6,6 @@ const
   $healthWrap = $body.querySelector('.health-wrap'),
   $firstAid = $healthWrap.querySelector('.first-aid').children,
   $healths = $healthWrap.querySelector('.health').children,
-  $event = $body.querySelector('.event'),
   $eventRegeneration = new Event('regeneration'),
   firstAidStateClasses = [
     'icon-first_aid_circuit', // пустая
@@ -28,9 +27,14 @@ let
   healthState = healthStateFull;
 
 function damage() {
+
+  /** GOD MOD */
+
   if (window.god) {
     return;
   }
+
+  /** / GOD MOD */
 
   if (health <= 0) {
     gameOver();
@@ -76,7 +80,7 @@ function useFirstAid() {
 
 function regeneration() {
   $body.classList.add('dont-shoot');
-  $event.dispatchEvent($eventRegeneration);
+  document.dispatchEvent($eventRegeneration);
 
   health = healthFull;
   healthState = healthStateFull;
@@ -105,13 +109,13 @@ function addFirstAid() {
 }
 
 function gameOver() {
-  $event.removeEventListener('firstAidDropped', addFirstAid);
-  $event.removeEventListener('damage', damage);
+  document.removeEventListener('firstAidDropped', addFirstAid);
+  document.removeEventListener('damage', damage);
   $healthWrap.removeEventListener('click', useFirstAid);
-  window.removeEventListener('keyup', HKeyHandler);
-  window.removeEventListener('keyup', TKeyHandler);
+  document.removeEventListener('keyup', HKeyHandler);
+  document.removeEventListener('keyup', TKeyHandler);
 
-  $event.dispatchEvent(new Event('gameOver'));
+  document.dispatchEvent(new Event('gameOver'));
 }
 
 function HKeyHandler(e) {
@@ -126,8 +130,8 @@ function TKeyHandler(e) {
   }
 }
 
-$event.addEventListener('firstAidDropped', addFirstAid);
-$event.addEventListener('damage', damage);
+document.addEventListener('firstAidDropped', addFirstAid);
+document.addEventListener('damage', damage);
 $healthWrap.addEventListener('click', useFirstAid);
-window.addEventListener('keyup', HKeyHandler);
-window.addEventListener('keyup', TKeyHandler);
+document.addEventListener('keyup', HKeyHandler);
+document.addEventListener('keyup', TKeyHandler);

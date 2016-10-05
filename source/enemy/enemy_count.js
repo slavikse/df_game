@@ -1,6 +1,4 @@
-const
-  $enemyCount = document.querySelector('.enemy-count'),
-  $event = document.querySelector('.event');
+const $enemyCount = document.querySelector('.enemy-count');
 
 let enemyCount = 0;
 
@@ -9,4 +7,4 @@ function enemyCountChange(e) {
   $enemyCount.textContent = enemyCount;
 }
 
-$event.addEventListener('enemyCountChange', enemyCountChange);
+document.addEventListener('enemyCountChange', enemyCountChange);

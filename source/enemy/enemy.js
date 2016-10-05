@@ -4,7 +4,6 @@ import throttle from 'libs/throttle';
 
 const
   $enemyPosition = document.querySelector('.enemy-position'),
-  $event = document.querySelector('.event'),
   $temp = document.querySelector('.temp'),
   enemyCloneCount = 6,
   imagesClasses = [
@@ -45,7 +44,7 @@ function cloneEnemy() {
     fragment.appendChild(clone);
   }
 
-  $event.dispatchEvent(eventEnemyCountChange);
+  document.dispatchEvent(eventEnemyCountChange);
   $temp.appendChild(fragment);
 }
 
@@ -70,7 +69,7 @@ function setDamage(clone) {
   /** enemy сохраняет свой таймер урона
    * для дальнейшего его удаления */
   clone.damageTimer = setTimeout(() => {
-    $event.dispatchEvent(eventDamage);
+    document.dispatchEvent(eventDamage);
     removeEnemy(clone, damageNode, enemyNode);
   }, damageTimer * 1000);
 
@@ -96,7 +95,7 @@ function removeEnemy(clone, damageNode, enemyNode) {
   }
 
   clearTimeout(clone.damageTimer);
-  $event.dispatchEvent(eventEnemyKill);
+  document.dispatchEvent(eventEnemyKill);
 
   enemyNode.style.animationName = 'enemy-kill';
   damageNode.remove();
@@ -116,7 +115,7 @@ function enemyKill(e) {
   removeEnemy(clone, damageNode, enemyNode);
   noise(audioSprite, dieAudios);
 
-  $event.dispatchEvent(eventScoreChange);
+  document.dispatchEvent(eventScoreChange);
 }
 
 function playingField() {
@@ -133,7 +132,7 @@ function gameOver() {
   $temp.remove();
 }
 
-$event.addEventListener('enemyCreate', cloneEnemy);
-$event.addEventListener('enemyKill', enemyKill);
-window.addEventListener('resize', playingFieldResize);
-$event.addEventListener('gameOver', gameOver);
+document.addEventListener('enemyCreate', cloneEnemy);
+document.addEventListener('enemyKill', enemyKill);
+document.addEventListener('resize', playingFieldResize);
+document.addEventListener('gameOver', gameOver);

@@ -1,7 +1,9 @@
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js')
-  .then(registration)
-  .catch(error);
+function swLoader() {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js')
+    .then(registration)
+    .catch(error);
+  }
 }
 
 function registration(e) {
@@ -17,3 +19,5 @@ function registration(e) {
 function error(err) {
   console.log(`Registration failed with ${err}`);
 }
+
+export default swLoader;

@@ -4,7 +4,8 @@
  * которая сменит имена в у index.css и index.js,
  * тем самым сменит версию кэша (гениально и просто)
  */
-const cacheVersion = 'index.css:index.js:audio_sprite.mp3:sprite.png',
+const
+  cacheVersion = 'index.css:index.js:audio_sprite.mp3:sprite.png',
   cacheURI = [
     '/',
     '/index.css',

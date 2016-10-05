@@ -1,6 +1,5 @@
 const
   $nextWaveTime = document.querySelector('.next-wave-time'),
-  $event = document.querySelector('.event'),
   nextTimeFull = 4,
   eventEnemyCreate = new Event('enemyCreate');
 
@@ -13,7 +12,7 @@ $nextWaveTime.style.animationName = 'rotate';
 function nextWave() {
   if (nextTimeCurrent < 0) {
     nextTimeCurrent = nextTimeFull;
-    $event.dispatchEvent(eventEnemyCreate);
+    document.dispatchEvent(eventEnemyCreate);
   }
 
   nextWaveTimeout = setTimeout(timer, 1000);
@@ -30,5 +29,5 @@ function gameOver() {
   clearTimeout(nextWaveTimeout);
 }
 
-$event.addEventListener('startGame', nextWave);
-$event.addEventListener('gameOver', gameOver);
+document.addEventListener('startGame', nextWave);
+document.addEventListener('gameOver', gameOver);
