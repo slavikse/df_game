@@ -16,7 +16,10 @@ const
     'source/*.css',
     '!source/_*.css'
   ],
-  wFiles = 'source/**/*.css',
+  wFiles = [
+    'source/**/*.css',
+    'temp/sprite.png.css',
+  ],
   there = 'public',
   production = process.env.NODE_ENV === 'production';
 

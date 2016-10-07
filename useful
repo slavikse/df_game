@@ -1,7 +1,7 @@
 
 ------------------------ РАЗМЕТКА ---------------------------
 
-img[width height alt], a[title], template, пробел: &#32
+img[width height alt], a[title], template, пробел: &#32;
 PICTURE: frontender.info/responsive-images
 webp:
 <picture>

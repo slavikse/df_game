@@ -1,7 +1,11 @@
+import debounce from 'libs/debounce';
+
 const
   $body = document.body,
   eventCatShoot = new Event('catShoot'),
-  eventEnemyKill = new Event('enemyKill');
+  eventEnemyKill = new Event('enemyKill'),
+  rate = 167,
+  shootFire = debounce(shoot, rate);
 
 let eventShoot = new CustomEvent('shoot');
 
@@ -16,13 +20,14 @@ function shoot(e) {
 
   // $event.dispatchEvent(new Event('damage'));
 
-  /** стрелять нельзя или
-   * выстрел по убитому врагу */
+  /** выстрел только по левой кнопке мыши или
+   * выстрелы временно заблокированы */
   if (
-    $body.classList.contains('dont-shoot') ||
-    target.classList.contains('enemy-kill')
+    e.which !== 1 ||
+    $body.classList.contains('dont-shoot')
   ) {
-  } else
+    return;
+  }
 
   /** выстрел по монстру */
   if (target.classList.contains('enemy')) {
@@ -36,10 +41,15 @@ function shoot(e) {
   }
 }
 
-function gameOver() {
-  document.removeEventListener('click', shoot);
+function startShoot() {
+  document.addEventListener('click', shootFire);
 }
 
-document.addEventListener('gameOver', gameOver);
+function stopShoot() {
+  document.removeEventListener('click', shootFire);
+}
 
-export default shoot;
+document.addEventListener('startGame', startShoot);
+document.addEventListener('waveEnd', stopShoot);
+document.addEventListener('closeShop', startShoot);
+document.addEventListener('gameOver', stopShoot);

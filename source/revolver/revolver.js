@@ -7,7 +7,7 @@ const
   $ammunition = $revolver.querySelector('.ammunition'),
   $shoot = $body.querySelector('.revolver-shoot'),
   $bullets = $drum.children,
-  ammunitionFull = 99,
+  ammunitionFull = 20,
   bulletFull = 6,
   audioSprite = window.audioSprite,
   audioSpriteJson = window.audioSpriteJson,
@@ -24,13 +24,13 @@ let
 $ammunition.textContent = ammunitionFull;
 
 function shoot(e) {
-  /** пули закончились в абойме или
-   * нельзя стрелять */
-  if (
-    bulletsNeedReload >= restDrum ||
-    $body.classList.contains('dont-shoot')
-  ) {
+  /** пули в барабане закончились */
+  if (bulletsNeedReload === restDrum) {
     $body.classList.add('dont-shoot');
+  }
+
+  /** стрелять временно запрещено */
+  if ($body.classList.contains('dont-shoot')) {
     noise(audioSprite, audioIdle);
     return;
   }
@@ -107,13 +107,17 @@ function drumReload() {
   bulletsReload(bulletsNeedReload);
 
   /** синхронизация со звуком перезарядки и анимацией */
-  setTimeout(reloaded, 600);
+  setTimeout(reloaded, 700);
 
   bulletsNeedReload = 0;
 }
 
 function ammunitionChange(change) {
-  ammunitionCount += change;
+  const changeBullets = change.add || change;
+
+  console.log(changeBullets);
+
+  ammunitionCount += changeBullets;
   $ammunition.textContent = ammunitionCount;
 }
 
@@ -137,16 +141,33 @@ function reloaded() {
   $drum.style.transform = 'rotate(0deg)';
 }
 
-function startGame() {
-  document.addEventListener('shoot', shoot);
-  document.addEventListener('keyup', RKeyHandler);
-  $revolver.addEventListener('click', drumRotate);
-}
-
 function RKeyHandler(e) {
   if (e.keyCode === 82) {
     drumRotate();
   }
+}
+
+function contextmenu(e) {
+  e.preventDefault();
+  drumRotate();
+}
+
+function startGame() {
+  document.addEventListener('shoot', shoot);
+  document.addEventListener('keyup', RKeyHandler);
+  document.addEventListener('contextmenu', contextmenu);
+  $revolver.addEventListener('click', drumRotate);
+  document.addEventListener('buyBullets', ammunitionChange);
+  document.addEventListener('gameOver', gameOver);
+}
+
+function gameOver() {
+  document.removeEventListener('shoot', shoot);
+  document.removeEventListener('keyup', RKeyHandler);
+  document.removeEventListener('contextmenu', contextmenu);
+  document.removeEventListener('buyBullets', ammunitionChange);
+  $revolver.removeEventListener('click', drumRotate);
+  document.removeEventListener('gameOver', gameOver);
 }
 
 document.addEventListener('startGame', startGame);

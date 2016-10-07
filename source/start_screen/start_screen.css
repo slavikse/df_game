@@ -1,7 +1,3 @@
-@import '../cat/cat';
-@import '../enemy/enemy';
-@import '../panel/panel';
-
 .start-screen {
   position: absolute;
   width: 100%;
@@ -10,6 +6,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  .guide {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 
   .nick {
     position: relative;
@@ -34,11 +36,11 @@
 
   .new-game {
     font-size: 6em;
-    color: #a7bf1d;
-    text-shadow: 0 0 14px #103600;
+    color: #ffeb3b;
+    text-shadow: 0 0 8px #ef6c00;
     cursor: pointer;
     z-index: 1000;
-    animation: 0.15s linear infinite alternate both; /* new-game */
+    animation: 0.1s linear infinite alternate; /* new-game */
   }
 }
 

@@ -3,7 +3,10 @@
 @import "_font";
 @import 'resource_preload/resource_preload';
 @import 'start_screen/start_screen';
-@import './../temp/sprite.png.css';
+@import '../temp/sprite.png.css';
+@import 'cat/cat';
+@import 'enemy/enemy';
+@import 'panel/panel';
 @import 'health/health_notice';
-@import 'result/result';
 @import 'shop/shop';
+@import 'result/result';

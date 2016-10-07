@@ -1,56 +1,72 @@
 const
-  $nextWaveTimer = document.querySelector('.next-wave-timer'),
+  $nextTime = document.querySelector('.next-time'),
   nextTimeMax = 4,
-  numberWaveMax = 3,
+  numberWaveMax = 1,
   eventEnemyCreate = new Event('enemyCreate'),
   eventWaveEnd = new Event('waveEnd');
 
 let
-  waveEnd = false,
-  nextWaveTimeout,
+  isWaveEnd,
+  nextTimeTimeout,
   nextTimeCurrent = nextTimeMax,
   numberWaveCurrent = 0;
 
-$nextWaveTimer.style.animationName = 'blink';
+function startWave() {
+  $nextTime.style.animationName = 'blink';
+  isWaveEnd = false;
+  nextTime();
+}
 
-function nextWave() {
-  if (nextTimeCurrent < 0) {
-    nextTimeCurrent = nextTimeMax;
-    numberWaveCurrent += 1;
-    document.dispatchEvent(eventEnemyCreate);
-
-    // волны закончились, по уничтожению показывается магазин
-    if (numberWaveCurrent === numberWaveMax) {
-      $nextWaveTimer.style.animationName = '';
-      nextTimeCurrent = 0;
-      waveEnd = true;
-      return;
-    }
-  }
-
-  nextWaveTimeout = setTimeout(timer, 1000);
+function nextTime() {
+  nextTimeTimeout = setTimeout(timer, 1000);
 }
 
 function timer() {
-  $nextWaveTimer.textContent = nextTimeCurrent;
+  $nextTime.textContent = nextTimeCurrent;
   nextTimeCurrent -= 1;
 
-  nextWave();
+  if (nextTimeCurrent === -1) {
+    nextTimeCurrent = nextTimeMax;
+    nextWave();
+  }
+
+  if (!isWaveEnd) {
+    nextTime();
+  }
+}
+
+function nextWave() {
+  numberWaveCurrent += 1;
+  document.dispatchEvent(eventEnemyCreate);
+
+  waveEnd();
+}
+
+function waveEnd() {
+  if (numberWaveCurrent === numberWaveMax) {
+    numberWaveCurrent = 0;
+    isWaveEnd = true;
+
+    $nextTime.style.animationName = '';
+  }
 }
 
 function noEnemies() {
-  if (!waveEnd) {
-    return;
+  if (isWaveEnd) {
+    document.dispatchEvent(eventWaveEnd);
   }
-
-  document.dispatchEvent(eventWaveEnd);
 }
 
 function gameOver() {
-  clearTimeout(nextWaveTimeout);
+  clearTimeout(nextTimeTimeout);
+
+  document.removeEventListener('startGame', startWave);
+  document.removeEventListener('noEnemies', noEnemies);
+  document.removeEventListener('closeShop', startWave);
+  document.removeEventListener('gameOver', gameOver);
 }
 
-document.addEventListener('startGame', nextWave);
+document.addEventListener('startGame', startWave);
 document.addEventListener('noEnemies', noEnemies);
-document.addEventListener('closeShop', nextWave);
+document.addEventListener('closeShop', startWave);
 document.addEventListener('gameOver', gameOver);

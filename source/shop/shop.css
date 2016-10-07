@@ -4,17 +4,17 @@
   width: 100%;
   height: 100%;
   background-color: rgba(4, 130, 0, 0.6);
-  transform: translateY(-100%);
+  //transform: translateY(-100%);
   transition: transform 0.4s;
   will-change: transform;
 
   .money {
     font-size: 4em;
-    color: black;
+    color: white;
     text-align: center;
   }
 
-  .items {
+  .bullets {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -22,14 +22,13 @@
     width: 60%;
   }
 
-  .item {
+  .bullet {
     margin: 10px;
     width: 150px;
     height: 100px;
     background-color: red;
     cursor: pointer;
     transition: transform 0.4s, background-color 0.4s;
-    backface-visibility: visible;
     outline: 0;
 
     &:focus {
@@ -45,5 +44,13 @@
     color: white;
     background-color: rgba(4, 130, 0, 0.6);
     cursor: pointer;
+    animation: 0.1s linear infinite alternate; /* close-shop */
+  }
+}
+
+@keyframes close-shop {
+  100% {
+    color: #048200;
+    text-shadow: 0 0 14px white;
   }
 }

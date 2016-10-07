@@ -1,32 +1,32 @@
-const $scoreCount = document.querySelector('.score-count');
-
-let scoreCount = 0;
+const $scoreCurrent = document.querySelector('.score-current');
+let scoreCurrent = 0;
 
 function scoreChange(e) {
-  scoreCount += e.detail.change;
-  $scoreCount.textContent = scoreCount;
+  scoreCurrent += e.detail.change;
+  $scoreCurrent.textContent = scoreCurrent;
+  sessionStorage.setItem('score', scoreCurrent);
 
   scoreJump();
 }
 
 function scoreJump() {
-  $scoreCount.animationName = 'score-change';
+  $scoreCurrent.style.animationName = 'score-change';
 
   setTimeout(() => {
-    $scoreCount.animationName = '';
+    $scoreCurrent.style.animationName = '';
   }, 100); // animate
 }
 
 function gameOver() {
-  const bestScore = localStorage.getItem('best-score');
+  const bestScore = localStorage.getItem('best-score') || 0;
 
-  localStorage.setItem('score', scoreCount);
-
-  if (scoreCount > bestScore) {
-    localStorage.setItem('best-score', scoreCount);
+  if (scoreCurrent > bestScore) {
+    localStorage.setItem('best-score', scoreCurrent);
   }
+
+  sessionStorage.setItem('score', scoreCurrent);
 }
 
 document.addEventListener('scoreChange', scoreChange);
 document.addEventListener('gameOver', gameOver);
-document.onbeforeunload = gameOver;
+window.onbeforeunload = gameOver;

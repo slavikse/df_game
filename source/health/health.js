@@ -124,6 +124,12 @@ function HKeyHandler(e) {
   }
 }
 
+function centerButtonMouse(e) {
+  if (e.which === 2) {
+    useFirstAid();
+  }
+}
+
 function TKeyHandler(e) {
   if (e.keyCode === 84) { // T
     addFirstAid();
@@ -134,4 +140,5 @@ document.addEventListener('firstAidDropped', addFirstAid);
 document.addEventListener('damage', damage);
 $healthWrap.addEventListener('click', useFirstAid);
 document.addEventListener('keyup', HKeyHandler);
+document.addEventListener('click', centerButtonMouse);
 document.addEventListener('keyup', TKeyHandler);

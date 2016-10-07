@@ -1,4 +1,3 @@
-import shoot from './../shoot/shoot';
 import noise from './../helper/noise';
 
 const
@@ -40,7 +39,6 @@ function getBestScore() {
 }
 
 function initGame() {
-
   /** god mod */
 
   window.god = false;
@@ -68,18 +66,16 @@ function initGame() {
 
   setTimeout(() => {
     $startScreen.remove();
-    document.addEventListener('click', shoot);
-  }, 1000); // 200ms анимация
+    document.dispatchEvent(eventStartGame);
+  }, 1000); // анимация
 
   setTimeout(() => {
     $body.style.backgroundImage = 'none'; // освобождаем память
     $ambient.setAttribute('src', 'audio/dark_ambient.mp3');
-  }, 3000);
+  }, 3000); // фоновая музыка
 
   setNick();
   initInterface();
-
-  document.dispatchEvent(eventStartGame);
 }
 
 function initInterface() {

@@ -5,7 +5,7 @@ import throttle from 'libs/throttle';
 const
   $enemyPosition = document.querySelector('.enemy-position'),
   $temp = document.querySelector('.temp'),
-  enemyCloneCount = 6,
+  enemyCloneCount = 4,
   imagesClasses = [
     'icon-monster1',
     'icon-monster2',
@@ -89,6 +89,7 @@ function setImage(clone) {
 function removeEnemy(clone, damageNode, enemyNode) {
   /**
    * выстрел по врагу в момент удаления (+ таймера урона)
+   * враг еще существует
    */
   if (!enemyNode) {
     return;
@@ -134,6 +135,5 @@ function gameOver() {
 
 document.addEventListener('enemyCreate', cloneEnemy);
 document.addEventListener('enemyKill', enemyKill);
-document.addEventListener('closeShop', cloneEnemy);
 document.addEventListener('resize', playingFieldResize);
 document.addEventListener('gameOver', gameOver);
