@@ -2,7 +2,7 @@ const $scoreCurrent = document.querySelector('.score-current');
 let scoreCurrent = 0;
 
 function scoreAdd(e) {
-  scoreCurrent += e.detail.change;
+  scoreCurrent += e.add;
   scoreChange();
 }
 

@@ -7,7 +7,7 @@ const
   $catPosition = $body.querySelector('.cat-position'),
   $cat = $catPosition.querySelector('.cat'),
   $toBad = $body.querySelector('.cat-to-bad'),
-  eventScoreDec = new CustomEvent('scoreDec', {detail: {change: -25}}),
+  eventScoreDec = new Event('scoreDec'),
   eventEnemyCreate = new Event('enemyCreate'),
   eventFirstAidDropped = new Event('firstAidDropped'),
   audioSprite = window.audioSprite,
@@ -19,6 +19,9 @@ let
   catVisibleTimeout,
   playingFieldWidth,
   playingFieldHeight;
+
+/** за выстрел в котика */
+eventScoreDec.dec = 25;
 
 playingField();
 
@@ -55,9 +58,7 @@ function catHide() {
 }
 
 function catShow() {
-  catVisibleTimeout = setTimeout(() => {
-    catRun();
-  }, 10000);
+  catVisibleTimeout = setTimeout(catRun, 10000);
 }
 
 function droppedFirstAid() {

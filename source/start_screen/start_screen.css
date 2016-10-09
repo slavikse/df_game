@@ -7,14 +7,6 @@
   justify-content: center;
   align-items: center;
 
-  .guide {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    transition: opacity 0.8s;
-    will-change: opacity;
-  }
-
   .nick {
     position: relative;
     z-index: 3000;
@@ -24,7 +16,7 @@
     text-align: center;
     text-shadow: 0 0 8px #000;
     background-color: rgba(4, 130, 0, 0.4);
-    transition: opacity 0.8s;
+    transition: opacity 0.5s;
     will-change: opacity;
   }
 
@@ -32,17 +24,25 @@
     color: white;
     font-size: 4em;
     text-shadow: 0 0 8px #103600;
-    transition: opacity 0.8s;
+    transition: opacity 0.5s;
     will-change: opacity;
   }
 
   .new-game {
+    z-index: 1000;
     font-size: 6em;
     color: #ffeb3b;
     text-shadow: 0 0 8px #ef6c00;
     cursor: pointer;
-    z-index: 1000;
     animation: 0.1s linear infinite alternate; /* new-game */
+  }
+
+  .guide {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    transition: opacity 0.5s;
+    will-change: opacity;
   }
 }
 
@@ -58,7 +58,7 @@
   width: 100%;
   height: 100%;
   opacity: 0;
-  transition: 2.5s;
+  transition: 5s;
   background: url("image/forest_night_mobile.jpg") 50% 50% / cover no-repeat;
 
   @media (544px <= width <= 992px) {

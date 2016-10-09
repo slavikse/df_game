@@ -2,7 +2,6 @@ const
   $screen = document.querySelector('.preload-screen'),
   resource = {
     audios: [
-      'audio/intro.mp3',
       'audio/dark_ambient.mp3',
       'audio/audio_sprite.mp3'
     ],
@@ -47,7 +46,7 @@ function load() {
 
   setTimeout(() => {
     $screen.remove();
-  }, 200); // animation 0.4s / 2
+  }, 500);
 }
 
 window.addEventListener('load', load);

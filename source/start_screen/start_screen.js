@@ -11,6 +11,8 @@ const
   $panel = $body.querySelector('.panel'),
   $ambient = $body.querySelector('.ambient'),
   $forestNight = $body.querySelector('.forest-night'),
+  audioSprite = window.audioSprite,
+  audioIntro = window.audioSpriteJson.intro,
   eventStartGame = new Event('startGame');
 
 initStartScreen();
@@ -60,21 +62,18 @@ function initGame() {
   $bestScoreFrame.style.opacity = 0;
   $newGame.style.animationName = 'new-game';
 
-  noise('audio/intro.mp3');
+  noise(audioSprite, audioIntro);
 
   setTimeout(() => {
     $newGame.style.opacity = 0;
-  }, 800);
-
-  setTimeout(() => {
     $startScreen.remove();
     document.dispatchEvent(eventStartGame);
-  }, 1000); // анимация
+  }, 500);
 
   setTimeout(() => {
     $body.style.backgroundImage = 'none'; // освобождаем память
     $ambient.setAttribute('src', 'audio/dark_ambient.mp3');
-  }, 3000); // фоновая музыка
+  }, 5500);
 
   setNick();
   initInterface();

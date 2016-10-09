@@ -13,9 +13,9 @@ const
     'icon-monster4'
   ],
   imagesClassesLength = imagesClasses.length - 1,
-  eventEnemyCountChange = new CustomEvent('enemyCountChange', {detail: {change: enemyCloneCount}}),
-  eventEnemyKill = new CustomEvent('enemyCountChange', {detail: {change: -1}}),
-  eventScoreAdd = new CustomEvent('scoreAdd', {detail: {change: 5}}),
+  eventEnemyAdd = new Event('enemyAdd'),
+  eventEnemyDec = new Event('enemyDec'),
+  eventScoreAdd = new Event('scoreAdd'),
   eventDamage = new Event('damage'),
   audioSprite = window.audioSprite,
   audioSpriteJson = window.audioSpriteJson,
@@ -31,6 +31,10 @@ let
   playingFieldWidth,
   playingFieldHeight;
 
+eventEnemyAdd.add = enemyCloneCount;
+eventEnemyDec.dec = 1;
+eventScoreAdd.add = 5;
+
 playingField();
 
 function cloneEnemy() {
@@ -45,7 +49,7 @@ function cloneEnemy() {
   }
 
   $temp.appendChild(fragment);
-  document.dispatchEvent(eventEnemyCountChange);
+  document.dispatchEvent(eventEnemyAdd);
 }
 
 function setPosition(clone) {
@@ -96,8 +100,9 @@ function removeEnemy(clone, damageNode, enemyNode) {
   }
 
   clearTimeout(clone.damageTimer);
-  document.dispatchEvent(eventEnemyKill);
+  document.dispatchEvent(eventEnemyDec);
 
+  enemyNode.classList.add('enemy-kill');
   enemyNode.style.animationName = 'enemy-kill';
   damageNode.remove();
   clone.style.zIndex = 0; // для возможности стрелять по тем, кто под убитым

@@ -1,16 +1,26 @@
 const
   $enemyCount = document.querySelector('.enemy-count'),
-  eventNoEnemies = new Event('noEnemies');
+  eventNoEnemy = new Event('noEnemy');
 
 let enemyCount = 0;
 
-function enemyCountChange(e) {
-  enemyCount += e.detail.change;
-  $enemyCount.textContent = enemyCount;
+function enemyAdd(e) {
+  enemyCount += e.add;
+  enemyCountChange();
+}
+
+function enemyDec(e) {
+  enemyCount -= e.dec;
+  enemyCountChange();
 
   if (enemyCount === 0) {
-    document.dispatchEvent(eventNoEnemies);
+    document.dispatchEvent(eventNoEnemy);
   }
 }
 
-document.addEventListener('enemyCountChange', enemyCountChange);
+function enemyCountChange() {
+  $enemyCount.textContent = enemyCount;
+}
+
+document.addEventListener('enemyAdd', enemyAdd);
+document.addEventListener('enemyDec', enemyDec);

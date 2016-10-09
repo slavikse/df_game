@@ -37,7 +37,6 @@ webp:
     srcset="image/meet_pers2@2x.jpg 2x">
 </picture>
 
-<meta name='application-name' content='Application Name'>
 <meta http-equiv="x-dns-prefetch-control" content="on">
 <link rel="dns-prefetch" href="https://URI.com">
 <link rel="prefetch" href="secondary.js">
@@ -126,3 +125,6 @@ import template from 'underscore.template';
 template('Hello, <%= name %>')({name: 'Paul'});
 var list = "<% _.each(people, function(name) { %> <li><%= name %></li> <% }); %>";
 template(list, {people : ['moe', 'curly', 'larry']}); // вернёт "<li>moe</li><li>curly</li><li>larry</li>"
+
+----------------------------- NPM ---------------------------
+opener: npmjs.com/package/opener

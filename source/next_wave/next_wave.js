@@ -51,7 +51,7 @@ function waveEnd() {
   }
 }
 
-function noEnemies() {
+function noEnemy() {
   if (isWaveEnd) {
     document.dispatchEvent(eventWaveEnd);
   }
@@ -61,12 +61,12 @@ function gameOver() {
   clearTimeout(nextTimeTimeout);
 
   document.removeEventListener('startGame', startWave);
-  document.removeEventListener('noEnemies', noEnemies);
+  document.removeEventListener('noEnemy', noEnemy);
   document.removeEventListener('closeShop', startWave);
   document.removeEventListener('gameOver', gameOver);
 }
 
 document.addEventListener('startGame', startWave);
-document.addEventListener('noEnemies', noEnemies);
+document.addEventListener('noEnemy', noEnemy);
 document.addEventListener('closeShop', startWave);
 document.addEventListener('gameOver', gameOver);

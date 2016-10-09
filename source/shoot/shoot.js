@@ -10,6 +10,17 @@ const
 let eventShoot = new CustomEvent('shoot');
 
 function shoot(e) {
+  /** выстрел только по левой кнопке мыши или
+   * враг убит или
+   * выстрелы временно заблокированы */
+  if (
+    e.which !== 1 ||
+    e.target.classList.contains('enemy-kill') ||
+    $body.classList.contains('dont-shoot')
+  ) {
+    return;
+  }
+
   const
     target = e.target,
     x = e.pageX,
@@ -19,15 +30,6 @@ function shoot(e) {
   document.dispatchEvent(eventShoot);
 
   // $event.dispatchEvent(new Event('damage'));
-
-  /** выстрел только по левой кнопке мыши или
-   * выстрелы временно заблокированы */
-  if (
-    e.which !== 1 ||
-    $body.classList.contains('dont-shoot')
-  ) {
-    return;
-  }
 
   /** выстрел по монстру */
   if (target.classList.contains('enemy')) {

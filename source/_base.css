@@ -10,7 +10,7 @@ body {
 }
 
 body {
-  font-family: 'Beer money', sans-serif;
+  font-family: 'beermoney', sans-serif;
   background: url("image/forest_day_mobile.jpg") 50% 50% / cover no-repeat;
   cursor: crosshair;
   overflow: hidden; /* мобы могут появляться на краю */

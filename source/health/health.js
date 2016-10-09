@@ -126,6 +126,8 @@ function HKeyHandler(e) {
 
 function centerButtonMouse(e) {
   if (e.which === 2) {
+    e.preventDefault();
+
     useFirstAid();
   }
 }
