@@ -1,20 +1,19 @@
 const $scoreCurrent = document.querySelector('.score-current');
 let scoreCurrent = 0;
 
-function scoreChange(e) {
+function scoreAdd(e) {
   scoreCurrent += e.detail.change;
-  $scoreCurrent.textContent = scoreCurrent;
-  sessionStorage.setItem('score', scoreCurrent);
-
-  scoreJump();
+  scoreChange();
 }
 
-function scoreJump() {
-  $scoreCurrent.style.animationName = 'score-change';
+function scoreDec(e) {
+  scoreCurrent -= e.dec;
+  scoreChange();
+}
 
-  setTimeout(() => {
-    $scoreCurrent.style.animationName = '';
-  }, 100); // animate
+function scoreChange() {
+  $scoreCurrent.textContent = scoreCurrent;
+  sessionStorage.setItem('score', scoreCurrent);
 }
 
 function gameOver() {
@@ -27,6 +26,7 @@ function gameOver() {
   sessionStorage.setItem('score', scoreCurrent);
 }
 
-document.addEventListener('scoreChange', scoreChange);
+document.addEventListener('scoreAdd', scoreAdd);
+document.addEventListener('scoreDec', scoreDec);
 document.addEventListener('gameOver', gameOver);
 window.onbeforeunload = gameOver;

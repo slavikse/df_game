@@ -7,7 +7,7 @@ const
   $catPosition = $body.querySelector('.cat-position'),
   $cat = $catPosition.querySelector('.cat'),
   $toBad = $body.querySelector('.cat-to-bad'),
-  eventScoreChange = new CustomEvent('scoreChange', {detail: {change: -25}}),
+  eventScoreDec = new CustomEvent('scoreDec', {detail: {change: -25}}),
   eventEnemyCreate = new Event('enemyCreate'),
   eventFirstAidDropped = new Event('firstAidDropped'),
   audioSprite = window.audioSprite,
@@ -78,7 +78,7 @@ function catShoot() {
     return;
   }
 
-  document.dispatchEvent(eventScoreChange);
+  document.dispatchEvent(eventScoreDec);
   document.dispatchEvent(eventEnemyCreate);
 
   catVisible();

@@ -5,6 +5,7 @@ const
   $bullets = $shop.querySelector('.bullets'),
   $closeShop = $shop.querySelector('.close-shop'),
   eventBuyBullets = new Event('buyBullets'),
+  eventScoreDec = new Event('scoreDec'),
   eventCloseShop = new Event('closeShop');
 
 function openShop() {
@@ -17,10 +18,29 @@ function openShop() {
   }, 100);
 }
 
-function buyBullets() {
-  eventBuyBullets.add = 5;
+function buyBullets(e) {
+  const target = e.target;
 
+  if (!target.classList.contains('bullet')) {
+    return;
+  }
+
+  const
+    dataset = target.dataset,
+    currentScore = sessionStorage.getItem('score'),
+    scoreDec = parseInt(dataset.score, 10);
+
+  if (currentScore - scoreDec < 0) {
+    return;
+  }
+
+  eventBuyBullets.add = parseInt(dataset.add, 10);
   document.dispatchEvent(eventBuyBullets);
+
+  eventScoreDec.dec = scoreDec;
+  document.dispatchEvent(eventScoreDec);
+
+  $moneyCurrent.textContent -= scoreDec;
 }
 
 function closeShop() {

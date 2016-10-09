@@ -103,7 +103,7 @@ function drumReload() {
     bulletsNeedReloadTmp = bulletsNeedReload;
   }
 
-  ammunitionChange(-bulletsNeedReloadTmp);
+  ammunitionDec(bulletsNeedReloadTmp);
   bulletsReload(bulletsNeedReload);
 
   /** синхронизация со звуком перезарядки и анимацией */
@@ -112,12 +112,17 @@ function drumReload() {
   bulletsNeedReload = 0;
 }
 
-function ammunitionChange(change) {
-  const changeBullets = change.add || change;
+function ammunitionAdd(e) {
+  ammunitionCount += e.add;
+  ammunitionChange();
+}
 
-  console.log(changeBullets);
+function ammunitionDec(change) {
+  ammunitionCount -= change;
+  ammunitionChange();
+}
 
-  ammunitionCount += changeBullets;
+function ammunitionChange() {
   $ammunition.textContent = ammunitionCount;
 }
 
@@ -157,7 +162,7 @@ function startGame() {
   document.addEventListener('keyup', RKeyHandler);
   document.addEventListener('contextmenu', contextmenu);
   $revolver.addEventListener('click', drumRotate);
-  document.addEventListener('buyBullets', ammunitionChange);
+  document.addEventListener('buyBullets', ammunitionAdd);
   document.addEventListener('gameOver', gameOver);
 }
 
@@ -165,7 +170,7 @@ function gameOver() {
   document.removeEventListener('shoot', shoot);
   document.removeEventListener('keyup', RKeyHandler);
   document.removeEventListener('contextmenu', contextmenu);
-  document.removeEventListener('buyBullets', ammunitionChange);
+  document.removeEventListener('buyBullets', ammunitionAdd);
   $revolver.removeEventListener('click', drumRotate);
   document.removeEventListener('gameOver', gameOver);
 }

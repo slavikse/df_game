@@ -39,9 +39,15 @@ if (production) {
   }
 }
 
-/**
- * 1. Удаляет стандартную заливку из svg, чтобы можно было ее менять через стили
- */
+gulp.task(name,
+  gulp.series(
+    createSvg,
+    changeExample
+  )
+);
+
+/** 1. Удаляет стандартную заливку из svg,
+ * чтобы можно было ее менять через стили */
 function createSvg() {
   return gulp.src(files)
   .pipe(rename({dirname: ''}))
@@ -50,22 +56,12 @@ function createSvg() {
   .pipe(gulp.dest(there))
 }
 
-/**
- * 1. Удаляет излишний путь ../public/ из примера для убодства
- * ... Придумать как удалить лишнее ...
- */
+/** 1. Удаляет излишний путь ../public/ из примера для убодства */
 function changeExample() {
   return gulp.src('temp/sprite.symbol.*')
   .pipe(replace(/\.\.\/public\//gi, '')) /* 1 */
   .pipe(gulp.dest(there))
 }
-
-gulp.task(name,
-  gulp.series(
-    createSvg,
-    changeExample
-  )
-);
 
 if (!production) {
   gulp.watch(files, gulp.series(name));

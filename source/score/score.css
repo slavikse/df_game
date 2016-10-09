@@ -5,14 +5,7 @@
   &-current {
     display: inline-block;
     width: 70px;
-    text-align: center;
-    animation: 0.1s linear;
-    will-change: transform, contents;
-  }
-}
-
-@keyframes score-change {
-  100% {
-    transform: translateY(-8px);
+    text-align: right;
+    will-change: contents;
   }
 }

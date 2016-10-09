@@ -41,6 +41,7 @@
     "postcss-import": "8.1.2",
     "postcss-media-minmax": "2.1.2",
     "postcss-nested": "1.0.0",
+    "vinyl-buffer": "1.0.0",
     "vinyl-named": "1.1.0",
     "webpack-stream": "3.2.0"
   }

@@ -4,7 +4,7 @@
   width: 100%;
   height: 100%;
   background-color: rgba(4, 130, 0, 0.6);
-  //transform: translateY(-100%);
+  transform: translateY(-100%);
   transition: transform 0.4s;
   will-change: transform;
 
@@ -24,9 +24,14 @@
 
   .bullet {
     margin: 10px;
-    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
     height: 100px;
-    background-color: red;
+    border: 3px dotted #103600;
+    color: #fff;
+    font-size: 2.5em;
     cursor: pointer;
     transition: transform 0.4s, background-color 0.4s;
     outline: 0;

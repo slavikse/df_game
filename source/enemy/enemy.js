@@ -15,7 +15,7 @@ const
   imagesClassesLength = imagesClasses.length - 1,
   eventEnemyCountChange = new CustomEvent('enemyCountChange', {detail: {change: enemyCloneCount}}),
   eventEnemyKill = new CustomEvent('enemyCountChange', {detail: {change: -1}}),
-  eventScoreChange = new CustomEvent('scoreChange', {detail: {change: 5}}),
+  eventScoreAdd = new CustomEvent('scoreAdd', {detail: {change: 5}}),
   eventDamage = new Event('damage'),
   audioSprite = window.audioSprite,
   audioSpriteJson = window.audioSpriteJson,
@@ -116,7 +116,7 @@ function enemyKill(e) {
   removeEnemy(clone, damageNode, enemyNode);
   noise(audioSprite, dieAudios);
 
-  document.dispatchEvent(eventScoreChange);
+  document.dispatchEvent(eventScoreAdd);
 }
 
 function playingField() {

@@ -6,10 +6,7 @@ import util from 'gulp-util';
 
 const
   name = 'audio',
-  files = [
-    'source/**/audio/*',
-    'temp/audio/audio_sprite.mp3*'
-  ],
+  files = 'source/**/audio/*',
   there = 'public/audio',
   config = cmd => {
     return cmd

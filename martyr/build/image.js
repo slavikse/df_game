@@ -6,28 +6,24 @@ import util from 'gulp-util';
 
 const
   name = 'image',
-  files = [
-    'source/**/image/*',
-    'temp/image/sprite.png*'
-  ],
+  files = 'source/**/image/*',
   there = 'public/image',
   production = process.env.NODE_ENV === 'production',
   config = {
     '*': [{
       width: '100%'
     }]
+  },
+  params = {
+    quality: 80,
+    progressive: true,
+    compressionLevel: 6,
+    stats: false,
+    silent: true,
+    errorOnEnlargement: false,
+    errorOnUnusedConfig: false,
+    withoutEnlargement: false
   };
-
-const params = {
-  quality: 80,
-  progressive: true,
-  compressionLevel: 6,
-  stats: false,
-  silent: true,
-  errorOnEnlargement: false,
-  errorOnUnusedConfig: false,
-  withoutEnlargement: false
-};
 
 gulp.task(name, () => {
   return gulp.src(files)
