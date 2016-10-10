@@ -11,8 +11,8 @@ const
   $panel = $body.querySelector('.panel'),
   $ambient = $body.querySelector('.ambient'),
   $forestNight = $body.querySelector('.forest-night'),
-  audioSprite = window.audioSprite,
-  audioIntro = window.audioSpriteJson.intro,
+  audioURI = window.audioURI,
+  audioIntro = window.audioSprite.intro,
   eventStartGame = new Event('startGame');
 
 initStartScreen();
@@ -62,7 +62,7 @@ function initGame() {
   $bestScoreFrame.style.opacity = 0;
   $newGame.style.animationName = 'new-game';
 
-  noise(audioSprite, audioIntro);
+  noise(audioURI, audioIntro);
 
   setTimeout(() => {
     $newGame.style.opacity = 0;

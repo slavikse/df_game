@@ -8,8 +8,12 @@ const
   $storeItems = $store.children,
   storeItemsLength = $storeItems.length,
   $closeShop = $shop.querySelector('.close-shop'),
+  audioURI = window.audioURI,
   audioSprite = window.audioSprite,
-  audioNextWave = window.audioSpriteJson.next_wave,
+  audioBulletHover = audioSprite.bullet_hover,
+  audioBuy = audioSprite.buy,
+  audioBuyBlock = audioSprite.buy_block,
+  audioNextWave = audioSprite.next_wave,
   eventBuyBullets = new Event('buyBullets'),
   eventScoreDec = new Event('scoreDec'),
   eventCloseShop = new Event('closeShop');
@@ -29,18 +33,27 @@ function openShop() {
 
 function setScore() {
   currentScore = sessionStorage.getItem('score');
-
   buyLockUnlock();
+}
+
+function bulletHover(e) {
+  if(!e.target.classList.contains('bullet')) {
+    return;
+  }
+
+  noise(audioURI, audioBulletHover);
 }
 
 function buyLockUnlock() {
   for (let i = 0, len = storeItemsLength; i < len; i++) {
-    const item = $storeItems[i];
+    const
+      item = $storeItems[i],
+      itemScore = parseInt(item.dataset.score, 10);
 
-    if (parseInt(item.dataset.score, 10) > currentScore) {
-      item.classList.add('buy-lock');
+    if (itemScore > currentScore) {
+      item.classList.add('buy-block');
     } else {
-      item.classList.remove('buy-lock');
+      item.classList.remove('buy-block');
     }
   }
 }
@@ -57,6 +70,7 @@ function buyBullets(e) {
     scoreDec = parseInt(dataset.score, 10);
 
   if (currentScore - scoreDec < 0) {
+    noise(audioURI, audioBuyBlock);
 
     /** GOD MOD */
 
@@ -68,6 +82,8 @@ function buyBullets(e) {
 
     // return;
   }
+
+  noise(audioURI, audioBuy);
 
   eventBuyBullets.add = parseInt(dataset.add, 10);
   document.dispatchEvent(eventBuyBullets);
@@ -85,7 +101,7 @@ function closeShop() {
   $store.removeEventListener('click', buyBullets);
   $closeShop.style.animationName = 'close-shop';
 
-  noise(audioSprite, audioNextWave);
+  noise(audioURI, audioNextWave);
 
   setTimeout(() => {
     $closeShop.style.animationName = '';
@@ -100,5 +116,6 @@ function gameOver() {
 }
 
 document.addEventListener('waveEnd', openShop);
+$store.addEventListener('mouseover', bulletHover);
 $closeShop.addEventListener('click', closeShop);
 document.addEventListener('gameOver', gameOver);

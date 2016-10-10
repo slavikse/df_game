@@ -1,31 +1,30 @@
 import gulp from 'gulp';
-import audiosprite from 'gulp-audiosprite';
-import ffmpeg from 'gulp-fluent-ffmpeg';
-import util from 'gulp-util';
+import audioSprite from 'gulp-audiosprite';
 
 const
   name = 'audio_sprite',
   files = 'source/**/audio_sprite/*',
   there = 'public/audio',
-  configSprite = {
-    path: 'audio',
-    output: 'audio_sprite',
-    'export': 'mp3',
-    channels: 2,
-    log: 'notice'
-  },
-  configFluent = cmd => {
-    return cmd
-    .audioBitrate('96')
-    .audioFrequency('32000')
-    .audioCodec('libmp3lame')
-  },
   production = process.env.NODE_ENV === 'production';
+
+let config = {
+  output: 'audio_sprite',
+  path: 'audio',
+  export: 'mp3',
+  format: 'howler',
+  log: 'notice',
+  gap: 0,
+  channels: 2
+};
+
+if (production) {
+  config.bitrate = 80;
+  config.samplerate = 32000;
+}
 
 gulp.task(name, () => {
   return gulp.src(files)
-  .pipe(audiosprite(configSprite))
-  .pipe(production ? ffmpeg('mp3', configFluent) : util.noop())
+  .pipe(audioSprite(config))
   .pipe(gulp.dest(there))
 });
 

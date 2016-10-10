@@ -9,11 +9,11 @@ const
   $bullets = $drum.children,
   ammunitionFull = 20,
   bulletFull = 6,
+  audioURI = window.audioURI,
   audioSprite = window.audioSprite,
-  audioSpriteJson = window.audioSpriteJson,
-  audioShoot = audioSpriteJson.shoot,
-  audioIdle = audioSpriteJson.idle,
-  audioReload = audioSpriteJson.reload;
+  audioShoot = audioSprite.shoot,
+  audioIdle = audioSprite.idle,
+  audioReload = audioSprite.reload;
 
 let
   bulletsNeedReload = 0, // текущая пуля для выстрела в барабане из 6
@@ -24,18 +24,7 @@ let
 $ammunition.textContent = ammunitionFull;
 
 function shoot(e) {
-  /** пули в барабане закончились */
-  if (bulletsNeedReload === restDrum) {
-    $body.classList.add('dont-shoot');
-  }
-
-  /** стрелять временно запрещено */
-  if ($body.classList.contains('dont-shoot')) {
-    noise(audioSprite, audioIdle);
-    return;
-  }
-
-  noise(audioSprite, audioShoot);
+  noise(audioURI, audioShoot);
   shootPositionChange(e.shoot.x, e.shoot.y);
 
   /** GOD MOD */
@@ -47,6 +36,11 @@ function shoot(e) {
   /** / GOD MOD */
 
   drumTurn();
+
+  /** пули в барабане закончились */
+  if (bulletsNeedReload === restDrum) {
+    $body.classList.add('dont-shoot');
+  }
 }
 
 function shootPositionChange(x, y) {
@@ -73,7 +67,7 @@ function drumRotate() {
     isDrumRotate ||
     ammunitionCount <= 0
   ) {
-    noise(audioSprite, audioIdle);
+    noise(audioURI, audioIdle);
     return;
   }
 
@@ -81,7 +75,7 @@ function drumRotate() {
   $drum.style.animationName = 'drum-rotate';
 
   isDrumRotate = true;
-  noise(audioSprite, audioReload);
+  noise(audioURI, audioReload);
 
   drumReload();
 }

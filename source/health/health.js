@@ -18,8 +18,8 @@ const
   firstAidFull = $firstAid.length - 1, // аптечек
   healthFull = healthStateClasses.length, // состояния сердца
   healthStateFull = healthStateClasses.length - 1, // состояние сердца, изначально сердце целое
-  audioSprite = window.audioSprite,
-  audioSpriteHeart = window.audioSpriteJson.heart;
+  audioURI = window.audioURI,
+  audioHeart = window.audioSprite.heart;
 
 let
   firstAid = firstAidFull,
@@ -53,7 +53,7 @@ function heartbeat() {
 
   $healths[health].className = healthStateClasses[healthState];
   $healths[health].style.animationName = 'health-blink';
-  noise(audioSprite, audioSpriteHeart);
+  noise(audioURI, audioHeart);
 
   healthState -= 1;
 

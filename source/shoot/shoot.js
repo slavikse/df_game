@@ -1,11 +1,14 @@
 import debounce from 'libs/debounce';
+import noise from './../helper/noise';
 
 const
   $body = document.body,
   eventCatShoot = new Event('catShoot'),
   eventEnemyKill = new Event('enemyKill'),
   rate = 167,
-  shootFire = debounce(shoot, rate);
+  shootFire = debounce(shoot, rate),
+  audioURI = window.audioURI,
+  audioIdle = window.audioSprite.idle;
 
 let eventShoot = new CustomEvent('shoot');
 
@@ -18,6 +21,7 @@ function shoot(e) {
     e.target.classList.contains('enemy-kill') ||
     $body.classList.contains('dont-shoot')
   ) {
+    noise(audioURI, audioIdle);
     return;
   }
 

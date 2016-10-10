@@ -13,11 +13,12 @@ const
 
     '/audio/audio_sprite.mp3',
     '/audio/dark_ambient.mp3',
-    '/audio/intro.mp3',
     '/audio/light_ambient.mp3',
 
     '/font/beermoney.woff',
     '/font/beermoney.woff2',
+    '/font/gun_store.woff',
+    '/font/gun_store.woff2',
 
     '/image/dark.forest.png',
     '/image/forest_day.jpg',

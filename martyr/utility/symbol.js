@@ -63,7 +63,7 @@ function word() {
 function symbol(cb) {
   filterWords.forEach(word => {
     for (let i = 0, len = word.length; i < len; i++) {
-      let symbol = word[i];
+      const symbol = word[i];
 
       if (symbol !== ' ') {
         symbols.push(symbol);

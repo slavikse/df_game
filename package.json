@@ -1,6 +1,6 @@
 {
   "name": "martyr",
-  "version": "3.9.6",
+  "version": "3.9.7",
   "description": "Сборщик веб проектов. Автоматизация задач. Упрощение жизни за счет машин :)",
   "main": "gulpfile.babel.js",
   "author": "slavikse",

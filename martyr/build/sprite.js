@@ -1,6 +1,7 @@
 import gulp from 'gulp';
 import spritesmith from 'gulp.spritesmith';
 import buffer from 'vinyl-buffer';
+import rename from 'gulp-rename';
 import responsive from 'gulp-responsive';
 import util from 'gulp-util';
 
@@ -49,13 +50,17 @@ function spriteCreate(cb) {
 function imageStream() {
   return spriteData.img
   .pipe(buffer())
-  .pipe(production ? responsive(config, params) : util.noop())
-  .pipe(gulp.dest(thereImage));
+  .pipe(production ? (
+    rename({dirname: ''}),
+    responsive(config, params),
+    rename({dirname: 'image'})
+  ) : util.noop())
+  .pipe(gulp.dest(thereImage))
 }
 
 function styleStream() {
   return spriteData.css
-  .pipe(gulp.dest(thereStyle));
+  .pipe(gulp.dest(thereStyle))
 }
 
 if (!production) {

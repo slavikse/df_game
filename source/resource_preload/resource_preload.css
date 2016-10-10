@@ -40,7 +40,7 @@
     display: block;
     width: 60px;
     height: 60px;
-    background: #05ae00;
+    background: #048200;
     border-radius: 50%;
     animation: scale 1s ease-in-out infinite;
     will-change: transform;
@@ -53,7 +53,7 @@
     left: 235px;
     width: 30px;
     height: 30px;
-    background: #048200;
+    background: #05ae00;
     border-radius: 50%;
     animation: move 1s ease-in-out infinite alternate;
     will-change: transform;

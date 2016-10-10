@@ -5,7 +5,7 @@ const
 
 function result() {
   $result.classList.add('result-show');
-  $resultCount.textContent = localStorage.getItem('score');
+  $resultCount.textContent = sessionStorage.getItem('score');
 }
 
 function restart() {

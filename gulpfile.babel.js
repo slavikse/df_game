@@ -1,15 +1,7 @@
 /* ***** КОМАНДЫ ***** *\
-Запушить изменения:
-git push -u origin master
 
 Сборка на продакшн:
 NODE_ENV=production gulp
-
-Сборка на продакшн + туннель:
-NODE_ENV=production gulp && NODE_ENV=tunnel gulp bs
-
-Запустить дев туннель:
-NODE_ENV=tunnel gulp
 
 Запустить туннель:
 NODE_ENV=tunnel gulp bs
@@ -23,14 +15,14 @@ const production = process.env.NODE_ENV === 'production';
 
 gulp.task('build',
   gulp.series(
-    'audio_sprite', // зависит: audio - подхватывает спрайт
-    'sprite', // зависят: style - подхватывает стили, sprite - подхватывает спрайт
     'audio',
+    'audio_sprite',
     'font',
+    'image',
     'resize',
     'script',
     'service',
-    'image',
+    'sprite', // зависит: style - подхватывает стили
     'style',
     'svg',
     'view'

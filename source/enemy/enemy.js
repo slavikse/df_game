@@ -5,7 +5,7 @@ import throttle from 'libs/throttle';
 const
   $enemyPosition = document.querySelector('.enemy-position'),
   $temp = document.querySelector('.temp'),
-  enemyCloneCount = 4,
+  enemyCloneCount = 6,
   imagesClasses = [
     'icon-monster1',
     'icon-monster2',
@@ -17,13 +17,13 @@ const
   eventEnemyDec = new Event('enemyDec'),
   eventScoreAdd = new Event('scoreAdd'),
   eventDamage = new Event('damage'),
+  audioURI = window.audioURI,
   audioSprite = window.audioSprite,
-  audioSpriteJson = window.audioSpriteJson,
   dieAudios = [
-    audioSpriteJson.monster_die1,
-    audioSpriteJson.monster_die2,
-    audioSpriteJson.monster_die3,
-    audioSpriteJson.monster_die4,
+    audioSprite.monster_die1,
+    audioSprite.monster_die2,
+    audioSprite.monster_die3,
+    audioSprite.monster_die4,
   ],
   playingFieldResize = throttle(playingField, 200);
 
@@ -118,9 +118,8 @@ function enemyKill(e) {
     damageNode = clone.children[0],
     enemyNode = clone.children[1];
 
+  noise(audioURI, dieAudios);
   removeEnemy(clone, damageNode, enemyNode);
-  noise(audioSprite, dieAudios);
-
   document.dispatchEvent(eventScoreAdd);
 }
 

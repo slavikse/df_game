@@ -10,8 +10,8 @@ const
   eventScoreDec = new Event('scoreDec'),
   eventEnemyCreate = new Event('enemyCreate'),
   eventFirstAidDropped = new Event('firstAidDropped'),
-  audioSprite = window.audioSprite,
-  audioToBad = window.audioSpriteJson.to_bad,
+  audioURI = window.audioURI,
+  audioToBad = window.audioSprite.to_bad,
   playingFieldResize = throttle(playingField, 200);
 
 let
@@ -87,7 +87,7 @@ function catShoot() {
 }
 
 function toBad() {
-  noise(audioSprite, audioToBad);
+  noise(audioURI, audioToBad);
 
   $body.classList.add('dont-shoot');
   $toBad.style.animationName = 'cat-to-bad';

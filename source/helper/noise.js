@@ -1,52 +1,49 @@
 import range from 'libs/range';
 
 /**
- * Воспроизводит звук или случайный звук если передано несколько в audioURI
- * Получая параметры, войсер узнает, что передан спрайт и воспроизводит случайный если передан не один
- * @param audioURI {Array,String} пути до звука или звуков
- * @param audioParam {Object,Array} параметры воспроизведения, может быть несколько
+ * Воспроизводит звук или случайный звук если передано несколько параметров звука
+ * @param uri {String} путь до звука или спрайта звуков
+ * @param params {Array} параметры воспроизведения, может быть несколько
  * @returns {Object} для внешней манипуляции
  */
-function noise(audioURI, audioParam = false) {
-  const uri = getRandom(audioURI);
+function noise(uri, params) {
   let audio = new Audio();
 
-  if (audioParam) {
-    audio = setAudioParam(audio, audioParam);
-  }
-
+  audio = setParam(audio, params);
   audio.setAttribute('src', uri);
   audio.play();
 
   return audio;
 }
 
-function setAudioParam(audio, audioParam) {
-  let
-    param = getRandom(audioParam),
-    start = param.start,
-    end = param.end,
-    playTime = (end - start).toFixed(2) * 1000;
+function setParam(audio, params) {
+  const
+    param = getRandom(params),
+    /** время в секундах */
+    startTime = param[0] / 1000,
+    /** продолжительность в ms */
+    duration = param[1].toFixed(2);
 
-  audio.currentTime = start;
+  audio.currentTime = startTime;
 
   setTimeout(() => {
     audio.pause();
     audio = null;
-  }, playTime);
+  }, duration);
 
   return audio;
 }
 
-function getRandom(values) {
-  let value = values;
+function getRandom(params) {
+  let param = params;
 
-  if (Array.isArray(values)) {
-    let random = range(0, values.length - 1);
-    value = values[random];
+  /** проверка на массив массивов */
+  if (Array.isArray(params[0])) {
+    const random = range(0, params.length - 1);
+    param = params[random];
   }
 
-  return value;
+  return param;
 }
 
 export default noise;

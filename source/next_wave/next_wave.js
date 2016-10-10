@@ -1,7 +1,7 @@
 const
   $nextTime = document.querySelector('.next-time'),
   nextTimeMax = 4,
-  numberWaveMax = 1,
+  numberWaveMax = 3,
   eventEnemyCreate = new Event('enemyCreate'),
   eventWaveEnd = new Event('waveEnd');
 
@@ -14,6 +14,7 @@ let
 function startWave() {
   $nextTime.style.animationName = 'blink';
   isWaveEnd = false;
+
   nextTime();
 }
 

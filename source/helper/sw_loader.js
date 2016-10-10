@@ -1,3 +1,9 @@
+const NODE_ENV = process.env.NODE_ENV;
+
+if (NODE_ENV === 'production') {
+  swLoader();
+}
+
 function swLoader() {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js')
@@ -19,5 +25,3 @@ function registration(e) {
 function error(err) {
   console.log(`Registration failed with ${err}`);
 }
-
-export default swLoader;

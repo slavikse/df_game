@@ -40,7 +40,6 @@ const
     devtool: production ? null : 'cheap-eval-source-map',
     plugins: [
       new webpack.NoErrorsPlugin(),
-      new webpack.HotModuleReplacementPlugin(),
       new webpack.EnvironmentPlugin([
         "NODE_ENV"
       ]),
@@ -50,6 +49,12 @@ const
       // })
     ]
   };
+
+if (!production) {
+  options.plugins.push(
+    new webpack.HotModuleReplacementPlugin()
+  )
+}
 
 if (production) {
   options.plugins.push(

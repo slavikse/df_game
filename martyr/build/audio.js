@@ -8,11 +8,12 @@ const
   name = 'audio',
   files = 'source/**/audio/*',
   there = 'public/audio',
-  config = cmd => {
-    return cmd
-    .audioBitrate('96')
-    .audioFrequency('32000')
+  config = audio => {
+    return audio
     .audioCodec('libmp3lame')
+    .audioChannels(2)
+    .audioBitrate(80)
+    .audioFrequency(32000)
   },
   production = process.env.NODE_ENV === 'production';
 
