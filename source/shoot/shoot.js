@@ -5,8 +5,7 @@ const
   $body = document.body,
   eventCatShoot = new Event('catShoot'),
   eventEnemyKill = new Event('enemyKill'),
-  rate = 167,
-  shootFire = debounce(shoot, rate),
+  shootFire = debounce(shoot, 167), // fire rate
   audioURI = window.audioURI,
   audioIdle = window.audioSprite.idle;
 

@@ -1,6 +1,6 @@
-import './helper/sw_loader';
-import './helper/audio_sprite'; /* TODO не обновляется... */
-import './resource_preload/resource_preload';
+// import './helper/sw_loader';
+import './helper/audio_sprite';
+import './preload/preload';
 import './start_screen/start_screen';
 import './shoot/shoot';
 import './cat/cat';

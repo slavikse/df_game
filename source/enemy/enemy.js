@@ -1,6 +1,6 @@
 import range from 'libs/range';
-import noise from './../helper/noise';
 import throttle from 'libs/throttle';
+import noise from './../helper/noise';
 
 const
   $enemyPosition = document.querySelector('.enemy-position'),
@@ -25,7 +25,7 @@ const
     audioSprite.monster_die3,
     audioSprite.monster_die4,
   ],
-  playingFieldResize = throttle(playingField, 200);
+  playingFieldResize = throttle(playingField, 500);
 
 let
   playingFieldWidth,
@@ -139,5 +139,5 @@ function gameOver() {
 
 document.addEventListener('enemyCreate', cloneEnemy);
 document.addEventListener('enemyKill', enemyKill);
-document.addEventListener('resize', playingFieldResize);
+window.addEventListener('resize', playingFieldResize);
 document.addEventListener('gameOver', gameOver);

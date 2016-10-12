@@ -33,9 +33,7 @@ let delFiles = [];
  */
 function getOldFileNames() {
   return gulp.src(revFiles)
-  .pipe(named(file => {
-    delFiles.push(`${there}/${file.relative}`);
-  }))
+  .pipe(named(file => delFiles.push(`${there}/${file.relative}`)))
 }
 
 /**
@@ -54,9 +52,7 @@ function revFilesFn() {
  */
 function replace() {
   return gulp.src(pathRevFiles)
-  .pipe(revReplace({
-    manifest: gulp.src('temp/rev-manifest.json')
-  }))
+  .pipe(revReplace({manifest: gulp.src('temp/rev-manifest.json')}))
   .pipe(gulp.dest(there))
 }
 

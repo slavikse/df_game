@@ -1,7 +1,7 @@
 const
   $nextTime = document.querySelector('.next-time'),
   nextTimeMax = 4,
-  numberWaveMax = 3,
+  numberWaveMax = 1,
   eventEnemyCreate = new Event('enemyCreate'),
   eventWaveEnd = new Event('waveEnd');
 
@@ -60,11 +60,6 @@ function noEnemy() {
 
 function gameOver() {
   clearTimeout(nextTimeTimeout);
-
-  document.removeEventListener('startGame', startWave);
-  document.removeEventListener('noEnemy', noEnemy);
-  document.removeEventListener('closeShop', startWave);
-  document.removeEventListener('gameOver', gameOver);
 }
 
 document.addEventListener('startGame', startWave);

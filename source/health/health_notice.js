@@ -43,7 +43,7 @@ function gameOver() {
   document.removeEventListener('regeneration', regeneration);
   document.removeEventListener('gameOver', gameOver);
 
-  noise(audioURI, audioSprite.death_scream);
+  noise(audioURI, audioSprite.death);
   $healthNotice.style.animationName = '';
   $healthNotice.classList.add('game-over');
 }

@@ -8,13 +8,7 @@ const
   name = 'audio',
   files = 'source/**/audio/*',
   there = 'public/audio',
-  config = audio => {
-    return audio
-    .audioCodec('libmp3lame')
-    .audioChannels(2)
-    .audioBitrate(80)
-    .audioFrequency(32000)
-  },
+  config = audio => audio.audioBitrate(64),
   production = process.env.NODE_ENV === 'production';
 
 gulp.task(name, () => {

@@ -7,7 +7,7 @@ import range from 'libs/range';
  * @returns {Object} для внешней манипуляции
  */
 function noise(uri, params) {
-  let audio = new Audio();
+  let audio = new Audio(uri);
 
   audio = setParam(audio, params);
   audio.setAttribute('src', uri);
@@ -37,7 +37,7 @@ function setParam(audio, params) {
 function getRandom(params) {
   let param = params;
 
-  /** проверка на массив массивов */
+  /** проверка на массив в массиве */
   if (Array.isArray(params[0])) {
     const random = range(0, params.length - 1);
     param = params[random];

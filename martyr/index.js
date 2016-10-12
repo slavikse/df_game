@@ -13,6 +13,7 @@ import './build/view';
 import './utility/bs';
 import './utility/del';
 import './utility/gzip';
+import './utility/kraken';
 import './utility/rev';
 import './utility/symbol';
 import './utility/zip';

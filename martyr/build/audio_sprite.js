@@ -13,13 +13,11 @@ let config = {
   export: 'mp3',
   format: 'howler',
   log: 'notice',
-  gap: 0,
   channels: 2
 };
 
 if (production) {
-  config.bitrate = 80;
-  config.samplerate = 32000;
+  config.bitrate = 64;
 }
 
 gulp.task(name, () => {

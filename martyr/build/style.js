@@ -18,7 +18,7 @@ const
   ],
   wFiles = [
     'source/**/*.css',
-    'temp/*.css', // sprite
+    'temp/*.css', // png sprite
   ],
   there = 'public',
   production = process.env.NODE_ENV === 'production';
@@ -32,9 +32,9 @@ let options = [
 
 if (production) {
   options.push(
-    flexFixed, // fixed IE10 bugs
     autoprefixer,
-    csso
+    csso,
+    flexFixed // fixed IE10 bugs
   )
 }
 

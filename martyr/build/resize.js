@@ -24,7 +24,7 @@ const
     }]
   };
 
-let params = {
+let param = {
   quality: 100,
   progressive: false,
   compressionLevel: 0,
@@ -36,21 +36,16 @@ let params = {
 };
 
 if (production) {
-  params.quality = 80;
-  params.progressive = true;
-  params.compressionLevel = 6;
+  param.quality = 60;
+  param.progressive = true;
+  param.compressionLevel = 8;
 }
 
-/**
- * Создает из оригинала 2 изображения меньших размеров
- * ПРИМЕЧАНИЕ: большие webp при сжатии с приемлемым качеством 95% показывают проигрыш Kb примерно в 2 раза,
- *  перед jpeg при сжатии с приемлемым качеством 80%
- */
 gulp.task(name, () => {
   return gulp.src(files)
   .pipe(rename({dirname: ''}))
   .pipe(changed(there))
-  .pipe(responsive(config, params))
+  .pipe(responsive(config, param))
   .pipe(gulp.dest(there))
 });
 

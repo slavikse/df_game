@@ -1,5 +1,5 @@
-import noise from '../helper/noise';
 import './health_notice';
+import noise from '../helper/noise';
 
 const
   $body = document.body,

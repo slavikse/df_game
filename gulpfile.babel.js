@@ -22,7 +22,7 @@ gulp.task('build',
     'resize',
     'script',
     'service',
-    'sprite', // зависит: style - подхватывает стили
+    'sprite', // style - подхватывает стили
     'style',
     'svg',
     'view'
@@ -35,6 +35,7 @@ gulp.task('default',
     'build',
     production ?
       gulp.series(
+        // 'kraken', /** включать только для выкладки. Лимит 100 Mb */
         'symbol',
         'rev',
         'gzip',

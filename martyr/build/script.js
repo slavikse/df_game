@@ -34,9 +34,7 @@ const
       ]
     },
     watch: !production,
-    watchOptions: {
-      aggregateTimeout: 30
-    },
+    watchOptions: {aggregateTimeout: 20},
     devtool: production ? null : 'cheap-eval-source-map',
     plugins: [
       new webpack.NoErrorsPlugin(),

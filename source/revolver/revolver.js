@@ -8,7 +8,7 @@ const
   $shoot = $body.querySelector('.revolver-shoot'),
   $bullets = $drum.children,
   ammunitionFull = 20,
-  bulletFull = 6,
+  bulletsFull = 6,
   audioURI = window.audioURI,
   audioSprite = window.audioSprite,
   audioShoot = audioSprite.shoot,
@@ -17,9 +17,10 @@ const
 
 let
   bulletsNeedReload = 0, // текущая пуля для выстрела в барабане из 6
-  ammunitionCount = ammunitionFull,
-  restDrum = bulletFull, // остаток в барабане
-  isDrumRotate = false;
+  ammunitionCount = ammunitionFull, // количество пуль в запаснике
+  isDrumRotate = false,
+  /** будет равняться bulletsFull, когда пуль много и остатку в барабане, когда мало */
+  bulletsAvailableInDrum = bulletsFull;
 
 $ammunition.textContent = ammunitionFull;
 
@@ -38,7 +39,7 @@ function shoot(e) {
   drumTurn();
 
   /** пули в барабане закончились */
-  if (bulletsNeedReload === restDrum) {
+  if (bulletsNeedReload === bulletsAvailableInDrum) {
     $body.classList.add('dont-shoot');
   }
 }
@@ -58,6 +59,7 @@ function drumTurn() {
   $drum.style.transform = `rotate(-${bulletsNeedReload * 60}deg)`;
 }
 
+/** перезарядка */
 function drumRotate() {
   /** барабан перезаряжен или
    * барабан еще крутится или
@@ -65,71 +67,87 @@ function drumRotate() {
   if (
     bulletsNeedReload === 0 ||
     isDrumRotate ||
-    ammunitionCount <= 0
+    ammunitionCount === 0
   ) {
     noise(audioURI, audioIdle);
     return;
   }
 
   $body.classList.add('dont-shoot');
-  $drum.style.animationName = 'drum-rotate';
-
   isDrumRotate = true;
+  $drum.style.animationName = 'drum-rotate';
   noise(audioURI, audioReload);
 
   drumReload();
 }
 
 function drumReload() {
-  let bulletsNeedReloadTmp = bulletsNeedReload;
+  littleBullets();
+  ammunitionDec();
+  bulletsReload();
 
-  /** если в запасе патрон меньше,
-   * чем нужно перезарядить,
-   * то перезарядится сколько есть */
-  if (bulletsNeedReload > ammunitionCount) {
-    /** сколько есть для перезарядки + остаток в барабане */
-    bulletsNeedReload = bulletFull - bulletsNeedReload + ammunitionCount;
-    restDrum = bulletsNeedReload;
-
-    bulletsHidden();
-    bulletsNeedReloadTmp = ammunitionCount;
-  } else {
-    bulletsNeedReloadTmp = bulletsNeedReload;
-  }
-
-  ammunitionDec(bulletsNeedReloadTmp);
-  bulletsReload(bulletsNeedReload);
+  bulletsNeedReload = bulletsFull - bulletsAvailableInDrum;
 
   /** синхронизация со звуком перезарядки и анимацией */
   setTimeout(reloaded, 700);
-
-  bulletsNeedReload = 0;
 }
 
-function ammunitionAdd(e) {
-  ammunitionCount += e.add;
-  ammunitionChange();
+/**TODO пуль 6. отсчет начинает с [0-5] */
+
+/** если в запаснике пуль меньше, чем нужно перезарядить,
+ * то перезарядится сколько есть + остаток в барабане */
+function littleBullets() {
+
+  console.log(bulletsNeedReload, ammunitionCount);
+
+  if (bulletsNeedReload > ammunitionCount) {
+    const restBullets = bulletsFull - bulletsNeedReload;
+
+    bulletsNeedReload = ammunitionCount + restBullets;
+    bulletsAvailableInDrum = bulletsNeedReload;
+    bulletsHidden();
+  }
+
+  return bulletsNeedReload;
 }
 
-function ammunitionDec(change) {
-  ammunitionCount -= change;
-  ammunitionChange();
+function bulletsHidden() {
+  for (let i = 0, len = bulletsFull; i < len; i++) {
+    $bullets[i].style.opacity = 0;
+  }
 }
 
-function ammunitionChange() {
-  $ammunition.textContent = ammunitionCount;
-}
-
-function bulletsReload(reloadBullet) {
-  for (let i = 0, len = reloadBullet; i < len; i++) {
+function bulletsReload() {
+  for (let i = 0; i < bulletsNeedReload; i++) {
     $bullets[i].style.opacity = 1;
   }
 }
 
-function bulletsHidden() {
-  for (let i = 0, len = bulletFull; i < len; i++) {
-    $bullets[i].style.opacity = 0;
+function ammunitionAdd(e) {
+  const add = e.add;
+
+  bulletsAvailableInDrum += add;
+
+  if (bulletsAvailableInDrum > bulletsFull) {
+    bulletsAvailableInDrum = bulletsFull;
   }
+
+  ammunitionCount += add;
+  ammunitionChange(ammunitionCount);
+}
+
+function ammunitionDec() {
+  ammunitionCount -= bulletsNeedReload;
+
+  if (ammunitionCount < 0) {
+    ammunitionCount = 0;
+  }
+
+  ammunitionChange(ammunitionCount);
+}
+
+function ammunitionChange(ammunitionCount) {
+  $ammunition.textContent = ammunitionCount;
 }
 
 function reloaded() {
@@ -170,3 +188,4 @@ function gameOver() {
 }
 
 document.addEventListener('startGame', startGame);
+

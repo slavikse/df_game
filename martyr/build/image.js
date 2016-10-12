@@ -9,15 +9,11 @@ const
   files = 'source/**/image/*',
   there = 'public/image',
   production = process.env.NODE_ENV === 'production',
-  config = {
-    '*': [{
-      width: '100%'
-    }]
-  },
-  params = {
-    quality: 80,
+  config = {'*': {width: '100%'}},
+  param = {
+    quality: 60,
     progressive: true,
-    compressionLevel: 6,
+    compressionLevel: 8,
     stats: false,
     silent: true,
     errorOnEnlargement: false,
@@ -29,7 +25,7 @@ gulp.task(name, () => {
   return gulp.src(files)
   .pipe(rename({dirname: ''}))
   .pipe(changed(there))
-  .pipe(production ? responsive(config, params) : util.noop())
+  .pipe(production ? responsive(config, param) : util.noop())
   .pipe(gulp.dest(there))
 });
 

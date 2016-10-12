@@ -53,7 +53,7 @@
     left: 235px;
     width: 30px;
     height: 30px;
-    background: #05ae00;
+    background: #048200;
     border-radius: 50%;
     animation: move 1s ease-in-out infinite alternate;
     will-change: transform;
@@ -64,7 +64,7 @@
       display: block;
       width: 30px;
       height: 30px;
-      background: #05ae00;
+      background: #048200;
       border-radius: 50%;
       content: '';
     }

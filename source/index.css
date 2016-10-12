@@ -1,7 +1,7 @@
 @import "_reset";
 @import "_base";
 @import "_font";
-@import 'resource_preload/resource_preload';
+@import 'preload/preload.css';
 @import 'start_screen/start_screen';
 @import '../temp/sprite.png';
 @import 'cat/cat';

@@ -1,27 +1,22 @@
-import noise from './../helper/noise';
 import range from 'libs/range';
 import throttle from 'libs/throttle';
+import noise from './../helper/noise';
 
 const
   $body = document.body,
   $catPosition = $body.querySelector('.cat-position'),
   $cat = $catPosition.querySelector('.cat'),
   $toBad = $body.querySelector('.cat-to-bad'),
-  eventScoreDec = new Event('scoreDec'),
   eventEnemyCreate = new Event('enemyCreate'),
-  eventFirstAidDropped = new Event('firstAidDropped'),
   audioURI = window.audioURI,
   audioToBad = window.audioSprite.to_bad,
-  playingFieldResize = throttle(playingField, 200);
+  playingFieldResize = throttle(playingField, 500);
 
 let
   catPositionTimeout,
   catVisibleTimeout,
   playingFieldWidth,
   playingFieldHeight;
-
-/** за выстрел в котика */
-eventScoreDec.dec = 25;
 
 playingField();
 
@@ -32,10 +27,7 @@ function catRun() {
     $catPosition.classList.add('cat-show');
   }, 5100);
 
-  catVisibleTimeout = setTimeout(() => {
-    catVisible();
-    droppedFirstAid();
-  }, 15100);
+  catVisibleTimeout = setTimeout(catVisible, 15100);
 }
 
 function changePosition() {
@@ -61,14 +53,6 @@ function catShow() {
   catVisibleTimeout = setTimeout(catRun, 10000);
 }
 
-function droppedFirstAid() {
-  const random = range(0, 4); // шанс 20%
-
-  if (random === 3) {
-    document.dispatchEvent(eventFirstAidDropped);
-  }
-}
-
 function catStop() {
   catHide();
   clearTimeout(catVisibleTimeout);
@@ -79,7 +63,6 @@ function catShoot() {
     return;
   }
 
-  document.dispatchEvent(eventScoreDec);
   document.dispatchEvent(eventEnemyCreate);
 
   catVisible();
@@ -110,24 +93,14 @@ function playingField() {
   playingFieldHeight = window.innerHeight - catHeight - panelHeight;
 }
 
-function startGame() {
-  catRun();
-
-  document.addEventListener('catShoot', catShoot);
-  document.addEventListener('waveEnd', catStop);
-  document.addEventListener('closeShop', catRun);
-  document.addEventListener('resize', playingFieldResize);
-  document.addEventListener('gameOver', gameOver);
-}
-
 function gameOver() {
   $cat.remove();
-
-  document.removeEventListener('catShoot', catShoot);
-  document.removeEventListener('waveEnd', catStop);
-  document.removeEventListener('closeShop', catRun);
-  document.removeEventListener('resize', playingFieldResize);
-  document.removeEventListener('gameOver', gameOver);
 }
 
-document.addEventListener('startGame', startGame);
+document.addEventListener('startGame', catRun);
+document.addEventListener('catShoot', catShoot);
+document.addEventListener('waveEnd', catStop);
+document.addEventListener('closeShop', catRun);
+window.addEventListener('resize', playingFieldResize);
+document.addEventListener('gameOver', gameOver);
+
