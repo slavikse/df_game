@@ -17,7 +17,7 @@ let config = {
 };
 
 if (production) {
-  config.bitrate = 64;
+  config.bitrate = 80;
 }
 
 gulp.task(name, () => {

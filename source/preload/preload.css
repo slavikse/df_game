@@ -42,7 +42,7 @@
     height: 60px;
     background: #048200;
     border-radius: 50%;
-    animation: scale 1s ease-in-out infinite;
+    animation: scale 1.5s ease-in-out infinite;
     will-change: transform;
     content: '';
   }
@@ -55,7 +55,7 @@
     height: 30px;
     background: #048200;
     border-radius: 50%;
-    animation: move 1s ease-in-out infinite alternate;
+    animation: move 1.3s ease-in-out infinite alternate;
     will-change: transform;
 
     &::after,
