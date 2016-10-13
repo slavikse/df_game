@@ -11,9 +11,9 @@ const
   production = process.env.NODE_ENV === 'production',
   config = {'*': {width: '100%'}},
   param = {
-    quality: 60,
+    quality: 80,
     progressive: true,
-    compressionLevel: 8,
+    compressionLevel: 6,
     stats: false,
     silent: true,
     errorOnEnlargement: false,
