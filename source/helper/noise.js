@@ -10,7 +10,6 @@ function noise(uri, params) {
   let audio = new Audio(uri);
 
   audio = setParam(audio, params);
-  audio.setAttribute('src', uri);
   audio.play();
 
   return audio;
@@ -19,19 +18,19 @@ function noise(uri, params) {
 function setParam(audio, params) {
   const
     param = getRandom(params),
-    /** время в секундах */
-    startTime = param[0] / 1000,
-    /** продолжительность в ms */
-    duration = param[1].toFixed(2);
+    startTime = param[0] / 1000, // время в секундах
+    duration = param[1].toFixed(2); // продолжительность в ms
 
   audio.currentTime = startTime;
 
-  setTimeout(() => {
-    audio.pause();
-    audio = null;
-  }, duration);
+  setTimeout(playEnd.bind(null, audio), duration);
 
   return audio;
+}
+
+function playEnd(audio) {
+  audio.pause();
+  audio = null;
 }
 
 function getRandom(params) {

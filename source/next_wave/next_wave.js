@@ -1,7 +1,7 @@
 const
   $nextTime = document.querySelector('.next-time'),
   nextTimeMax = 4,
-  numberWaveMax = 1,
+  numberWaveMax = 3,
   eventEnemyCreate = new Event('enemyCreate'),
   eventWaveEnd = new Event('waveEnd');
 
@@ -11,7 +11,7 @@ let
   nextTimeCurrent = nextTimeMax,
   numberWaveCurrent = 0;
 
-function startWave() {
+function run() {
   $nextTime.style.animationName = 'blink';
   isWaveEnd = false;
 
@@ -62,7 +62,7 @@ function gameOver() {
   clearTimeout(nextTimeTimeout);
 }
 
-document.addEventListener('startGame', startWave);
+document.addEventListener('startGame', run);
 document.addEventListener('noEnemy', noEnemy);
-document.addEventListener('closeShop', startWave);
+document.addEventListener('waveStart', run);
 document.addEventListener('gameOver', gameOver);

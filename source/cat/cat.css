@@ -7,7 +7,7 @@
 
 .cat-show {
   opacity: 1;
-  z-index: 100; /* обеспечивает перекрытие, чтобы была возможность попасть в котика */
+  z-index: 100; /* обеспечивает перекрытие, чтобы была возможность попасть */
 }
 
 .cat {
@@ -23,7 +23,7 @@
   }
 }
 
-.cat-to-bad {
+.to-bad {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -35,11 +35,11 @@
   background-color: rgba(73, 0, 0, 0.7);
   opacity: 0;
   z-index: -3000;
-  animation: 1.4s; /* cat-to-bad */
+  animation: 1.4s; /* to-bad */
   will-change: opacity;
 }
 
-@keyframes cat-to-bad {
+@keyframes to-bad {
   0%,
   100% {
     z-index: 3000;

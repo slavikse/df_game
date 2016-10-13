@@ -64,19 +64,22 @@ function initGame() {
 
   noise(audioURI, audioIntro);
 
-  setTimeout(() => {
-    $newGame.style.opacity = 0;
-    $startScreen.remove();
-    document.dispatchEvent(eventStartGame);
-  }, 500);
-
-  setTimeout(() => {
-    $body.style.backgroundImage = 'none'; // освобождаем память
-    $ambient.setAttribute('src', 'audio/dark_ambient.mp3');
-  }, 5500);
+  setTimeout(initGameEnd, 500);
+  setTimeout(changeBackground, 5500);
 
   setNick();
   initInterface();
+}
+
+function initGameEnd() {
+  $newGame.style.opacity = 0;
+  $startScreen.remove();
+  document.dispatchEvent(eventStartGame);
+}
+
+function changeBackground() {
+  $body.style.backgroundImage = 'none'; // освобождаем память
+  $ambient.setAttribute('src', 'audio/dark_ambient.mp3');
 }
 
 function initInterface() {

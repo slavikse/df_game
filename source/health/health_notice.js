@@ -21,9 +21,11 @@ function damage() {
   noise(audioURI, damageAudiosURI);
   $healthNotice.style.animationName = 'health-damage';
 
-  healthNoticeTimer = setTimeout(() => {
-    $healthNotice.style.animationName = '';
-  }, 600); // анимация
+  healthNoticeTimer = setTimeout(damageEnd, 600); // анимация
+}
+
+function damageEnd() {
+  $healthNotice.style.animationName = '';
 }
 
 function regeneration() {
@@ -31,21 +33,23 @@ function regeneration() {
   noise(audioURI, healAudiosURI);
   $healthNotice.style.animationName = 'health-regeneration';
 
-  healthNoticeTimer = setTimeout(() => {
-    $healthNotice.style.animationName = '';
-  }, 600); // анимация
+  healthNoticeTimer = setTimeout(regenerationEnd, 600); // анимация
+}
+
+function regenerationEnd() {
+  $healthNotice.style.animationName = '';
 }
 
 function gameOver() {
   clearTimeout(healthNoticeTimer);
 
-  document.removeEventListener('damage', damage);
-  document.removeEventListener('regeneration', regeneration);
-  document.removeEventListener('gameOver', gameOver);
-
   noise(audioURI, audioSprite.death);
   $healthNotice.style.animationName = '';
   $healthNotice.classList.add('game-over');
+
+  document.removeEventListener('damage', damage);
+  document.removeEventListener('regeneration', regeneration);
+  document.removeEventListener('gameOver', gameOver);
 }
 
 document.addEventListener('damage', damage);

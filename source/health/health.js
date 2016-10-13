@@ -57,9 +57,11 @@ function heartbeat() {
 
   healthState -= 1;
 
-  setTimeout(() => {
-    $healths[health].style.animationName = '';
-  }, 600); // анимация удара сердца
+  setTimeout(heartbeatEnd, 600); // анимация удара сердца
+}
+
+function heartbeatEnd() {
+  $healths[health].style.animationName = '';
 }
 
 function useFirstAid() {
@@ -89,9 +91,11 @@ function regeneration() {
     $healths[i].className = 'icon-heart';
   }
 
-  setTimeout(() => {
-    $body.classList.remove('dont-shoot');
-  }, 400); // анимация
+  setTimeout(dontShootEnd, 400); // анимация
+}
+
+function dontShootEnd() {
+  $body.classList.remove('dont-shoot');
 }
 
 function addFirstAid() {
@@ -103,9 +107,11 @@ function addFirstAid() {
   $firstAid[firstAid].className = firstAidStateClasses[1];
   $firstAid[firstAid].style.animationName = 'first-aid-blink';
 
-  setTimeout(() => {
-    $firstAid[firstAid].style.animationName = '';
-  }, 600); // анимация
+  setTimeout(addFirstAidEnd, 600); // анимация
+}
+
+function addFirstAidEnd() {
+  $firstAid[firstAid].style.animationName = '';
 }
 
 function gameOver() {
@@ -138,7 +144,7 @@ function TKeyHandler(e) {
   }
 }
 
-document.addEventListener('firstAidDropped', addFirstAid);
+document.addEventListener('buyFirstAid', addFirstAid);
 document.addEventListener('damage', damage);
 $healthWrap.addEventListener('click', useFirstAid);
 document.addEventListener('keyup', HKeyHandler);

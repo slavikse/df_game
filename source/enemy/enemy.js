@@ -72,12 +72,17 @@ function setDamage(clone) {
 
   /** enemy сохраняет свой таймер урона
    * для дальнейшего его удаления */
-  clone.damageTimer = setTimeout(() => {
-    document.dispatchEvent(eventDamage);
-    removeEnemy(clone, damageNode, enemyNode);
-  }, damageTimer * 1000);
+  clone.damageTimer = setTimeout(
+    killTime.bind(null, clone, damageNode, enemyNode),
+    damageTimer * 1000
+  );
 
   return clone;
+}
+
+function killTime(clone, damageNode, enemyNode) {
+  document.dispatchEvent(eventDamage);
+  removeEnemy(clone, damageNode, enemyNode);
 }
 
 function setImage(clone) {
@@ -95,9 +100,9 @@ function removeEnemy(clone, damageNode, enemyNode) {
    * выстрел по врагу в момент удаления (+ таймера урона)
    * враг еще существует
    */
-  if (!enemyNode) {
-    return;
-  }
+  // if (!enemyNode) {
+  //   return;
+  // }
 
   clearTimeout(clone.damageTimer);
   document.dispatchEvent(eventEnemyDec);
@@ -107,9 +112,11 @@ function removeEnemy(clone, damageNode, enemyNode) {
   damageNode.remove();
   clone.style.zIndex = 0; // для возможности стрелять по тем, кто под убитым
 
-  setTimeout(() => {
-    clone.remove();
-  }, 500); // анимация. половина от 1s
+  setTimeout(removeNode.bind(null, clone), 500); // анимация. половина от 1s
+}
+
+function removeNode(clone) {
+  clone.remove();
 }
 
 function enemyKill(e) {

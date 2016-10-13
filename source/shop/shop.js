@@ -2,46 +2,38 @@ import noise from './../helper/noise';
 
 const
   $body = document.body,
-  $score = $body.querySelector('.score'),
   $shop = $body.querySelector('.shop'),
   $store = $shop.querySelector('.store'),
-  $storeItems = $store.children,
+  $storeItems = $store.querySelectorAll('.item'),
   storeItemsLength = $storeItems.length,
+  $score = $body.querySelector('.score'),
   $closeShop = $shop.querySelector('.close-shop'),
   audioURI = window.audioURI,
   audioSprite = window.audioSprite,
-  audioBulletHover = audioSprite.bullet_hover,
+  audioDrumHover = audioSprite.drum_hover,
   audioBuy = audioSprite.buy,
   audioBuyBlock = audioSprite.buy_block,
   audioNextWave = audioSprite.next_wave,
-  eventBuyBullets = new Event('buyBullets'),
+  eventBuyDrum = new Event('buyDrum'),
+  eventBuyFirstAid = new Event('buyFirstAid'),
   eventScoreDec = new Event('scoreDec'),
-  eventCloseShop = new Event('closeShop');
+  eventWaveStart = new Event('waveStart');
 
 let currentScore;
 
 function openShop() {
-  $body.classList.add('dont-shoot');
+  /** чтобы счет успел записаться в localStorage */
+  setTimeout(setScore, 50);
 
+  $body.classList.add('dont-shoot');
   $shop.style.transform = 'translateY(0)';
   $score.classList.add('score-shop');
-  $store.addEventListener('click', buyBullets);
-
-  /** чтобы счет успел записаться */
-  setTimeout(setScore, 50);
+  $store.addEventListener('click', buy);
 }
 
 function setScore() {
   currentScore = sessionStorage.getItem('score');
   buyLockUnlock();
-}
-
-function bulletHover(e) {
-  if(!e.target.classList.contains('bullet')) {
-    return;
-  }
-
-  noise(audioURI, audioBulletHover);
 }
 
 function buyLockUnlock() {
@@ -58,18 +50,14 @@ function buyLockUnlock() {
   }
 }
 
-function buyBullets(e) {
+function buy(e) {
   const target = e.target;
 
-  if (!target.classList.contains('bullet')) {
+  if (!target.classList.contains('item')) {
     return;
   }
 
-  const
-    dataset = target.dataset,
-    scoreDec = parseInt(dataset.score, 10);
-
-  if (currentScore - scoreDec < 0) {
+  if (target.classList.contains('buy-block')) {
     noise(audioURI, audioBuyBlock);
 
     /** GOD MOD */
@@ -83,10 +71,21 @@ function buyBullets(e) {
     // return;
   }
 
-  noise(audioURI, audioBuy);
+  const
+    dataset = target.dataset,
+    item = dataset.item,
+    add = parseInt(dataset.add, 10),
+    scoreDec = parseInt(dataset.score, 10);
 
-  eventBuyBullets.add = parseInt(dataset.add, 10);
-  document.dispatchEvent(eventBuyBullets);
+  if (item === 'drum') {
+    buyDrum(add);
+  } else if (item === 'first-aid') {
+    buyFirstAid();
+  } else {
+    return;
+  }
+
+  noise(audioURI, audioBuy);
 
   eventScoreDec.dec = scoreDec;
   document.dispatchEvent(eventScoreDec);
@@ -95,20 +94,37 @@ function buyBullets(e) {
   buyLockUnlock();
 }
 
+function buyDrum(add) {
+  eventBuyDrum.add = add;
+  document.dispatchEvent(eventBuyDrum);
+}
+
+function buyFirstAid() {
+  document.dispatchEvent(eventBuyFirstAid);
+}
+
 function closeShop() {
   $body.classList.remove('dont-shoot');
-
-  $store.removeEventListener('click', buyBullets);
+  $store.removeEventListener('click', buy);
   $closeShop.style.animationName = 'close-shop';
 
   noise(audioURI, audioNextWave);
+  setTimeout(closeShopEnd, 800);
+}
 
-  setTimeout(() => {
-    $closeShop.style.animationName = '';
-    $shop.style.transform = 'translateY(100%)';
-    $score.classList.remove('score-shop');
-    document.dispatchEvent(eventCloseShop);
-  }, 800);
+function closeShopEnd() {
+  $closeShop.style.animationName = '';
+  $shop.style.transform = 'translateY(100%)';
+  $score.classList.remove('score-shop');
+  document.dispatchEvent(eventWaveStart);
+}
+
+function itemHandler(e) {
+  if (!e.target.classList.contains('item')) {
+    return;
+  }
+
+  noise(audioURI, audioDrumHover);
 }
 
 function gameOver() {
@@ -116,6 +132,6 @@ function gameOver() {
 }
 
 document.addEventListener('waveEnd', openShop);
-$store.addEventListener('mouseover', bulletHover);
+$store.addEventListener('mouseover', itemHandler);
 $closeShop.addEventListener('click', closeShop);
 document.addEventListener('gameOver', gameOver);

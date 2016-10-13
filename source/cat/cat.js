@@ -6,81 +6,79 @@ const
   $body = document.body,
   $catPosition = $body.querySelector('.cat-position'),
   $cat = $catPosition.querySelector('.cat'),
-  $toBad = $body.querySelector('.cat-to-bad'),
+  $toBad = $body.querySelector('.to-bad'),
   eventEnemyCreate = new Event('enemyCreate'),
   audioURI = window.audioURI,
   audioToBad = window.audioSprite.to_bad,
-  playingFieldResize = throttle(playingField, 500);
+  playingFieldResize = throttle(playingField, 500),
+  moveTime = 5000;
 
 let
-  catPositionTimeout,
-  catVisibleTimeout,
+  runTimerID,
+  moveTimerID,
+  hideTimerID,
   playingFieldWidth,
   playingFieldHeight;
 
 playingField();
 
-function catRun() {
-  catPositionTimeout = setTimeout(changePosition, 5000);
-
-  setTimeout(() => {
-    $catPosition.classList.add('cat-show');
-  }, 5100);
-
-  catVisibleTimeout = setTimeout(catVisible, 15100);
+function run() {
+  moveTimerID = setTimeout(move, moveTime);
+  setTimeout(show, moveTime + 100);
+  hideTimerID = setTimeout(hide, moveTime * 3 + 100);
 }
 
-function changePosition() {
+function move() {
   const
     x = range(0, playingFieldWidth),
     y = range(0, playingFieldHeight);
 
   $catPosition.style.transform = `translate(${x}px, ${y}px)`;
-  catPositionTimeout = setTimeout(changePosition, 5000);
+  moveTimerID = setTimeout(move, moveTime);
 }
 
-function catVisible() {
-  catHide();
-  catShow();
+function show() {
+  $catPosition.classList.add('cat-show');
 }
 
-function catHide() {
-  clearTimeout(catPositionTimeout);
+function hide() {
+  stop();
+  runTimerID = setTimeout(run, moveTime * 2);
+}
+
+function stop() {
   $catPosition.classList.remove('cat-show');
+
+  clearTimeout(runTimerID);
+  clearTimeout(moveTimerID);
+  clearTimeout(hideTimerID);
 }
 
-function catShow() {
-  catVisibleTimeout = setTimeout(catRun, 10000);
-}
-
-function catStop() {
-  catHide();
-  clearTimeout(catVisibleTimeout);
-}
-
-function catShoot() {
+function shoot() {
   if (!$catPosition.classList.contains('cat-show')) {
     return;
   }
 
-  document.dispatchEvent(eventEnemyCreate);
-
-  catVisible();
+  hide();
   toBad();
+
+  document.dispatchEvent(eventEnemyCreate);
 }
 
 function toBad() {
   noise(audioURI, audioToBad);
 
   $body.classList.add('dont-shoot');
-  $toBad.style.animationName = 'cat-to-bad';
+  $toBad.style.animationName = 'to-bad';
   $cat.style.animationName = 'cat-flip';
 
-  setTimeout(() => {
-    $body.classList.remove('dont-shoot');
-    $toBad.style.animationName = '';
-    $cat.style.animationName = '';
-  }, 1400); // анимация
+  setTimeout(toBadHide, 1400); // анимация
+}
+
+function toBadHide() {
+  $body.classList.remove('dont-shoot');
+  $toBad.style.animationName = '';
+  $cat.style.animationName = '';
 }
 
 function playingField() {
@@ -97,10 +95,10 @@ function gameOver() {
   $cat.remove();
 }
 
-document.addEventListener('startGame', catRun);
-document.addEventListener('catShoot', catShoot);
-document.addEventListener('waveEnd', catStop);
-document.addEventListener('closeShop', catRun);
+document.addEventListener('startGame', run);
+document.addEventListener('catShoot', shoot);
+document.addEventListener('waveEnd', stop);
+document.addEventListener('waveStart', run);
 window.addEventListener('resize', playingFieldResize);
 document.addEventListener('gameOver', gameOver);
 

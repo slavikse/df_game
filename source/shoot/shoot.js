@@ -46,15 +46,15 @@ function shoot(e) {
   }
 }
 
-function startShoot() {
+function shooting() {
   document.addEventListener('click', shootFire);
 }
 
-function stopShoot() {
+function shootingEnd() {
   document.removeEventListener('click', shootFire);
 }
 
-document.addEventListener('startGame', startShoot);
-document.addEventListener('waveEnd', stopShoot);
-document.addEventListener('closeShop', startShoot);
-document.addEventListener('gameOver', stopShoot);
+document.addEventListener('startGame', shooting);
+document.addEventListener('waveEnd', shootingEnd);
+document.addEventListener('waveStart', shooting);
+document.addEventListener('gameOver', shootingEnd);

@@ -29,3 +29,5 @@ gulp.task(name, () => {
 if (!production) {
   gulp.watch(files, gulp.series(name));
 }
+
+/** TODO решить с инкрементальностью. не подхватывает изменения в json */

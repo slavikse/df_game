@@ -29,7 +29,26 @@
   .restart {
     color: #05ae00;
     font-size: 3em;
-    text-decoration: underline;
     cursor: pointer;
+    transition: 0.5s color;
+    animation: restart-pulsar-1 0.5s linear infinite alternate;
+
+    &:hover {
+      color: red;
+      animation-name: restart-pulsar-2;
+      animation-duration: 0.15s;
+    }
+  }
+}
+
+@keyframes restart-pulsar-1 {
+  100% {
+    text-shadow: red 0 0 20px;
+  }
+}
+
+@keyframes restart-pulsar-2 {
+  100% {
+    text-shadow: red 0 0 60px;
   }
 }

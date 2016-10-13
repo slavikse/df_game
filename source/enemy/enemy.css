@@ -3,7 +3,7 @@
   overflow: hidden; /* полоска таймера до нанесения урона */
   opacity: 0;
   animation: 0.4s enemy-position-show both;
-  z-index: 100;
+  z-index: 100; /* обеспечивает перекрытие, чтобы была возможность попасть */
   will-change: opacity;
 }
 

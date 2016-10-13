@@ -22,27 +22,31 @@ gulp.task('build',
     'resize',
     'script',
     'service',
-    'sprite', // style - подхватывает стили
-    'style',
+    'sprite', // №1
+    'style', // забирает стили из спрайта изображений (№1)
     'svg',
     'view'
   )
 );
 
-gulp.task('default',
-  gulp.series(
-    'del',
-    'build',
-    production ?
-      gulp.series(
-        // 'kraken', /** включать только для выкладки. Лимит 100 Mb */
-        'symbol',
-        'rev',
-        'gzip',
-        'zip'
-      ) :
-      gulp.series(
-        'bs'
-      )
+if (production) {
+  gulp.task('default',
+    gulp.series(
+      'del',
+      'build',
+      // 'kraken', /** включать только для выкладки. Лимит 100 Mb */
+      // 'symbol', /** запускать отдельно, для оптимизации шрифтов */
+      'rev',
+      'gzip',
+      'zip'
+    )
   )
-);
+} else {
+  gulp.task('default',
+    gulp.series(
+      'del',
+      'build',
+      'bs'
+    )
+  )
+}
