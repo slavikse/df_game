@@ -3,7 +3,7 @@ import noise from './../helper/noise';
 
 const
   $body = document.body,
-  fireRate = 167,
+  fireRate = 100,
   shootFire = debounce(shoot, fireRate),
   audioURI = window.audioURI,
   audioIdle = window.audioSprite.idle,
@@ -11,6 +11,7 @@ const
   eventEnemyKill = new Event('enemyKill');
 
 let
+  movingGunTimerID = null,
   shootFireAutoTimerID,
   eventShoot = new CustomEvent('shoot');
 
@@ -29,8 +30,8 @@ function shoot(e) {
 
   const
     target = e.target,
-    x = e.pageX,
-    y = e.pageY;
+    x = e.clientX,
+    y = e.clientY;
 
   eventShoot.shoot = {x, y};
   document.dispatchEvent(eventShoot);
@@ -41,10 +42,9 @@ function shoot(e) {
   if (target.classList.contains('enemy')) {
     eventEnemyKill.enemy = e.target;
     document.dispatchEvent(eventEnemyKill);
-  } else
 
-  /** выстрел по котику */
-  if (target.classList.contains('cat')) {
+    /** выстрел по котику */
+  } else if (target.classList.contains('cat')) {
     document.dispatchEvent(eventCatShoot);
   }
 }
@@ -61,17 +61,29 @@ function shootAutoFireDown(e) {
 
 function shootAutoFireMove(e) {
   clearTimeout(shootFireAutoTimerID);
+  clearTimeout(movingGunTimerID);
+
+  movingGunTimerID = setTimeout(shootMovingStop.bind(null, e), fireRate);
   shootFire(e);
 }
 
-function shootingStop() {
-  document.removeEventListener('mousemove', shootAutoFireMove);
-  clearTimeout(shootFireAutoTimerID);
+function shootMovingStop(e) {
+  clearTimeout(movingGunTimerID);
+  shoot(e);
 }
 
 function noShooting() {
   document.removeEventListener('mousedown', shootAutoFireDown);
   document.removeEventListener('mouseup', shootingStop);
+
+  shootingStop();
+}
+
+function shootingStop() {
+  document.removeEventListener('mousemove', shootAutoFireMove);
+
+  clearTimeout(movingGunTimerID);
+  clearTimeout(shootFireAutoTimerID);
 }
 
 document.addEventListener('startGame', shooting);

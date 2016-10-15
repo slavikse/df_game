@@ -130,6 +130,10 @@ th {
   padding: 0;
 }
 
+[tabindex] {
+  outline: 0;
+}
+
 /**
  * 1. Remove the default vertical scrollbar in IE
  */

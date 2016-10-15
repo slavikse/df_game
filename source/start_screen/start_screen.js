@@ -6,8 +6,9 @@ const
   $nick = $startScreen.querySelector('.nick'),
   $bestScoreFrame = $startScreen.querySelector('.best-score-frame'),
   $bestScore = $bestScoreFrame.querySelector('.best-score'),
-  $guide = $startScreen.querySelector('.guide'),
   $newGame = $startScreen.querySelector('.new-game'),
+  $guideHelp = $body.querySelector('.guide-help'),
+  $guideWrap = $body.querySelector('.guide-wrap'),
   $panel = $body.querySelector('.panel'),
   $ambient = $body.querySelector('.ambient'),
   $forestNight = $body.querySelector('.forest-night'),
@@ -58,7 +59,8 @@ function initGame() {
   document.removeEventListener('keyup', initGame);
 
   $nick.style.opacity = 0;
-  $guide.style.opacity = 0;
+  $guideHelp.style.opacity = 0;
+  $guideWrap.style.opacity = 0;
   $bestScoreFrame.style.opacity = 0;
   $newGame.style.animationName = 'new-game';
 

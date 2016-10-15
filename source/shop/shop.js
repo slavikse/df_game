@@ -1,10 +1,13 @@
 import noise from './../helper/noise';
 
+//TODO когда фулл аптечек, заблокировать покупку
+
 const
   $body = document.body,
   $shop = $body.querySelector('.shop'),
   $store = $shop.querySelector('.store'),
   $storeItems = $store.querySelectorAll('.item'),
+  // $firstAid = $store.querySelector('.first-aid'),
   storeItemsLength = $storeItems.length,
   $score = $body.querySelector('.score'),
   $closeShop = $shop.querySelector('.close-shop'),

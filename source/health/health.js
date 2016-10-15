@@ -15,7 +15,7 @@ const
     'icon-heart_abadon', // пустое
     'icon-heart_half' // половинка
   ],
-  firstAidFull = $firstAid.length - 1, // аптечек
+  firstAidFull = $firstAid.length - 1, // аптечек [0,1]
   healthFull = healthStateClasses.length, // состояния сердца
   healthStateFull = healthStateClasses.length - 1, // состояние сердца, изначально сердце целое
   audioURI = window.audioURI,

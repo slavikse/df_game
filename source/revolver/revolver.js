@@ -58,13 +58,11 @@ function drumTurn() {
   $drum.style.transform = `rotate(-${holeCurrent * 60}deg)`;
 }
 
-/** Перезарядка */
-
 function drumRotate() {
   /**
-   * перезаряжен
-   * перезаряжается
-   * кончились
+   * перезаряжен или
+   * перезаряжается или
+   * кончились пули
    */
   if (
     holeCurrent === 0 ||
