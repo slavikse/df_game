@@ -15,15 +15,13 @@ let
   eventShoot = new CustomEvent('shoot');
 
 function shoot(e) {
-  /** нажата не ЛКМ или
-   * враг убит или
-   * выстрелы временно заблокированы */
-  if (
-    e.which !== 1 ||
-    e.target.classList.contains('enemy-kill') ||
-    $body.classList.contains('dont-shoot')
-  ) {
+  /** выстрелы временно заблокированы */
+  if ($body.classList.contains('dont-shoot')) {
     noise(audioURI, audioIdle);
+    return;
+
+    /** нажата не ЛКМ */
+  } else if (e.which !== 1) {
     return;
   }
 
@@ -80,3 +78,5 @@ document.addEventListener('startGame', shooting);
 document.addEventListener('waveEnd', noShooting);
 document.addEventListener('waveStart', shooting);
 document.addEventListener('gameOver', noShooting);
+
+/**TODO при остановке движения, продолжать стрелять */

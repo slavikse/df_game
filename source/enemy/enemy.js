@@ -96,18 +96,9 @@ function setImage(clone) {
 }
 
 function removeEnemy(clone, damageNode, enemyNode) {
-  /**
-   * выстрел по врагу в момент удаления (+ таймера урона)
-   * враг еще существует
-   */
-  // if (!enemyNode) {
-  //   return;
-  // }
-
   clearTimeout(clone.damageTimer);
   document.dispatchEvent(eventEnemyDec);
 
-  enemyNode.classList.add('enemy-kill');
   enemyNode.style.animationName = 'enemy-kill';
   damageNode.remove();
   clone.style.zIndex = 0; // для возможности стрелять по тем, кто под убитым
@@ -124,6 +115,10 @@ function enemyKill(e) {
     clone = e.enemy.parentNode,
     damageNode = clone.children[0],
     enemyNode = clone.children[1];
+
+  if (!enemyNode) {
+    return;
+  }
 
   noise(audioURI, dieAudios);
   removeEnemy(clone, damageNode, enemyNode);
