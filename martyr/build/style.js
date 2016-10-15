@@ -18,7 +18,7 @@ const
   ],
   wFiles = [
     'source/**/*.css',
-    'temp/*.css', // png sprite
+    'temp/*.css' // png sprite
   ],
   there = 'public',
   production = process.env.NODE_ENV === 'production';

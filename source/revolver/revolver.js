@@ -45,7 +45,7 @@ function shootPositionChange(x, y) {
   $shoot.style.transform = `translate(${x}px, ${y}px)`;
   $shoot.classList.add('shoot-visible');
 
-  setTimeout(shootHide, 60);
+  setTimeout(shootHide, 40);
 }
 
 function shootHide() {

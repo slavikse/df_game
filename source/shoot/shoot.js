@@ -3,16 +3,19 @@ import noise from './../helper/noise';
 
 const
   $body = document.body,
-  eventCatShoot = new Event('catShoot'),
-  eventEnemyKill = new Event('enemyKill'),
-  shootFire = debounce(shoot, 167), // fire rate
+  fireRate = 167,
+  shootFire = debounce(shoot, fireRate),
   audioURI = window.audioURI,
-  audioIdle = window.audioSprite.idle;
+  audioIdle = window.audioSprite.idle,
+  eventCatShoot = new Event('catShoot'),
+  eventEnemyKill = new Event('enemyKill');
 
-let eventShoot = new CustomEvent('shoot');
+let
+  shootFireAutoTimerID,
+  eventShoot = new CustomEvent('shoot');
 
 function shoot(e) {
-  /** выстрел только по левой кнопке мыши или
+  /** нажата не ЛКМ или
    * враг убит или
    * выстрелы временно заблокированы */
   if (
@@ -23,6 +26,8 @@ function shoot(e) {
     noise(audioURI, audioIdle);
     return;
   }
+
+  shootFireAutoTimerID = setTimeout(shoot.bind(null, e), fireRate);
 
   const
     target = e.target,
@@ -47,14 +52,31 @@ function shoot(e) {
 }
 
 function shooting() {
-  document.addEventListener('click', shootFire);
+  document.addEventListener('mousedown', shootAutoFireDown);
+  document.addEventListener('mouseup', shootingStop);
 }
 
-function shootingEnd() {
-  document.removeEventListener('click', shootFire);
+function shootAutoFireDown(e) {
+  shootFire(e);
+  document.addEventListener('mousemove', shootAutoFireMove);
+}
+
+function shootAutoFireMove(e) {
+  clearTimeout(shootFireAutoTimerID);
+  shootFire(e);
+}
+
+function shootingStop() {
+  document.removeEventListener('mousemove', shootAutoFireMove);
+  clearTimeout(shootFireAutoTimerID);
+}
+
+function noShooting() {
+  document.removeEventListener('mousedown', shootAutoFireDown);
+  document.removeEventListener('mouseup', shootingStop);
 }
 
 document.addEventListener('startGame', shooting);
-document.addEventListener('waveEnd', shootingEnd);
+document.addEventListener('waveEnd', noShooting);
 document.addEventListener('waveStart', shooting);
-document.addEventListener('gameOver', shootingEnd);
+document.addEventListener('gameOver', noShooting);
