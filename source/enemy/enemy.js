@@ -3,8 +3,8 @@ import throttle from 'libs/throttle';
 import noise from './../helper/noise';
 
 const
-  $enemyPosition = document.querySelector('.enemy-position'),
-  $temp = document.querySelector('.temp'),
+  $body = document.body,
+  $enemyPosition = $body.querySelector('.enemy-position'),
   enemyCloneCount = 6,
   imagesClasses = [
     'icon-monster1',
@@ -28,6 +28,7 @@ const
   playingFieldResize = throttle(playingField, 500);
 
 let
+  $temp = $body.querySelector('.temp'),
   playingFieldWidth,
   playingFieldHeight;
 
@@ -73,16 +74,11 @@ function setDamage(clone) {
   /** enemy сохраняет свой таймер урона
    * для дальнейшего его удаления */
   clone.damageTimer = setTimeout(
-    killTime.bind(null, clone, damageNode, enemyNode),
+    damageAndEnemyHide.bind(null, clone, damageNode, enemyNode),
     damageTimer * 1000
   );
 
   return clone;
-}
-
-function killTime(clone, damageNode, enemyNode) {
-  document.dispatchEvent(eventDamage);
-  removeEnemy(clone, damageNode, enemyNode);
 }
 
 function setImage(clone) {
@@ -95,19 +91,24 @@ function setImage(clone) {
   return clone;
 }
 
-function removeEnemy(clone, damageNode, enemyNode) {
-  clearTimeout(clone.damageTimer);
-  document.dispatchEvent(eventEnemyDec);
-
-  enemyNode.style.animationName = 'enemy-kill';
-  damageNode.remove();
-  clone.style.zIndex = 0; // для возможности стрелять по тем, кто под убитым
-
-  setTimeout(removeNode.bind(null, clone), 500); // анимация. половина от 1s
+function damageAndEnemyHide(clone, damageNode, enemyNode) {
+  document.dispatchEvent(eventDamage);
+  enemyHide(clone, damageNode, enemyNode);
 }
 
-function removeNode(clone) {
-  clone.remove();
+function enemyHide(clone, damageNode, enemyNode) {
+  clearTimeout(clone.damageTimer);
+  damageNode.style.visibility = 'hidden';
+
+  enemyNode.style.animationName = 'enemy-kill';
+  clone.style.zIndex = 0; // для возможности стрелять по тем, кто под убитым
+
+  document.dispatchEvent(eventEnemyDec);
+  setTimeout(enemyHideDelay.bind(null, clone), 500); // анимация
+}
+
+function enemyHideDelay(clone) {
+  clone.style.visibility = 'hidden';
 }
 
 function enemyKill(e) {
@@ -121,7 +122,7 @@ function enemyKill(e) {
   }
 
   noise(audioURI, dieAudios);
-  removeEnemy(clone, damageNode, enemyNode);
+  enemyHide(clone, damageNode, enemyNode);
   document.dispatchEvent(eventScoreAdd);
 }
 
@@ -135,11 +136,21 @@ function playingField() {
   playingFieldHeight = window.innerHeight - enemyHeight - panelHeight;
 }
 
-function gameOver() {
+function createEnemyNode() {
+  let tempNode = document.createElement('div');
+  tempNode.classList.add('temp');
+
+  $body.appendChild(tempNode);
+  $temp = $body.querySelector('.temp');
+}
+
+function removeEnemyNode() {
   $temp.remove();
 }
 
 document.addEventListener('enemyCreate', cloneEnemy);
 document.addEventListener('enemyKill', enemyKill);
+document.addEventListener('waveEnd', removeEnemyNode);
+document.addEventListener('waveStart', createEnemyNode);
 window.addEventListener('resize', playingFieldResize);
-document.addEventListener('gameOver', gameOver);
+document.addEventListener('gameOver', removeEnemyNode);

@@ -1,13 +1,11 @@
 import noise from './../helper/noise';
 
-//TODO когда фулл аптечек, заблокировать покупку
-
 const
   $body = document.body,
   $shop = $body.querySelector('.shop'),
   $store = $shop.querySelector('.store'),
   $storeItems = $store.querySelectorAll('.item'),
-  // $firstAid = $store.querySelector('.first-aid'),
+  $firstAid = $store.querySelector('.first-aid'),
   storeItemsLength = $storeItems.length,
   $score = $body.querySelector('.score'),
   $closeShop = $shop.querySelector('.close-shop'),
@@ -22,35 +20,21 @@ const
   eventScoreDec = new Event('scoreDec'),
   eventWaveStart = new Event('waveStart');
 
-let currentScore;
+let
+
+  currentScore,
+  firstAid;
 
 function openShop() {
-  /** чтобы счет успел записаться в localStorage */
-  setTimeout(setScore, 50);
+  currentScore = parseInt(sessionStorage.getItem('score'), 10);
+  firstAid = parseInt(sessionStorage.getItem('firstAid'), 10);
 
   $body.classList.add('dont-shoot');
-  $shop.style.transform = 'translateY(0)';
+  $shop.classList.add('shop-open');
   $score.classList.add('score-shop');
   $store.addEventListener('click', buy);
-}
 
-function setScore() {
-  currentScore = sessionStorage.getItem('score');
   buyLockUnlock();
-}
-
-function buyLockUnlock() {
-  for (let i = 0, len = storeItemsLength; i < len; i++) {
-    const
-      item = $storeItems[i],
-      itemScore = parseInt(item.dataset.score, 10);
-
-    if (itemScore > currentScore) {
-      item.classList.add('buy-block');
-    } else {
-      item.classList.remove('buy-block');
-    }
-  }
 }
 
 function buy(e) {
@@ -97,12 +81,32 @@ function buy(e) {
   buyLockUnlock();
 }
 
+function buyLockUnlock() {
+  for (let i = 0, len = storeItemsLength; i < len; i++) {
+    const
+      item = $storeItems[i],
+      itemScore = parseInt(item.dataset.score, 10);
+
+    if (itemScore > currentScore) {
+      item.classList.add('buy-block');
+    } else {
+      item.classList.remove('buy-block');
+    }
+  }
+
+  /** максимально аптечек [0-1], т.е. 2 штуки */
+  if (firstAid === 1) {
+    $firstAid.classList.add('buy-block');
+  }
+}
+
 function buyDrum(add) {
   eventBuyDrum.add = add;
   document.dispatchEvent(eventBuyDrum);
 }
 
 function buyFirstAid() {
+  firstAid += 1;
   document.dispatchEvent(eventBuyFirstAid);
 }
 
@@ -117,7 +121,7 @@ function closeShop() {
 
 function closeShopEnd() {
   $closeShop.style.animationName = '';
-  $shop.style.transform = 'translateY(100%)';
+  $shop.classList.remove('shop-open');
   $score.classList.remove('score-shop');
   document.dispatchEvent(eventWaveStart);
 }

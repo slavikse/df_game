@@ -6,6 +6,7 @@ const
   eventWaveEnd = new Event('waveEnd');
 
 let
+  waveCount = 0,
   isWaveEnd,
   nextTimeTimeout,
   nextTimeCurrent = nextTimeMax,
@@ -37,6 +38,7 @@ function timer() {
 }
 
 function nextWave() {
+  waveCount += 1;
   numberWaveCurrent += 1;
   document.dispatchEvent(eventEnemyCreate);
 
@@ -60,6 +62,13 @@ function noEnemy() {
 
 function gameOver() {
   clearTimeout(nextTimeTimeout);
+  waveCountStatistic();
+}
+
+function waveCountStatistic() {
+  let waveCountEvent = new Event('waveCount');
+  waveCountEvent.waveCount = waveCount;
+  document.dispatchEvent(waveCountEvent)
 }
 
 document.addEventListener('startGame', run);

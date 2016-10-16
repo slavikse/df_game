@@ -18,6 +18,7 @@ let healthNoticeTimer;
 
 function damage() {
   clearTimeout(healthNoticeTimer);
+
   noise(audioURI, damageAudiosURI);
   $healthNotice.style.animationName = 'health-damage';
 
@@ -30,6 +31,7 @@ function damageEnd() {
 
 function regeneration() {
   clearTimeout(healthNoticeTimer);
+
   noise(audioURI, healAudiosURI);
   $healthNotice.style.animationName = 'health-regeneration';
 

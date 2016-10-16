@@ -66,16 +66,20 @@ function initGame() {
 
   noise(audioURI, audioIntro);
 
-  setTimeout(initGameEnd, 500);
-  setTimeout(changeBackground, 5500);
-
   setNick();
   initInterface();
+
+  setTimeout(initGameEnd, 500);
+  setTimeout(changeBackground, 5500);
 }
 
 function initGameEnd() {
   $newGame.style.opacity = 0;
+
   $startScreen.remove();
+  $guideHelp.remove();
+  $guideWrap.remove();
+
   document.dispatchEvent(eventStartGame);
 }
 

@@ -34,7 +34,7 @@
   font-size: 8em;
   background-color: rgba(73, 0, 0, 0.7);
   opacity: 0;
-  z-index: -3000;
+  z-index: -100;
   animation: 1.4s; /* to-bad */
   will-change: opacity;
 }
@@ -42,7 +42,7 @@
 @keyframes to-bad {
   0%,
   100% {
-    z-index: 3000;
+    z-index: 200;
   }
 
   30%,

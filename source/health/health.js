@@ -22,9 +22,13 @@ const
   audioHeart = window.audioSprite.heart;
 
 let
+  receivedDamage = 0,
+  firstAidUse = 0,
   firstAid = firstAidFull,
   health = healthFull,
   healthState = healthStateFull;
+
+sessionStorage.setItem('firstAid', firstAid);
 
 function damage() {
 
@@ -42,6 +46,8 @@ function damage() {
   }
 
   heartbeat();
+
+  receivedDamage += 1;
 }
 
 function heartbeat() {
@@ -65,8 +71,7 @@ function heartbeatEnd() {
 }
 
 function useFirstAid() {
-  if (
-    firstAid < 0 || (
+  if (firstAid < 0 || (
       /** полное хп */
       health === healthFull &&
       healthState === healthStateFull
@@ -77,21 +82,26 @@ function useFirstAid() {
   $firstAid[firstAid].className = firstAidStateClasses[0];
   firstAid -= 1;
 
+  sessionStorage.setItem('firstAid', firstAid);
+
   regeneration();
 }
 
 function regeneration() {
   $body.classList.add('dont-shoot');
-  document.dispatchEvent($eventRegeneration);
 
   health = healthFull;
   healthState = healthStateFull;
+
+  document.dispatchEvent($eventRegeneration);
 
   for (let i = 0, len = $healths.length; i < len; i++) {
     $healths[i].className = 'icon-heart';
   }
 
   setTimeout(dontShootEnd, 400); // анимация
+
+  firstAidUse += 1;
 }
 
 function dontShootEnd() {
@@ -107,6 +117,8 @@ function addFirstAid() {
   $firstAid[firstAid].className = firstAidStateClasses[1];
   $firstAid[firstAid].style.animationName = 'first-aid-blink';
 
+  sessionStorage.setItem('firstAid', firstAid);
+
   setTimeout(addFirstAidEnd, 600); // анимация
 }
 
@@ -115,31 +127,45 @@ function addFirstAidEnd() {
 }
 
 function gameOver() {
-  document.removeEventListener('firstAidDropped', addFirstAid);
   document.removeEventListener('damage', damage);
   $healthWrap.removeEventListener('click', useFirstAid);
   document.removeEventListener('keyup', HKeyHandler);
+  document.removeEventListener('mousedown', CMBHandler);
   document.removeEventListener('keyup', TKeyHandler);
 
   document.dispatchEvent(new Event('gameOver'));
+
+  receivedDamageStatistic();
+  firstAidUseStatistic();
+}
+
+function receivedDamageStatistic() {
+  let receivedDamageEvent = new Event('receivedDamage');
+  receivedDamageEvent.receivedDamage = receivedDamage;
+  document.dispatchEvent(receivedDamageEvent);
+}
+
+function firstAidUseStatistic() {
+  let firstAidUseEvent = new Event('firstAidUse');
+  firstAidUseEvent.firstAidUse = firstAidUse;
+  document.dispatchEvent(firstAidUseEvent);
 }
 
 function HKeyHandler(e) {
-  if (e.keyCode === 72) { // H
+  if (e.keyCode === 72) {
     useFirstAid();
   }
 }
 
-function centerButtonMouse(e) {
-  if (e.which === 2) {
+function CMBHandler(e) {
+  if (e.which === 2) { // средняя кнопка мыши
     e.preventDefault();
-
     useFirstAid();
   }
 }
 
 function TKeyHandler(e) {
-  if (e.keyCode === 84) { // T
+  if (e.keyCode === 84) {
     addFirstAid();
   }
 }
@@ -148,5 +174,5 @@ document.addEventListener('buyFirstAid', addFirstAid);
 document.addEventListener('damage', damage);
 $healthWrap.addEventListener('click', useFirstAid);
 document.addEventListener('keyup', HKeyHandler);
-document.addEventListener('click', centerButtonMouse);
+document.addEventListener('mousedown', CMBHandler);
 document.addEventListener('keyup', TKeyHandler);

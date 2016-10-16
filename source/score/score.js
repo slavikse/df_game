@@ -30,3 +30,5 @@ document.addEventListener('scoreAdd', scoreAdd);
 document.addEventListener('scoreDec', scoreDec);
 document.addEventListener('gameOver', gameOver);
 window.onbeforeunload = gameOver;
+
+// scoreAdd({add: 500});

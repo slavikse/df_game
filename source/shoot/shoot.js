@@ -3,7 +3,7 @@ import noise from './../helper/noise';
 
 const
   $body = document.body,
-  fireRate = 100,
+  fireRate = 166.6, // 6 выстрелов в 1 секунду
   shootFire = debounce(shoot, fireRate),
   audioURI = window.audioURI,
   audioIdle = window.audioSprite.idle,
@@ -11,18 +11,29 @@ const
   eventEnemyKill = new Event('enemyKill');
 
 let
+  shootCountTotal = 0, // выстрелов всего
+  shootCountInTarget = 0, // пападание в цель
+  shootCountInCat = 0, // пападание в бонусного котика
   movingGunTimerID = null,
   shootFireAutoTimerID,
-  eventShoot = new CustomEvent('shoot');
+  eventShoot = new Event('shoot');
 
 function shoot(e) {
-  /** выстрелы временно заблокированы */
-  if ($body.classList.contains('dont-shoot')) {
-    noise(audioURI, audioIdle);
+  /** нажата не ЛКМ */
+  if (e.which !== 1) {
     return;
+  } else
 
-    /** нажата не ЛКМ */
-  } else if (e.which !== 1) {
+  /** выстрелы заблокированы
+   * (введен дополнительный идентификатор [nothing-shoot], потому,
+   * что dont-shoot используется многими модулями.
+   * Тем самым это некое разделение ответственности)
+   */
+  if (
+    $body.classList.contains('dont-shoot') ||
+    $body.classList.contains('nothing-shoot')
+  ) {
+    noise(audioURI, audioIdle);
     return;
   }
 
@@ -36,6 +47,8 @@ function shoot(e) {
   eventShoot.shoot = {x, y};
   document.dispatchEvent(eventShoot);
 
+  shootCountTotal += 1;
+
   // $event.dispatchEvent(new Event('damage'));
 
   /** выстрел по монстру */
@@ -43,9 +56,14 @@ function shoot(e) {
     eventEnemyKill.enemy = e.target;
     document.dispatchEvent(eventEnemyKill);
 
+    shootCountInTarget += 1;
+
     /** выстрел по котику */
   } else if (target.classList.contains('cat')) {
     document.dispatchEvent(eventCatShoot);
+
+    shootCountInTarget += 1;
+    shootCountInCat += 1;
   }
 }
 
@@ -60,14 +78,14 @@ function shootAutoFireDown(e) {
 }
 
 function shootAutoFireMove(e) {
-  clearTimeout(shootFireAutoTimerID);
   clearTimeout(movingGunTimerID);
+  clearTimeout(shootFireAutoTimerID);
 
-  movingGunTimerID = setTimeout(shootMovingStop.bind(null, e), fireRate);
+  movingGunTimerID = setTimeout(movingGunStop.bind(null, e), fireRate);
   shootFire(e);
 }
 
-function shootMovingStop(e) {
+function movingGunStop(e) {
   clearTimeout(movingGunTimerID);
   shoot(e);
 }
@@ -86,9 +104,22 @@ function shootingStop() {
   clearTimeout(shootFireAutoTimerID);
 }
 
+function gameOver() {
+  noShooting();
+  shootCountStatistic();
+}
+
+function shootCountStatistic() {
+  let shootCountEvent = new Event('shootCount');
+
+  shootCountEvent.shootCountTotal = shootCountTotal;
+  shootCountEvent.shootCountInTarget = shootCountInTarget;
+  shootCountEvent.shootCountInCat = shootCountInCat;
+
+  document.dispatchEvent(shootCountEvent);
+}
+
 document.addEventListener('startGame', shooting);
 document.addEventListener('waveEnd', noShooting);
 document.addEventListener('waveStart', shooting);
-document.addEventListener('gameOver', noShooting);
-
-/**TODO при остановке движения, продолжать стрелять */
+document.addEventListener('gameOver', gameOver);

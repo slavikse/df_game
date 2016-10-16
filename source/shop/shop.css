@@ -1,6 +1,6 @@
 .shop {
   position: absolute;
-  z-index: 5000;
+  z-index: -100;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,6 +11,11 @@
   transform: translateY(100%);
   transition: transform 0.4s;
   will-change: transform;
+
+  &-open {
+    transform: translateY(0);
+    z-index: 400;
+  }
 
   .store-title {
     width: 100%;
@@ -60,7 +65,7 @@
   }
 
   .close-shop {
-    z-index: 6000;
+    z-index: 500;
     font-size: 5em;
     color: #ffeb3b;
     text-shadow: 0 0 8px #ef6c00;

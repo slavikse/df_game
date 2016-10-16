@@ -8,5 +8,6 @@ import './enemy/enemy';
 import './panel/panel';
 import './shop/shop';
 import './result/result';
+import './statistic/statistic';
 
 /** загрузив игру, создаст событие, которое слушает стартовый экран */

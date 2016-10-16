@@ -9,7 +9,7 @@
 
   .nick {
     position: relative;
-    z-index: 3000;
+    z-index: 400;
     width: 100%;
     color: white;
     font-size: 3em;
@@ -29,7 +29,7 @@
   }
 
   .new-game {
-    z-index: 1000;
+    z-index: 450;
     font-size: 6em;
     color: #ffeb3b;
     text-shadow: 0 0 8px #ef6c00;
@@ -104,12 +104,12 @@
 
   &:focus ~ .guide-wrap {
     opacity: 1;
-    z-index: 4000;
+    z-index: 460;
   }
 
   @media (max-height: 420px) {
     opacity: 1;
-    z-index: 4000;
+    z-index: 460;
   }
 }
 
