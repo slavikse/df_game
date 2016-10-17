@@ -6,7 +6,9 @@ if (NODE_ENV === 'production') {
 
 function swLoader() {
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js')
+    navigator
+    .serviceWorker
+    .register('sw.js')
     .then(registration)
     .catch(error);
   }

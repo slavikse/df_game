@@ -12,7 +12,7 @@
   }
 
   &-shop {
-    z-index: 350;
+    z-index: 600;
     font-size: 4em;
   }
 }

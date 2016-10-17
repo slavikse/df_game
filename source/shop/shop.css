@@ -14,7 +14,6 @@
 
   &-open {
     transform: translateY(0);
-    z-index: 400;
   }
 
   .store-title {
@@ -65,7 +64,7 @@
   }
 
   .close-shop {
-    z-index: 500;
+    z-index: 450;
     font-size: 5em;
     color: #ffeb3b;
     text-shadow: 0 0 8px #ef6c00;

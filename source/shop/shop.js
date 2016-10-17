@@ -21,20 +21,46 @@ const
   eventWaveStart = new Event('waveStart');
 
 let
-
-  currentScore,
+  costs = 0,
+  scoreCurrent,
   firstAid;
 
 function openShop() {
-  currentScore = parseInt(sessionStorage.getItem('score'), 10);
-  firstAid = parseInt(sessionStorage.getItem('firstAid'), 10);
+  $shop.classList.add('shop-open');
+  $shop.style.zIndex = '400';
 
   $body.classList.add('dont-shoot');
-  $shop.classList.add('shop-open');
   $score.classList.add('score-shop');
-  $store.addEventListener('click', buy);
 
-  buyLockUnlock();
+  $store.addEventListener('click', buy);
+  $closeShop.addEventListener('mouseup', closeShop);
+
+  /** задержка из за отложенной записи в хранилище... */
+  setTimeout(() => {
+    scoreCurrent = parseInt(sessionStorage.getItem('score'), 10);
+    firstAid = parseInt(sessionStorage.getItem('firstAid'), 10);
+
+    buyLockUnlock();
+  }, 20);
+}
+
+function buyLockUnlock() {
+  for (let i = 0, len = storeItemsLength; i < len; i++) {
+    const
+      item = $storeItems[i],
+      itemScore = parseInt(item.dataset.score, 10);
+
+    if (itemScore > scoreCurrent) {
+      item.classList.add('buy-block');
+    } else {
+      item.classList.remove('buy-block');
+    }
+  }
+
+  /** максимально аптечек [0-1], т.е. 2 штуки */
+  if (firstAid === 1) {
+    $firstAid.classList.add('buy-block');
+  }
 }
 
 function buy(e) {
@@ -61,11 +87,11 @@ function buy(e) {
   const
     dataset = target.dataset,
     item = dataset.item,
-    add = parseInt(dataset.add, 10),
+    addDrum = parseInt(dataset.add, 10),
     scoreDec = parseInt(dataset.score, 10);
 
   if (item === 'drum') {
-    buyDrum(add);
+    buyDrum(addDrum);
   } else if (item === 'first-aid') {
     buyFirstAid();
   } else {
@@ -77,31 +103,13 @@ function buy(e) {
   eventScoreDec.dec = scoreDec;
   document.dispatchEvent(eventScoreDec);
 
-  currentScore -= scoreDec;
+  scoreCurrent -= scoreDec;
+  costs += scoreDec;
   buyLockUnlock();
 }
 
-function buyLockUnlock() {
-  for (let i = 0, len = storeItemsLength; i < len; i++) {
-    const
-      item = $storeItems[i],
-      itemScore = parseInt(item.dataset.score, 10);
-
-    if (itemScore > currentScore) {
-      item.classList.add('buy-block');
-    } else {
-      item.classList.remove('buy-block');
-    }
-  }
-
-  /** максимально аптечек [0-1], т.е. 2 штуки */
-  if (firstAid === 1) {
-    $firstAid.classList.add('buy-block');
-  }
-}
-
-function buyDrum(add) {
-  eventBuyDrum.add = add;
+function buyDrum(addDrum) {
+  eventBuyDrum.add = addDrum;
   document.dispatchEvent(eventBuyDrum);
 }
 
@@ -111,18 +119,23 @@ function buyFirstAid() {
 }
 
 function closeShop() {
-  $body.classList.remove('dont-shoot');
-  $store.removeEventListener('click', buy);
   $closeShop.style.animationName = 'close-shop';
 
+  $store.removeEventListener('click', buy);
+  $closeShop.removeEventListener('mouseup', closeShop);
+
   noise(audioURI, audioNextWave);
-  setTimeout(closeShopEnd, 800);
+  setTimeout(closeShopEnd, 450); // animate + 50ms (запасик)
 }
 
 function closeShopEnd() {
-  $closeShop.style.animationName = '';
-  $shop.classList.remove('shop-open');
+  $body.classList.remove('dont-shoot');
   $score.classList.remove('score-shop');
+
+  $shop.classList.remove('shop-open');
+  $shop.style.zIndex = 'auto';
+
+  $closeShop.style.animationName = '';
   document.dispatchEvent(eventWaveStart);
 }
 
@@ -134,11 +147,17 @@ function itemHandler(e) {
   noise(audioURI, audioDrumHover);
 }
 
+function costsStatistic() {
+  let costsEvent = new Event('costs');
+  costsEvent.costs = costs;
+  document.dispatchEvent(costsEvent);
+}
+
 function gameOver() {
   document.removeEventListener('waveEnd', openShop);
+  costsStatistic();
 }
 
 document.addEventListener('waveEnd', openShop);
 $store.addEventListener('mouseover', itemHandler);
-$closeShop.addEventListener('click', closeShop);
 document.addEventListener('gameOver', gameOver);

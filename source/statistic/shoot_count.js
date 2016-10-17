@@ -1,18 +1,26 @@
+let shootStat;
+
 function shootCountSet(e) {
   const
     shoots = e.shootCountTotal,
     inTarget = e.shootCountInTarget,
-    inCat = e.shootCountInCat,
+    bonusWave = e.shootCountInCat,
     miss = shoots - inTarget,
     inTargetPercent = (inTarget * 100 / shoots).toFixed(2);
 
-  console.log(`
-    Выстрелов: ${shoots}
-    В цель: ${inTarget}
-    Промахов: ${miss}
-    Точность: ${inTargetPercent}%
-    Доп волн: ${inCat}
-  `);
+  shootStat = {
+    shoots,
+    inTarget,
+    miss,
+    inTargetPercent,
+    bonusWave
+  }
+}
+
+function shootCountGet() {
+  return shootStat;
 }
 
 document.addEventListener('shootCount', shootCountSet);
+
+export default shootCountGet;

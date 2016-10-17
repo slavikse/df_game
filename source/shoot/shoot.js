@@ -16,7 +16,7 @@ let
   shootCountInCat = 0, // пападание в бонусного котика
   movingGunTimerID = null,
   shootFireAutoTimerID,
-  eventShoot = new Event('shoot');
+  shootEvent = new Event('shoot');
 
 function shoot(e) {
   /** нажата не ЛКМ */
@@ -44,8 +44,8 @@ function shoot(e) {
     x = e.clientX,
     y = e.clientY;
 
-  eventShoot.shoot = {x, y};
-  document.dispatchEvent(eventShoot);
+  shootEvent.shoot = {x, y};
+  document.dispatchEvent(shootEvent);
 
   shootCountTotal += 1;
 

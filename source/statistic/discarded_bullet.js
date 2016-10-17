@@ -1,5 +1,13 @@
+let discardedBullet;
+
 function discardedBulletSet(e) {
-  console.log(`Пуль выброшено: ${e.discardedBullet}`);
+  discardedBullet = e.discardedBullet;
+}
+
+function discardedBulletGet() {
+  return discardedBullet;
 }
 
 document.addEventListener('discardedBullet', discardedBulletSet);
+
+export default discardedBulletGet;

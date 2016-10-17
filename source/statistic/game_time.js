@@ -8,14 +8,18 @@ function gameTimeEnd() {
   const
     ms = Date.now() - gameTime,
     s = Math.trunc(ms / 1000),
-    m = Math.trunc(s / 60);
+    m = Math.trunc(s / 60),
 
-  console.log(`
-    Время игры:
-      Минут: ${m}
-      Секунд: ${s}
-  `);
+    minutes = m,
+    second = s - m * 60;
+
+  return {
+    minutes,
+    second
+  }
 }
 
 document.addEventListener('startGame', gameTimeStart);
 document.addEventListener('gameOver', gameTimeEnd);
+
+export default gameTimeEnd;

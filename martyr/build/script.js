@@ -67,7 +67,7 @@ if (production) {
         loops: true,
         unused: true,
         warnings: false,
-        drop_console: true,
+        // drop_console: true,
         unsafe: true
       }
     })

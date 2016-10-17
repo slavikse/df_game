@@ -1,13 +1,15 @@
+
+//TODO не обновляет кэши
+
 /**
- * кэш инвалидируется в случае изменения файлов,
+ * Кэш инвалидируется в случае изменения файлов,
  * об этом позаботится задача rev,
  * которая сменит имена в у index.css и index.js,
  * тем самым сменит версию кэша (гениально и просто)
  */
 const
-  cacheVersion = 'index.css:index.js:audio_sprite.mp3:sprite.png',
+  cacheVersion = 'index.css:index.js',
   cacheURI = [
-    '/',
     '/index.css',
     '/index.js',
 
@@ -35,18 +37,24 @@ function install(e) {
 }
 
 function cached() {
-  caches.open(cacheVersion)
-  .then(cache => {
-    return cache.addAll(cacheURI);
-  })
-  .catch(err => {
-    console.log(`Ошибка с кэшированием: ${err}`);
-  })
+  caches
+  .open(cacheVersion)
+  .then(cacheAll)
+  .catch(cacheError)
+}
+
+function cacheAll(cache) {
+  return cache.addAll(cacheURI);
+}
+
+function cacheError(error) {
+  console.error(`Ошибка с добавлением в кэш: ${error}`);
 }
 
 function fetched(e) {
   e.respondWith(
-    caches.match(e.request)
+    caches
+    .match(e.request)
     .then(cachedResponse => {
       if (cachedResponse) {
         return cachedResponse;
@@ -54,10 +62,12 @@ function fetched(e) {
 
       return fetch(e.request);
     })
-    .catch(err => {
-      console.log(`Ошибка с поиском кэшей: ${err}`);
-    })
-  );
+    .catch(fetchError)
+  )
+}
+
+function fetchError(error) {
+  console.log(`Ошибка с поиском кэша: ${error}`);
 }
 
 self.addEventListener('install', install);

@@ -1,5 +1,13 @@
+let receivedDamage;
+
 function receivedDamageSet(e) {
-  console.log(`Получено урона: ${e.receivedDamage}`);
+  receivedDamage = e.receivedDamage;
+}
+
+function receivedDamageGet() {
+  return receivedDamage;
 }
 
 document.addEventListener('receivedDamage', receivedDamageSet);
+
+export default receivedDamageGet;

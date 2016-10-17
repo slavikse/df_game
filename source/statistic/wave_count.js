@@ -1,5 +1,13 @@
+let waveCount;
+
 function waveCountSet(e) {
-  console.log(`Продержался волн: ${e.waveCount}`);
+  waveCount = e.waveCount;
+}
+
+function waveCountGet() {
+  return waveCount;
 }
 
 document.addEventListener('waveCount', waveCountSet);
+
+export default waveCountGet;

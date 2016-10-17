@@ -1,5 +1,13 @@
-function discardedBulletSet(e) {
-  console.log(`Перезарядок: ${e.drumReloadCount}`);
+let drumReloadCount;
+
+function drumReloadCountSet(e) {
+  drumReloadCount = e.drumReloadCount;
 }
 
-document.addEventListener('drumReloadCount', discardedBulletSet);
+function drumReloadCountGet() {
+  return drumReloadCount;
+}
+
+document.addEventListener('drumReloadCount', drumReloadCountSet);
+
+export default drumReloadCountGet;

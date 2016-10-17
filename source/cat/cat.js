@@ -101,4 +101,3 @@ document.addEventListener('waveEnd', stop);
 document.addEventListener('waveStart', run);
 window.addEventListener('resize', playingFieldResize);
 document.addEventListener('gameOver', gameOver);
-

@@ -1,5 +1,13 @@
+let firstAidUse;
+
 function firstAidUseSet(e) {
-  console.log(`Хилок использовано: ${e.firstAidUse}`);
+  firstAidUse = e.firstAidUse;
+}
+
+function firstAidUseGet() {
+  return firstAidUse;
 }
 
 document.addEventListener('firstAidUse', firstAidUseSet);
+
+export default firstAidUseGet;
