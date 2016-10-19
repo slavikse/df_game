@@ -5,7 +5,7 @@ import noise from './../helper/noise';
 const
   $body = document.body,
   $enemyPosition = $body.querySelector('.enemy-position'),
-  enemyCloneCount = 6,
+  enemyCloneCount = 3,
   imagesClasses = [
     'icon-monster1',
     'icon-monster2',
@@ -46,6 +46,7 @@ function cloneEnemy() {
     clone = setPosition(clone);
     clone = setDamage(clone);
     clone = setImage(clone);
+    clone = setHealth(clone);
     fragment.appendChild(clone);
   }
 
@@ -67,14 +68,15 @@ function setDamage(clone) {
   const
     damageTimer = range(6, 10),
     damageNode = clone.children[0],
-    enemyNode = clone.children[1];
+    enemyNode = clone.children[1],
+    healthNode = clone.children[2];
 
   damageNode.style.animationDuration = `${damageTimer}s`;
 
   /** enemy сохраняет свой таймер урона
    * для дальнейшего его удаления */
   clone.damageTimer = setTimeout(
-    damageAndEnemyHide.bind(null, clone, damageNode, enemyNode),
+    damageAndEnemyHide.bind(null, clone, damageNode, enemyNode, healthNode),
     damageTimer * 1000
   );
 
@@ -91,16 +93,28 @@ function setImage(clone) {
   return clone;
 }
 
-function damageAndEnemyHide(clone, damageNode, enemyNode) {
-  document.dispatchEvent(eventDamage);
-  enemyHide(clone, damageNode, enemyNode);
+function setHealth(clone) {
+  const
+    healthNode = clone.children[2],
+    health = range(2, 3);
+
+  healthNode.health = health;
+  healthNode.textContent = health;
+
+  return clone;
 }
 
-function enemyHide(clone, damageNode, enemyNode) {
+function damageAndEnemyHide(clone, damageNode, enemyNode, healthNode) {
+  document.dispatchEvent(eventDamage);
+  enemyHide(clone, damageNode, enemyNode, healthNode);
+}
+
+function enemyHide(clone, damageNode, enemyNode, healthNode) {
   clearTimeout(clone.damageTimer);
   damageNode.style.visibility = 'hidden';
 
   enemyNode.style.animationName = 'enemy-kill';
+  healthNode.style.visibility = 'hidden';
   clone.style.zIndex = 0; // для возможности стрелять по тем, кто под убитым
 
   document.dispatchEvent(eventEnemyDec);
@@ -115,14 +129,27 @@ function enemyKill(e) {
   const
     clone = e.enemy.parentNode,
     damageNode = clone.children[0],
-    enemyNode = clone.children[1];
+    enemyNode = clone.children[1],
+    healthNode = clone.children[2];
 
-  if (!enemyNode) {
-    return;
+  // if (!enemyNode) {
+  //   return;
+  // }
+
+  if (clone.death) {
+    return; // мертв
   }
 
+  if (healthNode.health > 1) {
+    healthNode.health -= 1;
+    healthNode.textContent = healthNode.health;
+    healthNode.style.width = 100 - (100 / healthNode.health) + '%';
+    return; // еще жив
+  }
+
+  clone.death = true;
   noise(audioURI, dieAudios);
-  enemyHide(clone, damageNode, enemyNode);
+  enemyHide(clone, damageNode, enemyNode, healthNode);
   document.dispatchEvent(eventScoreAdd);
 }
 

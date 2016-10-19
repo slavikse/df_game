@@ -14,9 +14,9 @@ const
   moveTime = 5000;
 
 let
-  runTimerID,
   moveTimerID,
   hideTimerID,
+  runTimerID,
   playingFieldWidth,
   playingFieldHeight;
 
@@ -49,9 +49,9 @@ function hide() {
 function stop() {
   $catPosition.classList.remove('cat-show');
 
-  clearTimeout(runTimerID);
   clearTimeout(moveTimerID);
   clearTimeout(hideTimerID);
+  clearTimeout(runTimerID);
 }
 
 function shoot() {
@@ -69,16 +69,16 @@ function toBad() {
   noise(audioURI, audioToBad);
 
   $body.classList.add('dont-shoot');
-  $toBad.style.animationName = 'to-bad';
   $cat.style.animationName = 'cat-flip';
+  $toBad.style.animationName = 'to-bad';
 
   setTimeout(toBadHide, 1400); // анимация
 }
 
 function toBadHide() {
   $body.classList.remove('dont-shoot');
-  $toBad.style.animationName = '';
   $cat.style.animationName = '';
+  $toBad.style.animationName = '';
 }
 
 function playingField() {

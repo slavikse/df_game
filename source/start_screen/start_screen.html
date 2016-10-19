@@ -1,17 +1,14 @@
 <div class="start-screen">
-  <input class="nick" value="введи позывной" autofocus>
+
+  @include('./auth.html')
 
   <div class="best-score-frame">
-    Лучший счет:&#32;<span class="best-score"></span>
+    Лучший счет:&#32;
+    <span class="best-score"></span>
   </div>
 
   <div class="new-game">Начать игру!</div>
-</div>
 
-<div class="guide-help" tabindex="0">?</div>
-<div class="guide-wrap">
-  <div class="guide">
-    <div class="icon-guide_key"></div>
-    <div class="icon-guide_mouse"></div>
-  </div>
+  @include('./guide.html')
+
 </div>

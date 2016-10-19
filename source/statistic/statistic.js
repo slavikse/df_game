@@ -39,7 +39,7 @@ function statisticGet() {
     'Волн пройдено': waveCount,
     'Доп волн': bonusWave,
     'Очков набрано': score,
-    'Расходы ($)': costs,
+    'Расходы': `${costs}$`,
     'Перезарядок': drumReload,
     'Пуль выброшено': discardedBullet,
     'Получено урона': receivedDamage,
@@ -47,7 +47,7 @@ function statisticGet() {
     'Выстрелов': shoots,
     'В цель': inTarget,
     'Промахов': miss,
-    'Точность (%)': inTargetPercent
+    'Точность': `${inTargetPercent}%`
   };
 
   // localStorage.setItem('statistic', JSON.stringify(statistic));

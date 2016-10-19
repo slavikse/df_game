@@ -29,22 +29,26 @@ const
   options = {
     module: {
       loaders: [
-        {test: /\.js$/, loader: 'babel'},
-        {test: /\.json$/, loader: 'json'}
+        {
+          test: /\.js$/,
+          loader: 'babel',
+          query: {compact: false}
+        }, {
+          test: /\.json$/,
+          loader: 'json'
+        }
       ]
     },
     watch: !production,
-    watchOptions: {aggregateTimeout: 50},
+    watchOptions: {aggregateTimeout: 30},
     devtool: production ? null : 'cheap-eval-source-map',
     plugins: [
       new webpack.NoErrorsPlugin(),
-      new webpack.EnvironmentPlugin([
-        "NODE_ENV"
-      ]),
-      // new webpack.optimize.CommonsChunkPlugin({
-      //   name: 'common',
-      //   minChunks: 2
-      // })
+      new webpack.EnvironmentPlugin(["NODE_ENV"]),
+      new webpack.optimize.CommonsChunkPlugin({
+        name: 'common',
+        minChunks: 2
+      })
     ]
   };
 

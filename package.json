@@ -13,6 +13,7 @@
     "babel-preset-es2015-loose": "8.0.0",
     "browser-sync": "2.17.3",
     "del": "2.2.2",
+    "firebase": "3.5.0",
     "gulp": "gulpjs/gulp#4.0",
     "gulp-audiosprite": "1.0.3",
     "gulp-changed": "1.3.2",

@@ -1,26 +1,16 @@
+@import "./auth";
+@import "./guide";
+
 .start-screen {
   position: absolute;
   width: 100%;
-  height: 70%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 
-  .nick {
-    position: relative;
-    z-index: 400;
-    width: 100%;
-    color: white;
-    font-size: 3em;
-    text-align: center;
-    text-shadow: 0 0 8px #000;
-    background-color: rgba(4, 130, 0, 0.4);
-    transition: opacity 0.5s;
-    will-change: opacity;
-  }
-
   .best-score-frame {
+    margin-top: 10px;
     color: white;
     font-size: 4em;
     text-shadow: 0 0 8px #103600;
@@ -35,81 +25,6 @@
     text-shadow: 0 0 8px #ef6c00;
     cursor: pointer;
     animation: 0.1s linear infinite alternate; /* new-game */
-  }
-}
-
-@keyframes new-game {
-  100% {
-    color: #bf5018;
-    text-shadow: 0 0 14px #680400;
-  }
-}
-
-.guide-wrap {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 10px 0;
-  opacity: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  transition: opacity 0.5s;
-  will-change: opacity;
-
-  &::after {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 6px;
-    background-color: rgba(0, 0, 0, 0.6);
-    content: '';
-  }
-
-  @media (min-height: 420px) {
-    opacity: 1;
-  }
-}
-
-.guide {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin: 0 auto;
-  max-width: 900px;
-}
-
-.guide-help {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  padding: 0 15px;
-  font-size: 4em;
-  color: white;
-  border: 5px double yellowgreen;
-  border-radius: 50%;
-  opacity: 0;
-  cursor: pointer;
-  transition: background-color 0.2s, opacity 0.2s;
-  will-change: opacity;
-
-  &:hover,
-  &:active {
-    background-color: rgba(4, 130, 0, 0.6);
-  }
-
-  &:focus {
-    opacity: 0;
-  }
-
-  &:focus ~ .guide-wrap {
-    opacity: 1;
-    z-index: 460;
-  }
-
-  @media (max-height: 420px) {
-    opacity: 1;
-    z-index: 460;
   }
 }
 

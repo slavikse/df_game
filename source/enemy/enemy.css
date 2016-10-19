@@ -41,3 +41,23 @@
     transform: rotateY(810deg);
   }
 }
+
+.enemy-health {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  font-family: sans-serif;
+  color: white;
+  text-align: center;
+  font-size: 1em;
+  background-color: red;
+  transition: transform 0.2s;
+  will-change: transform;
+}
+
+@keyframes enemy-health {
+  100% {
+    transform: translateX(-50%);
+  }
+}

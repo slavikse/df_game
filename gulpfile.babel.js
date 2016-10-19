@@ -16,14 +16,14 @@ const production = process.env.NODE_ENV === 'production';
 gulp.task('build',
   gulp.series(
     'audio',
-    'audio_sprite',
+    'audio_sprite', // #1
     'font',
     'image',
     'resize',
-    'script',
+    'script', // собирает json из аудио спрайта (#1)
     'service',
-    'sprite', // №1
-    'style', // забирает стили из спрайта изображений (№1)
+    'sprite', // #2
+    'style', // собирает css из спрайта изображений (#2)
     'svg',
     'view'
   )
@@ -34,7 +34,7 @@ if (production) {
     gulp.series(
       'del',
       'build',
-      // 'kraken', /** включать только для выкладки. Лимит 100 Mb */
+      // 'kraken', /** включать только для выкладки (хорошо жмет спрайт). Лимит 100 Mb */
       // 'symbol', /** уникальные символы в текстах в html файлах, для вырезания из шрифта лишнего */
       'rev',
       'gzip',

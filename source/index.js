@@ -11,3 +11,8 @@ import './result/result';
 import './statistic/statistic';
 
 /** загрузив игру, создаст событие, которое слушает стартовый экран */
+
+
+window.onerror = (message, url, lineNumber) => {
+  console.log(message, url, lineNumber);
+};

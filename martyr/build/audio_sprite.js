@@ -30,4 +30,4 @@ if (!production) {
   gulp.watch(files, gulp.series(name));
 }
 
-/** TODO решить с инкрементальностью. не подхватывает изменения в json */
+/** TODO решить с инкрементальностью. script не подхватывает изменения в json */

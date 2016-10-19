@@ -1,9 +1,9 @@
 import noise from './../helper/noise';
+import './auth';
 
 const
   $body = document.body,
   $startScreen = $body.querySelector('.start-screen'),
-  $nick = $startScreen.querySelector('.nick'),
   $bestScoreFrame = $startScreen.querySelector('.best-score-frame'),
   $bestScore = $bestScoreFrame.querySelector('.best-score'),
   $newGame = $startScreen.querySelector('.new-game'),
@@ -19,23 +19,7 @@ const
 initStartScreen();
 
 function initStartScreen() {
-  getNick();
   getBestScore();
-}
-
-function setNick() {
-  let nick = $nick.value;
-  localStorage.setItem('nick', nick);
-}
-
-function getNick() {
-  const nick = localStorage.getItem('nick');
-
-  if (nick) {
-    $nick.value = nick;
-  }
-
-  $nick.select();
 }
 
 function getBestScore() {
@@ -58,7 +42,6 @@ function initGame() {
   $newGame.removeEventListener('click', initGame);
   document.removeEventListener('keyup', initGame);
 
-  $nick.style.opacity = 0;
   $guideHelp.style.opacity = 0;
   $guideWrap.style.opacity = 0;
   $bestScoreFrame.style.opacity = 0;
@@ -66,7 +49,6 @@ function initGame() {
 
   noise(audioURI, audioIntro);
 
-  setNick();
   initInterface();
 
   setTimeout(initGameEnd, 500);

@@ -10,20 +10,25 @@ const
   bulletDrum = 6,
   audioURI = window.audioURI,
   audioSprite = window.audioSprite,
-  audioShoot = audioSprite.shoot,
+  audioShoots = [
+    audioSprite.shoot1,
+    audioSprite.shoot2,
+    audioSprite.shoot3,
+    audioSprite.shoot4
+  ],
   audioReload = audioSprite.reload;
 
 let
   discardedBullet = 0, // пули, которые были выброшены (при перезарядке, оставшиеся пули)
   drumReloadCount = 0,
   bulletCurrent = 0, // текущая пуля для выстрела в барабане
-  drumCount = 3, // барабанов для перезарядки
+  drumCount = 5, // барабанов для перезарядки
   isDrumRotate = false;
 
 drumCountChange(drumCount);
 
 function shoot(e) {
-  noise(audioURI, audioShoot);
+  noise(audioURI, audioShoots);
   shootPositionChange(e.shoot.x, e.shoot.y);
 
   /** GOD MOD */

@@ -1,0 +1,93 @@
+.auth-help {
+  position: absolute;
+  z-index: 460;
+  margin-top: 15px;
+  font-size: 3em;
+  color: #ffeb3b;
+  opacity: 1;
+  text-shadow: 0 0 8px #000;
+  cursor: pointer;
+  transition: color 0.5s;
+  will-change: opacity;
+
+  &:hover,
+  &:active {
+    color: #4cc938;
+  }
+
+  &:focus {
+    opacity: 0;
+  }
+
+  &:focus ~ .auth {
+    opacity: 1;
+    z-index: 460;
+  }
+
+  @media (min-height: 500px) {
+    opacity: 0;
+  }
+}
+
+.auth {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  z-index: 460;
+  width: 100%;
+  padding-bottom: 10px;
+  opacity: 0;
+  background-color: rgba(4, 130, 0, 0.4);
+  transition: opacity 0.5s;
+  will-change: opacity;
+
+  &:focus {
+    opacity: 1;
+    z-index: 460;
+  }
+
+  &::after {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 4px;
+    background-color: rgba(0, 0, 0, 0.6);
+    content: '';
+  }
+
+  @media (min-height: 500px) {
+    opacity: 1;
+  }
+
+  .login,
+  .password {
+    color: white;
+    font-size: 3em;
+    text-align: center;
+    text-shadow: 0 0 8px #000;
+
+    &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+      color: white;
+    }
+
+    &::-moz-placeholder { /* Firefox 19+ */
+      color: white;
+    }
+
+    &:-ms-input-placeholder { /* IE 10+ */
+      color: white;
+    }
+
+    &:-moz-placeholder { /* Firefox 18- */
+      color: white;
+    }
+  }
+
+  .submit {
+    color: #ffeb3b;
+    font-size: 3em;
+    text-shadow: 0 0 8px #000;
+    cursor: pointer;
+  }
+}

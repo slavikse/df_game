@@ -11,6 +11,7 @@ const
   eventEnemyKill = new Event('enemyKill');
 
 let
+  event = null, // event для сохранения выстрела в 1 точку
   shootCountTotal = 0, // выстрелов всего
   shootCountInTarget = 0, // пападание в цель
   shootCountInCat = 0, // пападание в бонусного котика
@@ -87,7 +88,7 @@ function shootAutoFireMove(e) {
 
 function movingGunStop(e) {
   clearTimeout(movingGunTimerID);
-  shoot(e);
+  shootFire(e);
 }
 
 function noShooting() {

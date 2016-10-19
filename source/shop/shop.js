@@ -125,7 +125,7 @@ function closeShop() {
   $closeShop.removeEventListener('mouseup', closeShop);
 
   noise(audioURI, audioNextWave);
-  setTimeout(closeShopEnd, 450); // animate + 50ms (запасик)
+  setTimeout(closeShopEnd, 400); // animate
 }
 
 function closeShopEnd() {
