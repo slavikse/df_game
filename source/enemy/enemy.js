@@ -34,7 +34,7 @@ let
 
 eventEnemyAdd.add = enemyCloneCount;
 eventEnemyDec.dec = 1;
-eventScoreAdd.add = 5;
+eventScoreAdd.add = 8;
 
 playingField();
 
@@ -83,6 +83,11 @@ function setDamage(clone) {
   return clone;
 }
 
+function damageAndEnemyHide(clone, damageNode, enemyNode, healthNode) {
+  document.dispatchEvent(eventDamage);
+  enemyHide(clone, damageNode, enemyNode, healthNode);
+}
+
 function setImage(clone) {
   const
     enemyNode = clone.children[1],
@@ -104,18 +109,58 @@ function setHealth(clone) {
   return clone;
 }
 
-function damageAndEnemyHide(clone, damageNode, enemyNode, healthNode) {
-  document.dispatchEvent(eventDamage);
+function enemyKill(e) {
+  const
+    clone = e.enemy.parentNode,
+    damageNode = clone.children[0],
+    enemyNode = clone.children[1],
+    healthNode = clone.children[2];
+
+  enemyHealthDec(healthNode);
+
+  if (
+    healthNode.death || // мертв
+    !enemyIsDeath(healthNode) // жив
+  ) {
+    return;
+  }
+
+  enemyDeath(clone, damageNode, enemyNode, healthNode);
+}
+
+function enemyHealthDec(healthNode) {
+  healthNode.style.animationName = 'enemy-health-dec';
+
+  setTimeout(() => {
+    healthNode.style.animationName = '';
+  }, 100); // animate
+}
+
+function enemyIsDeath(healthNode) {
+  if (healthNode.health > 1) {
+    healthNode.health -= 1;
+    healthNode.textContent = healthNode.health;
+    return false; // еще жив
+  }
+
+  healthNode.death = true;
+  return true;
+}
+
+function enemyDeath(clone, damageNode, enemyNode, healthNode) {
+  noise(audioURI, dieAudios);
   enemyHide(clone, damageNode, enemyNode, healthNode);
+  document.dispatchEvent(eventScoreAdd);
 }
 
 function enemyHide(clone, damageNode, enemyNode, healthNode) {
   clearTimeout(clone.damageTimer);
+
   damageNode.style.visibility = 'hidden';
+  healthNode.style.visibility = 'hidden';
 
   enemyNode.style.animationName = 'enemy-kill';
-  healthNode.style.visibility = 'hidden';
-  clone.style.zIndex = 0; // для возможности стрелять по тем, кто под убитым
+  clone.classList.add('enemy-hide');
 
   document.dispatchEvent(eventEnemyDec);
   setTimeout(enemyHideDelay.bind(null, clone), 500); // анимация
@@ -125,38 +170,10 @@ function enemyHideDelay(clone) {
   clone.style.visibility = 'hidden';
 }
 
-function enemyKill(e) {
-  const
-    clone = e.enemy.parentNode,
-    damageNode = clone.children[0],
-    enemyNode = clone.children[1],
-    healthNode = clone.children[2];
-
-  // if (!enemyNode) {
-  //   return;
-  // }
-
-  if (clone.death) {
-    return; // мертв
-  }
-
-  if (healthNode.health > 1) {
-    healthNode.health -= 1;
-    healthNode.textContent = healthNode.health;
-    healthNode.style.width = 100 - (100 / healthNode.health) + '%';
-    return; // еще жив
-  }
-
-  clone.death = true;
-  noise(audioURI, dieAudios);
-  enemyHide(clone, damageNode, enemyNode, healthNode);
-  document.dispatchEvent(eventScoreAdd);
-}
-
 function playingField() {
   const
-    enemyWidth = 94,
-    enemyHeight = 148,
+    enemyWidth = 150,
+    enemyHeight = 150,
     panelHeight = 100;
 
   playingFieldWidth = window.innerWidth - enemyWidth;

@@ -3,11 +3,13 @@
   opacity: 0;
   transition: opacity 0.4s, transform 0.4s; /* opacity - появление/скрытие, transform - перемещение по полю */
   will-change: opacity, transform;
+  pointer-events: none; /* при выстреле, будет не виден для эвентов мыши */
 }
 
 .cat-show {
-  opacity: 1;
   z-index: 100; /* обеспечивает перекрытие, чтобы была возможность попасть */
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .cat {

@@ -55,10 +55,6 @@ function stop() {
 }
 
 function shoot() {
-  if (!$catPosition.classList.contains('cat-show')) {
-    return;
-  }
-
   hide();
   toBad();
 

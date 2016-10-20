@@ -7,24 +7,47 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
 
   .best-score-frame {
     margin-top: 10px;
-    color: white;
     font-size: 4em;
-    text-shadow: 0 0 8px #103600;
+    color: #dfdfdf;
+    text-shadow: 0 0 10px #000000;
     transition: opacity 0.5s;
     will-change: opacity;
   }
 
   .new-game {
-    z-index: 450;
     font-size: 6em;
-    color: #ffeb3b;
-    text-shadow: 0 0 8px #ef6c00;
+    color: #e3e300;
+    text-shadow: 0 0 12px #4f1100;
     cursor: pointer;
-    animation: 0.1s linear infinite alternate; /* new-game */
+    animation: 0.1s linear infinite alternate both; /* new-game-after */
+    transition: color 0.2s, text-shadow 0.2s;
+    
+    &:hover {
+      animation-name: new-game-before;
+    }
+  }
+
+  .hide {
+    opacity: 0;
+  }
+}
+
+@keyframes new-game-before {
+  100% {
+    color: #ffff00;
+    text-shadow: 0 0 6px #ff7200;
+  }
+}
+
+@keyframes new-game-after {
+  100% {
+    color: #bf5018;
+    text-shadow: 0 0 14px #680400;
   }
 }
 

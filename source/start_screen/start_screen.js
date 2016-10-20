@@ -4,6 +4,8 @@ import './auth';
 const
   $body = document.body,
   $startScreen = $body.querySelector('.start-screen'),
+  $authHelp = $startScreen.querySelector('.auth-help'),
+  $auth = $startScreen.querySelector('.auth'),
   $bestScoreFrame = $startScreen.querySelector('.best-score-frame'),
   $bestScore = $bestScoreFrame.querySelector('.best-score'),
   $newGame = $startScreen.querySelector('.new-game'),
@@ -13,6 +15,7 @@ const
   $ambient = $body.querySelector('.ambient'),
   $forestNight = $body.querySelector('.forest-night'),
   audioURI = window.audioURI,
+  audioClick = window.audioSprite.menu_click,
   audioIntro = window.audioSprite.intro,
   eventStartGame = new Event('startGame');
 
@@ -24,6 +27,10 @@ function initStartScreen() {
 
 function getBestScore() {
   $bestScore.textContent = localStorage.getItem('best-score') || 0;
+}
+
+function hoverNewGame() {
+  noise(audioURI, audioClick);
 }
 
 function initGame() {
@@ -42,37 +49,38 @@ function initGame() {
   $newGame.removeEventListener('click', initGame);
   document.removeEventListener('keyup', initGame);
 
-  $guideHelp.style.opacity = 0;
-  $guideWrap.style.opacity = 0;
-  $bestScoreFrame.style.opacity = 0;
-  $newGame.style.animationName = 'new-game';
-
   noise(audioURI, audioIntro);
-
+  hiddenElement();
   initInterface();
 
   setTimeout(initGameEnd, 500);
   setTimeout(changeBackground, 5500);
 }
 
+function hiddenElement() {
+  $authHelp.classList.add('hide');
+  $auth.classList.add('hide');
+
+  $guideHelp.classList.add('hide');
+  $guideWrap.classList.add('hide');
+
+  $bestScoreFrame.classList.add('hide');
+}
+
+function initInterface() {
+  $newGame.style.animationName = 'new-game-after';
+  $panel.style.opacity = 1;
+  $forestNight.style.opacity = 1;
+}
+
 function initGameEnd() {
-  $newGame.style.opacity = 0;
-
   $startScreen.remove();
-  $guideHelp.remove();
-  $guideWrap.remove();
-
   document.dispatchEvent(eventStartGame);
 }
 
 function changeBackground() {
   $body.style.backgroundImage = 'none'; // освобождаем память
   $ambient.setAttribute('src', 'audio/dark_ambient.mp3');
-}
-
-function initInterface() {
-  $panel.style.opacity = 1;
-  $forestNight.style.opacity = 1;
 }
 
 function enterKeyHandler(e) {
@@ -83,5 +91,6 @@ function enterKeyHandler(e) {
   initGame();
 }
 
+$newGame.addEventListener('mouseover', hoverNewGame);
 $newGame.addEventListener('click', initGame);
 document.addEventListener('keyup', enterKeyHandler);

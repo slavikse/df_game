@@ -40,7 +40,7 @@ function damage() {
 
   /** / GOD MOD */
 
-  if (health <= 0) {
+  if (health === 0) {
     gameOver();
     return;
   }
@@ -128,7 +128,6 @@ function addFirstAidEnd() {
 
 function gameOver() {
   document.removeEventListener('damage', damage);
-  $healthWrap.removeEventListener('click', useFirstAid);
   document.removeEventListener('keyup', HKeyHandler);
   document.removeEventListener('mousedown', CMBHandler);
   document.removeEventListener('keyup', TKeyHandler);
@@ -172,7 +171,6 @@ function TKeyHandler(e) {
 
 document.addEventListener('buyFirstAid', addFirstAid);
 document.addEventListener('damage', damage);
-$healthWrap.addEventListener('click', useFirstAid);
 document.addEventListener('keyup', HKeyHandler);
 document.addEventListener('mousedown', CMBHandler);
 document.addEventListener('keyup', TKeyHandler);

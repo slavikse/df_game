@@ -26,27 +26,33 @@
   }
 
   .bullet1 {
-    transform: translate(31px, 5px);
+    top: 4px;
+    left: 29px;
   }
 
   .bullet2 {
-    transform: translate(55px, 18px);
+    top: 17px;
+    right: 6px;
   }
 
   .bullet3 {
-    transform: translate(55px, 46px);
+    bottom: 16px;
+    right: 6px;
   }
 
   .bullet4 {
-    transform: translate(32px, 59px);
+    bottom: 3px;
+    right: 30px;
   }
 
   .bullet5 {
-    transform: translate(7px, 46px);
+    bottom: 16px;
+    left: 6px;
   }
 
   .bullet6 {
-    transform: translate(7px, 18px);
+    top: 18px;
+    left: 6px;
   }
 
   .drum-count {

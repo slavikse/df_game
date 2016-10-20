@@ -38,7 +38,7 @@ function statisticGet() {
     'Время игры': `${minutes}m ${second}s`,
     'Волн пройдено': waveCount,
     'Доп волн': bonusWave,
-    'Очков набрано': score,
+    'Заработано': `${score}$`,
     'Расходы': `${costs}$`,
     'Перезарядок': drumReload,
     'Пуль выброшено': discardedBullet,

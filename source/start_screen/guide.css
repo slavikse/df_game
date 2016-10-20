@@ -1,6 +1,8 @@
 .guide-help {
+  position: absolute;
+  bottom: 0;
   margin: 10px auto;
-  padding: 0 15px;
+  padding: 0 18px;
   font-size: 4em;
   color: white;
   border: 5px double yellowgreen;
@@ -21,52 +23,34 @@
 
   &:focus ~ .guide-wrap {
     opacity: 1;
-    z-index: 460;
   }
 
   @media (max-height: 500px) {
     opacity: 1;
-    z-index: 460;
+    z-index: 10;
   }
 }
 
 .guide-wrap {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  position: relative;
   width: 100%;
   padding: 10px 0;
   opacity: 0;
+  border-top: 4px solid rgba(4, 130, 0, 0.4);
   background-color: rgba(0, 0, 0, 0.6);
   transition: opacity 0.5s;
   will-change: opacity;
-
-  &::after {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background-color: rgba(0, 0, 0, 0.6);
-    content: '';
-  }
+  pointer-events: none;
 
   @media (min-height: 500px) {
     opacity: 1;
   }
-}
 
-.guide {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin: 0 auto;
-  max-width: 900px;
-}
-
-@keyframes new-game {
-  100% {
-    color: #bf5018;
-    text-shadow: 0 0 14px #680400;
+  .guide {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 900px;
   }
 }

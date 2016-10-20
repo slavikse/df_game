@@ -142,14 +142,12 @@ function startGame() {
   document.addEventListener('shoot', shoot);
   document.addEventListener('keyup', RKeyHandler);
   document.addEventListener('contextmenu', drumReloadHandler);
-  $revolverWrap.addEventListener('click', drumRotate);
 }
 
 function gameOver() {
   document.removeEventListener('shoot', shoot);
   document.removeEventListener('keyup', RKeyHandler);
   document.removeEventListener('contextmenu', drumReloadHandler);
-  $revolverWrap.removeEventListener('click', drumRotate);
 
   discardedBulletStatistic();
   drumReloadCountStatistic();

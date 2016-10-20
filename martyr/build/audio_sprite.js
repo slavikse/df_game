@@ -1,5 +1,6 @@
 import gulp from 'gulp';
 import audioSprite from 'gulp-audiosprite';
+import util from 'gulp-util';
 
 const
   name = 'audio_sprite',
@@ -24,6 +25,7 @@ gulp.task(name, () => {
   return gulp.src(files)
   .pipe(audioSprite(config))
   .pipe(gulp.dest(there))
+  .on('data', () => util.log(name + 'script не подхватывает изменения в json'))
 });
 
 if (!production) {

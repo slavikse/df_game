@@ -1,5 +1,6 @@
 import gulp from 'gulp';
 import spritesmith from 'gulp.spritesmith';
+import util from 'gulp-util';
 
 const
   name = 'sprite',
@@ -31,6 +32,7 @@ function spriteCreate(cb) {
 function imageStream() {
   return spriteData.img
   .pipe(gulp.dest(thereImage))
+  .on('data', () => util.log('Обнови вкладку'))
 }
 
 function styleStream() {

@@ -13,6 +13,11 @@
   }
 }
 
+.enemy-hide {
+  z-index: 0;
+  pointer-events: none;
+}
+
 .enemy-damage {
   position: absolute;
   left: 0;
@@ -32,7 +37,7 @@
 
 .enemy {
   backface-visibility: visible;
-  animation: 0.5s both; /* enemy-kill */
+  animation: 0.5s; /* enemy-kill */
   will-change: transform;
 }
 
@@ -44,20 +49,19 @@
 
 .enemy-health {
   position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
+  right: 5px;
+  bottom: 5px;
+  padding: 2px 6px;
   font-family: sans-serif;
   color: white;
-  text-align: center;
-  font-size: 1em;
+  font-size: 1.2em;
   background-color: red;
-  transition: transform 0.2s;
-  will-change: transform;
+  border-radius: 50%;
+  animation: 0.1s alternate;
 }
 
-@keyframes enemy-health {
-  100% {
-    transform: translateX(-50%);
+@keyframes enemy-health-dec {
+  50% {
+    transform: scale(1.5);
   }
 }

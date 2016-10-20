@@ -14,6 +14,7 @@ const
   audioDrumHover = audioSprite.drum_hover,
   audioBuy = audioSprite.buy,
   audioBuyBlock = audioSprite.buy_block,
+  audioClick = audioSprite.menu_click,
   audioNextWave = audioSprite.next_wave,
   eventBuyDrum = new Event('buyDrum'),
   eventBuyFirstAid = new Event('buyFirstAid'),
@@ -41,7 +42,7 @@ function openShop() {
     firstAid = parseInt(sessionStorage.getItem('firstAid'), 10);
 
     buyLockUnlock();
-  }, 20);
+  }, 40);
 }
 
 function buyLockUnlock() {
@@ -118,8 +119,12 @@ function buyFirstAid() {
   document.dispatchEvent(eventBuyFirstAid);
 }
 
+function hoverCloseShop() {
+  noise(audioURI, audioClick);
+}
+
 function closeShop() {
-  $closeShop.style.animationName = 'close-shop';
+  $closeShop.style.animationName = 'close-shop-after';
 
   $store.removeEventListener('click', buy);
   $closeShop.removeEventListener('mouseup', closeShop);
@@ -160,4 +165,5 @@ function gameOver() {
 
 document.addEventListener('waveEnd', openShop);
 $store.addEventListener('mouseover', itemHandler);
+$closeShop.addEventListener('mouseover', hoverCloseShop);
 document.addEventListener('gameOver', gameOver);
