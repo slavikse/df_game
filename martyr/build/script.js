@@ -32,7 +32,7 @@ const
         {
           test: /\.js$/,
           loader: 'babel',
-          query: {compact: false}
+          // query: {compact: false}
         }, {
           test: /\.json$/,
           loader: 'json'
@@ -45,10 +45,10 @@ const
     plugins: [
       new webpack.NoErrorsPlugin(),
       new webpack.EnvironmentPlugin(["NODE_ENV"]),
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'common',
-        minChunks: 2
-      })
+      // new webpack.optimize.CommonsChunkPlugin({
+      //   name: 'common',
+      //   minChunks: 2
+      // })
     ]
   };
 

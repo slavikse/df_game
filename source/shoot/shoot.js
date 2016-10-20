@@ -1,4 +1,5 @@
 import debounce from 'libs/debounce';
+import delay from 'libs/delay';
 import noise from './../helper/noise';
 
 const
@@ -14,8 +15,8 @@ let
   shootCountTotal = 0, // выстрелов всего
   shootCountInTarget = 0, // пападание в цель
   shootCountInCat = 0, // пападание в бонусного котика
-  movingGunTimerID = null,
-  shootFireAutoTimerID,
+  shootMoveTimerID,
+  shootDownTimerID,
   shootEvent = new Event('shoot');
 
 function shoot(e) {
@@ -37,7 +38,7 @@ function shoot(e) {
     return;
   }
 
-  shootFireAutoTimerID = setTimeout(shoot.bind(null, e), fireRate);
+  shootDownTimerID = setTimeout(shoot.bind(null, e), fireRate);
 
   const
     target = e.target,
@@ -67,45 +68,47 @@ function shoot(e) {
   }
 }
 
-function shooting() {
-  document.addEventListener('mousedown', shootAutoFireDown);
-  document.addEventListener('mouseup', shootingStop);
+function shootStart() {
+  document.addEventListener('mousedown', shootDown);
+  document.addEventListener('mouseup', shootUp);
 }
 
-function shootAutoFireDown(e) {
+function shootDown(e) {
   shootFire(e);
-  document.addEventListener('mousemove', shootAutoFireMove);
+  document.addEventListener('mousemove', shootMove);
 }
 
-function shootAutoFireMove(e) {
-  clearTimeout(movingGunTimerID);
-  clearTimeout(shootFireAutoTimerID);
+function shootUp() {
+  document.removeEventListener('mousemove', shootMove);
 
-  movingGunTimerID = setTimeout(movingGunStop.bind(null, e), fireRate);
+  clearTimeout(shootDownTimerID);
+  clearTimeout(shootMoveTimerID);
+}
+
+function shootMove(e) {
+  clearTimeout(shootDownTimerID); // удаляет остатки выстрела (shootDown)
+  clearTimeout(shootMoveTimerID); // предотвращает преждевременную остановку выстрелов при движении
+
+  shootMoveTimerID = setTimeout(shootMoveStopAndShootDown.bind(null, e), fireRate);
+  shootFire(e); // при движении вызывается выстрел
+}
+
+/**
+ * курсор: остановившись остановит выстрелы при движении
+ * и начнет выстрелы в точку, пока зажата ЛКМ
+ */
+function shootMoveStopAndShootDown(e) {
+  clearTimeout(shootMoveTimerID);
   shootFire(e);
 }
 
-function movingGunStop(e) {
-  clearTimeout(movingGunTimerID);
-  shootFire(e);
-}
-
-function noShooting() {
-  document.removeEventListener('mousedown', shootAutoFireDown);
-  document.removeEventListener('mouseup', shootingStop);
-
-  shootingStop();
-}
-
-function shootingStop() {
-  document.removeEventListener('mousemove', shootAutoFireMove);
-
-  clearTimeout(movingGunTimerID);
-  clearTimeout(shootFireAutoTimerID);
+function shootEnd() {
+  document.removeEventListener('mousedown', shootDown);
+  document.removeEventListener('mousemove', shootMove);
 }
 
 function gameOver() {
-  noShooting();
+  shootEnd();
   shootCountStatistic();
 }
 
@@ -119,7 +122,7 @@ function shootCountStatistic() {
   document.dispatchEvent(shootCountEvent);
 }
 
-document.addEventListener('startGame', shooting);
-document.addEventListener('waveEnd', noShooting);
-document.addEventListener('waveStart', shooting);
+document.addEventListener('startGame', shootStart);
+document.addEventListener('waveEnd', shootEnd);
+document.addEventListener('waveStart', shootStart);
 document.addEventListener('gameOver', gameOver);

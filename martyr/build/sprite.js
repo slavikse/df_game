@@ -32,7 +32,7 @@ function spriteCreate(cb) {
 function imageStream() {
   return spriteData.img
   .pipe(gulp.dest(thereImage))
-  .on('data', () => util.log('Обнови вкладку'))
+  .on('data', () => util.log(name + ': Обнови вкладку'))
 }
 
 function styleStream() {

@@ -22,7 +22,7 @@ let
   discardedBullet = 0, // пули, которые были выброшены (при перезарядке, оставшиеся пули)
   drumReloadCount = 0,
   bulletCurrent = 0, // текущая пуля для выстрела в барабане
-  drumCount = 5, // барабанов для перезарядки
+  drumCount = 3, // барабанов для перезарядки
   isDrumRotate = false;
 
 drumCountChange(drumCount);
@@ -105,8 +105,8 @@ function holeReload() {
   }
 }
 
-function drumCountAdd(e) {
-  drumCount += e.add;
+function drumCountAdd() {
+  drumCount += 1;
   drumCountChange(drumCount);
 }
 

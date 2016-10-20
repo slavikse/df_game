@@ -5,7 +5,6 @@ import noise from './../helper/noise';
 const
   $body = document.body,
   $enemyPosition = $body.querySelector('.enemy-position'),
-  enemyCloneCount = 3,
   imagesClasses = [
     'icon-monster1',
     'icon-monster2',
@@ -28,18 +27,22 @@ const
   playingFieldResize = throttle(playingField, 500);
 
 let
+  enemyCloneCountDefault = 3,
+  enemyHealthDefault = [1, 2],
+  enemyDamageTimeDefault = [6, 8],
+  enemyCloneCount = enemyCloneCountDefault,
   $temp = $body.querySelector('.temp'),
   playingFieldWidth,
   playingFieldHeight;
 
-eventEnemyAdd.add = enemyCloneCount;
 eventEnemyDec.dec = 1;
-eventScoreAdd.add = 8;
+eventScoreAdd.add = 7;
 
 playingField();
 
-function cloneEnemy() {
+function cloneEnemy(e) {
   let fragment = document.createDocumentFragment();
+  enemyCloneCount = e.enemyCloneCount || enemyCloneCount; // котик генерит эвент
 
   for (let i = 0, len = enemyCloneCount; i < len; i++) {
     let clone = $enemyPosition.cloneNode(true);
@@ -51,7 +54,10 @@ function cloneEnemy() {
   }
 
   $temp.appendChild(fragment);
+
+  eventEnemyAdd.add = enemyCloneCount;
   document.dispatchEvent(eventEnemyAdd);
+  enemyCloneCount = enemyCloneCountDefault;
 }
 
 function setPosition(clone) {
@@ -66,7 +72,7 @@ function setPosition(clone) {
 
 function setDamage(clone) {
   const
-    damageTimer = range(6, 10),
+    damageTimer = range(...enemyDamageTimeDefault),
     damageNode = clone.children[0],
     enemyNode = clone.children[1],
     healthNode = clone.children[2];
@@ -101,7 +107,7 @@ function setImage(clone) {
 function setHealth(clone) {
   const
     healthNode = clone.children[2],
-    health = range(2, 3);
+    health = range(...enemyHealthDefault);
 
   healthNode.health = health;
   healthNode.textContent = health;
@@ -189,7 +195,9 @@ function createEnemyNode() {
 }
 
 function removeEnemyNode() {
-  $temp.remove();
+  setTimeout(() => {
+    $temp.remove();
+  }, 500); // чтобы успеть последнему мобу доанимировать
 }
 
 document.addEventListener('enemyCreate', cloneEnemy);

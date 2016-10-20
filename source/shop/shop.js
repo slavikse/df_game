@@ -26,6 +26,10 @@ let
   scoreCurrent,
   firstAid;
 
+function openShopWrap() {
+  setTimeout(openShop, 300);
+}
+
 function openShop() {
   $shop.classList.add('shop-open');
   $shop.style.zIndex = '400';
@@ -34,7 +38,7 @@ function openShop() {
   $score.classList.add('score-shop');
 
   $store.addEventListener('click', buy);
-  $closeShop.addEventListener('mouseup', closeShop);
+  $closeShop.addEventListener('click', closeShop);
 
   /** задержка из за отложенной записи в хранилище... */
   setTimeout(() => {
@@ -88,11 +92,10 @@ function buy(e) {
   const
     dataset = target.dataset,
     item = dataset.item,
-    addDrum = parseInt(dataset.add, 10),
     scoreDec = parseInt(dataset.score, 10);
 
   if (item === 'drum') {
-    buyDrum(addDrum);
+    buyDrum();
   } else if (item === 'first-aid') {
     buyFirstAid();
   } else {
@@ -109,8 +112,7 @@ function buy(e) {
   buyLockUnlock();
 }
 
-function buyDrum(addDrum) {
-  eventBuyDrum.add = addDrum;
+function buyDrum() {
   document.dispatchEvent(eventBuyDrum);
 }
 
@@ -127,7 +129,7 @@ function closeShop() {
   $closeShop.style.animationName = 'close-shop-after';
 
   $store.removeEventListener('click', buy);
-  $closeShop.removeEventListener('mouseup', closeShop);
+  $closeShop.removeEventListener('click', closeShop);
 
   noise(audioURI, audioNextWave);
   setTimeout(closeShopEnd, 400); // animate
@@ -144,11 +146,7 @@ function closeShopEnd() {
   document.dispatchEvent(eventWaveStart);
 }
 
-function itemHandler(e) {
-  if (!e.target.classList.contains('item')) {
-    return;
-  }
-
+function itemHandler() {
   noise(audioURI, audioDrumHover);
 }
 
@@ -159,11 +157,11 @@ function costsStatistic() {
 }
 
 function gameOver() {
-  document.removeEventListener('waveEnd', openShop);
+  document.removeEventListener('waveEnd', openShopWrap);
   costsStatistic();
 }
 
-document.addEventListener('waveEnd', openShop);
+document.addEventListener('waveEnd', openShopWrap);
 $store.addEventListener('mouseover', itemHandler);
 $closeShop.addEventListener('mouseover', hoverCloseShop);
 document.addEventListener('gameOver', gameOver);

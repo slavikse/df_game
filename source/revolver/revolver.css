@@ -4,10 +4,6 @@
   align-items: flex-end;
   z-index: 120;
 
-  .revolver {
-    transform: translateX(20px);
-  }
-
   .drum {
     position: relative;
     transition: transform 0.2s; /* поворот при выстреле */

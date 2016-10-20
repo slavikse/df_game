@@ -25,7 +25,7 @@ gulp.task(name, () => {
   return gulp.src(files)
   .pipe(audioSprite(config))
   .pipe(gulp.dest(there))
-  .on('data', () => util.log(name + 'script не подхватывает изменения в json'))
+  .on('data', () => util.log(name + ': script не подхватывает изменения в json'))
 });
 
 if (!production) {

@@ -7,7 +7,6 @@ const
   $catPosition = $body.querySelector('.cat-position'),
   $cat = $catPosition.querySelector('.cat'),
   $toBad = $body.querySelector('.to-bad'),
-  eventEnemyCreate = new Event('enemyCreate'),
   audioURI = window.audioURI,
   audioToBad = window.audioSprite.to_bad,
   playingFieldResize = throttle(playingField, 500),
@@ -18,7 +17,10 @@ let
   hideTimerID,
   runTimerID,
   playingFieldWidth,
-  playingFieldHeight;
+  playingFieldHeight,
+  eventEnemyCreate = new Event('enemyCreate');
+
+eventEnemyCreate.enemyCloneCount = 2;
 
 playingField();
 

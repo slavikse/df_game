@@ -1,7 +1,6 @@
 const
   $nextTime = document.querySelector('.next-time'),
   nextTimeMax = 4,
-  numberWaveMax = 3,
   eventEnemyCreate = new Event('enemyCreate'),
   eventWaveEnd = new Event('waveEnd');
 
@@ -9,6 +8,7 @@ let
   waveCount = 0,
   isWaveEnd,
   nextTimeTimeout,
+  numberWaveDefault = 1,
   nextTimeCurrent = nextTimeMax,
   numberWaveCurrent = 0;
 
@@ -46,7 +46,7 @@ function nextWave() {
 }
 
 function waveEnd() {
-  if (numberWaveCurrent === numberWaveMax) {
+  if (numberWaveCurrent === numberWaveDefault) {
     numberWaveCurrent = 0;
     isWaveEnd = true;
 
