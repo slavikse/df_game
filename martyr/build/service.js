@@ -14,5 +14,5 @@ gulp.task(name, () => {
 });
 
 if (!production) {
-  gulp.watch(files, gulp.series(name));
+  gulp.watch(files, gulp.parallel(name));
 }

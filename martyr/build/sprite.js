@@ -29,10 +29,11 @@ function spriteCreate(cb) {
   cb();
 }
 
+/** отлично жмет кракен. используемые средства сжатия не жмут вообще */
 function imageStream() {
   return spriteData.img
   .pipe(gulp.dest(thereImage))
-  .on('data', () => util.log(name + ': Обнови вкладку'))
+  .on('data', () => util.log('                      Обнови вкладку: ' + name))
 }
 
 function styleStream() {
@@ -41,5 +42,5 @@ function styleStream() {
 }
 
 if (!production) {
-  gulp.watch(files, gulp.series(name));
+  gulp.watch(files, gulp.parallel(name));
 }

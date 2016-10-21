@@ -7,7 +7,6 @@ const
   name = 'resize',
   files = 'source/**/resize/*',
   there = 'public/image',
-  production = process.env.NODE_ENV === 'production',
   config = {
     '*': [{
       width: '100%'
@@ -22,7 +21,8 @@ const
         suffix: '_mobile'
       }
     }]
-  };
+  },
+  production = process.env.NODE_ENV === 'production';
 
 let param = {
   quality: 100,
@@ -50,7 +50,7 @@ gulp.task(name, () => {
 });
 
 if (!production) {
-  gulp.watch(files, gulp.series(name));
+  gulp.watch(files, gulp.parallel(name));
 }
 
 // configWebp = {

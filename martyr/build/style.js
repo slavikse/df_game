@@ -6,9 +6,9 @@ import cached from 'postcss-cached';
 import atImport from 'postcss-import';
 import nested from 'postcss-nested';
 import media from 'postcss-media-minmax';
-import flexFixed from 'postcss-flexbugs-fixes';
 import autoprefixer from 'autoprefixer';
 import csso from 'postcss-csso';
+import flexFixed from 'postcss-flexbugs-fixes';
 
 const
   name = 'style',
@@ -16,7 +16,7 @@ const
     'source/*.css',
     '!source/_*.css'
   ],
-  wFiles = '{source,temp}/**/*.css', // temp -> png sprite
+  wFiles = '{source,temp}/**/*.css', // temp -> стили для png sprite
   there = 'public',
   production = process.env.NODE_ENV === 'production';
 
@@ -43,5 +43,5 @@ gulp.task(name, () => {
 });
 
 if (!production) {
-  gulp.watch(wFiles, gulp.series(name));
+  gulp.watch(wFiles, gulp.parallel(name));
 }

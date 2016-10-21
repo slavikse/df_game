@@ -11,7 +11,7 @@ const
   $closeShop = $shop.querySelector('.close-shop'),
   audioURI = window.audioURI,
   audioSprite = window.audioSprite,
-  audioDrumHover = audioSprite.drum_hover,
+  audioBuyHover = audioSprite.buy_hover,
   audioBuy = audioSprite.buy,
   audioBuyBlock = audioSprite.buy_block,
   audioClick = audioSprite.menu_click,
@@ -147,7 +147,7 @@ function closeShopEnd() {
 }
 
 function itemHandler() {
-  noise(audioURI, audioDrumHover);
+  noise(audioURI, audioBuyHover);
 }
 
 function costsStatistic() {

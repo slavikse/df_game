@@ -14,11 +14,10 @@ const
   files = 'source/*.html',
   wFiles = 'source/**/*.html',
   there = 'public',
-  production = process.env.NODE_ENV === 'production',
   options = {
     collapseBooleanAttributes: true,
     collapseInlineTagWhitespace: true, /* 1 */
-    collapseWhitespace: true,
+    collapseWhitespace: true, // убирает пробел между inline элементами
     minifyCSS: true,
     minifyJS: true,
     removeAttributeQuotes: true,
@@ -28,7 +27,8 @@ const
     removeRedundantAttributes: true, /* 2 */
     sortAttributes: true,
     sortClassName: true
-  };
+  },
+  production = process.env.NODE_ENV === 'production';
 
 gulp.task(name, () => {
   return gulp.src(files)
@@ -39,5 +39,5 @@ gulp.task(name, () => {
 });
 
 if (!production) {
-  gulp.watch(wFiles, gulp.series(name));
+  gulp.watch(wFiles, gulp.parallel(name));
 }

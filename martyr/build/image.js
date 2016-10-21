@@ -8,8 +8,11 @@ const
   name = 'image',
   files = 'source/**/image/*',
   there = 'public/image',
-  production = process.env.NODE_ENV === 'production',
-  config = {'*': {width: '100%'}},
+  config = {
+    '*': {
+      width: '100%'
+    }
+  },
   param = {
     quality: 80,
     progressive: true,
@@ -19,7 +22,8 @@ const
     errorOnEnlargement: false,
     errorOnUnusedConfig: false,
     withoutEnlargement: false
-  };
+  },
+  production = process.env.NODE_ENV === 'production';
 
 gulp.task(name, () => {
   return gulp.src(files)
@@ -30,7 +34,7 @@ gulp.task(name, () => {
 });
 
 if (!production) {
-  gulp.watch(files, gulp.series(name));
+  gulp.watch(files, gulp.parallel(name));
 }
 
 // configWebp = {

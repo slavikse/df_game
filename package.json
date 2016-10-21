@@ -1,6 +1,6 @@
 {
   "name": "martyr",
-  "version": "3.9.7",
+  "version": "3.9.8",
   "description": "Сборщик веб проектов. Автоматизация задач. Упрощение жизни за счет машин :)",
   "main": "gulpfile.babel.js",
   "author": "slavikse",
@@ -11,9 +11,8 @@
     "babel-loader": "6.2.5",
     "babel-preset-es2015": "6.16.0",
     "babel-preset-es2015-loose": "8.0.0",
-    "browser-sync": "2.17.3",
+    "browser-sync": "2.17.5",
     "del": "2.2.2",
-    "firebase": "3.5.0",
     "gulp": "gulpjs/gulp#4.0",
     "gulp-audiosprite": "1.0.3",
     "gulp-changed": "1.3.2",
