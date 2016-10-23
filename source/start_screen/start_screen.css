@@ -7,16 +7,16 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 
   .best-score-frame {
     margin-top: 10px;
     font-size: 4em;
-    color: #dfdfdf;
-    text-shadow: 0 0 10px #000000;
+    color: #fff;
+    text-shadow: 0 0 4px #000000;
     text-align: center;
-    transition: opacity 0.5s;
+    transition: opacity 0.4s;
     will-change: opacity;
   }
 
@@ -29,7 +29,6 @@
     transition: color 0.2s, text-shadow 0.2s;
     
     &:hover {
-      animation-name: new-game-before;
       animation-duration: 0.1s;
     }
 
@@ -45,13 +44,6 @@
 }
 
 @keyframes new-game-default {
-  100% {
-    color: #ffff00;
-    text-shadow: 0 0 6px #ff7200;
-  }
-}
-
-@keyframes new-game-before {
   100% {
     color: #ffff00;
     text-shadow: 0 0 6px #ff7200;
