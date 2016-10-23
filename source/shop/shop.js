@@ -1,4 +1,5 @@
 import noise from './../helper/noise';
+import './shop_time';
 
 const
   $body = document.body,
@@ -26,27 +27,28 @@ let
   scoreCurrent,
   firstAid;
 
-function openShopWrap() {
-  setTimeout(openShop, 300);
+function openShopDelay() {
+  setTimeout(openShop, 1500); // уведомление
 }
 
 function openShop() {
+  $body.classList.add('dont-shoot');
   $shop.classList.add('shop-open');
   $shop.style.zIndex = '400';
-
-  $body.classList.add('dont-shoot');
   $score.classList.add('score-shop');
 
   $store.addEventListener('click', buy);
   $closeShop.addEventListener('click', closeShop);
 
   /** задержка из за отложенной записи в хранилище... */
-  setTimeout(() => {
-    scoreCurrent = parseInt(sessionStorage.getItem('score'), 10);
-    firstAid = parseInt(sessionStorage.getItem('firstAid'), 10);
+  setTimeout(deferredReading, 40);
+}
 
-    buyLockUnlock();
-  }, 40);
+function deferredReading() {
+  scoreCurrent = parseInt(sessionStorage.getItem('score'), 10);
+  firstAid = parseInt(sessionStorage.getItem('firstAid'), 10);
+
+  buyLockUnlock();
 }
 
 function buyLockUnlock() {
@@ -137,10 +139,9 @@ function closeShop() {
 
 function closeShopEnd() {
   $body.classList.remove('dont-shoot');
-  $score.classList.remove('score-shop');
-
   $shop.classList.remove('shop-open');
   $shop.style.zIndex = 'auto';
+  $score.classList.remove('score-shop');
 
   $closeShop.style.animationName = '';
   document.dispatchEvent(eventWaveStart);
@@ -157,11 +158,11 @@ function costsStatistic() {
 }
 
 function gameOver() {
-  document.removeEventListener('waveEnd', openShopWrap);
+  document.removeEventListener('waveEnd', openShopDelay);
   costsStatistic();
 }
 
-document.addEventListener('waveEnd', openShopWrap);
+document.addEventListener('waveEnd', openShopDelay);
 $store.addEventListener('mouseover', itemHandler);
 $closeShop.addEventListener('mouseover', hoverCloseShop);
 document.addEventListener('gameOver', gameOver);

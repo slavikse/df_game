@@ -32,6 +32,7 @@ const
         {
           test: /\.js$/,
           loader: 'babel',
+          exclude: /firebase/
           // query: {compact: false}
         }, {
           test: /\.json$/,

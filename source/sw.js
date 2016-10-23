@@ -1,74 +1,117 @@
-
-//TODO не обновляет кэши
-
-/**
- * Кэш инвалидируется в случае изменения файлов,
- * об этом позаботится задача rev,
- * которая сменит имена в у index.css и index.js,
- * тем самым сменит версию кэша (гениально и просто)
- */
 const
-  cacheVersion = 'index.css:index.js',
-  cacheURI = [
-    '/index.css',
-    '/index.js',
+  cacheName = 'v2',
+  cacheFiles = [
+    './',
+    './index.css',
+    './index.js',
 
-    '/audio/audio_sprite.mp3',
-    '/audio/dark_ambient.mp3',
-    '/audio/light_ambient.mp3',
+    './audio/audio_sprite.mp3',
+    './audio/dark_ambient.mp3',
+    './audio/light_ambient.mp3',
 
-    '/font/beermoney.woff',
-    '/font/beermoney.woff2',
-    '/font/gun_store.woff',
-    '/font/gun_store.woff2',
+    './font/beermoney.woff',
+    './font/beermoney.woff2',
+    './font/gun_store.woff',
+    './font/gun_store.woff2',
 
-    '/image/dark.forest.png',
-    '/image/forest_day.jpg',
-    '/image/forest_day_mobile.jpg',
-    '/image/forest_day_tablet.jpg',
-    '/image/forest_night.jpg',
-    '/image/forest_night_mobile.jpg',
-    '/image/forest_night_tablet.jpg',
-    '/image/sprite.png'
+    './image/dark.forest.png',
+    './image/forest_day.jpg',
+    './image/forest_day_mobile.jpg',
+    './image/forest_day_tablet.jpg',
+    './image/forest_night.jpg',
+    './image/forest_night_mobile.jpg',
+    './image/forest_night_tablet.jpg',
+    './image/sprite.png'
   ];
 
 function install(e) {
-  e.waitUntil(cached);
+  // console.info('[sw] Установка sw');
+  e.waitUntil(
+    caches.open(cacheName)
+    .then(cachedFiles)
+    .catch(cachedError)
+  );
 }
 
-function cached() {
-  caches
-  .open(cacheVersion)
-  .then(cacheAll)
-  .catch(cacheError)
+function cachedFiles(cache) {
+  // console.info('[sw] Кэширование данных');
+  return cache.addAll(cacheFiles);
 }
 
-function cacheAll(cache) {
-  return cache.addAll(cacheURI);
+function cachedError(error) {
+  console.error(`[sw] Ошибка кэширования: ${error}`);
 }
 
-function cacheError(error) {
-  console.error(`Ошибка с добавлением в кэш: ${error}`);
+function activate(e) {
+  // console.info('[sw] Активация sw');
+  e.waitUntil(
+    caches.keys()
+    .then(cacheActual)
+  )
+}
+
+function cacheActual(cacheNames) {
+  return Promise.all(cacheNames.map(outdatedCache));
+}
+
+function outdatedCache(thisCacheName) {
+  if (thisCacheName !== cacheName) {
+    // console.info('[sw] Удаление кэшированных файлов:', thisCacheName);
+    return caches.delete(thisCacheName);
+  }
 }
 
 function fetched(e) {
+  // console.info('[sw] Получение данных', e.request.url);
   e.respondWith(
-    caches
-    .match(e.request)
-    .then(cachedResponse => {
-      if (cachedResponse) {
-        return cachedResponse;
+    caches.match(e.request)
+    .then(response => {
+      if (response) {
+        // console.info("[sw] Найдено в кэше: ", e.request.url, response);
+        return response;
       }
 
-      return fetch(e.request);
+      let requestClone = e.request.clone();
+      fetch(requestClone)
+      .then(response => {
+        if (!response) {
+          // console.info("[sw] Нет ответа из кэша");
+          return response;
+        }
+
+        let responseClone = response.clone();
+
+        caches.open(cacheName)
+        .then(cache => {
+          cache.put(e.request, responseClone);
+          // console.info('[sw] Кэширование новых данных: ', e.request.url);
+
+          return response;
+
+        });
+
+      })
+      .catch(fetchError);
     })
-    .catch(fetchError)
+
+
+    // caches
+    // .match(e.request)
+    // .then(cachedResponse => {
+    //   if (cachedResponse) {
+    //     return cachedResponse;
+    //   }
+    //
+    //   return fetch(e.request);
+    // })
+    // .catch(fetchError)
   )
 }
 
 function fetchError(error) {
-  console.log(`Ошибка с поиском кэша: ${error}`);
+  console.error(`[sw] Ошибка получения & кэширования новых данных: ${error}`);
 }
 
 self.addEventListener('install', install);
+self.addEventListener('activate', activate);
 self.addEventListener('fetch', fetched);

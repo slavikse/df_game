@@ -1,5 +1,5 @@
-// import firebase from 'firebase/app';
-// import 'firebase/auth';
+import firebase from 'firebase/app.js';
+import 'firebase/auth.js';
 // import 'firebase/database';
 // import 'firebase/storage';
 
@@ -14,39 +14,42 @@ const
     authDomain: "dark-forest-1567c.firebaseapp.com",
     databaseURL: "https://dark-forest-1567c.firebaseio.com",
     storageBucket: "dark-forest-1567c.appspot.com",
-    // messagingSenderId: "877244196821"
+    messagingSenderId: "877244196821"
   };
 
-// firebase.initializeApp(config);
-//
-// function auth(e) {
-//   firebase.auth()
-//   .createUserWithEmailAndPassword(e.email, e.password)
-//   .catch(authError);
-// }
-//
-// function authError(error) {
-//   console.warn(error);
-// }
-//
-// document.addEventListener('auth', auth);
+firebase.initializeApp(config);
+
+$login.select();
 
 function auth(e) {
   e.preventDefault();
 
-  console.log(
-    document.forms.auth.login.value,
-    document.forms.auth.password.value
-  );
+  const
+    authElem = document.forms.auth,
+    login = authElem.login.value,
+    password = authElem.password.value;
 
-  // let login = $login.value || 'tester';
-  // $login.select();
-
-  // return login;
+  fbAuth(login, password);
 }
-//
+
+function fbAuth(login, password) {
+  const unrealEmail = `${login}@gmail.com`;
+
+  firebase.auth()
+  .createUserWithEmailAndPassword(unrealEmail, password)
+  .then(e => {
+    console.log(e)
+  })
+  .catch(authError);
+}
+
+function authError(error) {
+  console.warn(error.code, error.message);
+}
+
 // function login() {
 //
 // }
 
 $submit.addEventListener('click', auth);
+document.addEventListener('auth', auth);

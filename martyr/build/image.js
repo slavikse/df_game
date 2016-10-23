@@ -14,9 +14,9 @@ const
     }
   },
   param = {
-    quality: 80,
+    quality: 60,
     progressive: true,
-    compressionLevel: 6,
+    compressionLevel: 8,
     stats: false,
     silent: true,
     errorOnEnlargement: false,

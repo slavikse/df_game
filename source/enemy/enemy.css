@@ -1,6 +1,9 @@
 .enemy-position {
   position: absolute;
   overflow: hidden; /* полоска таймера до нанесения урона */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   opacity: 0;
   animation: 0.4s enemy-position-show both;
   z-index: 100; /* обеспечивает перекрытие, чтобы была возможность попасть */
@@ -18,20 +21,24 @@
   pointer-events: none;
 }
 
-.enemy-damage {
+.enemy-warning {
   position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 5px;
-  height: 100%;
-  background-color: red;
-  animation: linear enemy-damage both;
-  will-change: transform;
+  z-index: 110;
+  opacity: 0;
+  pointer-events: none;
 }
 
-@keyframes enemy-damage {
+.enemy-damage {
+  position: absolute;
+  transform: translateX(100%);
+  z-index: 105;
+  animation: 0.5s enemy-damage-animate both paused;
+  pointer-events: none;
+}
+
+@keyframes enemy-damage-animate {
   100% {
-    transform: translateY(100%);
+    transform: translateX(-100%) rotate(90deg);
   }
 }
 
@@ -51,13 +58,14 @@
   position: absolute;
   right: 5px;
   bottom: 5px;
-  padding: 2px 6px;
+  padding: 1px 4px;
   font-family: sans-serif;
   color: white;
-  font-size: 1.2em;
+  font-size: 1em;
   background-color: red;
   border-radius: 50%;
   animation: 0.1s alternate;
+  pointer-events: none;
 }
 
 @keyframes enemy-health-dec {

@@ -6,10 +6,10 @@ const
   $body = document.body,
   $enemyPosition = $body.querySelector('.enemy-position'),
   imagesClasses = [
-    'icon-monster1',
-    'icon-monster2',
-    'icon-monster3',
-    'icon-monster4'
+    'icon-enemy1',
+    'icon-enemy2',
+    'icon-enemy3',
+    'icon-enemy4'
   ],
   imagesClassesLength = imagesClasses.length - 1,
   eventEnemyAdd = new Event('enemyAdd'),
@@ -19,15 +19,15 @@ const
   audioURI = window.audioURI,
   audioSprite = window.audioSprite,
   dieAudios = [
-    audioSprite.monster_die1,
-    audioSprite.monster_die2,
-    audioSprite.monster_die3,
-    audioSprite.monster_die4,
+    audioSprite.enemy_die1,
+    audioSprite.enemy_die2,
+    audioSprite.enemy_die3,
+    audioSprite.enemy_die4,
   ],
   playingFieldResize = throttle(playingField, 500);
 
 let
-  enemyCloneCountDefault = 3,
+  enemyCloneCountDefault = 4,
   enemyHealthDefault = [1, 2],
   enemyDamageTimeDefault = [6, 8],
   enemyCloneCount = enemyCloneCountDefault,
@@ -72,31 +72,40 @@ function setPosition(clone) {
 
 function setDamage(clone) {
   const
-    damageTimer = range(...enemyDamageTimeDefault),
-    damageNode = clone.children[0],
-    enemyNode = clone.children[1],
-    healthNode = clone.children[2];
+    damageTimer = range(...enemyDamageTimeDefault) * 1000,
+    warningNode = clone.querySelector('.enemy-warning'),
+    damageNode = clone.querySelector('.enemy-damage'),
+    enemyNode = clone.querySelector('.enemy'),
+    healthNode = clone.querySelector('.enemy-health');
 
-  damageNode.style.animationDuration = `${damageTimer}s`;
+  clone.warningTimer = setTimeout(
+    enemyWarning.bind(null, warningNode),
+    damageTimer - 1000
+  );
 
-  /** enemy сохраняет свой таймер урона
-   * для дальнейшего его удаления */
+  /** сохраняет таймер урона для дальнейшего его удаления */
   clone.damageTimer = setTimeout(
-    damageAndEnemyHide.bind(null, clone, damageNode, enemyNode, healthNode),
-    damageTimer * 1000
+    enemyDamage.bind(null, {clone, warningNode, damageNode, enemyNode, healthNode}),
+    damageTimer
   );
 
   return clone;
 }
 
-function damageAndEnemyHide(clone, damageNode, enemyNode, healthNode) {
+function enemyWarning(warningNode) {
+  warningNode.style.opacity = 1;
+}
+
+function enemyDamage(nodes) {
+  nodes.warningNode.style.opacity = 0;
+  nodes.damageNode.style.animationPlayState = 'running';
   document.dispatchEvent(eventDamage);
-  enemyHide(clone, damageNode, enemyNode, healthNode);
+  enemyHide(nodes);
 }
 
 function setImage(clone) {
   const
-    enemyNode = clone.children[1],
+    enemyNode = clone.querySelector('.enemy'),
     random = range(0, imagesClassesLength);
 
   enemyNode.classList.add(imagesClasses[random]);
@@ -106,7 +115,7 @@ function setImage(clone) {
 
 function setHealth(clone) {
   const
-    healthNode = clone.children[2],
+    healthNode = clone.querySelector('.enemy-health'),
     health = range(...enemyHealthDefault);
 
   healthNode.health = health;
@@ -118,9 +127,10 @@ function setHealth(clone) {
 function enemyKill(e) {
   const
     clone = e.enemy.parentNode,
-    damageNode = clone.children[0],
-    enemyNode = clone.children[1],
-    healthNode = clone.children[2];
+    warningNode = clone.querySelector('.enemy-warning'),
+    damageNode = clone.querySelector('.enemy-damage'),
+    enemyNode = clone.querySelector('.enemy'),
+    healthNode = clone.querySelector('.enemy-health');
 
   enemyHealthDec(healthNode);
 
@@ -131,7 +141,7 @@ function enemyKill(e) {
     return;
   }
 
-  enemyDeath(clone, damageNode, enemyNode, healthNode);
+  enemyDeath({clone, warningNode, damageNode, enemyNode, healthNode});
 }
 
 function enemyHealthDec(healthNode) {
@@ -153,23 +163,24 @@ function enemyIsDeath(healthNode) {
   return true;
 }
 
-function enemyDeath(clone, damageNode, enemyNode, healthNode) {
+function enemyDeath(nodes) {
   noise(audioURI, dieAudios);
-  enemyHide(clone, damageNode, enemyNode, healthNode);
+  enemyHide(nodes);
   document.dispatchEvent(eventScoreAdd);
 }
 
-function enemyHide(clone, damageNode, enemyNode, healthNode) {
-  clearTimeout(clone.damageTimer);
+function enemyHide(nodes) {
+  clearTimeout(nodes.clone.warningTimer);
+  clearTimeout(nodes.clone.damageTimer);
 
-  damageNode.style.visibility = 'hidden';
-  healthNode.style.visibility = 'hidden';
+  nodes.warningNode.style.visibility = 'hidden';
+  nodes.healthNode.style.visibility = 'hidden';
 
-  enemyNode.style.animationName = 'enemy-kill';
-  clone.classList.add('enemy-hide');
+  nodes.enemyNode.style.animationName = 'enemy-kill';
+  nodes.clone.classList.add('enemy-hide');
 
   document.dispatchEvent(eventEnemyDec);
-  setTimeout(enemyHideDelay.bind(null, clone), 500); // анимация
+  setTimeout(enemyHideDelay.bind(null, nodes.clone), 500); // анимация
 }
 
 function enemyHideDelay(clone) {

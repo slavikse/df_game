@@ -17,6 +17,10 @@ body {
   cursor: crosshair;
   overflow: hidden; /* мобы могут появляться на краю */
 
+  &.dont-shoot {
+    cursor: cell;
+  }
+
   @media (544px <= width <= 992px) {
     background-image: url("image/forest_day_tablet.jpg");
   }
@@ -24,8 +28,4 @@ body {
   @media (width > 992px) {
     background-image: url("image/forest_day.jpg");
   }
-}
-
-body.dont-shoot {
-  cursor: cell;
 }

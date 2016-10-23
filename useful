@@ -74,8 +74,8 @@ Twitter
 
 Рекомендации:
   Mobile first! Поиск справа налево. will-change для сложной анимации
-  Layout: раскладка (width, left, ...), дорогая операция
-  Paint: отрисовка (color, opacity, ...), дешевая операция
+  Layout: раскладка (width, left..), дорогая операция
+  Paint: отрисовка (color, opacity..), дешевая операция
   Composite: компоновка, самая дешевая операция
   Opacity, transform: самые дешевые операции
 
@@ -115,8 +115,6 @@ svg4everybody();
  * При использовании webp поправить конфиг в сборке изображений */
 import picturefill from 'picturefill';
 picturefill();
-
-Шаблонка: https://lodash.com/docs/4.16.4#template
 
 ----------------------------- NPM ---------------------------
 opener: npmjs.com/package/opener

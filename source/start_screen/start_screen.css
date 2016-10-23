@@ -25,16 +25,29 @@
     color: #e3e300;
     text-shadow: 0 0 12px #4f1100;
     cursor: pointer;
-    animation: 0.1s linear infinite alternate both; /* new-game-after */
+    animation: new-game-default 0.3s linear infinite alternate both; /* new-game-after */
     transition: color 0.2s, text-shadow 0.2s;
     
     &:hover {
       animation-name: new-game-before;
+      animation-duration: 0.1s;
+    }
+
+    &.new-game-after {
+      animation-name: new-game-after;
+      animation-duration: 0.1s;
     }
   }
 
   .hide {
     opacity: 0;
+  }
+}
+
+@keyframes new-game-default {
+  100% {
+    color: #ffff00;
+    text-shadow: 0 0 6px #ff7200;
   }
 }
 

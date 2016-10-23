@@ -24,7 +24,7 @@
     z-index: 10;
   }
 
-  @media (min-height: 500px) {
+  @media (height > 500px) {
     opacity: 0;
   }
 }
@@ -46,7 +46,7 @@
     z-index: 10;
   }
 
-  @media (min-height: 500px) {
+  @media (height > 500px) {
     opacity: 1;
   }
 

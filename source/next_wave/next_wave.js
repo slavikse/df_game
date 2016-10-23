@@ -8,22 +8,22 @@ let
   waveCount = 0,
   isWaveEnd,
   nextTimeTimeout,
-  numberWaveDefault = 1,
   nextTimeCurrent = nextTimeDefault,
+  numberWaveDefault = 2,
   numberWaveCurrent = 0;
 
 function run() {
-  $nextTime.style.animationName = 'blink';
+  $nextTime.style.animationName = 'tick';
   isWaveEnd = false;
 
   nextTime();
 }
 
 function nextTime() {
-  nextTimeTimeout = setTimeout(timer, 1000);
+  nextTimeTimeout = setTimeout(nextWaveTime, 1000);
 }
 
-function timer() {
+function nextWaveTime() {
   $nextTime.textContent = nextTimeCurrent;
   nextTimeCurrent -= 1;
 
@@ -38,19 +38,19 @@ function timer() {
 }
 
 function nextWave() {
+  $nextTime.textContent = '+';
   waveCount += 1;
   numberWaveCurrent += 1;
   document.dispatchEvent(eventEnemyCreate);
-
   waveEnd();
 }
 
 function waveEnd() {
   if (numberWaveCurrent === numberWaveDefault) {
+    $nextTime.style.animationName = '';
+    $nextTime.textContent = '';
     numberWaveCurrent = 0;
     isWaveEnd = true;
-
-    $nextTime.style.animationName = '';
   }
 }
 
