@@ -132,6 +132,7 @@ function enemyKill(e) {
     enemyNode = clone.querySelector('.enemy'),
     healthNode = clone.querySelector('.enemy-health');
 
+  enemyShoot(enemyNode);
   enemyHealthDec(healthNode);
 
   if (
@@ -142,6 +143,14 @@ function enemyKill(e) {
   }
 
   enemyDeath({clone, warningNode, damageNode, enemyNode, healthNode});
+}
+
+function enemyShoot(enemyNode) {
+  enemyNode.style.animationName = 'enemy-shoot';
+
+  setTimeout(() => {
+    enemyNode.style.animationName = '';
+  }, 100);
 }
 
 function enemyHealthDec(healthNode) {
@@ -176,7 +185,7 @@ function enemyHide(nodes) {
   nodes.warningNode.style.visibility = 'hidden';
   nodes.healthNode.style.visibility = 'hidden';
 
-  nodes.enemyNode.style.animationName = 'enemy-kill';
+  nodes.enemyNode.classList.add('enemy-kill');
   nodes.clone.classList.add('enemy-hide');
 
   document.dispatchEvent(eventEnemyDec);

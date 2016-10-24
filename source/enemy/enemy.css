@@ -54,8 +54,18 @@
 
 .enemy {
   backface-visibility: visible;
-  animation: 0.5s; /* enemy-kill */
+  animation: 0.1s; /* enemy-shoot */
   will-change: transform;
+}
+
+@keyframes enemy-shoot {
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.enemy-kill {
+  animation: 0.5s enemy-kill; /* enemy-kill 0.5 */
 }
 
 @keyframes enemy-kill {

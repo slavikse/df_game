@@ -9,7 +9,7 @@ let
   isWaveEnd,
   nextTimeTimeout,
   nextTimeCurrent = nextTimeDefault,
-  numberWaveDefault = 2,
+  numberWaveDefault = 4,
   numberWaveCurrent = 0;
 
 function run() {
