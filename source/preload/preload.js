@@ -44,9 +44,11 @@ function load() {
   window.removeEventListener('load', load);
   $screen.style.opacity = 0;
 
-  setTimeout(() => {
-    $screen.remove();
-  }, 500);
+  setTimeout(loadEnd, 600); // animate
+}
+
+function loadEnd() {
+  $screen.remove();
 }
 
 window.addEventListener('load', load);

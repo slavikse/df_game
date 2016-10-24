@@ -4,8 +4,8 @@ import './auth';
 const
   $body = document.body,
   $startScreen = $body.querySelector('.start-screen'),
-  $authHelp = $startScreen.querySelector('.auth-help'),
-  $auth = $startScreen.querySelector('.auth'),
+  $authShowToggle = $startScreen.querySelector('.auth-show-toggle'),
+  $authWrap = $startScreen.querySelector('.auth-wrap'),
   $bestScoreFrame = $startScreen.querySelector('.best-score-frame'),
   $bestScore = $bestScoreFrame.querySelector('.best-score'),
   $newGame = $startScreen.querySelector('.new-game'),
@@ -58,8 +58,8 @@ function initGame() {
 }
 
 function hiddenElement() {
-  $authHelp.classList.add('hide');
-  $auth.classList.add('hide');
+  $authShowToggle.classList.add('hide');
+  $authWrap.classList.add('hide');
 
   $guideHelp.classList.add('hide');
   $guideWrap.classList.add('hide');

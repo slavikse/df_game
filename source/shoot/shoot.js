@@ -1,5 +1,4 @@
 import debounce from 'libs/debounce';
-import delay from 'libs/delay';
 import noise from './../helper/noise';
 
 const

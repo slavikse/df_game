@@ -72,8 +72,8 @@
   left: -16.5px;
   opacity: 0;
   z-index: 140;
-  pointer-events: none;
   will-change: opacity, transform;
+  pointer-events: none;
 
   &-visible {
     opacity: 1;

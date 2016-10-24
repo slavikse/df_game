@@ -1,12 +1,11 @@
 .enemy-position {
   position: absolute;
-  overflow: hidden; /* полоска таймера до нанесения урона */
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
   animation: 0.4s enemy-position-show both;
-  z-index: 100; /* обеспечивает перекрытие, чтобы была возможность попасть */
+  z-index: 100;
   will-change: opacity;
 }
 
@@ -30,15 +29,26 @@
 
 .enemy-damage {
   position: absolute;
-  transform: translateX(100%);
   z-index: 105;
-  animation: 0.5s enemy-damage-animate both paused;
+  animation: 0.2s linear enemy-damage-animate both paused;
+  will-change: transform, opacity;
   pointer-events: none;
 }
 
 @keyframes enemy-damage-animate {
+  0% {
+    opacity: 0;
+    transform: translate(20%, -20%);
+  }
+
+  20%,
+  80% {
+    opacity: 1;
+  }
+
   100% {
-    transform: translateX(-100%) rotate(90deg);
+    opacity: 0;
+    transform: translate(-20%, 20%);
   }
 }
 
