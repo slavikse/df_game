@@ -1,15 +1,19 @@
 <div class="auth-wrap">
   <form class="auth" name="auth">
+    <!-- ищет @ и . -->
     <input
-      class="login"
-      name="login"
-      placeholder="твоё имя, ковбой?"
+      class="email"
+      name="email"
+      type="email"
+      pattern=".+@.+\..+"
+      placeholder="email, ковбой"
       required>
 
     <input
       class="password"
       name="password"
       type="password"
+      pattern="[a-zA-Z0-9]{6,}"
       placeholder="личный шифр"
       required>
 
@@ -20,4 +24,8 @@
   </form>
 </div>
 
-<div class="auth-show-toggle">Заходи</div>
+<div class="auth-show">
+  <div class="auth-loader auth-loader-js"></div>
+  <div class="auth-show-toggle"></div>
+  <div class="logout icon-logout"></div>
+</div>

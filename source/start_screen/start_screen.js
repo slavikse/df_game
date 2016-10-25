@@ -1,5 +1,6 @@
 import noise from './../helper/noise';
 import './auth';
+import './guide';
 
 const
   $body = document.body,
@@ -15,7 +16,7 @@ const
   $ambient = $body.querySelector('.ambient'),
   $forestNight = $body.querySelector('.forest-night'),
   audioURI = window.audioURI,
-  audioClick = window.audioSprite.menu_click,
+  audioClick = window.audioSprite.hover_menu,
   audioIntro = window.audioSprite.intro,
   eventStartGame = new Event('startGame');
 

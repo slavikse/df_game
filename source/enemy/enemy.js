@@ -136,8 +136,8 @@ function enemyKill(e) {
   enemyHealthDec(healthNode);
 
   if (
-    healthNode.death || // мертв
-    !enemyIsDeath(healthNode) // жив
+    healthNode.death ||
+    !enemyIsDeath(healthNode)
   ) {
     return;
   }

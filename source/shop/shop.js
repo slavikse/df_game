@@ -15,7 +15,7 @@ const
   audioBuyHover = audioSprite.buy_hover,
   audioBuy = audioSprite.buy,
   audioBuyBlock = audioSprite.buy_block,
-  audioClick = audioSprite.menu_click,
+  audioClick = audioSprite.hover_menu,
   audioNextWave = audioSprite.next_wave,
   eventBuyDrum = new Event('buyDrum'),
   eventBuyFirstAid = new Event('buyFirstAid'),

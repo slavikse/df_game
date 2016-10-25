@@ -7,12 +7,15 @@ import 'firebase/auth.js';
 const
   $body = document.body,
   $startScreen = $body.querySelector('.start-screen'),
+  $authLoader = $startScreen.querySelector('.auth-loader-js'),
   $authWrap = $startScreen.querySelector('.auth-wrap'),
-  $authShowToggle = $startScreen.querySelector('.auth-show-toggle'),
-  $login = $startScreen.querySelector('.login'),
+  $email = $startScreen.querySelector('.email'),
+  $password = $startScreen.querySelector('.password'),
   $submit = $startScreen.querySelector('.submit'),
+  $authShowToggle = $startScreen.querySelector('.auth-show-toggle'),
+  $logout = $startScreen.querySelector('.logout'),
   audioURI = window.audioURI,
-  audioClick = window.audioSprite.menu_click,
+  audioHoverMenu = window.audioSprite.hover_menu,
 
   config = {
     apiKey: "AIzaSyCbo2nw-39rTK69JMaDbS-2mynfkyx_GSE",
@@ -24,23 +27,40 @@ const
   };
 
 let
+  emailSave,
+  passwordSave,
   isAuthShow = false,
-  logInName;
+  loginName;
 
 firebase.initializeApp(config);
+firebase.auth().onAuthStateChanged(authChanged);
 
-isLogin();
-
-function isLogin() {
-  logInName = localStorage.getItem('name');
-
-  if (logInName) {
-    setExistName();
+function authChanged(user) {
+  if (user) {
+    $logout.classList.add('logout-active');
+    $authShowToggle.removeEventListener('mouseover', hoverMenu);
+    $authShowToggle.removeEventListener('click', authShowToggle);
+    $authShowToggle.classList.remove('auth-show-toggle-active');
+  } else {
+    $logout.classList.remove('logout-active');
+    $authShowToggle.addEventListener('mouseover', hoverMenu);
+    $authShowToggle.addEventListener('click', authShowToggle);
+    $authShowToggle.classList.add('auth-show-toggle-active');
   }
+
+  $authLoader.classList.remove('auth-loader');
+  setExistName();
+}
+
+function logout() {
+  loginName = '';
+  localStorage.removeItem('name');
+  firebase.auth().signOut();
 }
 
 function setExistName() {
-  $authShowToggle.textContent = logInName ? `Хaй ${logInName}!` : 'Заходи';
+  loginName = localStorage.getItem('name');
+  $authShowToggle.textContent = loginName ? `Хaй ${loginName}!` : 'Войти';
 }
 
 function auth(e) {
@@ -48,35 +68,79 @@ function auth(e) {
 
   const
     form = document.forms.auth,
-    login = form.login.value,
+    email = form.email.value,
     password = form.password.value;
 
-  logInName = login;
+  if (checkValid(email, password)) {
+    submitAnimateError();
+    return;
+  }
 
-  fbAuth(login, password);
+  emailSave = email;
+  passwordSave = password;
+
+  $submit.style.animationName = 'auth-submit-waited';
+  fbAuth(email, password);
 }
 
-function fbAuth(login, password) {
-  const email = `${login}@gmail.com`;
+function checkValid(email, password) {
+  if (
+    /.+@.+\..+/.test(email) &&
+    /[a-zA-Z0-9]{6,}/.test(password)
+  ) {
+    return false;
+  }
+
+  return true;
+}
+
+function fbAuth(email, password) {
+  firebase.auth()
+  .signInWithEmailAndPassword(email, password)
+  .then(authSuccess)
+  .catch(signInError);
+}
+
+function signInError() {
+  // authLoginError();
 
   firebase.auth()
-  .createUserWithEmailAndPassword(email, password)
+  .createUserWithEmailAndPassword(emailSave, passwordSave)
   .then(authSuccess)
-  .catch(authError);
+  .catch(authPasswordError);
 }
 
 function authSuccess() {
-  localStorage.setItem('name', logInName);
+  $submit.style.animationName = '';
+
+  loginName = loginName.replace(/@.+/, ''); // - @gmail.com
+  localStorage.setItem('name', loginName);
 
   authShowToggle();
 }
 
-function authError(error) {
-  console.warn(error.code, error.message);
+// function authLoginError() {
+//   $email.select();
+//   submitAnimateError();
+// }
+
+function authPasswordError() {
+  $password.select();
+  submitAnimateError();
 }
 
-function hoverNewGame() {
-  noise(audioURI, audioClick);
+function submitAnimateError() {
+  $submit.style.animationName = 'auth-submit-error';
+
+  setTimeout(authErrorAnimateEnd, 400);
+}
+
+function authErrorAnimateEnd() {
+  $submit.style.animationName = '';
+}
+
+function hoverMenu() {
+  noise(audioURI, audioHoverMenu);
 }
 
 function authShowToggle() {
@@ -84,15 +148,15 @@ function authShowToggle() {
     isAuthShow = false;
     setExistName();
   } else {
-    $login.focus();
     isAuthShow = true;
+    $email.focus();
     $authShowToggle.textContent = 'Скрыть';
   }
 
   $authWrap.classList.toggle('auth-wrap-show');
 }
 
-$authShowToggle.addEventListener('mouseover', hoverNewGame);
-$submit.addEventListener('mouseover', hoverNewGame);
+$submit.addEventListener('mouseover', hoverMenu);
 $submit.addEventListener('click', auth);
-$authShowToggle.addEventListener('click', authShowToggle);
+$logout.addEventListener('mouseover', hoverMenu);
+$logout.addEventListener('click', logout);

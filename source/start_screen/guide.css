@@ -19,6 +19,7 @@
 
   &:focus {
     opacity: 0;
+    z-index: -10;
   }
 
   &:focus ~ .guide-wrap {
