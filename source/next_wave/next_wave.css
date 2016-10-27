@@ -6,6 +6,7 @@
   line-height: 1.1;
   text-align: center;
   text-shadow: 0 0 0 #fff;
+  overflow: hidden; /* вылезает */
   animation: 1s infinite 0.2s; /* tick */
   will-change: contents, transform;
 }

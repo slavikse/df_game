@@ -30,7 +30,7 @@
 .enemy-damage {
   position: absolute;
   z-index: 105;
-  animation: 0.2s linear enemy-damage-animate both paused;
+  animation: 0.15s linear enemy-damage-animate both paused;
   will-change: transform, opacity;
   pointer-events: none;
 }

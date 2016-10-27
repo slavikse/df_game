@@ -8,6 +8,7 @@
   border: 5px double #a3da37;
   border-radius: 50%;
   cursor: pointer;
+
   transition: color 0.2s, background-color 0.2s, opacity 0.2s;
   will-change: opacity;
 

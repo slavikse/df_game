@@ -1,8 +1,12 @@
+import noise from './../helper/noise';
+
 const
   $nextTime = document.querySelector('.next-time'),
   nextTimeDefault = 4,
   eventEnemyCreate = new Event('enemyCreate'),
-  eventWaveEnd = new Event('waveEnd');
+  eventWaveEnd = new Event('waveEnd'),
+  audioURI = window.audioURI,
+  audioTimerTick = window.audioSprite.timer_tick;
 
 let
   waveCount = 0,
@@ -26,6 +30,8 @@ function nextTime() {
 function nextWaveTime() {
   $nextTime.textContent = nextTimeCurrent;
   nextTimeCurrent -= 1;
+
+  noise(audioURI, audioTimerTick);
 
   if (nextTimeCurrent === -1) {
     nextTimeCurrent = nextTimeDefault;

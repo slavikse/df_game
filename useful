@@ -1,6 +1,8 @@
 
 ------------------------ РАЗМЕТКА ---------------------------
 
+CSP: stackoverflow.com/questions/30280370/how-does-content-security-policy-work
+
 img[width height alt], a[title], template, пробел: &#32;
 PICTURE: frontender.info/responsive-images
 webp:

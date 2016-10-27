@@ -1,6 +1,6 @@
 import noise from './../helper/noise';
-import './auth';
-import './guide';
+import './../auth/auth';
+import './../guide/guide';
 
 const
   $body = document.body,
@@ -48,7 +48,6 @@ function initGame() {
   /** / god mod */
 
   $newGame.removeEventListener('click', initGame);
-  document.removeEventListener('keyup', initGame);
 
   noise(audioURI, audioIntro);
   hiddenElement();
@@ -84,14 +83,5 @@ function changeBackground() {
   $ambient.setAttribute('src', 'audio/dark_ambient.mp3');
 }
 
-function enterKeyHandler(e) {
-  if (e.keyCode !== 13) {
-    return;
-  }
-
-  initGame();
-}
-
 $newGame.addEventListener('mouseover', hoverNewGame);
 $newGame.addEventListener('click', initGame);
-document.addEventListener('keyup', enterKeyHandler);

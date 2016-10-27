@@ -1,12 +1,12 @@
 const
   $result = document.querySelector('.result'),
-  $resultCount = $result.querySelector('.result-count'),
+  $count = $result.querySelector('.count'),
   $statistic = $result.querySelector('.statistic'),
   $restart = $result.querySelector('.restart');
 
 function result() {
   $result.classList.add('result-show');
-  $resultCount.textContent = sessionStorage.getItem('score');
+  $count.textContent = sessionStorage.getItem('score');
 }
 
 function statistic(e) {

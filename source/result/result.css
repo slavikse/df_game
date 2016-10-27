@@ -17,21 +17,22 @@
     z-index: 1000;
   }
 
-  &-title {
+  .title {
     color: red;
     font-size: 5em;
   }
 
-  &-count-frame {
+  .count-frame {
     color: white;
     font-size: 4em;
   }
 
-  .statistic-button {
+  .statistic-show {
     margin-top: 10px;
     color: #ffeb3b;
     text-shadow: 0 0 8px #ef6c00;
     font-size: 3em;
+    outline: 0;
     cursor: pointer;
     animation: statistic-pulsar 0.5s linear infinite alternate;
 
@@ -49,6 +50,7 @@
     background-color: red;
     border: 4px dashed white;
     overflow-y: auto;
+    outline: 0;
     transition: transform 0.4s;
     will-change: transform;
 

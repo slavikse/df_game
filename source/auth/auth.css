@@ -4,6 +4,7 @@
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   opacity: 0;
@@ -16,6 +17,14 @@
     opacity: 1;
     background-color: rgba(0, 0, 0, 0.8);
   }
+}
+
+.auth-error {
+  font-size: 3em;
+  color: red;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.2s;
 }
 
 .auth {
@@ -70,6 +79,7 @@
     cursor: pointer;
     animation: auth-submit-default 0.4s linear infinite alternate both; /* auth-submit-after */
   }
+
 }
 
 @keyframes auth-submit-default {
@@ -133,6 +143,7 @@
     }
   }
 
+  /* дверка на выход */
   .logout {
     margin-left: 10px;
     display: none;
