@@ -20,12 +20,12 @@ gulp.task('build',
     'font',
     'image',
     'resize',
-    'script', // собирает json из аудио спрайта (#1)
     'service',
     'sprite', // #2
-    'style', // собирает css из спрайта изображений (#2)
     'svg',
-    'view'
+    'view',
+    'script', // собирает json из аудио спрайта (#1)
+    'style' // собирает css из спрайта изображений (#2)
   )
 );
 

@@ -27,24 +27,29 @@ const
   playingFieldResize = throttle(playingField, 500);
 
 let
+  timerIDs = [], // собирает все id таймеров, для последующего удаления
   enemyCloneCountDefault = 4,
+  enemyCloneCurrent = 0,
+  enemyDec = 1,
+  scoreAdd = 7,
   enemyHealthDefault = [1, 2],
   enemyDamageTimeDefault = [6, 8],
   enemyCloneCount = enemyCloneCountDefault,
-  $temp = $body.querySelector('.temp'),
+  $paddock = $body.querySelector('.paddock'),
   playingFieldWidth,
   playingFieldHeight;
 
-eventEnemyDec.dec = 1;
-eventScoreAdd.add = 7;
+eventEnemyDec.dec = enemyDec;
+eventScoreAdd.add = scoreAdd;
 
 playingField();
 
 function cloneEnemy(e) {
+  const enemyCloneCountCurrent = e.enemyCloneCount || enemyCloneCount;
   let fragment = document.createDocumentFragment();
-  enemyCloneCount = e.enemyCloneCount || enemyCloneCount; // котик генерит эвент
 
-  for (let i = 0, len = enemyCloneCount; i < len; i++) {
+  /** при попадании в котика, генерит e.enemyCloneCount */
+  for (let i = 0; i < enemyCloneCountCurrent; i++) {
     let clone = $enemyPosition.cloneNode(true);
     clone = setPosition(clone);
     clone = setDamage(clone);
@@ -53,11 +58,11 @@ function cloneEnemy(e) {
     fragment.appendChild(clone);
   }
 
-  $temp.appendChild(fragment);
+  $paddock.appendChild(fragment);
 
-  eventEnemyAdd.add = enemyCloneCount;
+  enemyCloneCurrent += enemyCloneCountCurrent;
+  eventEnemyAdd.add = enemyCloneCountCurrent;
   document.dispatchEvent(eventEnemyAdd);
-  enemyCloneCount = enemyCloneCountDefault;
 }
 
 function setPosition(clone) {
@@ -84,10 +89,13 @@ function setDamage(clone) {
   );
 
   /** сохраняет таймер урона для дальнейшего его удаления */
-  clone.damageTimer = setTimeout(
+  const timerID = setTimeout(
     enemyDamage.bind(null, {clone, warningNode, damageNode, enemyNode, healthNode}),
     damageTimer
   );
+
+  clone.damageTimer = timerID;
+  timerIDs.push(timerID);
 
   return clone;
 }
@@ -135,9 +143,7 @@ function enemyKill(e) {
   enemyShoot(enemyNode);
   enemyHealthDec(healthNode);
 
-  if (
-    healthNode.death || !enemyIsDeath(healthNode)
-  ) {
+  if (healthNode.death || !enemyIsDeath(healthNode)) {
     return;
   }
 
@@ -146,18 +152,20 @@ function enemyKill(e) {
 
 function enemyShoot(enemyNode) {
   enemyNode.style.animationName = 'enemy-shoot';
+  setTimeout(enemyShootEnd.bind(null, enemyNode), 100);
+}
 
-  setTimeout(() => {
-    enemyNode.style.animationName = '';
-  }, 100);
+function enemyShootEnd(enemyNode) {
+  enemyNode.style.animationName = '';
 }
 
 function enemyHealthDec(healthNode) {
   healthNode.style.animationName = 'enemy-health-dec';
+  setTimeout(enemyHealthDecEnd.bind(null, healthNode), 100); // animate
+}
 
-  setTimeout(() => {
-    healthNode.style.animationName = '';
-  }, 100); // animate
+function enemyHealthDecEnd(healthNode) {
+  healthNode.style.animationName = '';
 }
 
 function enemyIsDeath(healthNode) {
@@ -187,6 +195,7 @@ function enemyHide(nodes) {
   nodes.enemyNode.classList.add('enemy-kill');
   nodes.clone.classList.add('enemy-hide');
 
+  enemyCloneCurrent -= 1;
   document.dispatchEvent(eventEnemyDec);
   setTimeout(enemyHideDelay.bind(null, nodes.clone), 500); // анимация
 }
@@ -206,22 +215,50 @@ function playingField() {
 }
 
 function createEnemyNode() {
-  let tempNode = document.createElement('div');
-  tempNode.classList.add('temp');
-
-  $body.appendChild(tempNode);
-  $temp = $body.querySelector('.temp');
+  let paddockNode = document.createElement('div');
+  paddockNode.classList.add('paddock');
+  $body.appendChild(paddockNode);
+  $paddock = $body.querySelector('.paddock');
 }
 
 function removeEnemyNode() {
-  setTimeout(() => {
-    $temp.remove();
-  }, 500); // чтобы успеть последнему мобу доанимировать
+  setTimeout(removeEnemyNodeDelay, 500); // чтобы успеть последнему мобу доанимировать
 }
 
+function removeEnemyNodeDelay() {
+  timerIDs = [];
+  $paddock.remove();
+}
+
+function bomb() {
+  bombEvents();
+
+  timerIDs.forEach(id => {
+    clearTimeout(id);
+  });
+
+  $paddock.remove();
+  timerIDs = [];
+  enemyCloneCurrent = 0;
+  createEnemyNode();
+}
+
+function bombEvents() {
+  eventEnemyDec.dec = enemyCloneCurrent;
+  eventScoreAdd.add = scoreAdd * enemyCloneCurrent;
+
+  document.dispatchEvent(eventEnemyDec);
+  document.dispatchEvent(eventScoreAdd);
+
+  eventEnemyDec.dec = enemyDec;
+  eventScoreAdd.add = scoreAdd;
+}
+
+document.addEventListener('startGame', createEnemyNode);
 document.addEventListener('enemyCreate', cloneEnemy);
 document.addEventListener('enemyKill', enemyKill);
-document.addEventListener('waveEnd', removeEnemyNode);
+document.addEventListener('bomb', bomb);
 document.addEventListener('waveStart', createEnemyNode);
+document.addEventListener('waveEnd', removeEnemyNode);
 window.addEventListener('resize', playingFieldResize);
 document.addEventListener('gameOver', removeEnemyNode);

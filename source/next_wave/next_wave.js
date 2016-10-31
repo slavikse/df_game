@@ -2,7 +2,7 @@ import noise from './../helper/noise';
 
 const
   $nextTime = document.querySelector('.next-time'),
-  nextTimeDefault = 4,
+  nextTimeDefault = 3,
   eventEnemyCreate = new Event('enemyCreate'),
   eventWaveEnd = new Event('waveEnd'),
   audioURI = window.audioURI,
@@ -17,10 +17,14 @@ let
   numberWaveCurrent = 0;
 
 function run() {
-  $nextTime.style.animationName = 'tick';
   isWaveEnd = false;
 
+  setTimeout(runTimer, 1000);
   nextTime();
+}
+
+function runTimer() {
+  $nextTime.style.animationPlayState = 'running';
 }
 
 function nextTime() {
@@ -28,9 +32,7 @@ function nextTime() {
 }
 
 function nextWaveTime() {
-  $nextTime.textContent = nextTimeCurrent;
   nextTimeCurrent -= 1;
-
   noise(audioURI, audioTimerTick);
 
   if (nextTimeCurrent === -1) {
@@ -44,7 +46,6 @@ function nextWaveTime() {
 }
 
 function nextWave() {
-  $nextTime.textContent = '+';
   waveCount += 1;
   numberWaveCurrent += 1;
   document.dispatchEvent(eventEnemyCreate);
@@ -53,8 +54,8 @@ function nextWave() {
 
 function waveEnd() {
   if (numberWaveCurrent === numberWaveDefault) {
-    $nextTime.style.animationName = '';
-    $nextTime.textContent = '';
+    $nextTime.style.transform = 'rotateX(-90deg)';
+    $nextTime.style.animationPlayState = 'paused';
     numberWaveCurrent = 0;
     isWaveEnd = true;
   }

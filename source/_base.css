@@ -27,6 +27,6 @@ body {
   }
 }
 
-.temp {
+.paddock {
   overflow: hidden; /* мобы могут появляться на краю */
 }

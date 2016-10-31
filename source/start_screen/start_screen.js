@@ -68,7 +68,7 @@ function hiddenElement() {
 }
 
 function initInterface() {
-  $newGame.classList.add('new-game-after');
+  $newGame.classList.add('new-game-start');
   $panel.style.opacity = 1;
   $forestNight.style.opacity = 1;
 }

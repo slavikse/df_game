@@ -1,6 +1,6 @@
 .result {
   position: absolute;
-  z-index: -100;
+  z-index: -10;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,8 +13,8 @@
   will-change: opacity;
 
   &-show {
+    z-index: 200;
     opacity: 1;
-    z-index: 1000;
   }
 
   .title {
@@ -30,14 +30,17 @@
   .statistic-show {
     margin-top: 10px;
     color: #ffeb3b;
-    text-shadow: 0 0 8px #ef6c00;
     font-size: 3em;
     outline: 0;
     cursor: pointer;
-    animation: statistic-pulsar 0.5s linear infinite alternate;
+    transition: color 0.2s;
 
     &:focus ~ .statistic {
       transform: translateX(0);
+    }
+
+    &:hover {
+      color: #8f851f;
     }
   }
 
@@ -46,12 +49,12 @@
     top: 0;
     left: 0;
     height: 100%;
-    transform: translateX(-100%);
-    background-color: red;
     border: 4px dashed white;
+    background-color: red;
     overflow-y: auto;
     outline: 0;
     transition: transform 0.4s;
+    transform: translateX(-100%);
     will-change: transform;
 
     &:focus {
@@ -74,34 +77,13 @@
 
   .restart {
     margin-top: 30px;
-    color: #05ae00;
+    color: #06d600;
     font-size: 3em;
     cursor: pointer;
-    transition: 0.5s color;
-    animation: restart-pulsar-1 0.5s linear infinite alternate;
+    transition: color 0.2s;
 
     &:hover {
-      color: red;
-      animation-name: restart-pulsar-2;
-      animation-duration: 0.15s;
+      color: #048700;
     }
-  }
-}
-
-@keyframes restart-pulsar-1 {
-  100% {
-    text-shadow: red 0 0 20px;
-  }
-}
-
-@keyframes restart-pulsar-2 {
-  100% {
-    text-shadow: red 0 0 60px;
-  }
-}
-
-@keyframes statistic-pulsar {
-  100% {
-    text-shadow: #ef6c00 0 0 20px;
   }
 }

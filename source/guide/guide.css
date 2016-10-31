@@ -3,12 +3,11 @@
   z-index: 10;
   margin: 40px auto 0;
   padding: 0 18px;
-  font-size: 4em;
-  color: #d6d6d6;
   border: 5px double #a3da37;
   border-radius: 50%;
+  color: #d6d6d6;
+  font-size: 4em;
   cursor: pointer;
-
   transition: color 0.2s, background-color 0.2s, opacity 0.2s;
   will-change: opacity;
 
@@ -34,12 +33,12 @@
   left: 0;
   width: 100%;
   padding: 10px 0;
-  opacity: 0;
   border-top: 4px solid rgba(4, 130, 0, 0.4);
   background-color: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  pointer-events: none;
   transition: opacity 0.4s;
   will-change: opacity;
-  pointer-events: none;
 
   .guide {
     display: flex;

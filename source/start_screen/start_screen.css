@@ -23,17 +23,16 @@
   .new-game {
     font-size: 6em;
     color: #e3e300;
-    text-shadow: 0 0 16px #4f1100;
+    text-shadow: 0 0 10px #4f1100;
     cursor: pointer;
-    animation: new-game-default 0.3s linear infinite alternate both; /* new-game-after */
-    transition: color 0.2s, text-shadow 0.2s;
-    
+    transition: color 0.2s;
+    animation: new-game 0s linear infinite alternate; /* new-game */
+
     &:hover {
-      animation-duration: 0.1s;
+      animation-duration: 0.2s;
     }
 
-    &.new-game-after {
-      animation-name: new-game-after;
+    &.new-game-start { /* повышаем вес селектора */
       animation-duration: 0.1s;
     }
   }
@@ -43,17 +42,9 @@
   }
 }
 
-@keyframes new-game-default {
+@keyframes new-game {
   100% {
-    color: #ffff00;
-    text-shadow: 0 0 6px #ff7200;
-  }
-}
-
-@keyframes new-game-after {
-  100% {
-    color: #bf5018;
-    text-shadow: 0 0 14px #680400;
+    color: #db5c1c;
   }
 }
 

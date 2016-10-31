@@ -1,6 +1,6 @@
 .preload-screen {
   position: absolute;
-  z-index: 300;
+  z-index: 120;
   width: 100%;
   height: 100%;
   background-color: #0e2e00;
@@ -9,16 +9,16 @@
 
 .loader-frame {
   position: absolute;
-  z-index: 310;
+  z-index: 121;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 78%;
+  height: 100%;
 
   svg { /* FF bug fix */
     position: absolute;
-    z-index: -100;
+    z-index: -5;
     pointer-events: none;
   }
 }
@@ -36,12 +36,12 @@
     position: absolute;
     top: 30px;
     left: 220px;
-    margin: 0 auto;
     display: block;
+    margin: 0 auto;
     width: 60px;
     height: 60px;
-    background: #048200;
     border-radius: 50%;
+    background: #048200;
     animation: scale 1.5s ease-in-out infinite;
     will-change: transform;
     content: '';
@@ -53,8 +53,8 @@
     left: 235px;
     width: 30px;
     height: 30px;
-    background: #048200;
     border-radius: 50%;
+    background: #048200;
     animation: move 1.3s ease-in-out infinite alternate;
     will-change: transform;
 
@@ -64,8 +64,8 @@
       display: block;
       width: 30px;
       height: 30px;
-      background: #048200;
       border-radius: 50%;
+      background: #048200;
       content: '';
     }
 

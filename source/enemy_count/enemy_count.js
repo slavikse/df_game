@@ -6,19 +6,19 @@ let enemyCount = 0;
 
 function enemyAdd(e) {
   enemyCount += e.add;
-  enemyCountChange();
+  enemyCountChange(enemyCount);
 }
 
 function enemyDec(e) {
   enemyCount -= e.dec;
-  enemyCountChange();
+  enemyCountChange(enemyCount);
 
   if (enemyCount === 0) {
     document.dispatchEvent(eventNoEnemy);
   }
 }
 
-function enemyCountChange() {
+function enemyCountChange(enemyCount) {
   $enemyCount.textContent = enemyCount;
 }
 

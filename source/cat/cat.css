@@ -1,13 +1,13 @@
 .cat-position {
   position: absolute;
   opacity: 0;
+  pointer-events: none;
   transition: opacity 0.4s, transform 0.4s; /* opacity - появление/скрытие, transform - перемещение по полю */
   will-change: opacity, transform;
-  pointer-events: none;
 }
 
 .cat-show {
-  z-index: 100;
+  z-index: 110;
   opacity: 1;
   pointer-events: auto;
 }
@@ -27,16 +27,16 @@
 
 .to-bad {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  z-index: -100;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100%;
   color: red;
   font-size: 8em;
   background-color: rgba(73, 0, 0, 0.7);
   opacity: 0;
-  z-index: -100;
   animation: 1.4s; /* to-bad */
   will-change: opacity;
 }

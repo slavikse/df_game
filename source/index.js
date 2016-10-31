@@ -5,6 +5,7 @@ import './shoot/shoot';
 import './cat/cat';
 import './enemy/enemy';
 import './panel/panel';
+import './bomb/bomb';
 import './shop/shop';
 import './result/result';
 import './statistic/statistic';

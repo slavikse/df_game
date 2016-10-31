@@ -1,19 +1,18 @@
 @import '../health/health';
 @import '../score/score';
 @import '../next_wave/next_wave';
-@import '../enemy/enemy_count';
+@import '../enemy_count/enemy_count';
 @import '../revolver/revolver';
 
 .panel {
   position: absolute;
   bottom: 0;
   left: 0;
-  margin-bottom: 5px;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  margin-bottom: 5px;
   width: 100%;
-
   opacity: 0; /* панель появится когда будет начата игра */
   transition: 1.5s opacity;
 }

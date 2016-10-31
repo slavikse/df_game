@@ -1,11 +1,11 @@
 .enemy-position {
   position: absolute;
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
   animation: 0.4s enemy-position-show both;
-  z-index: 100;
   will-change: opacity;
 }
 
@@ -22,17 +22,17 @@
 
 .enemy-warning {
   position: absolute;
-  z-index: 110;
+  z-index: 102;
   opacity: 0;
   pointer-events: none;
 }
 
 .enemy-damage {
   position: absolute;
-  z-index: 105;
+  z-index: 101;
+  pointer-events: none;
   animation: 0.15s linear enemy-damage-animate both paused;
   will-change: transform, opacity;
-  pointer-events: none;
 }
 
 @keyframes enemy-damage-animate {
@@ -79,13 +79,13 @@
   right: 5px;
   bottom: 5px;
   padding: 1px 4px;
-  font-family: sans-serif;
-  color: white;
-  font-size: 1em;
-  background-color: red;
   border-radius: 50%;
-  animation: 0.1s alternate;
+  color: white;
+  font-family: sans-serif;
+  font-size: 1em;
   pointer-events: none;
+  background-color: red;
+  animation: 0.1s alternate;
 }
 
 @keyframes enemy-health-dec {

@@ -1,0 +1,15 @@
+.bomb {
+  position: absolute;
+  z-index: -100;
+  width: 100%;
+  height: 100%;
+  animation: 1s alternate; /* bomb */
+}
+
+@keyframes bomb {
+  0% {
+    z-index: 90;
+    background-color: rgba(219, 92, 28, 0.2);
+    box-shadow: inset 0 0 70px #e25f21;
+  }
+}

@@ -3,19 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <!--<meta http-equiv="Content-Security-Policy" content="default-src https://slavikse.github.io; child-src 'none'; object-src 'none'">-->
+  <!--TODO Content-Security-Policy-->
+  <!--<meta http-equiv="Content-Security-Policy"
+  content="default-src https://slavikse.github.io; child-src 'none'; object-src 'none'">-->
   <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self'">-->
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="index,follow,noodp">
   <meta name="googlebot" content="index,follow">
 
   <!-- limit to 150 characters -->
-  <meta name="description" content="Веб игра | Тайм киллер | Хардкор">
+  <meta name="description" content="Веб игра | Шутер | Тайм киллер | Хардкор">
   <meta name='application-name' content='dark | forest'>
   <meta name='theme-color' content='#048200'>
 
   <meta property="og:title" content="dark | forest">
-  <meta property="og:description" content="Веб игра | Тайм киллер | Хардкор">
+  <meta property="og:description" content="Веб игра | Шутер | Тайм киллер | Хардкор">
   <meta property="og:url" content="https://slavikse.github.io/df_game">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://slavikse.github.io/df_game/image/darkforest_og.jpg">
@@ -40,11 +42,14 @@
 @include('./cat/cat.html')
 @include('./enemy/enemy.html')
 @include('./panel/panel.html')
+@include('./bomb/bomb.html')
 @include('./health/health_notice.html')
 @include('./shop/shop.html')
 @include('./result/result.html')
 
-<div class="temp"></div>
+<i class="shoot icon-shootfire32"></i>
+
+<div class="paddock"></div>
 
 <audio class="ambient" src="audio/light_ambient.mp3" autoplay loop></audio>
 
