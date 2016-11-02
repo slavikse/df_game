@@ -27,6 +27,8 @@ const
   },
 
   options = {
+    //progress: true,
+    //colors: true,
     module: {
       loaders: [
         {
@@ -64,6 +66,7 @@ if (production) {
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
+      minimize: true,
       beautify: false,
       comments: false,
       compress: {

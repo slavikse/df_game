@@ -1,11 +1,17 @@
 .auth-book {
-  position: relative;
+  position: absolute;
   z-index: 120;
-  width: 100px;
-  height: 100px;
+  width: 300px;
+  height: 150px;
+  transform: translate(-50%, -50%);
   transform-style: preserve-3d;
-  perspective: 600px;
-  perspective-origin: center 150px;
+  perspective: 1400px;
+  perspective-origin: -100px 200px;
+  animation: 0.8s open-animation-end 1.6s both paused; /* растягивание */
+
+  &:hover {
+    animation-play-state: running;
+  }
 
   .paper {
     position: absolute;
@@ -13,7 +19,6 @@
     left: 0;
     width: 100%;
     height: 100%;
-    color: #fff;
     font-size: 4rem;
     will-change: transform;
   }
@@ -21,7 +26,7 @@
   .paper-first-open {
     transform-style: preserve-3d;
     transform-origin: right;
-    animation: 2s open-book-right 0s both paused;
+    animation: 0.8s open-book-right 0s both paused;
     will-change: transform;
   }
 
@@ -33,13 +38,13 @@
   .paper-3 { /* нижний слой листа paper-first-open */
     background-color: green;
     transform-origin: bottom;
-    animation: 2s open-book-bottom-front 2s both paused;
+    animation: 0.8s open-book-bottom-front 0.8s both paused;
   }
 
   .paper-2 {
     background-color: yellow;
     transform-origin: bottom;
-    animation: 2s open-book-bottom-back 2s both paused;
+    animation: 0.8s open-book-bottom-back 0.8s both paused;
   }
 
   .paper-1 {
@@ -69,5 +74,11 @@
 @keyframes open-book-bottom-front {
   100% {
     transform: rotateX(180deg);
+  }
+}
+
+@keyframes open-animation-end {
+  100% {
+    transform: scale(1.6) translate(-50%, -50%);
   }
 }

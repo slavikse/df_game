@@ -11,7 +11,7 @@ let i = 0;
 function shopTime() {
   const text = texts[i];
 
-  $shopTimeWrap.style.animationName = 'shop-time-wrap';
+  $shopTimeWrap.style.zIndex = '160';
   $shopTime.textContent = text;
   $shopTime.style.animationName = 'shop-time';
 
@@ -28,7 +28,7 @@ function indexInc() {
 }
 
 function shopTimeEnd() {
-  $shopTimeWrap.style.animationName = '';
+  $shopTimeWrap.style.zIndex = '-10';
   $shopTime.style.animationName = '';
 }
 

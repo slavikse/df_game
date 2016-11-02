@@ -2,7 +2,7 @@ import noise from './../helper/noise';
 
 const
   $nextTime = document.querySelector('.next-time'),
-  nextTimeDefault = 3,
+  nextTimeDefault = 4,
   eventEnemyCreate = new Event('enemyCreate'),
   eventWaveEnd = new Event('waveEnd'),
   audioURI = window.audioURI,
@@ -37,7 +37,7 @@ function nextWaveTime() {
 
   if (nextTimeCurrent === -1) {
     nextTimeCurrent = nextTimeDefault;
-    nextWave();
+    //nextWave();
   }
 
   if (!isWaveEnd) {

@@ -1,6 +1,7 @@
 
 ------------------------ РАЗМЕТКА ---------------------------
 
+Экранировать пользовательский ввод. защищаться от CSRF
 CSP: stackoverflow.com/questions/30280370/how-does-content-security-policy-work
 
 img[width height alt], a[title], template, пробел: &#32;
@@ -112,6 +113,8 @@ svg4everybody();
  * При использовании webp поправить конфиг в сборке изображений */
 import picturefill from 'picturefill';
 picturefill();
+
+new FormData
 
 ----------------------------- NPM ---------------------------
 opener: npmjs.com/package/opener

@@ -1,35 +1,48 @@
 @include('./auth_book.html')
 
-<div class="auth-show">
-  <div class="auth-loader auth-loader-js"></div>
-  <div class="auth-show-toggle"></div>
-  <div class="logout icon-auth_logout"></div>
+<div class='auth-show'>
+  <div class='auth-loader auth-loader-js'></div>
+  <div class="user-name"></div>
+  
+  <div class='auth-opener'>
+    <div class='cogwheel cogwheel-1'>
+      <div class='letter-o'>o</div>
+      <div class='letter-cl'>cl</div>
+    </div>
+
+    <div class='cogwheel cogwheel-2'>
+      <div class='letter-e'>e</div>
+      <div class='letter-s'>s</div>
+    </div>
+  </div>
+
+  <div class='logout icon-auth_logout'></div>
 </div>
 
-<div class="auth-wrap">
-  <div class="auth-error">Не верные данные!</div>
+<div class='auth-wrap'>
+  <div class='auth-error'>Не верные данные!</div>
 
-  <form class="auth" name="auth">
+  <form class='auth' name='auth'>
     <!-- ищет @ и . -->
     <input
-      class="email"
-      name="email"
-      type="email"
-      pattern=".+@.+\..+"
-      placeholder="email, ковбой"
+      class='email'
+      name='email'
+      type='email'
+      pattern='.+@.+\..+'
+      placeholder='email, ковбой'
       required>
 
     <input
-      class="password"
-      name="password"
-      type="password"
-      pattern="[a-zA-Z0-9]{6,}"
-      placeholder="личный шифр"
+      class='password'
+      name='password'
+      type='password'
+      pattern='[a-zA-Z0-9]{6,}'
+      placeholder='личный шифр'
       required>
 
     <input
-      class="submit"
-      type="submit"
-      value="Выдать револьвер!">
+      class='submit'
+      type='submit'
+      value='Выдать револьвер!'>
   </form>
 </div>

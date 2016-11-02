@@ -1,31 +1,28 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang='ru'>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <!--TODO Content-Security-Policy-->
-  <!--<meta http-equiv="Content-Security-Policy"
-  content="default-src https://slavikse.github.io; child-src 'none'; object-src 'none'">-->
-  <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self'">-->
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="robots" content="index,follow,noodp">
-  <meta name="googlebot" content="index,follow">
+  <meta charset='utf-8'>
+  <meta http-equiv='x-ua-compatible' content='ie=edge'>
+  <!--<meta http-equiv='Content-Security-Policy' content='default-src 'self''>-->
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+  <meta name='robots' content='index,follow,noodp'>
+  <meta name='googlebot' content='index,follow'>
 
   <!-- limit to 150 characters -->
-  <meta name="description" content="Веб игра | Шутер | Тайм киллер | Хардкор">
+  <meta name='description' content='Веб игра | Шутер | Тайм киллер | Хардкор'>
   <meta name='application-name' content='dark | forest'>
   <meta name='theme-color' content='#048200'>
 
-  <meta property="og:title" content="dark | forest">
-  <meta property="og:description" content="Веб игра | Шутер | Тайм киллер | Хардкор">
-  <meta property="og:url" content="https://slavikse.github.io/df_game">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="https://slavikse.github.io/df_game/image/darkforest_og.jpg">
-  <meta property="og:locale" content="ru_RU">
+  <meta property='og:title' content='dark | forest'>
+  <meta property='og:description' content='Веб игра | Шутер | Тайм киллер | Хардкор'>
+  <meta property='og:url' content='https://slavikse.github.io/df_game'>
+  <meta property='og:type' content='website'>
+  <meta property='og:image' content='https://slavikse.github.io/df_game/image/darkforest_og.jpg'>
+  <meta property='og:locale' content='ru_RU'>
   <title>dark | forest</title>
 
-  <link href="index.css" rel="stylesheet">
-  <link href="image/dark.forest.png" rel="icon" sizes="32x32">
+  <link href='index.css' rel='stylesheet'>
+  <link href='image/dark.forest.png' rel='icon' sizes='32x32'>
 </head>
 <body>
 
@@ -34,7 +31,7 @@
 <!-- 837кб 25.10.16 -->
 
 <!-- описание в start_screen -->
-<div class="forest-night"></div>
+<div class='forest-night'></div>
 
 @include('./preload/preload.html')
 @include('./start_screen/start_screen.html')
@@ -47,13 +44,13 @@
 @include('./shop/shop.html')
 @include('./result/result.html')
 
-<i class="shoot icon-shootfire32"></i>
+<i class='shoot icon-shootfire32'></i>
 
-<div class="paddock"></div>
+<div class='paddock'></div>
 
-<audio class="ambient" src="audio/light_ambient.mp3" autoplay loop></audio>
+<audio class='ambient' src='audio/light_ambient.mp3' autoplay loop></audio>
 
-<!--<script src="common.js" defer></script>-->
-<script src="index.js" defer></script>
+<!--<script src='common.js' defer></script>-->
+<script src='index.js' defer></script>
 </body>
 </html>

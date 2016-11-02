@@ -7,11 +7,12 @@ import 'firebase/auth.js';
 const $body = document.body,
   $startScreen = $body.querySelector('.start-screen'),
   $authLoader = $startScreen.querySelector('.auth-loader-js'),
+  $authOpener = $startScreen.querySelector('.auth-opener'),
+  $userName = $startScreen.querySelector('.user-name'),
+  $authError = $startScreen.querySelector('.auth-error'),
   $authWrap = $startScreen.querySelector('.auth-wrap'),
   $email = $startScreen.querySelector('.email'),
   $submit = $startScreen.querySelector('.submit'),
-  $authError = $startScreen.querySelector('.auth-error'),
-  $authShowToggle = $startScreen.querySelector('.auth-show-toggle'),
   $logout = $startScreen.querySelector('.logout'),
   audioURI = window.audioURI,
   audioHoverMenu = window.audioSprite.hover_menu,
@@ -43,7 +44,10 @@ function auth(e) {
     email = form.email.value,
     password = form.password.value;
 
-  if (checkValid(email, password)) {
+  if (!(
+      /.+@.+\..+/.test(email) &&
+      /[a-zA-Z0-9]{6,}/.test(password)
+    )) {
     submitAnimateError();
     return;
   }
@@ -53,17 +57,6 @@ function auth(e) {
 
   $submit.style.animationName = 'auth-submit-waited';
   fbAuth(email, password);
-}
-
-function checkValid(email, password) {
-  if (
-    /.+@.+\..+/.test(email) &&
-    /[a-zA-Z0-9]{6,}/.test(password)
-  ) {
-    return false;
-  }
-
-  return true;
 }
 
 function fbAuth(email, password) {
@@ -101,11 +94,42 @@ function authErrorEnd() {
 
 function submitAnimateError() {
   $submit.style.animationName = 'auth-submit-error';
-  setTimeout(submitAnimateEnd, 400); // animate
+  setTimeout(submitAnimateEnd, 400);
 }
 
 function submitAnimateEnd() {
   $submit.style.animationName = '';
+}
+
+function authChanged(user) {
+  if (user) {
+    $logout.style.display = 'inline-block';
+    $authOpener.classList.add('auth-opener-on');
+
+    $authOpener.removeEventListener('mouseover', hoverMenu);
+    $authOpener.removeEventListener('click', authShowToggle);
+  } else {
+    $logout.style.display = '';
+    $authOpener.classList.remove('auth-opener-on');
+
+    $authOpener.addEventListener('mouseover', hoverMenu);
+    $authOpener.addEventListener('click', authShowToggle);
+  }
+
+  $authLoader.classList.remove('auth-loader');
+  setExistName();
+}
+
+function setExistName() {
+  loginName = localStorage.getItem('name');
+
+  if (loginName) {
+    $authOpener.style.display = 'none';
+    $userName.textContent = `Хaй ${loginName}!`;
+  } else {
+    $authOpener.style.display = 'flex';
+    $userName.textContent = '';
+  }
 }
 
 function authShowToggle() {
@@ -115,45 +139,21 @@ function authShowToggle() {
   } else {
     isAuthShow = true;
     $email.focus();
-    $authShowToggle.textContent = 'Скрыть';
   }
 
   noise(audioURI, audioAuthShow);
   $authWrap.classList.toggle('auth-wrap-show');
-}
-
-function hoverMenu() {
-  noise(audioURI, audioHoverMenu);
-}
-
-function authChanged(user) {
-  if (user) {
-    $logout.classList.add('logout-active');
-    $authShowToggle.classList.remove('auth-show-toggle-active');
-
-    $authShowToggle.removeEventListener('mouseover', hoverMenu);
-    $authShowToggle.removeEventListener('click', authShowToggle);
-  } else {
-    $logout.classList.remove('logout-active');
-    $authShowToggle.classList.add('auth-show-toggle-active');
-
-    $authShowToggle.addEventListener('mouseover', hoverMenu);
-    $authShowToggle.addEventListener('click', authShowToggle);
-  }
-
-  $authLoader.classList.remove('auth-loader');
-  setExistName();
-}
-
-function setExistName() {
-  loginName = localStorage.getItem('name');
-  $authShowToggle.textContent = loginName ? `Хaй ${loginName}!` : 'Войти';
+  $authOpener.classList.toggle('auth-opener-on');
 }
 
 function logout() {
   firebase.auth().signOut();
   localStorage.removeItem('name');
   loginName = '';
+}
+
+function hoverMenu() {
+  noise(audioURI, audioHoverMenu);
 }
 
 $submit.addEventListener('mouseover', hoverMenu);

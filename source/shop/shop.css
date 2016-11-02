@@ -92,13 +92,11 @@
 @keyframes close-shop-before {
   100% {
     color: #ffff00;
-    text-shadow: 0 0 6px #ff7200;
   }
 }
 
 @keyframes close-shop-after {
   100% {
     color: #bf5018;
-    text-shadow: 0 0 14px #680400;
   }
 }

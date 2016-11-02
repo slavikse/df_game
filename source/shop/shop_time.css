@@ -5,14 +5,7 @@
   justify-content: center;
   align-items: center;
   height: 100%;
-  width: 100%;
-  animation: 1s both;
-}
-
-@keyframes shop-time-wrap {
-  100% {
-    z-index: 160;
-  }
+  width: 100%
 }
 
 .shop-time {
@@ -20,7 +13,7 @@
   font-size: 6em;
   color: #fff;
   text-shadow: 0 0 10px #000;
-  animation: 1.5s;
+  animation: 1.5s; /* shop-time */
   will-change: opacity, transform;
 }
 

@@ -21,15 +21,9 @@ function statistic(e) {
         <div class="value">${statistic[key]}</div>
       </div>
     `
-  });
+  }).join('');
 
-  let tmplCompile = '';
-
-  tmpl.forEach(nodeElement => {
-    tmplCompile += nodeElement;
-  });
-
-  $statistic.innerHTML = tmplCompile;
+  $statistic.insertAdjacentHTML('afterBegin', tmpl);
 }
 
 function restart() {
