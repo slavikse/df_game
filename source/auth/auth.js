@@ -156,8 +156,8 @@ function authSuccess() {
 
   $authSubmit.style.animationName = 'auth-submit-success';
   authNotify($authCorrect);
+  authLoginAnimate();
 
-  setTimeout(authLoginAnimate, 1200);
   setTimeout(authShowToggle, 1200);
 }
 

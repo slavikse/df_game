@@ -11,14 +11,15 @@
 }
 
 .auth-user-name {
+  z-index: 50;
   font-size: 3.4em;
   color: #60ff4b;
   text-shadow: 2px 2px 2px #000;
-  transition: color 0.6s, text-shadow 0.6s;
+  transition: color 0.1s, text-shadow 0.1s;
 
   &-login {
-    color: yellow;
-    text-shadow: 3px 3px 0 red, -3px -3px 0 red;
+    color: darkgreen;
+    text-shadow: 2px 2px 0 yellow, -2px -2px 0 yellow;
   }
 }
 
