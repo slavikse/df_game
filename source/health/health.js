@@ -6,7 +6,6 @@ const
   $healthWrap = $body.querySelector('.health-wrap'),
   $firstAid = $healthWrap.querySelector('.first-aid').children,
   $healths = $healthWrap.querySelector('.health').children,
-  $eventRegeneration = new Event('regeneration'),
   firstAidStateClasses = [
     'icon-first_aid_circuit', // пустая
     'icon-first_aid' // целая
@@ -18,8 +17,11 @@ const
   firstAidFull = $firstAid.length - 1, // аптечек [0,1]
   healthFull = healthStateClasses.length, // состояния сердца
   healthStateFull = healthStateClasses.length - 1, // состояние сердца, изначально сердце целое
+
   audioURI = window.audioURI,
-  audioHeart = window.audioSprite.heart;
+  audioHeart = window.audioSprite.heart,
+
+  $eventRegeneration = new Event('regeneration');
 
 let
   receivedDamage = 0,

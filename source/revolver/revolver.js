@@ -8,6 +8,7 @@ const
   $drumCount = $revolverWrap.querySelector('.drum-count'),
   $shoot = $body.querySelector('.shoot'),
   bulletDrum = 6,
+
   audioURI = window.audioURI,
   audioSprite = window.audioSprite,
   audioShoots = [
@@ -24,6 +25,11 @@ let
   bulletCurrent = 0, // текущая пуля для выстрела в барабане
   drumCount = 3, // барабанов для перезарядки
   isDrumRotate = false;
+
+function authBonus() {
+  drumCount += 1;
+  drumCountChange(drumCount);
+}
 
 drumCountChange(drumCount);
 
@@ -167,6 +173,7 @@ function drumReloadCountStatistic() {
   document.dispatchEvent(drumReloadCountEvent);
 }
 
+document.addEventListener('authBonus', authBonus);
 document.addEventListener('startGame', startGame);
 document.addEventListener('buyDrum', drumCountAdd);
 document.addEventListener('gameOver', gameOver);

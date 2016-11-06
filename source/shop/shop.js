@@ -3,6 +3,7 @@ import './shop_time';
 
 const
   $body = document.body,
+  $ambient = $body.querySelector('.ambient'),
   $shop = $body.querySelector('.shop'),
   $store = $shop.querySelector('.store'),
   $storeItems = $store.querySelectorAll('.item'),
@@ -10,13 +11,15 @@ const
   storeItemsLength = $storeItems.length,
   $score = $body.querySelector('.score'),
   $closeShop = $shop.querySelector('.close-shop'),
+
   audioURI = window.audioURI,
   audioSprite = window.audioSprite,
   audioBuyHover = audioSprite.buy_hover,
   audioBuy = audioSprite.buy,
-  audioBuyBlock = audioSprite.buy_block,
+  audioCancel = audioSprite.cancel,
   audioClick = audioSprite.hover_menu,
   audioNextWave = audioSprite.next_wave,
+
   eventBuyDrum = new Event('buyDrum'),
   eventBuyFirstAid = new Event('buyFirstAid'),
   eventScoreDec = new Event('scoreDec'),
@@ -32,6 +35,8 @@ function openShopDelay() {
 }
 
 function openShop() {
+  $ambient.setAttribute('src', 'audio/shop_ambient.mp3');
+
   $body.classList.add('dont-shoot');
   $shop.classList.add('shop-open');
   $shop.style.zIndex = '400';
@@ -78,7 +83,7 @@ function buy(e) {
   }
 
   if (target.classList.contains('buy-block')) {
-    noise(audioURI, audioBuyBlock);
+    noise(audioURI, audioCancel);
 
     /** GOD MOD */
 
@@ -128,6 +133,7 @@ function hoverCloseShop() {
 }
 
 function closeShop() {
+  $ambient.setAttribute('src', 'audio/dark_ambient.mp3');
   $closeShop.style.animationName = 'close-shop-after';
 
   $store.removeEventListener('click', buy);

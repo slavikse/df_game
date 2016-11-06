@@ -5,8 +5,10 @@ const
   $body = document.body,
   fireRate = 166.6, // 6 выстрелов в 1 секунду
   shootFire = debounce(shoot, fireRate),
+
   audioURI = window.audioURI,
   audioIdle = window.audioSprite.idle,
+
   eventCatShoot = new Event('catShoot'),
   eventEnemyKill = new Event('enemyKill');
 

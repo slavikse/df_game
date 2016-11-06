@@ -1,48 +1,49 @@
-@include('./auth_book.html')
-
 <div class='auth-show'>
+  <!-- auth-loader-js - анимация убирается путем удаления auth-loader -->
   <div class='auth-loader auth-loader-js'></div>
-  <div class="user-name"></div>
-  
+  <div class='auth-user-name'></div>
+
   <div class='auth-opener'>
     <div class='cogwheel cogwheel-1'>
-      <div class='letter-o'>o</div>
-      <div class='letter-cl'>cl</div>
+      <div class='letter letter-o'>o</div>
+      <div class='letter letter-cl'>cl</div>
     </div>
-
     <div class='cogwheel cogwheel-2'>
-      <div class='letter-e'>e</div>
-      <div class='letter-s'>s</div>
+      <div class='letter letter-e'>e</div>
+      <div class='letter letter-s'>s</div>
     </div>
   </div>
 
-  <div class='logout icon-auth_logout'></div>
+  <div class='auth-logout icon-auth_logout'></div>
 </div>
 
 <div class='auth-wrap'>
-  <div class='auth-error'>Не верные данные!</div>
+  <div class="auth-notify-wrap">
+    <div class='auth-notify auth-correct'>Вход выполнен!</div>
+    <div class='auth-notify auth-wrong'>Не верные данные!</div>
+    <div class='auth-notify auth-incorrect'>Не корректные данные!</div>
+  </div>
 
-  <form class='auth' name='auth'>
-    <!-- ищет @ и . -->
+  <form class='auth-form' name='auth'>
     <input
-      class='email'
+      class='auth-email'
       name='email'
       type='email'
-      pattern='.+@.+\..+'
+      pattern='^.{1,20}@.{1,6}\..{2,6}$'
       placeholder='email, ковбой'
       required>
 
     <input
-      class='password'
+      class='auth-password'
       name='password'
       type='password'
-      pattern='[a-zA-Z0-9]{6,}'
+      pattern='^.{6,30}$'
       placeholder='личный шифр'
       required>
 
     <input
-      class='submit'
+      class='auth-submit'
       type='submit'
-      value='Выдать револьвер!'>
+      value='+1 обойма за вход!'>
   </form>
 </div>

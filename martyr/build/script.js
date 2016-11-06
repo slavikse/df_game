@@ -26,16 +26,20 @@ const
     }
   },
 
+  buildReady = cb => {
+    if (firstBuildReady) {
+      cb();
+    }
+  },
+
   options = {
-    //progress: true,
-    //colors: true,
     module: {
       loaders: [
         {
           test: /\.js$/,
-          loader: 'babel',
-          exclude: /firebase/
-          // query: {compact: false}
+          exclude: /firebase/,
+          cacheDirectory: true,
+          loader: 'babel'
         }, {
           test: /\.json$/,
           loader: 'json'
@@ -88,9 +92,5 @@ gulp.task(name, cb => {
   .pipe(named())
   .pipe(webpackStream(options, null, done))
   .pipe(gulp.dest(there))
-  .on('data', () => {
-    if (firstBuildReady) {
-      cb();
-    }
-  })
+  .on('data', buildReady.bind(null, cb))
 });

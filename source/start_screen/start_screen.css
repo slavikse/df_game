@@ -9,24 +9,36 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  transition: opacity 0.8s, background-color 0.2s;
+  will-change: opacity;
+
+  &-shading {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  &-shading .best-score-frame,
+  &-shading .new-game {
+    opacity: 0;
+  }
 
   .best-score-frame {
     margin-top: 10px;
     font-size: 4em;
     color: #fff;
-    text-shadow: 0 0 16px #000;
+    text-shadow: 2px 2px 2px #000;
     text-align: center;
-    transition: opacity 0.4s;
+    transition: opacity 0.2s;
     will-change: opacity;
   }
 
   .new-game {
     font-size: 6em;
     color: #e3e300;
-    text-shadow: 0 0 10px #4f1100;
+    text-shadow: 2px 2px 2px black;
     cursor: pointer;
-    transition: color 0.2s;
-    animation: new-game 0s linear infinite alternate; /* new-game */
+    transition: color 0.2s, opacity 0.2s;
+    animation: new-game linear infinite alternate; /* new-game */
+    will-change: opacity;
 
     &:hover {
       animation-duration: 0.2s;
@@ -35,10 +47,6 @@
     &.new-game-start { /* повышаем вес селектора */
       animation-duration: 0.1s;
     }
-  }
-
-  .hide {
-    opacity: 0;
   }
 }
 

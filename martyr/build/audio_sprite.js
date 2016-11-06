@@ -29,3 +29,6 @@ gulp.task(name, () => {
 if (!production) {
   gulp.watch(files, gulp.parallel(name));
 }
+
+/**TODO проблема с обновлением звукового спрайта. все звуки сдвигаются.
+ * возможно проблема в обновлении json файла в скриптах */

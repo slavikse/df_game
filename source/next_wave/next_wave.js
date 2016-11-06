@@ -3,16 +3,18 @@ import noise from './../helper/noise';
 const
   $nextTime = document.querySelector('.next-time'),
   nextTimeDefault = 4,
-  eventEnemyCreate = new Event('enemyCreate'),
-  eventWaveEnd = new Event('waveEnd'),
+
   audioURI = window.audioURI,
-  audioTimerTick = window.audioSprite.timer_tick;
+  audioTimerTick = window.audioSprite.timer_tick,
+
+  eventEnemyCreate = new Event('enemyCreate'),
+  eventWaveEnd = new Event('waveEnd');
 
 let
   waveCount = 0,
   isWaveEnd,
   nextTimeTimeout,
-  nextTimeCurrent = nextTimeDefault,
+  nextTimeCurrent = 0,
   numberWaveDefault = 4,
   numberWaveCurrent = 0;
 
@@ -28,16 +30,17 @@ function runTimer() {
 }
 
 function nextTime() {
+  $nextTime.style.transform = `rotateX(-${90 * nextTimeCurrent}deg)`;
   nextTimeTimeout = setTimeout(nextWaveTime, 1000);
 }
 
 function nextWaveTime() {
-  nextTimeCurrent -= 1;
+  nextTimeCurrent += 1;
   noise(audioURI, audioTimerTick);
 
-  if (nextTimeCurrent === -1) {
-    nextTimeCurrent = nextTimeDefault;
-    //nextWave();
+  if (nextTimeCurrent === nextTimeDefault + 1) {
+    nextTimeCurrent = 0;
+    nextWave();
   }
 
   if (!isWaveEnd) {

@@ -5,19 +5,17 @@ import './../guide/guide';
 const
   $body = document.body,
   $startScreen = $body.querySelector('.start-screen'),
-  $authShowToggle = $startScreen.querySelector('.auth-show-toggle'),
-  $authWrap = $startScreen.querySelector('.auth-wrap'),
   $bestScoreFrame = $startScreen.querySelector('.best-score-frame'),
   $bestScore = $bestScoreFrame.querySelector('.best-score'),
   $newGame = $startScreen.querySelector('.new-game'),
-  $guideHelp = $body.querySelector('.guide-help'),
-  $guideWrap = $body.querySelector('.guide-wrap'),
   $panel = $body.querySelector('.panel'),
   $ambient = $body.querySelector('.ambient'),
   $forestNight = $body.querySelector('.forest-night'),
+
   audioURI = window.audioURI,
-  audioClick = window.audioSprite.hover_menu,
+  audioHover = window.audioSprite.hover_menu,
   audioIntro = window.audioSprite.intro,
+
   eventStartGame = new Event('startGame');
 
 initStartScreen();
@@ -31,7 +29,7 @@ function getBestScore() {
 }
 
 function hoverNewGame() {
-  noise(audioURI, audioClick);
+  noise(audioURI, audioHover);
 }
 
 function initGame() {
@@ -48,27 +46,16 @@ function initGame() {
   /** / god mod */
 
   $newGame.removeEventListener('click', initGame);
+  $newGame.classList.add('new-game-start');
 
   noise(audioURI, audioIntro);
-  hiddenElement();
   initInterface();
-
-  setTimeout(initGameEnd, 500);
+  setTimeout(initGameEnd, 800);
   setTimeout(changeBackground, 5500);
 }
 
-function hiddenElement() {
-  $authShowToggle.classList.add('hide');
-  $authWrap.classList.add('hide');
-
-  $guideHelp.classList.add('hide');
-  $guideWrap.classList.add('hide');
-
-  $bestScoreFrame.classList.add('hide');
-}
-
 function initInterface() {
-  $newGame.classList.add('new-game-start');
+  $startScreen.style.opacity = 0;
   $panel.style.opacity = 1;
   $forestNight.style.opacity = 1;
 }

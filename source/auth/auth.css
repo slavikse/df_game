@@ -1,122 +1,33 @@
-@import "auth_book";
-
-.auth {
-  border-top: 4px solid #000;
-  border-bottom: 4px solid #000;
-  background-color: rgba(2, 64, 0, 0.6);
-
-  .email,
-  .password {
-    z-index: 50;
-    width: 100%;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.6);
-    color: #f9f9f9;
-    font-size: 3em;
-    text-align: center;
-    text-shadow: 0 0 12px #000;
-    transition: border-color 0.4s;
-
-    &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-      color: #ccc;
-    }
-
-    &::-moz-placeholder { /* Firefox 19+ */
-      color: #ccc;
-    }
-
-    &:-ms-input-placeholder { /* IE 10+ */
-      color: #ccc;
-    }
-
-    &:-moz-placeholder { /* Firefox 18- */
-      color: #ccc;
-    }
-
-    &:valid {
-      border-color: #00ae00;
-    }
-
-    &:invalid {
-      border-color: #e20000;
-    }
-  }
-
-  .submit {
-    z-index: 50;
-    width: 100%;
-    padding: 6px 0;
-    color: #59e942;
-    font-size: 3em;
-    text-shadow: 0 0 4px #000;
-    background-color: rgba(0, 0, 0, 0.4);
-    cursor: pointer;
-    animation: auth-submit-default 0.6s linear infinite alternate both; /* auth-submit-after */
-  }
-}
-
-@keyframes auth-submit-default {
-  100% {
-    color: #ffff00;
-  }
-}
-
-@keyframes auth-submit-waited {
-  50% {
-    transform: scale(0.95);
-  }
-}
-
-@keyframes auth-submit-error {
-  0% {
-    transform: translateX(0);
-  }
-
-  10%,
-  30%,
-  50%,
-  70%,
-  90% {
-    transform: translateX(10px);
-  }
-
-  20%,
-  40%,
-  60%,
-  80% {
-    transform: translateX(-10px);
-  }
-
-  100% {
-    transform: translateX(0);
-  }
-}
-
 .auth-show {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
   height: 50px;
+  transition: filter 0.3s;
 
-  .user-name {
-    font-size: 3.4em;
-    color: #60ff4b;
-    text-shadow: 0 0 10px #000;
+  &-logout {
+    filter: blur(3px);
   }
+}
 
-  .logout {
-    margin-left: 10px;
-    display: none;
-    cursor: pointer;
+.auth-user-name {
+  font-size: 3.4em;
+  color: #60ff4b;
+  text-shadow: 2px 2px 2px #000;
+  transition: color 0.6s, text-shadow 0.6s;
+
+  &-login {
+    color: yellow;
+    text-shadow: 3px 3px 0 red, -3px -3px 0 red;
   }
 }
 
 .auth-opener {
   display: none;
-  z-index: 50;
+  z-index: 100;
   color: #51d83f;
   line-height: 0.5;
-  text-shadow: 0 0 10px #000;
+  text-shadow: 2px 2px 2px #000;
   cursor: pointer;
   transition: color 0.2s;
 
@@ -126,9 +37,14 @@
 
   .cogwheel {
     display: flex;
-    transition: transform 0.5s;
+    transition: transform 0.6s;
     transform-origin: center 27px;
+    pointer-events: none;
     will-change: transform;
+  }
+
+  .letter {
+    pointer-events: none;
   }
 
   .letter-o {
@@ -144,14 +60,14 @@
 
   .letter-e {
     font-size: 4.5em;
-    transition: transform 0.5s;
+    transition: transform 0.6s;
     will-change: transform;
   }
 
   .letter-s {
     font-size: 5.6em;
     transform: rotate(70deg) translate(4px, -6px);
-    transition: transform 0.5s;
+    transition: transform 0.6s;
     will-change: transform;
   }
 
@@ -172,7 +88,13 @@
       transform: rotate(180deg) translate(0, -14px);
     }
   }
+}
 
+.auth-logout {
+  margin-left: 10px;
+  z-index: 50;
+  display: none;
+  cursor: pointer;
 }
 
 .auth-loader {
@@ -222,29 +144,145 @@
 
 .auth-wrap {
   position: absolute;
-  transform: rotateY(90deg);
-  width: 100%;
-  height: 100%;
+  z-index: -10;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  height: 100%;
   opacity: 0;
-  transition: opacity 0.6s, transform 0.4s, background-color 0.4s;
-  will-change: transform, opacity;
+  transform: scale(0.6);
+  background-color: rgba(0, 0, 0, 0);
+  transition: opacity 0.4s, transform 0.6s, background-color 0.4s;
+  will-change: opacity, transform;
 
   &-show {
     z-index: 45;
-    transform: rotateY(0deg);
     opacity: 1;
-    background-color: rgba(0, 0, 0, 0.8);
+    transform: scale(1);
+    background-color: rgba(0, 0, 0, 0.4);
   }
 }
 
-.auth-error {
+.auth-notify-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+}
+
+.auth-notify {
+  position: absolute;
+  font-size: 3em;
+  opacity: 0;
+  transition: opacity 0.6s;
+}
+
+.auth-correct {
+  color: #00FF00;
+}
+
+.auth-wrong {
   color: red;
+}
+
+.auth-incorrect {
+  color: red;
+}
+
+.auth-form {
+  width: 100%;
+  border-top: 4px solid #000;
+  border-bottom: 4px solid #000;
+  background-color: rgba(2, 64, 0, 0.6);
+}
+
+.auth-email,
+.auth-password {
+  z-index: 50;
+  width: 100%;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.6);
+  color: #fff;
   font-size: 3em;
   text-align: center;
-  opacity: 0;
-  transition: opacity 0.2s;
+  text-shadow: 2px 2px 2px #000;
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: border-color 0.4s;
+
+  &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #fff;
+  }
+
+  &::-moz-placeholder { /* Firefox 19+ */
+    color: #fff;
+  }
+
+  &:-ms-input-placeholder { /* IE 10+ */
+    color: #fff;
+  }
+
+  &:-moz-placeholder { /* Firefox 18- */
+    color: #fff;
+  }
+
+  &:valid {
+    border-color: #00ae00;
+  }
+
+  &:invalid {
+    border-color: #e20000;
+  }
+}
+
+.auth-submit {
+  z-index: 50;
+  width: 100%;
+  padding: 6px 0;
+  color: #59e942;
+  font-size: 3em;
+  text-shadow: 2px 2px 2px #000;
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  animation: 0.6s infinite alternate both; /* auth-submit-waited, auth-submit-error, auth-submit-success */
+  will-change: transform;
+}
+
+@keyframes auth-submit-waited {
+  50% {
+    transform: scale(0.95);
+  }
+}
+
+@keyframes auth-submit-error {
+  0% {
+    transform: translateX(0);
+  }
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(10px);
+  }
+
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(-10px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes auth-submit-success {
+  50% {
+    transform: scale(1.3);
+  }
 }

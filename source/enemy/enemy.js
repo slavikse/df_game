@@ -12,10 +12,12 @@ const
     'icon-enemy4'
   ],
   imagesClassesLength = imagesClasses.length - 1,
+
   eventEnemyAdd = new Event('enemyAdd'),
   eventEnemyDec = new Event('enemyDec'),
   eventScoreAdd = new Event('scoreAdd'),
   eventDamage = new Event('damage'),
+
   audioURI = window.audioURI,
   audioSprite = window.audioSprite,
   dieAudios = [
@@ -24,6 +26,7 @@ const
     audioSprite.enemy_die3,
     audioSprite.enemy_die4,
   ],
+
   playingFieldResize = throttle(playingField, 500);
 
 let

@@ -12,7 +12,7 @@ body {
   font-family: 'beermoney', sans-serif;
   background: url("image/forest_day_mobile.jpg") 50% 50% / cover no-repeat;
   cursor: crosshair;
-  overflow: hidden; /* мобы могут появляться на краю */
+  overflow: hidden; /* мобы могут появляться на краю и при получении урона ... */
 
   @media (544px <= width <= 992px) {
     background-image: url("image/forest_day_tablet.jpg");
@@ -25,8 +25,4 @@ body {
   &.dont-shoot {
     cursor: cell;
   }
-}
-
-.paddock {
-  overflow: hidden; /* мобы могут появляться на краю */
 }

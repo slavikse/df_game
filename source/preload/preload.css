@@ -55,7 +55,7 @@
     height: 30px;
     border-radius: 50%;
     background: #048200;
-    animation: move 1.3s ease-in-out infinite alternate;
+    animation: move 1.5s ease-in-out infinite alternate;
     will-change: transform;
 
     &::after,

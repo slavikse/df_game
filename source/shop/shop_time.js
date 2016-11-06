@@ -29,6 +29,7 @@ function indexInc() {
 
 function shopTimeEnd() {
   $shopTimeWrap.style.zIndex = '-10';
+  $shopTime.textContent = '';
   $shopTime.style.animationName = '';
 }
 

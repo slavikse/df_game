@@ -2,6 +2,7 @@ import noise from '../helper/noise';
 
 const
   $healthNotice = document.querySelector('.health-notice'),
+
   audioURI = window.audioURI,
   audioSprite = window.audioSprite,
   healAudiosURI = [

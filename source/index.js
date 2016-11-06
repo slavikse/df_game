@@ -1,7 +1,5 @@
-//import 'whatwg-fetch';
-//import 'es6-promise';
-import './helper/audio_sprite';
 import './preload/preload';
+import './helper/audio_sprite';
 import './start_screen/start_screen';
 import './shoot/shoot';
 import './cat/cat';

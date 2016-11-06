@@ -4,7 +4,7 @@
   justify-content: center;
   width: 4em;
   height: 4em;
-  animation: time-rotate 4s infinite both paused;
+  transition: transform 1s ease-in;
   transform-style: preserve-3d;
 
   .edge {
@@ -15,7 +15,7 @@
     font-size: 3em;
     text-align: center;
     background-color: white;
-    box-shadow: inset 0 0 30px #eee;
+    box-shadow: inset 0 0 20px #3b3b3b;
   }
 
   .edge-front {
@@ -38,20 +38,5 @@
     line-height: 0.6;
     transform-origin: bottom;
     transform: rotateX(90deg) translateY(0.5em);
-  }
-}
-
-@keyframes time-rotate {
-  25% {
-    transform: rotateX(-90deg);
-  }
-  50% {
-    transform: rotateX(-180deg);
-  }
-  75% {
-    transform: rotateX(-270deg);
-  }
-  100% {
-    transform: rotateX(-360deg);
   }
 }

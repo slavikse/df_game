@@ -3,8 +3,10 @@ import noise from './../helper/noise';
 const
   $body = document.body,
   $bomb = $body.querySelector('.bomb'),
+
   audioURI = window.audioURI,
   audioBomb = window.audioSprite.bomb,
+
   eventBomb = new Event('bomb');
 
 function bomb() {
