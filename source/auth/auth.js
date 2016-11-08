@@ -2,6 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth.js';
 // import 'firebase/database';
 // import 'firebase/storage';
+import {audioURI, audioSprite} from './../helper/audio_sprite';
 import noise from './../helper/noise';
 
 const
@@ -19,11 +20,10 @@ const
   $authWrong = $authWrap.querySelector('.auth-wrong'),
   $authSubmit = $authWrap.querySelector('.auth-submit'),
 
-  audioURI = window.audioURI,
-  audioAuthHover = window.audioSprite.hover_menu,
-  audioAuthShow = window.audioSprite.auth_show,
-  audioAuthIn = window.audioSprite.auth_in,
-  audioAuthOut = window.audioSprite.auth_out,
+  audioAuthHover = audioSprite.hover_menu,
+  audioAuthShow = audioSprite.auth_show,
+  audioAuthIn = audioSprite.auth_in,
+  audioAuthOut = audioSprite.auth_out,
   audioCancel = audioSprite.cancel,
 
   eventAuthBonus = new Event('authBonus'),
@@ -66,8 +66,8 @@ function authChanged(user) {
     $authLogout.style.display = '';
   }
 
-  // bug fix: Uncaught (in promise) DOMException: The play() request was interrupted by a call to pause()
-  setTimeout(noise.bind(null, audioURI, authAudio), 50);
+  // Uncaught (in promise) DOMException: The play() request was interrupted by a call to pause()
+  noise(audioURI, authAudio);
 
   $authOpener.classList.remove('auth-opener-on');
   $authLoader.classList.remove('auth-loader');

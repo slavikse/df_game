@@ -1,3 +1,4 @@
+import {audioURI, audioSprite} from './../helper/audio_sprite';
 import noise from './../helper/noise';
 
 const
@@ -9,8 +10,6 @@ const
   $shoot = $body.querySelector('.shoot'),
   bulletDrum = 6,
 
-  audioURI = window.audioURI,
-  audioSprite = window.audioSprite,
   audioShoots = [
     audioSprite.shoot1,
     audioSprite.shoot2,

@@ -1,11 +1,11 @@
+import {audioURI, audioSprite} from './../helper/audio_sprite';
 import noise from './../helper/noise';
 
 const
   $body = document.body,
   $bomb = $body.querySelector('.bomb'),
 
-  audioURI = window.audioURI,
-  audioBomb = window.audioSprite.bomb,
+  audioBomb = audioSprite.bomb,
 
   eventBomb = new Event('bomb');
 

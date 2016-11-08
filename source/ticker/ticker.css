@@ -1,0 +1,62 @@
+.ticker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 4em;
+  transform-style: preserve-3d;
+  transform: rotateY(90deg); /* начинается с паузы || */
+  transition: transform 0.4s ease; /* tick */
+
+  .edge {
+    position: absolute;
+    width: 1em;
+    height: 1em;
+    color: black;
+    font-size: 3em;
+    text-align: center;
+    background-color: white;
+    box-shadow: inset 0 0 20px #3b3b3b;
+  }
+
+  .edge-left { /* || */
+    transform: translateX(-0.5em) rotateY(90deg);
+  }
+
+  .edge-front { /* :: */
+    line-height: 0.8;
+    transform: translateZ(0.5em);
+  }
+
+  .edge-top { /* :. */
+    line-height: 0.8;
+    transform: translateY(-0.5em) rotateX(90deg);
+  }
+
+  .edge-back { /* : */
+    line-height: 0.9;
+    transform: translateZ(-0.5em);
+  }
+
+  .edge-bottom { /* . */
+    line-height: 0.6;
+    transform: translateY(0.5em) rotateX(90deg);
+  }
+
+  .edge-right { /* + */
+    line-height: 0.9;
+    transform: translateX(0.5em) rotateY(90deg);
+  }
+}
+
+/*
+
+|| rotateY(90deg)
+
+:: rotateX(360deg)
+:. rotateX(270deg)
+:  rotateX(180deg)
+.  rotateX(90deg)
+
++  rotateY(-90deg)
+
+*/

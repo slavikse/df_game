@@ -1,4 +1,5 @@
 import './health_notice';
+import {audioURI, audioSprite} from './../helper/audio_sprite';
 import noise from '../helper/noise';
 
 const
@@ -18,8 +19,7 @@ const
   healthFull = healthStateClasses.length, // состояния сердца
   healthStateFull = healthStateClasses.length - 1, // состояние сердца, изначально сердце целое
 
-  audioURI = window.audioURI,
-  audioHeart = window.audioSprite.heart,
+  audioHeart = audioSprite.heart,
 
   $eventRegeneration = new Event('regeneration');
 

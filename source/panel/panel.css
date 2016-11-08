@@ -1,6 +1,6 @@
 @import '../health/health';
 @import '../score/score';
-@import '../next_wave/next_wave';
+@import '../ticker/ticker';
 @import '../enemy_count/enemy_count';
 @import '../revolver/revolver';
 

@@ -1,6 +1,6 @@
 import './../health/health.js';
 import './../score/score.js';
-import './../next_wave/next_wave.js';
+import './../ticker/ticker.js';
 import './../enemy_count/enemy_count';
 import './../revolver/revolver.js';
 

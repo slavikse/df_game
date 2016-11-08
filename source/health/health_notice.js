@@ -1,10 +1,9 @@
+import {audioURI, audioSprite} from './../helper/audio_sprite';
 import noise from '../helper/noise';
 
 const
   $healthNotice = document.querySelector('.health-notice'),
 
-  audioURI = window.audioURI,
-  audioSprite = window.audioSprite,
   healAudiosURI = [
     audioSprite.heal1,
     audioSprite.heal2

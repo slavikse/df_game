@@ -1,5 +1,6 @@
-import noise from './../helper/noise';
 import './shop_time';
+import {audioURI, audioSprite} from './../helper/audio_sprite';
+import noise from './../helper/noise';
 
 const
   $body = document.body,
@@ -12,8 +13,6 @@ const
   $score = $body.querySelector('.score'),
   $closeShop = $shop.querySelector('.close-shop'),
 
-  audioURI = window.audioURI,
-  audioSprite = window.audioSprite,
   audioBuyHover = audioSprite.buy_hover,
   audioBuy = audioSprite.buy,
   audioCancel = audioSprite.cancel,
@@ -35,12 +34,12 @@ function openShopDelay() {
 }
 
 function openShop() {
-  $ambient.setAttribute('src', 'audio/shop_ambient.mp3');
-
+  $shop.style.zIndex = '400';
   $body.classList.add('dont-shoot');
   $shop.classList.add('shop-open');
-  $shop.style.zIndex = '400';
   $score.classList.add('score-shop');
+
+  $ambient.setAttribute('src', 'audio/shop_ambient.mp3');
 
   $store.addEventListener('click', buy);
   $closeShop.addEventListener('click', closeShop);
@@ -140,17 +139,22 @@ function closeShop() {
   $closeShop.removeEventListener('click', closeShop);
 
   noise(audioURI, audioNextWave);
-  setTimeout(closeShopEnd, 400); // animate
+  setTimeout(closeShopEnd, 400); // button close shop animate
 }
 
 function closeShopEnd() {
   $body.classList.remove('dont-shoot');
   $shop.classList.remove('shop-open');
-  $shop.style.zIndex = 'auto';
   $score.classList.remove('score-shop');
 
   $closeShop.style.animationName = '';
   document.dispatchEvent(eventWaveStart);
+
+  setTimeout(closeShopHide, 400);
+}
+
+function closeShopHide() {
+  $shop.style.zIndex = '-10';
 }
 
 function itemHandler() {

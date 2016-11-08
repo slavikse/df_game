@@ -1,4 +1,5 @@
 import debounce from 'libs/debounce';
+import {audioURI, audioSprite} from './../helper/audio_sprite';
 import noise from './../helper/noise';
 
 const
@@ -6,8 +7,7 @@ const
   fireRate = 166.6, // 6 выстрелов в 1 секунду
   shootFire = debounce(shoot, fireRate),
 
-  audioURI = window.audioURI,
-  audioIdle = window.audioSprite.idle,
+  audioIdle = audioSprite.idle,
 
   eventCatShoot = new Event('catShoot'),
   eventEnemyKill = new Event('enemyKill');

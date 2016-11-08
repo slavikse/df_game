@@ -16,10 +16,10 @@ import './statistic/statistic';
 //  console.log('Отловил:', message, url, lineNumber);
 //};
 
-const NODE_ENV = process.env.NODE_ENV;
-
-if (NODE_ENV === 'production') {
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js');
-  }
-}
+//const NODE_ENV = process.env.NODE_ENV;
+//
+//if (NODE_ENV === 'production') {
+//  if ('serviceWorker' in navigator) {
+//    navigator.serviceWorker.register('sw.js');
+//  }
+//}

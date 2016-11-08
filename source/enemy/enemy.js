@@ -1,5 +1,6 @@
 import range from 'libs/range';
 import throttle from 'libs/throttle';
+import {audioURI, audioSprite} from './../helper/audio_sprite';
 import noise from './../helper/noise';
 
 const
@@ -18,8 +19,6 @@ const
   eventScoreAdd = new Event('scoreAdd'),
   eventDamage = new Event('damage'),
 
-  audioURI = window.audioURI,
-  audioSprite = window.audioSprite,
   dieAudios = [
     audioSprite.enemy_die1,
     audioSprite.enemy_die2,

@@ -1,5 +1,6 @@
 import range from 'libs/range';
 import throttle from 'libs/throttle';
+import {audioURI, audioSprite} from './../helper/audio_sprite';
 import noise from './../helper/noise';
 
 const
@@ -8,9 +9,7 @@ const
   $cat = $catPosition.querySelector('.cat'),
   $toBad = $body.querySelector('.to-bad'),
 
-  audioURI = window.audioURI,
-  audioToBad = window.audioSprite.to_bad,
-
+  audioToBad = audioSprite.to_bad,
   playingFieldResize = throttle(playingField, 500),
   moveTime = 5000;
 

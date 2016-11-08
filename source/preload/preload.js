@@ -3,7 +3,8 @@ const
   resource = {
     audios: [
       'audio/dark_ambient.mp3',
-      'audio/audio_sprite.mp3'
+      'audio/audio_sprite.mp3',
+      'audio/shop_ambient.mp3'
     ],
     images: [
       // 'image/sprite.png' # брауз сразу запрашивает

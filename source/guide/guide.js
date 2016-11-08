@@ -1,9 +1,9 @@
+import {audioURI, audioSprite} from './../helper/audio_sprite';
 import noise from './../helper/noise';
 
 const
   $guideHelp = document.querySelector('.guide-help'),
-  audioURI = window.audioURI,
-  audioHoverMenu = window.audioSprite.hover_menu;
+  audioHoverMenu = audioSprite.hover_menu;
 
 function hoverMenu() {
   noise(audioURI, audioHoverMenu);
