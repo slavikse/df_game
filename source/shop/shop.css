@@ -2,34 +2,36 @@
 
 .shop {
   position: absolute;
-  z-index: -10;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  flex-direction: column;
   width: 100%;
   height: 100%;
-  background-color: rgba(2, 58, 0, 0.6);
   opacity: 0;
-  transform: scale(0.4);
-  transition:  opacity 0.4s, transform 0.4s;
-  will-change: opacity, transform;
   pointer-events: none;
+  background-color: rgba(0, 0, 0, 0.8);
+  transform: scale(0.6);
+  transition: opacity 0.4s, transform 0.4s;
+  will-change: opacity, transform;
 
   &-open {
     opacity: 1;
     transform: scale(1);
+
+    .item {
+      pointer-events: auto;
+    }
   }
 
-  .store-title {
+  &-title {
     position: absolute;
     left: 0;
     margin: 10px;
     font-family: gun_store, sans-serif;
-    font-size: 2.5em;
+    font-size: 2em;
     font-style: italic;
-    color: #35b900;
-    text-shadow: 2px 2px 2px #000000;
+    color: #32ac00;
   }
 
   .guns {
@@ -37,19 +39,18 @@
   }
 
   .item {
-    margin: 10px;
+    margin: 6px;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 10px;
     border: 3px dashed #2d9b00;
     color: #fff;
-    font-size: 2.5em;
-    text-shadow: 1px 1px 2px #000000;
-    box-shadow: 0 0 10px #000000, inset 0 0 6px #000000;
+    font-size: 2em;
     background-color: rgba(5, 123, 0, 0.4);
+    text-shadow: 1px 1px 3px black;
+    box-shadow: inset 0 0 10px black;
     cursor: pointer;
-    pointer-events: auto;
 
     .icon {
       pointer-events: none;
@@ -57,48 +58,34 @@
 
     &:hover,
     &:active {
-      background-color: rgba(3, 103, 0, 0.8);
+      background-color: rgba(3, 103, 0, 0.6);
     }
   }
 
   .buy-block {
     border: 3px dashed #888;
-    cursor: no-drop;
     background-color: rgba(99, 100, 100, 0.4);
+    cursor: no-drop;
 
     &:hover,
     &:active {
-      background-color: rgba(85, 86, 86, 0.8);
+      background-color: rgba(85, 86, 86, 0.6);
     }
   }
 
-  .close-shop {
+  &-close {
     position: absolute;
-    z-index: 150;
     right: 0;
-    margin: 4px;
-    font-size: 4em;
-    color: #e3e300;
-    text-align: right;
-    text-shadow: 0 0 12px #4f1100;
-    cursor: pointer;
+    margin: 10px;
+    font-size: 3em;
+    color: #ffff00;
+    text-shadow: 0 0 10px #4f1100;
     pointer-events: auto;
-    animation: 0.1s linear infinite alternate both; /* close-shop */
+    cursor: pointer;
+    transition: color 0.2s;
 
     &:hover {
-      animation-name: close-shop-before;
+      color: #db5c1c;
     }
-  }
-}
-
-@keyframes close-shop-before {
-  100% {
-    color: #ffff00;
-  }
-}
-
-@keyframes close-shop-after {
-  100% {
-    color: #bf5018;
   }
 }

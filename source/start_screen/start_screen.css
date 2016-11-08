@@ -32,27 +32,18 @@
   }
 
   .new-game {
+    position: relative;
+    z-index: 10;
     font-size: 6em;
-    color: #e3e300;
+    color: #ffff00;
     text-shadow: 2px 2px 2px black;
     cursor: pointer;
     transition: color 0.2s, opacity 0.2s;
-    animation: new-game linear infinite alternate; /* new-game */
     will-change: opacity;
 
     &:hover {
-      animation-duration: 0.2s;
+      color: #db5c1c;
     }
-
-    &.new-game-start { /* повышаем вес селектора */
-      animation-duration: 0.1s;
-    }
-  }
-}
-
-@keyframes new-game {
-  100% {
-    color: #db5c1c;
   }
 }
 

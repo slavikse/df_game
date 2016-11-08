@@ -4,20 +4,19 @@ import noise from './../helper/noise';
 const
   $body = document.body,
   $bomb = $body.querySelector('.bomb'),
-
   audioBomb = audioSprite.bomb,
-
   eventBomb = new Event('bomb');
 
 function bomb() {
-  document.dispatchEvent(eventBomb);
   bombEffect();
+  document.dispatchEvent(eventBomb);
 }
 
 function bombEffect() {
   $bomb.style.animationName = 'bomb';
   noise(audioURI, audioBomb);
-  setTimeout(bombEffectEnd, 1000); // анимация
+
+  setTimeout(bombEffectEnd, 600); // анимация
 }
 
 function bombEffectEnd() {
@@ -41,3 +40,4 @@ function removeListenKey() {
 document.addEventListener('startGame', addListenKey);
 document.addEventListener('waveStart', addListenKey);
 document.addEventListener('waveEnd', removeListenKey);
+document.addEventListener('gameOver', removeListenKey);

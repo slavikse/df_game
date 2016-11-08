@@ -16,8 +16,10 @@ let
   shootCountTotal = 0, // выстрелов всего
   shootCountInTarget = 0, // пападание в цель
   shootCountInCat = 0, // пападание в бонусного котика
+
   shootMoveTimerID,
   shootDownTimerID,
+
   shootEvent = new Event('shoot');
 
 function shoot(e) {

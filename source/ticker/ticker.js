@@ -31,7 +31,7 @@ function nextTick() {
   const tickerRotateX = 360 - 90 * tickCurrent;
   $ticker.style.transform = `rotateX(${tickerRotateX}deg)`;
 
-  setTimeout(noise.bind(null, audioURI, audioTick), 400); // анимация поворота
+  setTimeout(noise.bind(null, audioURI, audioTick), 300); // анимация поворота тикера
 
   if (tickCurrent === tickDefault) {
     extraWave();

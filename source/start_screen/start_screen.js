@@ -49,23 +49,24 @@ function initGame() {
   $newGame.classList.add('new-game-start');
 
   noise(audioURI, audioIntro);
-  initInterface();
-  setTimeout(initGameEnd, 800);
-  setTimeout(changeBackground, 5500);
-}
+  changeBackground();
 
-function initInterface() {
-  $startScreen.style.opacity = 0;
-  $panel.style.opacity = 1;
-  $forestNight.style.opacity = 1;
-}
-
-function initGameEnd() {
-  $startScreen.remove();
   document.dispatchEvent(eventStartGame);
+  setTimeout(changeAmbient, 5500);
 }
 
 function changeBackground() {
+  $startScreen.style.opacity = 0;
+  $forestNight.style.opacity = 1;
+
+  setTimeout(changeBackgroundEnd, 800);
+}
+
+function changeBackgroundEnd() {
+  $startScreen.remove();
+}
+
+function changeAmbient() {
   $body.style.backgroundImage = 'none'; // освобождаем память
   $ambient.setAttribute('src', 'audio/dark_ambient.mp3');
 }

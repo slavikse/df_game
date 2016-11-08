@@ -1,26 +1,24 @@
 const
-  $shopTimeWrap = document.querySelector('.shop-time-wrap'),
-  $shopTime = $shopTimeWrap.querySelector('.shop-time'),
+  $shopTime = document.querySelector('.shop-time'),
   texts = [
     'Передохни!',
     'Понеслась!'
-  ];
+  ],
+  textsLength = texts.length - 1;
 
 let i = 0;
 
 function shopTime() {
-  const text = texts[i];
-
-  $shopTimeWrap.style.zIndex = '160';
-  $shopTime.textContent = text;
+  textToggle();
   $shopTime.style.animationName = 'shop-time';
 
-  indexInc();
   setTimeout(shopTimeEnd, 1500);
 }
 
-function indexInc() {
-  if (i === texts.length - 1) {
+function textToggle() {
+  $shopTime.textContent = texts[i];
+
+  if (i === textsLength) {
     i = 0;
   } else {
     i += 1;
@@ -28,7 +26,6 @@ function indexInc() {
 }
 
 function shopTimeEnd() {
-  $shopTimeWrap.style.zIndex = '-10';
   $shopTime.textContent = '';
   $shopTime.style.animationName = '';
 }
