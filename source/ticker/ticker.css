@@ -5,7 +5,7 @@
   height: 4em;
   transform-style: preserve-3d;
   transform: rotateY(90deg); /* начинается с паузы || */
-  transition: transform 0.4s ease; /* tick */
+  transition: transform 0.4s ease-in; /* tick */
 
   .edge {
     position: absolute;
@@ -23,13 +23,30 @@
   }
 
   .edge-front { /* :: */
-    line-height: 0.8;
+    line-height: 0.85;
     transform: translateZ(0.5em);
   }
 
   .edge-top { /* :. */
-    line-height: 0.8;
+    position: relative;
+    line-height: 0.6;
     transform: translateY(-0.5em) rotateX(90deg);
+
+    &::before,
+    &::after {
+      position: absolute;
+      content: '.';
+    }
+
+    &::before {
+      top: -10px;
+      left: 6px;
+    }
+
+    &::after {
+      right: 6px;
+      bottom: 10px;
+    }
   }
 
   .edge-back { /* : */
@@ -49,14 +66,10 @@
 }
 
 /*
-
 || rotateY(90deg)
-
 :: rotateX(360deg)
 :. rotateX(270deg)
 :  rotateX(180deg)
 .  rotateX(90deg)
-
 +  rotateY(-90deg)
-
 */
