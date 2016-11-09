@@ -18,7 +18,7 @@ function noise(uri, params) {
 function setParam(audio, params) {
   const
     param = getRandom(params),
-    startTime = param[0] / 1000, // время в секундах
+    startTime = param[0] / 1000, // время начала в s
     duration = param[1].toFixed(2); // продолжительность в ms
 
   audio.currentTime = startTime;

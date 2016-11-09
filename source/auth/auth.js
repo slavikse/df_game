@@ -38,6 +38,7 @@ const
   };
 
 let
+  isGetAuthBonus = false,
   emailSave,
   passwordSave,
   isAuthShow = false,
@@ -57,7 +58,11 @@ function authChanged(user) {
     $authOpener.removeEventListener('click', authShowToggle);
     $authLogout.style.display = 'inline-block';
 
-    document.dispatchEvent(eventAuthBonus);
+    if (!isGetAuthBonus) {
+      document.dispatchEvent(eventAuthBonus);
+    }
+
+    isGetAuthBonus = true;
   } else {
     authAudio = audioAuthOut;
 

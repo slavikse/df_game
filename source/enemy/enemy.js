@@ -29,6 +29,7 @@ const
   playingFieldResize = throttle(playingField, 500);
 
 let
+  $paddock = $body.querySelector('.paddock'),
   timerIDs = [], // собирает все id таймеров, для последующего удаления
   enemyCloneCountDefault = 4,
   enemyCloneCurrent = 0,
@@ -37,7 +38,6 @@ let
   enemyHealthDefault = [1, 2],
   enemyDamageTimeDefault = [6, 8],
   enemyCloneCount = enemyCloneCountDefault,
-  $paddock = $body.querySelector('.paddock'),
   playingFieldWidth,
   playingFieldHeight;
 
@@ -162,7 +162,7 @@ function enemyShootEnd(enemyNode) {
 }
 
 function enemyHealthDec(healthNode) {
-  healthNode.style.animationName = 'enemy-health-dec';
+  healthNode.style.animationName = 'enemy-health';
   setTimeout(enemyHealthDecEnd.bind(null, healthNode), 100); // animate
 }
 

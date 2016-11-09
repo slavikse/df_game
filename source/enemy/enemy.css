@@ -1,6 +1,5 @@
 .enemy-position {
   position: absolute;
-  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,26 +15,25 @@
 }
 
 .enemy-hide {
-  z-index: 0;
   pointer-events: none;
 }
 
 .enemy-warning {
   position: absolute;
-  z-index: 102;
+  z-index: 1;
   opacity: 0;
   pointer-events: none;
 }
 
 .enemy-damage {
   position: absolute;
-  z-index: 101;
+  z-index: 1;
   pointer-events: none;
-  animation: 0.15s linear enemy-damage-animate both paused;
+  animation: 0.15s linear enemy-damage both paused;
   will-change: transform, opacity;
 }
 
-@keyframes enemy-damage-animate {
+@keyframes enemy-damage {
   0% {
     opacity: 0;
     transform: translate(20%, -20%);
@@ -65,7 +63,7 @@
 }
 
 .enemy-kill {
-  animation: 0.5s enemy-kill; /* enemy-kill 0.5 */
+  animation: 0.5s enemy-kill; /* enemy-kill */
 }
 
 @keyframes enemy-kill {
@@ -85,10 +83,10 @@
   font-size: 1em;
   pointer-events: none;
   background-color: red;
-  animation: 0.1s alternate;
+  animation: 0.1s alternate; /* enemy-health */
 }
 
-@keyframes enemy-health-dec {
+@keyframes enemy-health {
   50% {
     transform: scale(1.5);
   }

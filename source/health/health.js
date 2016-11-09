@@ -7,6 +7,7 @@ const
   $healthWrap = $body.querySelector('.health-wrap'),
   $firstAid = $healthWrap.querySelector('.first-aid').children,
   $healths = $healthWrap.querySelector('.health').children,
+
   firstAidStateClasses = [
     'icon-first_aid_circuit', // пустая
     'icon-first_aid' // целая

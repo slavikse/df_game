@@ -1,6 +1,5 @@
 .result {
   position: absolute;
-  z-index: -10;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,22 +8,28 @@
   height: 100%;
   opacity: 0;
   background-color: #000;
+  pointer-events: none;
   transition: 1.5s opacity;
   will-change: opacity;
 
   &-show {
-    z-index: 200;
     opacity: 1;
+
+    .statistic-show,
+    .restart {
+      pointer-events: auto;
+    }
   }
 
   .title {
     color: red;
     font-size: 5em;
+    text-shadow: 0 0 10px red;
   }
 
   .count-frame {
     color: white;
-    font-size: 4em;
+    font-size: 3em;
   }
 
   .statistic-show {
@@ -33,14 +38,9 @@
     font-size: 3em;
     outline: 0;
     cursor: pointer;
-    transition: color 0.2s;
 
     &:focus ~ .statistic {
       transform: translateX(0);
-    }
-
-    &:hover {
-      color: #8f851f;
     }
   }
 
@@ -76,14 +76,10 @@
   }
 
   .restart {
-    margin-top: 30px;
+    margin-top: 10px;
     color: #06d600;
     font-size: 3em;
+    text-shadow: 0 0 6px green;
     cursor: pointer;
-    transition: color 0.2s;
-
-    &:hover {
-      color: #048700;
-    }
   }
 }

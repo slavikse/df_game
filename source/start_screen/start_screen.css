@@ -12,6 +12,10 @@
   transition: opacity 0.8s, background-color 0.2s;
   will-change: opacity;
 
+  &-no-events {
+    pointer-events: none !important;
+  }
+
   &-shading {
     background-color: rgba(0, 0, 0, 0.8);
   }
@@ -33,17 +37,28 @@
 
   .new-game {
     position: relative;
-    z-index: 10;
+    z-index: 1;
     font-size: 6em;
     color: #ffff00;
-    text-shadow: 2px 2px 2px black;
+    text-shadow: 2px 2px 4px black;
     cursor: pointer;
     transition: color 0.2s, opacity 0.2s;
-    will-change: opacity;
+    animation: new-game 0.2s ease alternate both paused;
+    will-change: opacity, transform;
 
     &:hover {
-      color: #db5c1c;
+      color: #fe6b20;
     }
+
+    &-start {
+      animation-play-state: running;
+    }
+  }
+}
+
+@keyframes new-game {
+  50% {
+    transform: scale(1.15);
   }
 }
 

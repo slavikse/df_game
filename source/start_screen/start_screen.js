@@ -6,10 +6,8 @@ import noise from './../helper/noise';
 const
   $body = document.body,
   $startScreen = $body.querySelector('.start-screen'),
-  $bestScoreFrame = $startScreen.querySelector('.best-score-frame'),
-  $bestScore = $bestScoreFrame.querySelector('.best-score'),
+  $bestScore = $startScreen.querySelector('.best-score'),
   $newGame = $startScreen.querySelector('.new-game'),
-  $panel = $body.querySelector('.panel'),
   $ambient = $body.querySelector('.ambient'),
   $forestNight = $body.querySelector('.forest-night'),
 
@@ -18,18 +16,10 @@ const
 
   eventStartGame = new Event('startGame');
 
-initStartScreen();
-
-function initStartScreen() {
-  getBestScore();
-}
+getBestScore();
 
 function getBestScore() {
   $bestScore.textContent = localStorage.getItem('best-score') || 0;
-}
-
-function hoverNewGame() {
-  noise(audioURI, audioHover);
 }
 
 function initGame() {
@@ -46,9 +36,11 @@ function initGame() {
   /** / god mod */
 
   $newGame.removeEventListener('click', initGame);
+  noise(audioURI, audioIntro);
+
+  $startScreen.classList.add('start-screen-no-events');
   $newGame.classList.add('new-game-start');
 
-  noise(audioURI, audioIntro);
   changeBackground();
 
   document.dispatchEvent(eventStartGame);
@@ -58,17 +50,16 @@ function initGame() {
 function changeBackground() {
   $startScreen.style.opacity = 0;
   $forestNight.style.opacity = 1;
-
-  setTimeout(changeBackgroundEnd, 800);
-}
-
-function changeBackgroundEnd() {
-  $startScreen.remove();
 }
 
 function changeAmbient() {
   $body.style.backgroundImage = 'none'; // освобождаем память
   $ambient.setAttribute('src', 'audio/dark_ambient.mp3');
+  $startScreen.remove();
+}
+
+function hoverNewGame() {
+  noise(audioURI, audioHover);
 }
 
 $newGame.addEventListener('mouseover', hoverNewGame);

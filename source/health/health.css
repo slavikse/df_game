@@ -1,11 +1,12 @@
 .health-wrap {
+  position: relative;
+  z-index: 1; /* в магазе */
   display: flex;
   flex-direction: column;
   margin-left: 5px;
 }
 
 .first-aid {
-  z-index: 1;
   display: flex;
   margin-bottom: 10px;
 

@@ -12,7 +12,7 @@
 
 .auth-user-name {
   position: relative;
-  z-index: 60;
+  z-index: 3;
   font-size: 3.6em;
   color: #60ff4b;
   text-shadow: 2px 2px 2px #000;
@@ -26,8 +26,8 @@
 
 .auth-opener {
   position: relative;
+  z-index: 3;
   display: none;
-  z-index: 50;
   color: #51d83f;
   line-height: 0.5;
   text-shadow: 2px 2px 2px #000;
@@ -40,7 +40,7 @@
 
   .cogwheel {
     display: flex;
-    transition: transform 0.6s;
+    transition: transform 0.4s;
     transform-origin: center 27px;
     pointer-events: none;
     will-change: transform;
@@ -63,14 +63,14 @@
 
   .letter-e {
     font-size: 4.5em;
-    transition: transform 0.6s;
+    transition: transform 0.4s;
     will-change: transform;
   }
 
   .letter-s {
     font-size: 5.6em;
     transform: rotate(70deg) translate(4px, -6px);
-    transition: transform 0.6s;
+    transition: transform 0.4s;
     will-change: transform;
   }
 
@@ -94,8 +94,6 @@
 }
 
 .auth-logout {
-  position: relative;
-  z-index: 50;
   margin-left: 10px;
   display: none;
   cursor: pointer;
@@ -162,7 +160,7 @@
   will-change: opacity, transform;
 
   &-show {
-    z-index: 45;
+    z-index: 2;
     opacity: 1;
     pointer-events: auto;
     transform: scale(1);
@@ -183,7 +181,7 @@
   position: absolute;
   font-size: 3em;
   opacity: 0;
-  transition: opacity 0.6s;
+  transition: opacity 0.4s;
 }
 
 .auth-correct {
@@ -242,8 +240,6 @@
 }
 
 .auth-submit {
-  position: relative;
-  z-index: 50;
   width: 100%;
   padding: 6px 0;
   color: #59e942;
