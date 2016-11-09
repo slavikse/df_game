@@ -30,6 +30,8 @@ function getBestScore(uid) {
     db.ref(uid)
     .once('value')
     .then(bestScore);
+  } else {
+    $bestScore.textContent = localStorage.getItem('best-score') || 0;
   }
 }
 

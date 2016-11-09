@@ -54,6 +54,7 @@ function getStatistic() {
     };
 
   getBestScore();
+  localSaveBestScore();
   resultStatistic(tmpl);
 }
 
@@ -79,6 +80,14 @@ function saveBestScore() {
   db.ref(uid).set({
     bestScore: score
   });
+}
+
+function localSaveBestScore() {
+  const bestScore = localStorage.getItem('best-score') || 0;
+
+  if (score > bestScore) {
+    localStorage.setItem('best-score', score);
+  }
 }
 
 function resultStatistic(tmpl) {
