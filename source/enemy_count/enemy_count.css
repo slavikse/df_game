@@ -1,12 +1,13 @@
-.enemy-title {
-  display: flex;
+.enemy-count {
+  display: inline-block;
+  width: 30px;
   color: white;
   font-size: 2.5em;
+  text-align: right;
+  will-change: contents;
 }
 
-.enemy-count {
-  width: 80px;
-  height: 40px;
-  text-align: center;
-  will-change: contents;
+.icon-enemy_count {
+  display: inline-block;
+  vertical-align: bottom;
 }

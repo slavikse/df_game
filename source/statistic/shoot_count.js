@@ -1,6 +1,6 @@
 let shootStat;
 
-function shootCountSet(e) {
+function setShootCount(e) {
   const
     shoots = e.shootCountTotal,
     inTarget = e.shootCountInTarget,
@@ -17,10 +17,10 @@ function shootCountSet(e) {
   }
 }
 
-function shootCountGet() {
+function getShootCount() {
   return shootStat;
 }
 
-document.addEventListener('shootCount', shootCountSet);
+document.addEventListener('shootCount', setShootCount);
 
-export default shootCountGet;
+export default getShootCount;

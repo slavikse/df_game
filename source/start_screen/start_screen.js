@@ -1,3 +1,4 @@
+import fb from './../helper/fb';
 import './../auth/auth';
 import './../guide/guide';
 import {audioURI, audioSprite} from './../helper/audio_sprite';
@@ -14,12 +15,28 @@ const
   audioHover = audioSprite.hover_menu,
   audioIntro = audioSprite.intro,
 
-  eventStartGame = new Event('startGame');
+  eventStartGame = new Event('startGame'),
+  db = fb.database();
 
-getBestScore();
+fb.auth().onAuthStateChanged(auth);
 
-function getBestScore() {
-  $bestScore.textContent = localStorage.getItem('best-score') || 0;
+function auth(user) {
+  const uid = (user && user.uid) ? user.uid : null;
+  getBestScore(uid);
+}
+
+function getBestScore(uid) {
+  if (uid) {
+    db.ref(uid)
+    .once('value')
+    .then(bestScore);
+  }
+}
+
+function bestScore(snapshot) {
+  if (snapshot.val() && snapshot.val().bestScore) {
+    $bestScore.textContent = snapshot.val().bestScore;
+  }
 }
 
 function initGame() {

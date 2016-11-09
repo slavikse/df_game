@@ -26,8 +26,7 @@
   }
 
   .best-score-frame {
-    margin-top: 10px;
-    font-size: 4em;
+    font-size: 3em;
     color: #fff;
     text-shadow: 2px 2px 2px #000;
     text-align: center;
@@ -38,7 +37,7 @@
   .new-game {
     position: relative;
     z-index: 1;
-    font-size: 6em;
+    font-size: 5em;
     color: #ffff00;
     text-shadow: 2px 2px 4px black;
     cursor: pointer;

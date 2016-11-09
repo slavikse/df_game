@@ -21,17 +21,15 @@ const
   healthStateFull = healthStateClasses.length - 1, // состояние сердца, изначально сердце целое
 
   audioHeart = audioSprite.heart,
-
-  $eventRegeneration = new Event('regeneration');
+  eventRegeneration = new Event('regeneration');
 
 let
   receivedDamageStat = 0,
   firstAidUseStat = 0,
   firstAid = firstAidFull,
   health = healthFull,
-  healthState = healthStateFull;
-
-sessionStorage.setItem('firstAid', firstAid);
+  healthState = healthStateFull,
+  eventFirstAidShop = new Event('firstAidShop');
 
 function damage() {
 
@@ -84,8 +82,6 @@ function useFirstAid() {
   $firstAid[firstAid].className = firstAidStateClasses[0];
   firstAid -= 1;
 
-  sessionStorage.setItem('firstAid', firstAid);
-
   regeneration();
 }
 
@@ -95,7 +91,7 @@ function regeneration() {
   health = healthFull;
   healthState = healthStateFull;
 
-  document.dispatchEvent($eventRegeneration);
+  document.dispatchEvent(eventRegeneration);
 
   for (let i = 0, len = $healths.length; i < len; i++) {
     $healths[i].className = 'icon-heart';
@@ -118,13 +114,16 @@ function addFirstAid() {
   $firstAid[firstAid].className = firstAidStateClasses[1];
   $firstAid[firstAid].style.animationName = 'first-aid-blink';
 
-  sessionStorage.setItem('firstAid', firstAid);
-
   setTimeout(addFirstAidEnd, 600); // анимация
 }
 
 function addFirstAidEnd() {
   $firstAid[firstAid].style.animationName = '';
+}
+
+function firstAidShop() {
+  eventFirstAidShop.firstAid = firstAid;
+  document.dispatchEvent(eventFirstAidShop);
 }
 
 function saveFirstAidUseStat() {
@@ -182,5 +181,5 @@ document.addEventListener('buyFirstAid', addFirstAid);
 document.addEventListener('damage', damage);
 document.addEventListener('keyup', HKeyHandler);
 document.addEventListener('mousedown', CMBHandler);
-//document.addEventListener('waveEnd', waveEnd);
+document.addEventListener('waveEnd', firstAidShop);
 document.addEventListener('keyup', TKeyHandler);

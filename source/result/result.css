@@ -23,17 +23,11 @@
 
   .title {
     color: red;
-    font-size: 5em;
+    font-size: 3.5em;
     text-shadow: 0 0 10px red;
   }
 
-  .count-frame {
-    color: white;
-    font-size: 3em;
-  }
-
   .statistic-show {
-    margin-top: 10px;
     color: #ffeb3b;
     font-size: 3em;
     outline: 0;
@@ -53,6 +47,7 @@
     background-color: red;
     overflow-y: auto;
     outline: 0;
+    pointer-events: auto;
     transition: transform 0.4s;
     transform: translateX(-100%);
     will-change: transform;
@@ -76,9 +71,8 @@
   }
 
   .restart {
-    margin-top: 10px;
     color: #06d600;
-    font-size: 3em;
+    font-size: 3.2em;
     text-shadow: 0 0 6px green;
     cursor: pointer;
   }

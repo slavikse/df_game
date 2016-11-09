@@ -20,7 +20,8 @@ let
   shootMoveTimerID,
   shootDownTimerID,
 
-  shootEvent = new Event('shoot');
+  shootEvent = new Event('shoot'),
+  shootCountEvent = new Event('shootCount');
 
 function shoot(e) {
   /** нажата не ЛКМ */
@@ -120,8 +121,6 @@ function saveShootCountInCatStat() {
 }
 
 function shootCountStatistic() {
-  let shootCountEvent = new Event('shootCount');
-
   shootCountEvent.shootCountTotal = shootCountTotalStat;
   shootCountEvent.shootCountInTarget = shootCountInTargetStat;
   shootCountEvent.shootCountInCat = shootCountInCatStat;

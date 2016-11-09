@@ -25,8 +25,16 @@ const
 
 let
   costsStat = 0,
-  scoreCurrent,
+  score,
   firstAid;
+
+function scoreShop(e) {
+  score = e.score;
+}
+
+function firstAidShop(e) {
+  firstAid = e.firstAid;
+}
 
 function openShopDelay() {
   setTimeout(openShop, 1500); // уведомление
@@ -37,15 +45,6 @@ function openShop() {
   $shop.classList.add('shop-open');
 
   $ambient.setAttribute('src', 'audio/shop_ambient.mp3');
-
-  /** задержка из за отложенной записи в хранилище... */
-  setTimeout(deferredReading, 40);
-}
-
-function deferredReading() {
-  scoreCurrent = parseInt(sessionStorage.getItem('score'), 10);
-  firstAid = parseInt(sessionStorage.getItem('firstAid'), 10);
-
   buyLockUnlock();
 }
 
@@ -55,7 +54,7 @@ function buyLockUnlock() {
       item = $storeItems[i],
       itemScore = parseInt(item.dataset.score, 10);
 
-    if (itemScore > scoreCurrent) {
+    if (itemScore > score) {
       item.classList.add('buy-block');
     } else {
       item.classList.remove('buy-block');
@@ -103,7 +102,7 @@ function buy(e) {
   eventScoreDec.dec = scoreDec;
   document.dispatchEvent(eventScoreDec);
 
-  scoreCurrent -= scoreDec;
+  score -= scoreDec;
   saveCostsStat(scoreDec);
   buyLockUnlock();
 }
@@ -155,4 +154,6 @@ $store.addEventListener('click', buy);
 $shopClose.addEventListener('mouseover', hoverShopClose);
 $shopClose.addEventListener('click', shopClose);
 document.addEventListener('waveEnd', openShopDelay);
+document.addEventListener('scoreShop', scoreShop);
+document.addEventListener('firstAidShop', firstAidShop);
 document.addEventListener('gameOver', gameOver);

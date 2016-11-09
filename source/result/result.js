@@ -1,29 +1,30 @@
 const
   $result = document.querySelector('.result'),
-  $count = $result.querySelector('.count'),
   $statistic = $result.querySelector('.statistic'),
   $restart = $result.querySelector('.restart');
 
-function result() {
-  $result.classList.add('result-show');
-  $count.textContent = sessionStorage.getItem('score');
-}
+let statistic;
 
-function statistic(e) {
+function getStatistic(e) {
+  statistic = e.statistic;
+
   const
-    statistic = e.statistic,
-    statsKey = Object.keys(statistic);
+    statsKey = Object.keys(statistic),
+    tmpl = statsKey.map(getTmpl).join('');
 
-  const tmpl = statsKey.map(key => {
-    return `
-      <div class="item">
-        <div class="key">${key}</div>
-        <div class="value">${statistic[key]}</div>
-      </div>
-    `
-  }).join('');
+  console.warn('RESULT only one!');
 
   $statistic.insertAdjacentHTML('afterBegin', tmpl);
+  $result.classList.add('result-show');
+}
+
+function getTmpl(key) {
+  return `
+    <div class="item">
+      <div class="key">${key}</div>
+      <div class="value">${statistic[key]}</div>
+    </div>
+  `;
 }
 
 function restart() {
@@ -31,6 +32,5 @@ function restart() {
   location.reload();
 }
 
-document.addEventListener('gameOver', result);
-document.addEventListener('statistic', statistic);
+document.addEventListener('statistic', getStatistic);
 $restart.addEventListener('click', restart);

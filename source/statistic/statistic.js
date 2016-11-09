@@ -1,64 +1,90 @@
-import costsGet from './costs';
-import discardedBulletGet from './discarded_bullet';
-import drumReloadCountGet from './drum_reload_count';
-import firstAidUseGet from './first_aid_use';
+import fb from './../helper/fb';
+import delay from 'libs/delay';
+import getCosts from './costs';
+import getDiscardedBullet from './discarded_bullet';
+import getDrumReloadCount from './drum_reload_count';
+import getFirstAidUse from './first_aid_use';
 import gameTimeEnd from './game_time';
-import receivedDamageGet from './received_damage';
-import shootCountGet from './shoot_count';
-import waveCountGet from './wave_count';
+import getReceivedDamage from './received_damage';
+import getScore from './score';
+import getShootCount from './shoot_count';
+import getWaveCount from './wave_count';
 
-let statistic;
+const
+  getStatisticDelay = delay(getStatistic, 30), // дожидаемся всех
+  db = fb.database();
 
-function saveStatisticWrap() {
-  setTimeout(statisticGet, 20); // дожидаемся всех
+let
+  uid,
+  score;
+
+fb.auth().onAuthStateChanged(auth);
+
+function auth(user) {
+  uid = (user && user.uid) ? user.uid : null;
 }
 
-function statisticGet() {
+function getStatistic() {
+  score = getScore();
+
   const
-    score = sessionStorage.getItem('score'),
-    costs = costsGet(),
-    discardedBullet = discardedBulletGet(),
-    drumReload = drumReloadCountGet(),
-    firstAid = firstAidUseGet(),
-    {
-      minutes,
-      second
-    } = gameTimeEnd(),
-    receivedDamage = receivedDamageGet(),
-    {
-      shoots,
-      inTarget,
-      miss,
-      inTargetPercent,
-      bonusWave
-    } = shootCountGet(),
-    waveCount = waveCountGet();
+    costs = getCosts(),
+    discardedBullet = getDiscardedBullet(),
+    drumReload = getDrumReloadCount(),
+    firstAid = getFirstAidUse(),
+    {minutes, second} = gameTimeEnd(),
+    receivedDamage = getReceivedDamage(),
+    {shoots, inTarget, miss, inTargetPercent, bonusWave} = getShootCount(),
+    waveCount = getWaveCount(),
 
-  statistic = {
-    'Время игры': `${minutes}m ${second}s`,
-    'Волн пройдено': waveCount,
-    'Доп волн': bonusWave,
-    'Заработано': `${score}$`,
-    'Расходы': `${costs}$`,
-    'Перезарядок': drumReload,
-    'Пуль выброшено': discardedBullet,
-    'Получено урона': receivedDamage,
-    'Лечения': firstAid,
-    'Выстрелов': shoots,
-    'В цель': inTarget,
-    'Промахов': miss,
-    'Точность': `${inTargetPercent}%`
-  };
+    tmpl = {
+      'Время игры': `${minutes}m ${second}s`,
+      'Волн пройдено': waveCount,
+      'Доп волн': bonusWave,
+      'Заработано': `${score}$`,
+      'Расходы': `${costs}$`,
+      'Перезарядок': drumReload,
+      'Пуль выброшено': discardedBullet,
+      'Получено урона': receivedDamage,
+      'Лечения': firstAid,
+      'Выстрелов': shoots,
+      'В цель': inTarget,
+      'Промахов': miss,
+      'Точность': `${inTargetPercent}%`
+    };
 
-  // localStorage.setItem('statistic', JSON.stringify(statistic));
-
-  statisticSend();
+  getBestScore();
+  resultStatistic(tmpl);
 }
 
-function statisticSend() {
+function getBestScore() {
+  if (uid) {
+    db.ref(uid)
+    .once('value')
+    .then(bestScore);
+  }
+}
+
+function bestScore(snapshot) {
+  if (snapshot.val() && snapshot.val().bestScore) {
+    const bestScore = snapshot.val().bestScore;
+
+    if (score > bestScore) {
+      saveBestScore();
+    }
+  }
+}
+
+function saveBestScore() {
+  db.ref(uid).set({
+    bestScore: score
+  });
+}
+
+function resultStatistic(tmpl) {
   let statisticEvent = new Event('statistic');
-  statisticEvent.statistic = statistic;
+  statisticEvent.statistic = tmpl;
   document.dispatchEvent(statisticEvent);
 }
 
-document.addEventListener('gameOver', saveStatisticWrap);
+document.addEventListener('gameOver', getStatisticDelay);

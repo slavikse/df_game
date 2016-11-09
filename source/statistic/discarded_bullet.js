@@ -1,13 +1,13 @@
 let discardedBullet;
 
-function discardedBulletSet(e) {
+function setDiscardedBullet(e) {
   discardedBullet = e.discardedBullet;
 }
 
-function discardedBulletGet() {
+function getDiscardedBullet() {
   return discardedBullet;
 }
 
-document.addEventListener('discardedBullet', discardedBulletSet);
+document.addEventListener('discardedBullet', setDiscardedBullet);
 
-export default discardedBulletGet;
+export default getDiscardedBullet;

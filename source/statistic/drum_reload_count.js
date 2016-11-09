@@ -1,13 +1,13 @@
 let drumReloadCount;
 
-function drumReloadCountSet(e) {
+function setDrumReloadCount(e) {
   drumReloadCount = e.drumReloadCount;
 }
 
-function drumReloadCountGet() {
+function getDrumReloadCount() {
   return drumReloadCount;
 }
 
-document.addEventListener('drumReloadCount', drumReloadCountSet);
+document.addEventListener('drumReloadCount', setDrumReloadCount);
 
-export default drumReloadCountGet;
+export default getDrumReloadCount;

@@ -1,13 +1,13 @@
 let receivedDamage;
 
-function receivedDamageSet(e) {
+function setReceivedDamage(e) {
   receivedDamage = e.receivedDamage;
 }
 
-function receivedDamageGet() {
+function getReceivedDamage() {
   return receivedDamage;
 }
 
-document.addEventListener('receivedDamage', receivedDamageSet);
+document.addEventListener('receivedDamage', setReceivedDamage);
 
-export default receivedDamageGet;
+export default getReceivedDamage;

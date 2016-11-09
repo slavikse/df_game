@@ -1,13 +1,13 @@
 let firstAidUse;
 
-function firstAidUseSet(e) {
+function setFirstAidUse(e) {
   firstAidUse = e.firstAidUse;
 }
 
-function firstAidUseGet() {
+function getFirstAidUse() {
   return firstAidUse;
 }
 
-document.addEventListener('firstAidUse', firstAidUseSet);
+document.addEventListener('firstAidUse', setFirstAidUse);
 
-export default firstAidUseGet;
+export default getFirstAidUse;

@@ -1,7 +1,4 @@
-import firebase from 'firebase/app';
-import 'firebase/auth.js';
-// import 'firebase/database';
-// import 'firebase/storage';
+import fb from './../helper/fb';
 import {audioURI, audioSprite} from './../helper/audio_sprite';
 import noise from './../helper/noise';
 
@@ -15,10 +12,10 @@ const
   $authLogout = $authShow.querySelector('.auth-logout'),
 
   $authWrap = $startScreen.querySelector('.auth-wrap'),
-  $authCorrect = $authWrap.querySelector('.auth-correct'),
-  $authInCorrect = $authWrap.querySelector('.auth-incorrect'),
-  $authWrong = $authWrap.querySelector('.auth-wrong'),
-  $authSubmit = $authWrap.querySelector('.auth-submit'),
+  $authCorrect = $startScreen.querySelector('.auth-correct'),
+  $authInCorrect = $startScreen.querySelector('.auth-incorrect'),
+  $authWrong = $startScreen.querySelector('.auth-wrong'),
+  $authSubmit = $startScreen.querySelector('.auth-submit'),
 
   audioAuthHover = audioSprite.hover_menu,
   audioAuthShow = audioSprite.auth_show,
@@ -26,27 +23,17 @@ const
   audioAuthOut = audioSprite.auth_out,
   audioCancel = audioSprite.cancel,
 
-  eventAuthBonus = new Event('authBonus'),
-
-  fbConfig = {
-    apiKey: 'AIzaSyCbo2nw-39rTK69JMaDbS-2mynfkyx_GSE',
-    authDomain: 'dark-forest-1567c.firebaseapp.com',
-    databaseURL: 'https://dark-forest-1567c.firebaseio.com',
-    storageBucket: 'dark-forest-1567c.appspot.com',
-    messagingSenderId: '877244196821',
-    authUser: 'firebase:authUser:AIzaSyCbo2nw-39rTK69JMaDbS-2mynfkyx_GSE:[DEFAULT]'
-  };
+  eventAuthBonus = new Event('authBonus');
 
 let
+  userName,
   isGetAuthBonus = false,
   emailSave,
   passwordSave,
   isAuthShow = false,
-  isAuthProgress = false,
-  loginName;
+  isAuthProgress = false;
 
-firebase.initializeApp(fbConfig);
-firebase.auth().onAuthStateChanged(authChanged);
+fb.auth().onAuthStateChanged(authChanged);
 
 function authChanged(user) {
   let authAudio;
@@ -63,12 +50,17 @@ function authChanged(user) {
     }
 
     isGetAuthBonus = true;
+
+    userName = getUserName(user);
+    showUserName(userName);
   } else {
     authAudio = audioAuthOut;
 
     $authSubmit.addEventListener('click', auth);
     $authOpener.addEventListener('click', authShowToggle);
     $authLogout.style.display = '';
+
+    showUserName();
   }
 
   //fix: Uncaught (in promise) DOMException: The play() request was interrupted by a call to pause()
@@ -77,13 +69,17 @@ function authChanged(user) {
   $authOpener.classList.remove('auth-opener-on');
   $authLoader.classList.remove('auth-loader');
 
-  setExistName();
+}
+
+function getUserName(user) {
+  const name = (user && user.email) ? user.email : null;
+  return name.replace(/@.+/, ''); // remove @...
 }
 
 function authShowToggle() {
   if (isAuthShow) {
     isAuthShow = false;
-    setExistName();
+    showUserName(userName);
   } else {
     isAuthShow = true;
   }
@@ -95,12 +91,10 @@ function authShowToggle() {
   $authOpener.classList.toggle('auth-opener-on');
 }
 
-function setExistName() {
-  loginName = localStorage.getItem('name');
-
-  if (loginName) {
+function showUserName(userName) {
+  if (userName) {
     $authOpener.style.display = 'none';
-    $authUserName.textContent = `Хaй ${loginName}!`;
+    $authUserName.textContent = `Хaй ${userName}!`;
   } else {
     $authOpener.style.display = 'flex';
     $authUserName.textContent = '';
@@ -149,7 +143,7 @@ function dataCorrect(email, password) {
 function fbAuth(email, password) {
   isAuthProgress = true;
 
-  firebase.auth()
+  fb.auth()
   .signInWithEmailAndPassword(email, password)
   .then(authSuccess)
   .catch(register);
@@ -157,7 +151,6 @@ function fbAuth(email, password) {
 
 function authSuccess() {
   isAuthProgress = false;
-  savePlayerName();
 
   $authSubmit.style.animationName = 'auth-submit-success';
   authNotify($authCorrect);
@@ -166,13 +159,8 @@ function authSuccess() {
   setTimeout(authShowToggle, 1200);
 }
 
-function savePlayerName() {
-  loginName = emailSave.replace(/@.+/, ''); // remove @...
-  localStorage.setItem('name', loginName);
-}
-
 function register() {
-  firebase.auth()
+  fb.auth()
   .createUserWithEmailAndPassword(emailSave, passwordSave)
   .then(authSuccess)
   .catch(authWrong);
@@ -213,14 +201,11 @@ function authLoginAnimateEnd() {
 
 function logout() {
   authLogoutAnimate();
-  localStorage.removeItem('name');
-  loginName = '';
-
   setTimeout(logoutEnd, 300);
 }
 
 function logoutEnd() {
-  firebase.auth().signOut();
+  fb.auth().signOut();
 }
 
 function authLogoutAnimate() {

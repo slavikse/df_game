@@ -1,13 +1,13 @@
 let waveCount;
 
-function waveCountSet(e) {
+function setWaveCount(e) {
   waveCount = e.waveCount;
 }
 
-function waveCountGet() {
+function getWaveCount() {
   return waveCount;
 }
 
-document.addEventListener('waveCount', waveCountSet);
+document.addEventListener('waveCount', setWaveCount);
 
-export default waveCountGet;
+export default getWaveCount;

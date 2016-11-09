@@ -1,13 +1,13 @@
-let costsCount;
+let costs;
 
-function costsSet(e) {
-  costsCount = e.costs;
+function setCosts(e) {
+  costs = e.costs;
 }
 
-function costsGet() {
-  return costsCount;
+function getCosts() {
+  return costs;
 }
 
-document.addEventListener('costs', costsSet);
+document.addEventListener('costs', setCosts);
 
-export default costsGet;
+export default getCosts;

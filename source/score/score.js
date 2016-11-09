@@ -1,34 +1,41 @@
-const $scoreCurrent = document.querySelector('.score-current');
-let scoreCurrent = 0;
+import delay from 'libs/delay';
+
+const
+  $score = document.querySelector('.score'),
+  scoreShopDelay = delay(scoreShop, 20); // чтобы успел записать
+
+let
+  score = 0,
+  eventScoreShop = new Event('scoreShop'),
+  scoreEvent = new Event('score');
 
 function scoreAdd(e) {
-  scoreCurrent += e.add;
+  score += e.add;
   scoreChange();
 }
 
 function scoreDec(e) {
-  scoreCurrent -= e.dec;
+  score -= e.dec;
   scoreChange();
 }
 
 function scoreChange() {
-  $scoreCurrent.textContent = scoreCurrent;
-  sessionStorage.setItem('score', scoreCurrent);
+  $score.textContent = score;
 }
 
-function gameOver() {
-  const bestScore = localStorage.getItem('best-score') || 0;
+function scoreShop() {
+  eventScoreShop.score = score;
+  document.dispatchEvent(eventScoreShop);
+}
 
-  if (scoreCurrent > bestScore) {
-    localStorage.setItem('best-score', scoreCurrent);
-  }
-
-  sessionStorage.setItem('score', scoreCurrent);
+function scoreStatistic() {
+  scoreEvent.score = score;
+  document.dispatchEvent(scoreEvent);
 }
 
 document.addEventListener('scoreAdd', scoreAdd);
 document.addEventListener('scoreDec', scoreDec);
-document.addEventListener('gameOver', gameOver);
-window.onbeforeunload = gameOver;
+document.addEventListener('waveEnd', scoreShopDelay);
+document.addEventListener('gameOver', scoreStatistic);
 
 // scoreAdd({add: 500});
