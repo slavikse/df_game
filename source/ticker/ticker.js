@@ -11,7 +11,7 @@ const
   eventWaveEnd = new Event('waveEnd');
 
 let
-  waveCount = 0,
+  waveCountStat = 0,
   isWaveEnd,
   tickTimeout,
   tickCurrent = 0,
@@ -51,7 +51,7 @@ function extraWave() {
   tickExtra();
 
   numberWaveCurrent += 1;
-  waveCount += 1;
+  saveWaveCountStat();
 
   if (numberWaveCurrent === numberWaveDefault) {
     waveEnd();
@@ -84,15 +84,19 @@ function noEnemy() {
   }
 }
 
-function gameOver() {
-  clearTimeout(tickTimeout);
-  waveCountStatistic();
+function saveWaveCountStat() {
+  waveCountStat += 1;
 }
 
 function waveCountStatistic() {
   let waveCountEvent = new Event('waveCount');
-  waveCountEvent.waveCount = waveCount;
+  waveCountEvent.waveCount = waveCountStat;
   document.dispatchEvent(waveCountEvent)
+}
+
+function gameOver() {
+  clearTimeout(tickTimeout);
+  waveCountStatistic();
 }
 
 document.addEventListener('startGame', run);

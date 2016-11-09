@@ -25,8 +25,8 @@ const
   $eventRegeneration = new Event('regeneration');
 
 let
-  receivedDamage = 0,
-  firstAidUse = 0,
+  receivedDamageStat = 0,
+  firstAidUseStat = 0,
   firstAid = firstAidFull,
   health = healthFull,
   healthState = healthStateFull;
@@ -49,8 +49,7 @@ function damage() {
   }
 
   heartbeat();
-
-  receivedDamage += 1;
+  saveReceivedDamageStat();
 }
 
 function heartbeat() {
@@ -103,8 +102,7 @@ function regeneration() {
   }
 
   setTimeout(dontShootEnd, 400); // анимация
-
-  firstAidUse += 1;
+  saveFirstAidUseStat();
 }
 
 function dontShootEnd() {
@@ -129,27 +127,23 @@ function addFirstAidEnd() {
   $firstAid[firstAid].style.animationName = '';
 }
 
-function gameOver() {
-  document.removeEventListener('damage', damage);
-  document.removeEventListener('keyup', HKeyHandler);
-  document.removeEventListener('mousedown', CMBHandler);
-  document.removeEventListener('keyup', TKeyHandler);
+function saveFirstAidUseStat() {
+  firstAidUseStat += 1;
+}
 
-  document.dispatchEvent(new Event('gameOver'));
-
-  receivedDamageStatistic();
-  firstAidUseStatistic();
+function saveReceivedDamageStat() {
+  receivedDamageStat += 1;
 }
 
 function receivedDamageStatistic() {
   let receivedDamageEvent = new Event('receivedDamage');
-  receivedDamageEvent.receivedDamage = receivedDamage;
+  receivedDamageEvent.receivedDamage = receivedDamageStat;
   document.dispatchEvent(receivedDamageEvent);
 }
 
 function firstAidUseStatistic() {
   let firstAidUseEvent = new Event('firstAidUse');
-  firstAidUseEvent.firstAidUse = firstAidUse;
+  firstAidUseEvent.firstAidUse = firstAidUseStat;
   document.dispatchEvent(firstAidUseEvent);
 }
 
@@ -172,8 +166,21 @@ function TKeyHandler(e) {
   }
 }
 
+function gameOver() {
+  document.removeEventListener('damage', damage);
+  document.removeEventListener('keyup', HKeyHandler);
+  document.removeEventListener('mousedown', CMBHandler);
+  document.removeEventListener('keyup', TKeyHandler);
+
+  document.dispatchEvent(new Event('gameOver'));
+
+  receivedDamageStatistic();
+  firstAidUseStatistic();
+}
+
 document.addEventListener('buyFirstAid', addFirstAid);
 document.addEventListener('damage', damage);
 document.addEventListener('keyup', HKeyHandler);
 document.addEventListener('mousedown', CMBHandler);
+//document.addEventListener('waveEnd', waveEnd);
 document.addEventListener('keyup', TKeyHandler);

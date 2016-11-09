@@ -13,9 +13,9 @@ const
   eventEnemyKill = new Event('enemyKill');
 
 let
-  shootCountTotal = 0, // выстрелов всего
-  shootCountInTarget = 0, // пападание в цель
-  shootCountInCat = 0, // пападание в бонусного котика
+  shootCountTotalStat = 0, // выстрелов всего
+  shootCountInTargetStat = 0, // пападание в цель
+  shootCountInCatStat = 0, // пападание в бонусного котика
 
   shootMoveTimerID,
   shootDownTimerID,
@@ -50,8 +50,7 @@ function shoot(e) {
 
   shootEvent.shoot = {x, y};
   document.dispatchEvent(shootEvent);
-
-  shootCountTotal += 1;
+  saveShootCountTotalStat();
 
   // $event.dispatchEvent(new Event('damage'));
 
@@ -59,15 +58,13 @@ function shoot(e) {
   if (target.classList.contains('enemy')) {
     eventEnemyKill.enemy = e.target;
     document.dispatchEvent(eventEnemyKill);
-
-    shootCountInTarget += 1;
+    saveShootCountInTargetStat();
 
     /** выстрел по котику */
   } else if (target.classList.contains('cat')) {
     document.dispatchEvent(eventCatShoot);
-
-    shootCountInTarget += 1;
-    shootCountInCat += 1;
+    saveShootCountInTargetStat();
+    saveShootCountInCatStat();
   }
 }
 
@@ -110,19 +107,31 @@ function shootEnd() {
   document.removeEventListener('mousemove', shootMove);
 }
 
-function gameOver() {
-  shootEnd();
-  shootCountStatistic();
+function saveShootCountTotalStat() {
+  shootCountTotalStat += 1;
+}
+
+function saveShootCountInTargetStat() {
+  shootCountInTargetStat += 1;
+}
+
+function saveShootCountInCatStat() {
+  shootCountInCatStat += 1;
 }
 
 function shootCountStatistic() {
   let shootCountEvent = new Event('shootCount');
 
-  shootCountEvent.shootCountTotal = shootCountTotal;
-  shootCountEvent.shootCountInTarget = shootCountInTarget;
-  shootCountEvent.shootCountInCat = shootCountInCat;
+  shootCountEvent.shootCountTotal = shootCountTotalStat;
+  shootCountEvent.shootCountInTarget = shootCountInTargetStat;
+  shootCountEvent.shootCountInCat = shootCountInCatStat;
 
   document.dispatchEvent(shootCountEvent);
+}
+
+function gameOver() {
+  shootEnd();
+  shootCountStatistic();
 }
 
 document.addEventListener('startGame', shootStart);

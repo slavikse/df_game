@@ -19,8 +19,8 @@ const
   audioReload = audioSprite.reload;
 
 let
-  discardedBullet = 0, // пули, которые были выброшены (при перезарядке, оставшиеся пули)
-  drumReloadCount = 0,
+  discardedBulletStat = 0, // пули, которые были выброшены (при перезарядке, оставшиеся пули)
+  drumReloadCountStat = 0,
   bulletCurrent = 0, // текущая пуля для выстрела в барабане
   drumCount = 3, // барабанов для перезарядки
   isDrumRotate = false;
@@ -95,13 +95,12 @@ function drumReload() {
   holeReload();
   drumCountDec();
 
-  discardedBullet += bulletDrum - bulletCurrent;
+  saveDiscardedBulletStat();
   bulletCurrent = 0;
 
   /** синхронизация со звуком перезарядки и анимацией */
   setTimeout(reloaded, 700);
-
-  drumReloadCount += 1;
+  saveDrumReloadCountStat();
 }
 
 function holeReload() {
@@ -143,6 +142,28 @@ function drumReloadHandler(e) {
   drumRotate();
 }
 
+function saveDrumReloadCountStat() {
+  drumReloadCountStat += 1;
+}
+
+function saveDiscardedBulletStat() {
+  discardedBulletStat += bulletDrum - bulletCurrent;
+}
+
+function discardedBulletStatistic() {
+  let discardedBulletEvent = new Event('discardedBullet');
+  discardedBulletEvent.discardedBullet = discardedBulletStat;
+
+  document.dispatchEvent(discardedBulletEvent);
+}
+
+function drumReloadCountStatistic() {
+  let drumReloadCountEvent = new Event('drumReloadCount');
+  drumReloadCountEvent.drumReloadCount = drumReloadCountStat;
+
+  document.dispatchEvent(drumReloadCountEvent);
+}
+
 function startGame() {
   document.addEventListener('shoot', shoot);
   document.addEventListener('keyup', RKeyHandler);
@@ -156,20 +177,6 @@ function gameOver() {
 
   discardedBulletStatistic();
   drumReloadCountStatistic();
-}
-
-function discardedBulletStatistic() {
-  let discardedBulletEvent = new Event('discardedBullet');
-  discardedBulletEvent.discardedBullet = discardedBullet;
-
-  document.dispatchEvent(discardedBulletEvent);
-}
-
-function drumReloadCountStatistic() {
-  let drumReloadCountEvent = new Event('drumReloadCount');
-  drumReloadCountEvent.drumReloadCount = drumReloadCount;
-
-  document.dispatchEvent(drumReloadCountEvent);
 }
 
 document.addEventListener('authBonus', authBonus);

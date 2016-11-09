@@ -24,7 +24,7 @@ const
   eventWaveStart = new Event('waveStart');
 
 let
-  costs = 0,
+  costsStat = 0,
   scoreCurrent,
   firstAid;
 
@@ -104,7 +104,7 @@ function buy(e) {
   document.dispatchEvent(eventScoreDec);
 
   scoreCurrent -= scoreDec;
-  costs += scoreDec;
+  saveCostsStat(scoreDec);
   buyLockUnlock();
 }
 
@@ -135,9 +135,13 @@ function itemHandler() {
   noise(audioURI, audioBuyHover);
 }
 
+function saveCostsStat(scoreDec) {
+  costsStat += scoreDec;
+}
+
 function costsStatistic() {
   let costsEvent = new Event('costs');
-  costsEvent.costs = costs;
+  costsEvent.costs = costsStat;
   document.dispatchEvent(costsEvent);
 }
 

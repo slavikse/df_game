@@ -71,9 +71,8 @@ function authChanged(user) {
     $authLogout.style.display = '';
   }
 
-  //TODO при входе в игру
-  //Uncaught (in promise) DOMException: The play() request was interrupted by a call to pause()
-  noise(audioURI, authAudio);
+  //fix: Uncaught (in promise) DOMException: The play() request was interrupted by a call to pause()
+  setTimeout(noise.bind(null, audioURI, authAudio), 100);
 
   $authOpener.classList.remove('auth-opener-on');
   $authLoader.classList.remove('auth-loader');
