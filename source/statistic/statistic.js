@@ -25,6 +25,11 @@ function auth(user) {
 }
 
 function getStatistic() {
+
+
+  console.log('what?');
+
+  
   score = getScore();
 
   const

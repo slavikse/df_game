@@ -28,7 +28,7 @@
   .best-score-frame {
     font-size: 3em;
     color: #fff;
-    text-shadow: 2px 2px 2px #000;
+    text-shadow: 0 0 10px black;
     text-align: center;
     transition: opacity 0.2s;
     will-change: opacity;
@@ -39,7 +39,7 @@
     z-index: 1;
     font-size: 5em;
     color: #ffff00;
-    text-shadow: 2px 2px 4px black;
+    text-shadow: 0 0 10px black;
     cursor: pointer;
     transition: color 0.2s, opacity 0.2s;
     animation: new-game 0.2s ease alternate both paused;

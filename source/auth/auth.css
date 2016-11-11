@@ -16,7 +16,7 @@
   z-index: 3;
   font-size: 3.6em;
   color: #60ff4b;
-  text-shadow: 2px 2px 2px #000;
+  text-shadow: 0 0 10px black;
   transition: color 0.1s, text-shadow 0.1s;
 
   &-login {
@@ -31,7 +31,7 @@
   display: none;
   color: #51d83f;
   line-height: 0.5;
-  text-shadow: 2px 2px 2px #000;
+  text-shadow: 0 0 10px black;
   cursor: pointer;
   transition: color 0.2s;
 
@@ -212,7 +212,7 @@
   color: #fff;
   font-size: 3em;
   text-align: center;
-  text-shadow: 2px 2px 2px #000;
+  text-shadow: 0 0 10px black;
   background-color: rgba(0, 0, 0, 0.2);
   transition: border-color 0.4s;
 
@@ -246,7 +246,7 @@
   padding: 6px 0;
   color: #59e942;
   font-size: 3em;
-  text-shadow: 2px 2px 2px #000;
+  text-shadow: 0 0 10px black;
   background-color: rgba(0, 0, 0, 0.5);
   cursor: pointer;
   animation: 0.4s infinite alternate both; /* auth-submit-waited, auth-submit-error, auth-submit-success */

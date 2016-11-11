@@ -10,6 +10,7 @@
   text-shadow: 0 0 4px black;
   text-align: center;
   cursor: pointer;
+  box-shadow: 0 0 10px black;
   transition: background-color 0.2s, opacity 0.2s;
   will-change: opacity;
 

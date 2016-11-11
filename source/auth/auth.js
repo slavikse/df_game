@@ -4,7 +4,6 @@ import noise from './../helper/noise';
 
 const
   $startScreen = document.querySelector('.start-screen'),
-
   $authShow = $startScreen.querySelector('.auth-show'),
   $authLoader = $authShow.querySelector('.auth-loader-js'),
   $authUserName = $authShow.querySelector('.auth-user-name'),
