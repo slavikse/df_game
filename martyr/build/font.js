@@ -3,11 +3,10 @@ import changed from 'gulp-changed';
 import fontmin from 'gulp-fontmin';
 import util from 'gulp-util';
 
-const
-  name = 'font',
-  files = 'source/font/*',
-  there = 'public/font',
-  production = process.env.NODE_ENV === 'production';
+const name = 'font';
+const files = 'source/font/*';
+const there = 'public/font';
+const production = process.env.NODE_ENV === 'production';
 
 gulp.task(name, () => {
   return gulp.src(files)

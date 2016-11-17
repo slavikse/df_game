@@ -4,60 +4,59 @@ import notify from '../utility/notify';
 import named from 'vinyl-named';
 import webpackStream from 'webpack-stream';
 
+const name = 'script';
+const files = 'source/*.js';
+const there = 'public';
+const webpack = webpackStream.webpack;
+const production = process.env.NODE_ENV === 'production';
+
 let firstBuildReady = false;
 
-const
-  name = 'script',
-  files = 'source/*.js',
-  there = 'public',
-  webpack = webpackStream.webpack,
-  production = process.env.NODE_ENV === 'production',
+/**
+ * Сигнализирует о завершении первой сборки,
+ * чтобы gulp смог продолжить выполнение
+ * @type {Object} ошибку обрабатывает gulp
+ */
+const done = err => {
+  firstBuildReady = true;
 
-  /**
-   * Сигнализирует о завершении первой сборки,
-   * чтобы gulp смог продолжить выполнение
-   * @type {Object} ошибку обрабатывает gulp
-   */
-  done = err => {
-    firstBuildReady = true;
+  if (err) {
+    return null;
+  }
+};
 
-    if (err) {
-      return null;
-    }
-  },
+const buildReady = cb => {
+  if (firstBuildReady) {
+    cb();
+  }
+};
 
-  buildReady = cb => {
-    if (firstBuildReady) {
-      cb();
-    }
-  },
-
-  options = {
-    module: {
-      loaders: [
-        {
-          test: /\.js$/,
-          exclude: /firebase/,
-          cacheDirectory: true,
-          loader: 'babel'
-        }, {
-          test: /\.json$/,
-          loader: 'json'
-        }
-      ]
-    },
-    watch: !production,
-    watchOptions: {aggregateTimeout: 30},
-    devtool: production ? null : 'cheap-eval-source-map',
-    plugins: [
-      new webpack.NoErrorsPlugin(),
-      new webpack.EnvironmentPlugin(["NODE_ENV"]),
-      // new webpack.optimize.CommonsChunkPlugin({
-      //   name: 'common',
-      //   minChunks: 2
-      // })
+const options = {
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /firebase/,
+        cacheDirectory: true,
+        loader: 'babel'
+      }, {
+        test: /\.json$/,
+        loader: 'json'
+      }
     ]
-  };
+  },
+  watch: !production,
+  watchOptions: {aggregateTimeout: 20},
+  devtool: production ? null : 'cheap-eval-source-map',
+  plugins: [
+    new webpack.NoErrorsPlugin(),
+    new webpack.EnvironmentPlugin(["NODE_ENV"]),
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'common',
+    //   minChunks: 2
+    // })
+  ]
+};
 
 if (!production) {
   options.plugins.push(

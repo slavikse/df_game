@@ -7,11 +7,10 @@ import svgSprite from 'gulp-svg-sprite';
  * 1. Путь для примеров использования svg спрайта
  * 2. Расположение svg спрайта
  */
-const
-  name = 'svg',
-  files = 'source/**/svg/*',
-  there = 'temp', /* 1 */
-  production = process.env.NODE_ENV === 'production';
+const name = 'svg';
+const files = 'source/**/svg/*';
+const there = 'temp';
+const production = process.env.NODE_ENV === 'production';
 
 let config = {
   shape: {

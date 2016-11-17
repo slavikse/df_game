@@ -2,12 +2,11 @@ import gulp from 'gulp';
 import spritesmith from 'gulp.spritesmith';
 import util from 'gulp-util';
 
-const
-  name = 'sprite',
-  files = 'source/**/sprite/*',
-  thereImage = 'public',
-  thereStyle = 'temp',
-  production = process.env.NODE_ENV === 'production';
+const name = 'sprite';
+const files = 'source/**/sprite/*';
+const thereImage = 'public';
+const thereStyle = 'temp';
+const production = process.env.NODE_ENV === 'production';
 
 let spriteData;
 
@@ -29,7 +28,10 @@ function spriteCreate(cb) {
   cb();
 }
 
-/** отлично жмет кракен. используемые средства сжатия не жмут вообще */
+/**
+ * Спрайт отлично жмет кракен.
+ * Используемые средства сжатия не жмут вообще
+ */
 function imageStream() {
   return spriteData.img
   .pipe(gulp.dest(thereImage))

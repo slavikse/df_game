@@ -5,30 +5,25 @@ import include from 'gulp-file-include';
 import htmlmin from 'gulp-htmlmin';
 import util from 'gulp-util';
 
-/**
- * 1. Spaces collapsing between display:inline
- * 2. Remove default attr
- */
-const
-  name = 'view',
-  files = 'source/*.html',
-  wFiles = 'source/**/*.html',
-  there = 'public',
-  options = {
-    collapseBooleanAttributes: true,
-    collapseInlineTagWhitespace: true, /* 1 */
-    collapseWhitespace: true, // убирает пробел между inline элементами
-    minifyCSS: true,
-    minifyJS: true,
-    removeAttributeQuotes: true,
-    removeComments: true,
-    removeEmptyAttributes: true,
-    preventAttributesEscaping: true,
-    removeRedundantAttributes: true, /* 2 */
-    sortAttributes: true,
-    sortClassName: true
-  },
-  production = process.env.NODE_ENV === 'production';
+const name = 'view';
+const files = 'source/*.html';
+const wFiles = 'source/**/*.html';
+const there = 'public';
+const production = process.env.NODE_ENV === 'production';
+const options = {
+  collapseBooleanAttributes: true,
+  collapseInlineTagWhitespace: true, // spaces collapsing between display:inline
+  collapseWhitespace: true, // убирает пробел между inline элементами
+  minifyCSS: true,
+  minifyJS: true,
+  removeAttributeQuotes: true,
+  removeComments: true,
+  removeEmptyAttributes: true,
+  preventAttributesEscaping: true,
+  removeRedundantAttributes: true, // remove default attr
+  sortAttributes: true,
+  sortClassName: true
+};
 
 gulp.task(name, () => {
   return gulp.src(files)

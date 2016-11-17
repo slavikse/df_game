@@ -1,23 +1,22 @@
 import gulp from 'gulp';
 import htmlmin from 'gulp-htmlmin';
 
-const
-  name = 'symbol',
-  files = 'public/*.html',
-  options = {
-    collapseBooleanAttributes: true,
-    collapseInlineTagWhitespace: true, /* 1 */
-    collapseWhitespace: true,
-    minifyCSS: true,
-    minifyJS: true,
-    removeAttributeQuotes: true,
-    removeComments: true,
-    removeEmptyAttributes: true,
-    preventAttributesEscaping: true,
-    removeRedundantAttributes: true, /* 2 */
-    sortAttributes: true,
-    sortClassName: true
-  };
+const name = 'symbol';
+const files = 'public/*.html';
+const options = {
+  collapseBooleanAttributes: true,
+  collapseInlineTagWhitespace: true, /* 1 */
+  collapseWhitespace: true,
+  minifyCSS: true,
+  minifyJS: true,
+  removeAttributeQuotes: true,
+  removeComments: true,
+  removeEmptyAttributes: true,
+  preventAttributesEscaping: true,
+  removeRedundantAttributes: true, /* 2 */
+  sortAttributes: true,
+  sortClassName: true
+};
 
 let
   words = [],
@@ -36,9 +35,7 @@ function word() {
   return gulp.src(files)
   .pipe(htmlmin(options))
   .on('data', file => {
-    words =
-      String(file.contents)
-      .match(/>(.*?)</g);
+    words = String(file.contents).match(/>(.*?)</g);
 
     words.forEach(word => {
       filterWords.push(word
@@ -78,7 +75,5 @@ function symbol(cb) {
 }
 
 function uniqueArray(array) {
-  return array.filter((item, pos, self) => {
-    return self.indexOf(item) === pos;
-  });
+  return array.filter((item, pos, self) => self.indexOf(item) === pos);
 }

@@ -4,18 +4,15 @@ import rev from 'gulp-rev';
 import revReplace from 'gulp-rev-replace';
 import del from 'del';
 
-/**
- * 1. Пути до версионируемых файлов
- * 2. Версионируемые файлы
- */
-const
-  name = 'rev',
-  pathRevFiles = 'public/**/*.{html,css,js}', /* 1 */
-  revFiles = [/* 2 */
-    'public/**/*.*',
-    '!public/*.{html,txt,xml}'
-  ],
-  there = 'public';
+const name = 'rev';
+const pathRevFiles = 'public/**/*.{html,css,js}';
+const revFiles = [/* 2 */
+  'public/**/*.*',
+  '!public/*.{html,txt,xml}'
+];
+const there = 'public';
+
+let delFiles = [];
 
 gulp.task(name,
   gulp.series(
@@ -25,8 +22,6 @@ gulp.task(name,
     delFilesFn
   )
 );
-
-let delFiles = [];
 
 /**
  * Собирает имена файлов в массив для удаления устаревших файлов

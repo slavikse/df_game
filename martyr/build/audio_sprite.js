@@ -1,11 +1,10 @@
 import gulp from 'gulp';
 import audioSprite from 'gulp-audiosprite';
 
-const
-  name = 'audio_sprite',
-  files = 'source/**/audio_sprite/*',
-  there = 'public/audio',
-  production = process.env.NODE_ENV === 'production';
+const name = 'audio_sprite';
+const files = 'source/**/audio_sprite/*';
+const there = 'public/audio';
+const production = process.env.NODE_ENV === 'production';
 
 let config = {
   output: 'audio_sprite',
@@ -31,4 +30,5 @@ if (!production) {
 }
 
 /**TODO проблема с обновлением звукового спрайта. все звуки сдвигаются.
+ * заменить генерацию json на js
  * возможно проблема в обновлении json файла в скриптах */

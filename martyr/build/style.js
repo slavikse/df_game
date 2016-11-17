@@ -9,15 +9,14 @@ import autoprefixer from 'autoprefixer';
 import csso from 'postcss-csso';
 import flexFixed from 'postcss-flexbugs-fixes';
 
-const
-  name = 'style',
-  files = [
-    'source/*.css',
-    '!source/_*.css'
-  ],
-  wFiles = '{source,temp}/**/*.css', // temp -> стили для png sprite
-  there = 'public',
-  production = process.env.NODE_ENV === 'production';
+const name = 'style';
+const files = [
+  'source/*.css',
+  '!source/_*.css'
+];
+const wFiles = '{source,temp}/**/*.css';
+const there = 'public';
+const production = process.env.NODE_ENV === 'production';
 
 let options = [
   atImport,

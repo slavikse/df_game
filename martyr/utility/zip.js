@@ -1,11 +1,10 @@
 import gulp from 'gulp';
 import zip from 'gulp-zip';
 
-const
-  name = 'zip',
-  folder = 'public/**',
-  there = 'zip',
-  time = new Date().toLocaleString('ru');
+const name = 'zip';
+const folder = 'public/**';
+const there = 'zip';
+const time = new Date().toLocaleString('ru');
 
 gulp.task(name, () => {
   return gulp.src(folder)

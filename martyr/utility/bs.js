@@ -1,12 +1,11 @@
 import gulp from 'gulp';
 import bs from 'browser-sync';
 
-bs.create();
+const name = 'bs';
+const folder = 'public';
+const tunnel = process.env.NODE_ENV === 'tunnel';
 
-const
-  name = 'bs',
-  folder = 'public',
-  tunnel = process.env.NODE_ENV === 'tunnel';
+bs.create();
 
 gulp.task(name, cb => {
   bs.init({

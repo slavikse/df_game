@@ -1,17 +1,36 @@
-/* ***** КОМАНДЫ ***** *\
-
-Запустить туннель:
-NODE_ENV=tunnel gulp bs
-
-Сборка на продакшн:
-NODE_ENV=production gulp
-
-***********************/
+/******** КОМАНДЫ **********
+ *
+ * Запустить туннель:
+ * NODE_ENV=tunnel gulp bs
+ *
+ * Сборка на продакшн:
+ * NODE_ENV=production gulp
+ *
+ ***************************/
 
 import gulp from 'gulp';
-import './martyr';
 
-const production = process.env.NODE_ENV === 'production';
+import './martyr/build/audio';
+import './martyr/build/audio_sprite';
+import './martyr/build/font';
+import './martyr/build/image';
+import './martyr/build/resize';
+import './martyr/build/script';
+import './martyr/build/service';
+import './martyr/build/sprite';
+import './martyr/build/style';
+// import './martyr/build/svg';
+import './martyr/build/view';
+
+import './martyr/utility/bs';
+import './martyr/utility/del';
+import './martyr/utility/gzip';
+// import './martyr/utility/kraken';
+import './martyr/utility/rev';
+// import './martyr/utility/symbol';
+import './martyr/utility/zip';
+
+const isProduction = process.env.NODE_ENV === 'production';
 
 gulp.task('build',
   gulp.series(
@@ -22,14 +41,20 @@ gulp.task('build',
     'resize',
     'service',
     'sprite', // #2
-    'svg',
+    // 'svg',
     'view',
     'script', // собирает json из аудио спрайта (#1)
     'style' // собирает css из спрайта изображений (#2)
   )
 );
 
-if (production) {
+if (isProduction) {
+  production();
+} else {
+  develop();
+}
+
+function production() {
   gulp.task('default',
     gulp.series(
       'del',
@@ -41,7 +66,9 @@ if (production) {
       'zip'
     )
   )
-} else {
+}
+
+function develop() {
   gulp.task('default',
     gulp.series(
       'del',

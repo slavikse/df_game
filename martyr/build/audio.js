@@ -4,12 +4,11 @@ import changed from 'gulp-changed';
 import ffmpeg from 'gulp-fluent-ffmpeg';
 import util from 'gulp-util';
 
-const
-  name = 'audio',
-  files = 'source/**/audio/*',
-  there = 'public/audio',
-  config = audio => audio.audioBitrate(80),
-  production = process.env.NODE_ENV === 'production';
+const name = 'audio';
+const files = 'source/**/audio/*';
+const there = 'public/audio';
+const config = audio => audio.audioBitrate(80);
+const production = process.env.NODE_ENV === 'production';
 
 gulp.task(name, () => {
   return gulp.src(files)

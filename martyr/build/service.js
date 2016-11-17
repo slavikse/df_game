@@ -1,11 +1,10 @@
 import gulp from 'gulp';
 import changed from 'gulp-changed';
 
-const
-  name = 'service',
-  files = 'source/{robots.txt,sitemap.xml}',
-  there = 'public',
-  production = process.env.NODE_ENV === 'production';
+const name = 'service';
+const files = 'source/{robots.txt,sitemap.xml}';
+const there = 'public';
+const production = process.env.NODE_ENV === 'production';
 
 gulp.task(name, () => {
   return gulp.src(files)

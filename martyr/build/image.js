@@ -4,26 +4,21 @@ import changed from 'gulp-changed';
 import responsive from 'gulp-responsive';
 import util from 'gulp-util';
 
-const
-  name = 'image',
-  files = 'source/**/image/*',
-  there = 'public/image',
-  config = {
-    '*': {
-      width: '100%'
-    }
-  },
-  param = {
-    quality: 60,
-    progressive: true,
-    compressionLevel: 8,
-    stats: false,
-    silent: true,
-    errorOnEnlargement: false,
-    errorOnUnusedConfig: false,
-    withoutEnlargement: false
-  },
-  production = process.env.NODE_ENV === 'production';
+const name = 'image';
+const files = 'source/**/image/*';
+const there = 'public/image';
+const config = {'*': {width: '100%'}};
+const production = process.env.NODE_ENV === 'production';
+const param = {
+  quality: 60,
+  progressive: true,
+  compressionLevel: 8,
+  stats: false,
+  silent: true,
+  errorOnEnlargement: false,
+  errorOnUnusedConfig: false,
+  withoutEnlargement: false
+};
 
 gulp.task(name, () => {
   return gulp.src(files)

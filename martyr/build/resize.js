@@ -3,26 +3,25 @@ import rename from 'gulp-rename';
 import changed from 'gulp-changed';
 import responsive from 'gulp-responsive';
 
-const
-  name = 'resize',
-  files = 'source/**/resize/*',
-  there = 'public/image',
-  config = {
-    '*': [{
-      width: '100%'
-    }, {
-      width: '70%',
-      rename: {
-        suffix: '_tablet'
-      }
-    }, {
-      width: '40%',
-      rename: {
-        suffix: '_mobile'
-      }
-    }]
-  },
-  production = process.env.NODE_ENV === 'production';
+const name = 'resize';
+const files = 'source/**/resize/*';
+const there = 'public/image';
+const production = process.env.NODE_ENV === 'production';
+const config = {
+  '*': [{
+    width: '100%'
+  }, {
+    width: '70%',
+    rename: {
+      suffix: '_tablet'
+    }
+  }, {
+    width: '40%',
+    rename: {
+      suffix: '_mobile'
+    }
+  }]
+};
 
 let param = {
   quality: 100,
