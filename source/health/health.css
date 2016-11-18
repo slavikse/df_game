@@ -10,7 +10,7 @@
   display: flex;
   margin-bottom: 10px;
 
-  div {
+  & div {
     margin: 0 2px;
     animation: 0.6s alternate both; /* first-aid-blink */
     will-change: transform;
@@ -26,7 +26,7 @@
 .health {
   display: flex;
 
-  div {
+  & div {
     margin: 0 2px;
     animation: 0.6s alternate both; /* health-blink */
     will-change: opacity, transform;

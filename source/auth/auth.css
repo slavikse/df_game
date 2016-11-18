@@ -39,7 +39,7 @@
     color: #ffff00;
   }
 
-  .cogwheel {
+  & .cogwheel {
     display: flex;
     transition: transform 0.4s;
     transform-origin: center 27px;
@@ -47,28 +47,28 @@
     will-change: transform;
   }
 
-  .letter {
+  & .letter {
     pointer-events: none;
   }
 
-  .letter-o {
+  & .letter-o {
     font-size: 5em;
     letter-spacing: 2px;
   }
 
-  .letter-cl {
+  & .letter-cl {
     font-size: 4.7em;
     letter-spacing: -5px;
     transform: rotate(180deg) translateY(-7px);
   }
 
-  .letter-e {
+  & .letter-e {
     font-size: 4.5em;
     transition: transform 0.4s;
     will-change: transform;
   }
 
-  .letter-s {
+  & .letter-s {
     font-size: 5.6em;
     transform: rotate(70deg) translate(4px, -6px);
     transition: transform 0.4s;
@@ -76,19 +76,19 @@
   }
 
   &.auth-opener-on {
-    .cogwheel-1 {
+    & .cogwheel-1 {
       transform: rotate(180deg);
     }
 
-    .cogwheel-2 {
+    & .cogwheel-2 {
       transform: rotate(-180deg);
     }
 
-    .letter-e {
+    & .letter-e {
       transform: rotate(180deg) translate(-4px, -4px);
     }
 
-    .letter-s {
+    & .letter-s {
       transform: rotate(180deg) translate(0, -14px);
     }
   }

@@ -1,8 +1,8 @@
-@import '../health/health';
-@import '../score/score';
-@import '../ticker/ticker';
-@import '../enemy_count/enemy_count';
-@import '../revolver/revolver';
+@import '../health/health.css';
+@import '../score/score.css';
+@import '../ticker/ticker.css';
+@import '../enemy_count/enemy_count.css';
+@import '../revolver/revolver.css';
 
 .panel {
   position: absolute;

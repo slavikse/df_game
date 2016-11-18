@@ -1,27 +1,21 @@
 import debounce from 'libs/debounce';
-import {audioURI, audioSprite} from './../helper/audio_sprite';
-import noise from './../helper/noise';
+import {audioURI, audioSprite} from './../helper/audio_sprite.js';
+import noise from './../helper/noise.js';
 
-const
-  $body = document.body,
-  fireRate = 166.6, // 6 выстрелов в 1 секунду
-  shootFire = debounce(shoot, fireRate),
+const $body = document.body;
+const fireRate = 166.6;
+const shootFire = debounce(shoot, fireRate);
+const audioIdle = audioSprite.idle;
+const eventCatShoot = new Event('catShoot');
+const eventEnemyKill = new Event('enemyKill');
 
-  audioIdle = audioSprite.idle,
-
-  eventCatShoot = new Event('catShoot'),
-  eventEnemyKill = new Event('enemyKill');
-
-let
-  shootCountTotalStat = 0, // выстрелов всего
-  shootCountInTargetStat = 0, // пападание в цель
-  shootCountInCatStat = 0, // пападание в бонусного котика
-
-  shootMoveTimerID,
-  shootDownTimerID,
-
-  shootEvent = new Event('shoot'),
-  shootCountEvent = new Event('shootCount');
+let shootCountTotalStat = 0;
+let shootCountInTargetStat = 0;
+let shootCountInCatStat = 0;
+let shootMoveTimerID;
+let shootDownTimerID;
+let shootEvent = new Event('shoot');
+let shootCountEvent = new Event('shootCount');
 
 function shoot(e) {
   /** нажата не ЛКМ */
@@ -44,10 +38,9 @@ function shoot(e) {
 
   shootDownTimerID = setTimeout(shoot.bind(null, e), fireRate);
 
-  const
-    target = e.target,
-    x = e.clientX,
-    y = e.clientY;
+  const target = e.target;
+  const x = e.clientX;
+  const y = e.clientY;
 
   shootEvent.shoot = {x, y};
   document.dispatchEvent(shootEvent);

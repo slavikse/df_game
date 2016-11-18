@@ -1,8 +1,8 @@
-import './../health/health';
-import './../score/score';
-import './../ticker/ticker';
-import './../enemy_count/enemy_count';
-import './../revolver/revolver';
+import './../health/health.js';
+import './../score/score.js';
+import './../ticker/ticker.js';
+import './../enemy_count/enemy_count.js';
+import './../revolver/revolver.js';
 
 const $panel = document.querySelector('.panel');
 

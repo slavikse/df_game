@@ -1,25 +1,22 @@
 import range from 'libs/range';
 import throttle from 'libs/throttle';
-import {audioURI, audioSprite} from './../helper/audio_sprite';
-import noise from './../helper/noise';
+import {audioURI, audioSprite} from './../helper/audio_sprite.js';
+import noise from './../helper/noise.js';
 
-const
-  $body = document.body,
-  $catPosition = $body.querySelector('.cat-position'),
-  $cat = $catPosition.querySelector('.cat'),
-  $toBad = $body.querySelector('.to-bad'),
+const $body = document.body;
+const $catPosition = $body.querySelector('.cat-position');
+const $cat = $catPosition.querySelector('.cat');
+const $toBad = $body.querySelector('.to-bad');
+const audioToBad = audioSprite.to_bad;
+const playingFieldResize = throttle(playingField, 500);
+const moveTime = 5000;
 
-  audioToBad = audioSprite.to_bad,
-  playingFieldResize = throttle(playingField, 500),
-  moveTime = 5000;
-
-let
-  moveTimerID,
-  hideTimerID,
-  runTimerID,
-  playingFieldWidth,
-  playingFieldHeight,
-  eventEnemyCreate = new Event('enemyCreate');
+let moveTimerID;
+let hideTimerID;
+let runTimerID;
+let playingFieldWidth;
+let playingFieldHeight;
+let eventEnemyCreate = new Event('enemyCreate');
 
 eventEnemyCreate.enemyCloneCount = 2;
 
@@ -32,9 +29,8 @@ function run() {
 }
 
 function move() {
-  const
-    x = range(0, playingFieldWidth),
-    y = range(0, playingFieldHeight);
+  const x = range(0, playingFieldWidth);
+  const y = range(0, playingFieldHeight);
 
   $catPosition.style.transform = `translate(${x}px, ${y}px)`;
   moveTimerID = setTimeout(move, moveTime);
@@ -81,10 +77,9 @@ function toBadHide() {
 }
 
 function playingField() {
-  const
-    catWidth = 94,
-    catHeight = 148,
-    panelHeight = 100;
+  const catWidth = 94;
+  const catHeight = 148;
+  const panelHeight = 100;
 
   playingFieldWidth = window.innerWidth - catWidth;
   playingFieldHeight = window.innerHeight - catHeight - panelHeight;

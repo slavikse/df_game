@@ -1,13 +1,11 @@
 import delay from 'libs/delay';
 
-const
-  $score = document.querySelector('.score'),
-  scoreShopDelay = delay(scoreShop, 20); // чтобы успел записать
+const $score = document.querySelector('.score');
+const scoreShopDelay = delay(scoreShop, 20); // чтобы успел записать
 
-let
-  score = 0,
-  eventScoreShop = new Event('scoreShop'),
-  scoreEvent = new Event('score');
+let score = 0;
+let eventScoreShop = new Event('scoreShop');
+let scoreEvent = new Event('score');
 
 function scoreAdd(e) {
   score += e.add;

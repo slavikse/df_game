@@ -41,7 +41,7 @@
     opacity: 1;
   }
 
-  .guide {
+  & .guide {
     display: flex;
     justify-content: space-around;
     align-items: center;

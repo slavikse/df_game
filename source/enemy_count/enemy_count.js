@@ -1,6 +1,5 @@
-const
-  $enemyCount = document.querySelector('.enemy-count'),
-  eventNoEnemy = new Event('noEnemy');
+const $enemyCount = document.querySelector('.enemy-count');
+const eventNoEnemy = new Event('noEnemy');
 
 let enemyCount = 0;
 

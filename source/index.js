@@ -1,14 +1,14 @@
-import './preload/preload';
-import './helper/audio_sprite';
-import './start_screen/start_screen';
-import './shoot/shoot';
-import './cat/cat';
-import './enemy/enemy';
-import './panel/panel';
-import './bomb/bomb';
-import './shop/shop';
-import './result/result';
-import './statistic/statistic';
+import './preload/preload.js';
+import './helper/audio_sprite.js';
+import './start_screen/start_screen.js';
+import './shoot/shoot.js';
+import './cat/cat.js';
+import './enemy/enemy.js';
+import './panel/panel.js';
+import './bomb/bomb.js';
+import './shop/shop.js';
+import './result/result.js';
+import './statistic/statistic.js';
 
 /** загрузив игру, создаст событие, которое слушает стартовый экран */
 

@@ -1,5 +1,5 @@
-@import "./../auth/auth";
-@import "./../guide/guide";
+@import "./../auth/auth.css";
+@import "./../guide/guide.css";
 
 .start-screen {
   position: absolute;
@@ -25,7 +25,7 @@
     opacity: 0;
   }
 
-  .best-score-frame {
+  & .best-score-frame {
     font-size: 3em;
     color: #fff;
     text-shadow: 0 0 10px black;
@@ -34,7 +34,7 @@
     will-change: opacity;
   }
 
-  .new-game {
+  & .new-game {
     position: relative;
     z-index: 1;
     font-size: 5em;

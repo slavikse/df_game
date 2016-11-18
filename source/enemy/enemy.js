@@ -1,45 +1,40 @@
 import range from 'libs/range';
 import throttle from 'libs/throttle';
-import {audioURI, audioSprite} from './../helper/audio_sprite';
-import noise from './../helper/noise';
+import {audioURI, audioSprite} from './../helper/audio_sprite.js';
+import noise from './../helper/noise.js';
 
-const
-  $body = document.body,
-  $enemyPosition = $body.querySelector('.enemy-position'),
-  imagesClasses = [
-    'icon-enemy1',
-    'icon-enemy2',
-    'icon-enemy3',
-    'icon-enemy4'
-  ],
-  imagesClassesLength = imagesClasses.length - 1,
+const $body = document.body;
+const $enemyPosition = $body.querySelector('.enemy-position');
+const imagesClasses = [
+  'icon-enemy1',
+  'icon-enemy2',
+  'icon-enemy3',
+  'icon-enemy4'
+];
+const imagesClassesLength = imagesClasses.length - 1;
+const eventEnemyAdd = new Event('enemyAdd');
+const eventEnemyDec = new Event('enemyDec');
+const eventScoreAdd = new Event('scoreAdd');
+const eventDamage = new Event('damage');
+const dieAudios = [
+  audioSprite.enemy_die1,
+  audioSprite.enemy_die2,
+  audioSprite.enemy_die3,
+  audioSprite.enemy_die4,
+];
+const playingFieldResize = throttle(playingField, 500);
 
-  eventEnemyAdd = new Event('enemyAdd'),
-  eventEnemyDec = new Event('enemyDec'),
-  eventScoreAdd = new Event('scoreAdd'),
-  eventDamage = new Event('damage'),
-
-  dieAudios = [
-    audioSprite.enemy_die1,
-    audioSprite.enemy_die2,
-    audioSprite.enemy_die3,
-    audioSprite.enemy_die4,
-  ],
-
-  playingFieldResize = throttle(playingField, 500);
-
-let
-  $paddock = $body.querySelector('.paddock'),
-  timerIDs = [], // собирает все id таймеров, для последующего удаления
-  enemyCloneCountDefault = 4,
-  enemyCloneCurrent = 0,
-  enemyDec = 1,
-  scoreAdd = 7,
-  enemyHealthDefault = [1, 2],
-  enemyDamageTimeDefault = [6, 8],
-  enemyCloneCount = enemyCloneCountDefault,
-  playingFieldWidth,
-  playingFieldHeight;
+let $paddock = $body.querySelector('.paddock');
+let timerIDs = [];
+let enemyCloneCountDefault = 4;
+let enemyCloneCurrent = 0;
+let enemyDec = 1;
+let scoreAdd = 7;
+let enemyHealthDefault = [1, 2];
+let enemyDamageTimeDefault = [6, 8];
+let enemyCloneCount = enemyCloneCountDefault;
+let playingFieldWidth;
+let playingFieldHeight;
 
 eventEnemyDec.dec = enemyDec;
 eventScoreAdd.add = scoreAdd;
@@ -68,9 +63,8 @@ function cloneEnemy(e) {
 }
 
 function setPosition(clone) {
-  const
-    x = range(0, playingFieldWidth),
-    y = range(0, playingFieldHeight);
+  const x = range(0, playingFieldWidth);
+  const y = range(0, playingFieldHeight);
 
   clone.style.transform = `translate(${x}px, ${y}px)`;
 
@@ -78,12 +72,11 @@ function setPosition(clone) {
 }
 
 function setDamage(clone) {
-  const
-    damageTimer = range(...enemyDamageTimeDefault) * 1000,
-    warningNode = clone.querySelector('.enemy-warning'),
-    damageNode = clone.querySelector('.enemy-damage'),
-    enemyNode = clone.querySelector('.enemy'),
-    healthNode = clone.querySelector('.enemy-health');
+  const damageTimer = range(...enemyDamageTimeDefault) * 1000;
+  const warningNode = clone.querySelector('.enemy-warning');
+  const damageNode = clone.querySelector('.enemy-damage');
+  const enemyNode = clone.querySelector('.enemy');
+  const healthNode = clone.querySelector('.enemy-health');
 
   clone.warningTimer = setTimeout(
     enemyWarning.bind(null, warningNode),
@@ -114,9 +107,8 @@ function enemyDamage(nodes) {
 }
 
 function setImage(clone) {
-  const
-    enemyNode = clone.querySelector('.enemy'),
-    random = range(0, imagesClassesLength);
+  const enemyNode = clone.querySelector('.enemy');
+  const random = range(0, imagesClassesLength);
 
   enemyNode.classList.add(imagesClasses[random]);
 
@@ -124,9 +116,8 @@ function setImage(clone) {
 }
 
 function setHealth(clone) {
-  const
-    healthNode = clone.querySelector('.enemy-health'),
-    health = range(...enemyHealthDefault);
+  const healthNode = clone.querySelector('.enemy-health');
+  const health = range(...enemyHealthDefault);
 
   healthNode.health = health;
   healthNode.textContent = health;
@@ -135,12 +126,11 @@ function setHealth(clone) {
 }
 
 function enemyKill(e) {
-  const
-    clone = e.enemy.parentNode,
-    warningNode = clone.querySelector('.enemy-warning'),
-    damageNode = clone.querySelector('.enemy-damage'),
-    enemyNode = clone.querySelector('.enemy'),
-    healthNode = clone.querySelector('.enemy-health');
+  const clone = e.enemy.parentNode;
+  const warningNode = clone.querySelector('.enemy-warning');
+  const damageNode = clone.querySelector('.enemy-damage');
+  const enemyNode = clone.querySelector('.enemy');
+  const healthNode = clone.querySelector('.enemy-health');
 
   enemyShoot(enemyNode);
   enemyHealthDec(healthNode);
@@ -207,10 +197,9 @@ function enemyHideDelay(clone) {
 }
 
 function playingField() {
-  const
-    enemyWidth = 150,
-    enemyHeight = 150,
-    panelHeight = 100;
+  const enemyWidth = 150;
+  const enemyHeight = 150;
+  const panelHeight = 100;
 
   playingFieldWidth = window.innerWidth - enemyWidth;
   playingFieldHeight = window.innerHeight - enemyHeight - panelHeight;

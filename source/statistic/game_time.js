@@ -5,13 +5,11 @@ function gameTimeStart() {
 }
 
 function gameTimeEnd() {
-  const
-    ms = Date.now() - gameTime,
-    s = Math.trunc(ms / 1000),
-    m = Math.trunc(s / 60),
-
-    minutes = m,
-    second = s - m * 60;
+  const ms = Date.now() - gameTime;
+  const s = Math.trunc(ms / 1000);
+  const m = Math.trunc(s / 60);
+  const minutes = m;
+  const second = s - m * 60;
 
   return {
     minutes,

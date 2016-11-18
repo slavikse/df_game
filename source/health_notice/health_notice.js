@@ -1,18 +1,16 @@
-import {audioURI, audioSprite} from './../helper/audio_sprite';
-import noise from '../helper/noise';
+import {audioURI, audioSprite} from '../helper/audio_sprite.js';
+import noise from '../helper/noise.js';
 
-const
-  $healthNotice = document.querySelector('.health-notice'),
-
-  healAudiosURI = [
-    audioSprite.heal1,
-    audioSprite.heal2
-  ],
-  damageAudiosURI = [
-    audioSprite.damage1,
-    audioSprite.damage2,
-    audioSprite.damage3
-  ];
+const $healthNotice = document.querySelector('.health-notice');
+const healAudiosURI = [
+  audioSprite.heal1,
+  audioSprite.heal2
+];
+const damageAudiosURI = [
+  audioSprite.damage1,
+  audioSprite.damage2,
+  audioSprite.damage3
+];
 
 let healthNoticeTimer;
 

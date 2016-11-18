@@ -4,7 +4,7 @@
   align-items: flex-end;
   overflow: hidden; /* барабан выезжает */
 
-  .drum {
+  & .drum {
     position: relative;
     z-index: 1; /* в магазе */
     transition: transform 0.2s; /* поворот при выстреле */
@@ -12,47 +12,47 @@
     will-change: transform;
   }
 
-  .bullet {
+  & .bullet {
     position: absolute;
     transition: opacity 0.2s;
     will-change: opacity;
   }
 
-  .hide {
+  & .hide {
     opacity: 0;
   }
 
-  .bullet1 {
+  & .bullet1 {
     top: 4px;
     left: 29px;
   }
 
-  .bullet2 {
+  & .bullet2 {
     top: 17px;
     right: 6px;
   }
 
-  .bullet3 {
+  & .bullet3 {
     bottom: 16px;
     right: 6px;
   }
 
-  .bullet4 {
+  & .bullet4 {
     bottom: 3px;
     right: 30px;
   }
 
-  .bullet5 {
+  & .bullet5 {
     bottom: 16px;
     left: 6px;
   }
 
-  .bullet6 {
+  & .bullet6 {
     top: 18px;
     left: 6px;
   }
 
-  .drum-count {
+  & .drum-count {
     position: relative;
     z-index: 1; /* в магазе */
     width: 50px;

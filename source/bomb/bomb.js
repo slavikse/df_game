@@ -1,11 +1,9 @@
-import {audioURI, audioSprite} from './../helper/audio_sprite';
-import noise from './../helper/noise';
+import {audioURI, audioSprite} from './../helper/audio_sprite.js';
+import noise from './../helper/noise.js';
 
-const
-  $body = document.body,
-  $bomb = $body.querySelector('.bomb'),
-  audioBomb = audioSprite.bomb,
-  eventBomb = new Event('bomb');
+const $bomb = document.querySelector('.bomb');
+const audioBomb = audioSprite.bomb;
+const eventBomb = new Event('bomb');
 
 function bomb() {
   bombEffect();

@@ -1,22 +1,18 @@
-import {audioURI, audioSprite} from './../helper/audio_sprite';
-import noise from './../helper/noise';
+import {audioURI, audioSprite} from './../helper/audio_sprite.js';
+import noise from './../helper/noise.js';
 
-const
-  $ticker = document.querySelector('.ticker'),
-  tickDefault = 4, // [0-4] - 5 тиков, 5 тик - это +
+const $ticker = document.querySelector('.ticker');
+const tickDefault = 4;
+const audioTick = audioSprite.tick;
+const eventEnemyCreate = new Event('enemyCreate');
+const eventWaveEnd = new Event('waveEnd');
 
-  audioTick = audioSprite.tick,
-
-  eventEnemyCreate = new Event('enemyCreate'),
-  eventWaveEnd = new Event('waveEnd');
-
-let
-  waveCountStat = 0,
-  isWaveEnd,
-  tickTimeout,
-  tickCurrent = 0,
-  numberWaveDefault = 4,
-  numberWaveCurrent = 0;
+let waveCountStat = 0;
+let isWaveEnd;
+let tickTimeout;
+let tickCurrent = 0;
+let numberWaveDefault = 4;
+let numberWaveCurrent = 0;
 
 function run() {
   isWaveEnd = false;

@@ -1,15 +1,14 @@
-const
-  $screen = document.querySelector('.preload-screen'),
-  resource = {
-    audios: [
-      'audio/audio_sprite.mp3',
-      'audio/dark_ambient.mp3',
-      'audio/shop_ambient.mp3'
-    ],
-    images: [
-      // 'image/sprite.png' # брауз сразу запрашивает
-    ]
-  };
+const $screen = document.querySelector('.preload-screen');
+const resource = {
+  audios: [
+    'audio/audio_sprite.mp3',
+    'audio/dark_ambient.mp3',
+    'audio/shop_ambient.mp3'
+  ],
+  images: [
+    // 'image/sprite.png' # брауз сразу запрашивает
+  ]
+};
 
 addResource();
 resourcePreload();

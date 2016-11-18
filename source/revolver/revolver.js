@@ -1,29 +1,26 @@
-import {audioURI, audioSprite} from './../helper/audio_sprite';
-import noise from './../helper/noise';
+import {audioURI, audioSprite} from './../helper/audio_sprite.js';
+import noise from './../helper/noise.js';
 
-const
-  $body = document.body,
-  $revolverWrap = $body.querySelector('.revolver-wrap'),
-  $drum = $revolverWrap.querySelector('.drum'),
-  $bullets = $drum.querySelectorAll('.bullet'),
-  $drumCount = $revolverWrap.querySelector('.drum-count'),
-  $shoot = $body.querySelector('.shoot'),
-  bulletDrum = 6,
+const $body = document.body;
+const $revolverWrap = $body.querySelector('.revolver-wrap');
+const $drum = $revolverWrap.querySelector('.drum');
+const $bullets = $drum.querySelectorAll('.bullet');
+const $drumCount = $revolverWrap.querySelector('.drum-count');
+const $shoot = $body.querySelector('.shoot');
+const bulletDrum = 6;
+const audioShoots = [
+  audioSprite.shoot1,
+  audioSprite.shoot2,
+  audioSprite.shoot3,
+  audioSprite.shoot4
+];
+const audioReload = audioSprite.reload;
 
-  audioShoots = [
-    audioSprite.shoot1,
-    audioSprite.shoot2,
-    audioSprite.shoot3,
-    audioSprite.shoot4
-  ],
-  audioReload = audioSprite.reload;
-
-let
-  discardedBulletStat = 0, // пули, которые были выброшены (при перезарядке, оставшиеся пули)
-  drumReloadCountStat = 0,
-  bulletCurrent = 0, // текущая пуля для выстрела в барабане
-  drumCount = 3, // барабанов для перезарядки
-  isDrumRotate = false;
+let discardedBulletStat = 0;
+let drumReloadCountStat = 0;
+let bulletCurrent = 0;
+let drumCount = 3;
+let isDrumRotate = false;
 
 function authBonus() {
   drumCount += 1;

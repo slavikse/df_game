@@ -1,32 +1,28 @@
-import './shop_time';
-import {audioURI, audioSprite} from './../helper/audio_sprite';
-import noise from './../helper/noise';
+import {audioURI, audioSprite} from './../helper/audio_sprite.js';
+import noise from './../helper/noise.js';
+import '../shop_time/shop_time.js';
 
-const
-  $body = document.body,
-  $ambient = $body.querySelector('.ambient'),
-  $shop = $body.querySelector('.shop'),
-  $store = $shop.querySelector('.store'),
-  $storeItems = $store.querySelectorAll('.item'),
-  storeItemsLength = $storeItems.length,
-  $firstAid = $store.querySelector('.first-aid'),
-  $shopClose = $shop.querySelector('.shop-close'),
+const $body = document.body;
+const $ambient = $body.querySelector('.ambient');
+const $shop = $body.querySelector('.shop');
+const $store = $shop.querySelector('.store');
+const $storeItems = $store.querySelectorAll('.item');
+const storeItemsLength = $storeItems.length;
+const $firstAid = $store.querySelector('.first-aid');
+const $shopClose = $shop.querySelector('.shop-close');
+const audioBuyHover = audioSprite.buy_hover;
+const audioBuy = audioSprite.buy;
+const audioCancel = audioSprite.cancel;
+const audioClick = audioSprite.hover_menu;
+const audioNextWave = audioSprite.next_wave;
+const eventBuyDrum = new Event('buyDrum');
+const eventBuyFirstAid = new Event('buyFirstAid');
+const eventScoreDec = new Event('scoreDec');
+const eventWaveStart = new Event('waveStart');
 
-  audioBuyHover = audioSprite.buy_hover,
-  audioBuy = audioSprite.buy,
-  audioCancel = audioSprite.cancel,
-  audioClick = audioSprite.hover_menu,
-  audioNextWave = audioSprite.next_wave,
-
-  eventBuyDrum = new Event('buyDrum'),
-  eventBuyFirstAid = new Event('buyFirstAid'),
-  eventScoreDec = new Event('scoreDec'),
-  eventWaveStart = new Event('waveStart');
-
-let
-  costsStat = 0,
-  score,
-  firstAid;
+let costsStat = 0;
+let score;
+let firstAid;
 
 function scoreShop(e) {
   score = e.score;
@@ -50,9 +46,8 @@ function openShop() {
 
 function buyLockUnlock() {
   for (let i = 0, len = storeItemsLength; i < len; i++) {
-    const
-      item = $storeItems[i],
-      itemScore = parseInt(item.dataset.score, 10);
+    const item = $storeItems[i];
+    const itemScore = parseInt(item.dataset.score, 10);
 
     if (itemScore > score) {
       item.classList.add('buy-block');
@@ -84,10 +79,9 @@ function buy(e) {
     // return;
   }
 
-  const
-    dataset = target.dataset,
-    item = dataset.item,
-    scoreDec = parseInt(dataset.score, 10);
+  const dataset = target.dataset;
+  const item = dataset.item;
+  const scoreDec = parseInt(dataset.score, 10);
 
   if (item === 'drum') {
     buyDrum();

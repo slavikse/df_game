@@ -1,36 +1,31 @@
-import fb from './../helper/fb';
-import {audioURI, audioSprite} from './../helper/audio_sprite';
-import noise from './../helper/noise';
+import fb from './../helper/fb.js';
+import {audioURI, audioSprite} from './../helper/audio_sprite.js';
+import noise from './../helper/noise.js';
 
-const
-  $startScreen = document.querySelector('.start-screen'),
-  $authShow = $startScreen.querySelector('.auth-show'),
-  $authLoader = $authShow.querySelector('.auth-loader-js'),
-  $authUserName = $authShow.querySelector('.auth-user-name'),
-  $authOpener = $authShow.querySelector('.auth-opener'),
-  $authLogout = $authShow.querySelector('.auth-logout'),
+const $startScreen = document.querySelector('.start-screen');
+const $authShow = $startScreen.querySelector('.auth-show');
+const $authLoader = $authShow.querySelector('.auth-loader-js');
+const $authUserName = $authShow.querySelector('.auth-user-name');
+const $authOpener = $authShow.querySelector('.auth-opener');
+const $authLogout = $authShow.querySelector('.auth-logout');
+const $authWrap = $startScreen.querySelector('.auth-wrap');
+const $authCorrect = $startScreen.querySelector('.auth-correct');
+const $authInCorrect = $startScreen.querySelector('.auth-incorrect');
+const $authWrong = $startScreen.querySelector('.auth-wrong');
+const $authSubmit = $startScreen.querySelector('.auth-submit');
+const audioAuthHover = audioSprite.hover_menu;
+const audioAuthShow = audioSprite.auth_show;
+const audioAuthIn = audioSprite.auth_in;
+const audioAuthOut = audioSprite.auth_out;
+const audioCancel = audioSprite.cancel;
+const eventAuthBonus = new Event('authBonus');
 
-  $authWrap = $startScreen.querySelector('.auth-wrap'),
-  $authCorrect = $startScreen.querySelector('.auth-correct'),
-  $authInCorrect = $startScreen.querySelector('.auth-incorrect'),
-  $authWrong = $startScreen.querySelector('.auth-wrong'),
-  $authSubmit = $startScreen.querySelector('.auth-submit'),
-
-  audioAuthHover = audioSprite.hover_menu,
-  audioAuthShow = audioSprite.auth_show,
-  audioAuthIn = audioSprite.auth_in,
-  audioAuthOut = audioSprite.auth_out,
-  audioCancel = audioSprite.cancel,
-
-  eventAuthBonus = new Event('authBonus');
-
-let
-  userName,
-  isGetAuthBonus = false,
-  emailSave,
-  passwordSave,
-  isAuthShow = false,
-  isAuthProgress = false;
+let userName;
+let isGetAuthBonus = false;
+let emailSave;
+let passwordSave;
+let isAuthShow = false;
+let isAuthProgress = false;
 
 fb.auth().onAuthStateChanged(authChanged);
 
@@ -107,10 +102,9 @@ function auth(e) {
     return;
   }
 
-  const
-    form = document.forms.auth,
-    email = form.email.value,
-    password = form.password.value;
+  const form = document.forms.auth;
+  const email = form.email.value;
+  const password = form.password.value;
 
   if (!dataCorrect(email, password)) {
     $authSubmit.style.animationName = 'auth-submit-error';

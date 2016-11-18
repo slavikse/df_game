@@ -1,22 +1,19 @@
-import fb from './../helper/fb';
-import './../auth/auth';
-import './../guide/guide';
-import {audioURI, audioSprite} from './../helper/audio_sprite';
-import noise from './../helper/noise';
+import fb from './../helper/fb.js';
+import './../auth/auth.js';
+import './../guide/guide.js';
+import {audioURI, audioSprite} from './../helper/audio_sprite.js';
+import noise from './../helper/noise.js';
 
-const
-  $body = document.body,
-  $startScreen = $body.querySelector('.start-screen'),
-  $bestScore = $startScreen.querySelector('.best-score'),
-  $newGame = $startScreen.querySelector('.new-game'),
-  $ambient = $body.querySelector('.ambient'),
-  $forestNight = $body.querySelector('.forest-night'),
-
-  audioHover = audioSprite.hover_menu,
-  audioIntro = audioSprite.intro,
-
-  eventStartGame = new Event('startGame'),
-  db = fb.database();
+const $body = document.body;
+const $startScreen = $body.querySelector('.start-screen');
+const $bestScore = $startScreen.querySelector('.best-score');
+const $newGame = $startScreen.querySelector('.new-game');
+const $ambient = $body.querySelector('.ambient');
+const $forestNight = $body.querySelector('.forest-night');
+const audioHover = audioSprite.hover_menu;
+const audioIntro = audioSprite.intro;
+const eventStartGame = new Event('startGame');
+const db = fb.database();
 
 fb.auth().onAuthStateChanged(auth);
 

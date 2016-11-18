@@ -1,35 +1,31 @@
-import './health_notice';
-import {audioURI, audioSprite} from './../helper/audio_sprite';
-import noise from '../helper/noise';
+import {audioURI, audioSprite} from './../helper/audio_sprite.js';
+import noise from '../helper/noise.js';
+import '../health_notice/health_notice.js';
 
-const
-  $body = document.body,
-  $healthWrap = $body.querySelector('.health-wrap'),
-  $firstAid = $healthWrap.querySelector('.first-aid').children,
-  $healths = $healthWrap.querySelector('.health').children,
+const $body = document.body;
+const $healthWrap = $body.querySelector('.health-wrap');
+const $firstAid = $healthWrap.querySelector('.first-aid').children;
+const $healths = $healthWrap.querySelector('.health').children;
+const firstAidStateClasses = [
+  'icon-first_aid_circuit', // пустая
+  'icon-first_aid' // целая
+];
+const healthStateClasses = [
+  'icon-heart_abadon', // пустое
+  'icon-heart_half' // половинка
+];
+const firstAidFull = $firstAid.length - 1;
+const healthFull = healthStateClasses.length;
+const healthStateFull = healthStateClasses.length - 1;
+const audioHeart = audioSprite.heart;
+const eventRegeneration = new Event('regeneration');
 
-  firstAidStateClasses = [
-    'icon-first_aid_circuit', // пустая
-    'icon-first_aid' // целая
-  ],
-  healthStateClasses = [
-    'icon-heart_abadon', // пустое
-    'icon-heart_half' // половинка
-  ],
-  firstAidFull = $firstAid.length - 1, // аптечек [0,1]
-  healthFull = healthStateClasses.length, // состояния сердца
-  healthStateFull = healthStateClasses.length - 1, // состояние сердца, изначально сердце целое
-
-  audioHeart = audioSprite.heart,
-  eventRegeneration = new Event('regeneration');
-
-let
-  receivedDamageStat = 0,
-  firstAidUseStat = 0,
-  firstAid = firstAidFull,
-  health = healthFull,
-  healthState = healthStateFull,
-  eventFirstAidShop = new Event('firstAidShop');
+let receivedDamageStat = 0;
+let firstAidUseStat = 0;
+let firstAid = firstAidFull;
+let health = healthFull;
+let healthState = healthStateFull;
+let eventFirstAidShop = new Event('firstAidShop');
 
 function damage() {
 

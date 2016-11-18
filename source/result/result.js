@@ -1,16 +1,14 @@
-const
-  $result = document.querySelector('.result'),
-  $statistic = $result.querySelector('.statistic'),
-  $restart = $result.querySelector('.restart');
+const $result = document.querySelector('.result');
+const $statistic = $result.querySelector('.statistic');
+const $restart = $result.querySelector('.restart');
 
 let statistic;
 
 function getStatistic(e) {
   statistic = e.statistic;
 
-  const
-    statsKey = Object.keys(statistic),
-    tmpl = statsKey.map(getTmpl).join('');
+  const statsKey = Object.keys(statistic);
+  const tmpl = statsKey.map(getTmpl).join('');
 
   console.warn('RESULT only one!');
 
