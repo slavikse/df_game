@@ -1,5 +1,4 @@
 import fb from './../helper/fb';
-import delay from 'libs/delay';
 import getCosts from './costs';
 import getDiscardedBullet from './discarded_bullet';
 import getDrumReloadCount from './drum_reload_count';
@@ -10,7 +9,6 @@ import getScore from './score';
 import getShootCount from './shoot_count';
 import getWaveCount from './wave_count';
 
-const getStatisticDelay = delay(getStatistic, 30);
 const db = fb.database();
 
 let uid;
@@ -23,11 +21,6 @@ function auth(user) {
 }
 
 function getStatistic() {
-
-
-  console.log('what?');
-
-
   score = getScore();
 
   const costs = getCosts();
@@ -38,7 +31,7 @@ function getStatistic() {
   const receivedDamage = getReceivedDamage();
   const {shoots, inTarget, miss, inTargetPercent, bonusWave} = getShootCount();
   const waveCount = getWaveCount();
-  const tmpl = {
+  const data = {
     'Время игры': `${minutes}m ${second}s`,
     'Волн пройдено': waveCount,
     'Доп волн': bonusWave,
@@ -56,31 +49,25 @@ function getStatistic() {
 
   getBestScore();
   localSaveBestScore();
-  resultStatistic(tmpl);
+  resultStatistic(data);
 }
 
 function getBestScore() {
   if (uid) {
-    db.ref(uid)
-    .once('value')
-    .then(bestScore);
+    db.ref(uid).once('value').then(bestScore);
   }
 }
 
 function bestScore(snapshot) {
-  if (snapshot.val() && snapshot.val().bestScore) {
-    const bestScore = snapshot.val().bestScore;
+  const bestScore = snapshot.val().bestScore;
 
-    if (score > bestScore) {
-      saveBestScore();
-    }
+  if (bestScore && score > bestScore) {
+    saveBestScore();
   }
 }
 
 function saveBestScore() {
-  db.ref(uid).set({
-    bestScore: score
-  });
+  db.ref(uid).set({bestScore: score});
 }
 
 function localSaveBestScore() {
@@ -91,10 +78,10 @@ function localSaveBestScore() {
   }
 }
 
-function resultStatistic(tmpl) {
+function resultStatistic(data) {
   let statisticEvent = new Event('statistic');
-  statisticEvent.statistic = tmpl;
+  statisticEvent.statistic = data;
   document.dispatchEvent(statisticEvent);
 }
 
-document.addEventListener('gameOver', getStatisticDelay);
+document.addEventListener('gameOver', getStatistic);

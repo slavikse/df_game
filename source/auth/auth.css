@@ -15,7 +15,7 @@
   position: relative;
   z-index: 3;
   font-size: 3.6em;
-  color: #60ff4b;
+  color: #51d83f;
   text-shadow: 0 0 10px black;
   transition: color 0.1s, text-shadow 0.1s;
 
@@ -115,7 +115,7 @@
   &::before,
   &::after {
     position: absolute;
-    color: #41a72f;
+    color: #51d83f;
     font-size: 2.4em;
     content: '*';
   }
@@ -187,7 +187,7 @@
 }
 
 .auth-correct {
-  color: #00FF00;
+  color: #51d83f;
 }
 
 .auth-wrong {
@@ -233,7 +233,7 @@
   }
 
   &:valid {
-    border-color: #00ae00;
+    border-color: #51d83f;
   }
 
   &:invalid {
@@ -244,7 +244,7 @@
 .auth-submit {
   width: 100%;
   padding: 6px 0;
-  color: #59e942;
+  color: #51d83f;
   font-size: 3em;
   text-shadow: 0 0 10px black;
   background-color: rgba(0, 0, 0, 0.5);

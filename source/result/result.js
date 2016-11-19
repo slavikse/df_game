@@ -4,19 +4,17 @@ const $restart = $result.querySelector('.restart');
 
 let statistic;
 
-function getStatistic(e) {
+function templateCompile(e) {
   statistic = e.statistic;
 
   const statsKey = Object.keys(statistic);
-  const tmpl = statsKey.map(getTmpl).join('');
+  const template = statsKey.map(getTemplate).join('');
 
-  console.warn('RESULT only one!');
-
-  $statistic.insertAdjacentHTML('afterBegin', tmpl);
+  $statistic.insertAdjacentHTML('afterBegin', template);
   $result.classList.add('result-show');
 }
 
-function getTmpl(key) {
+function getTemplate(key) {
   return `
     <div class="item">
       <div class="key">${key}</div>
@@ -30,5 +28,5 @@ function restart() {
   location.reload();
 }
 
-document.addEventListener('statistic', getStatistic);
+document.addEventListener('statistic', templateCompile);
 $restart.addEventListener('click', restart);

@@ -1,6 +1,6 @@
-import {audioURI, audioSprite} from './../helper/audio_sprite.js';
-import noise from '../helper/noise.js';
-import '../health_notice/health_notice.js';
+import {audioURI, audioSprite} from './../helper/audio_sprite';
+import noise from '../helper/noise';
+import '../health_notice/health_notice';
 
 const $body = document.body;
 const $healthWrap = $body.querySelector('.health-wrap');
@@ -167,10 +167,10 @@ function gameOver() {
   document.removeEventListener('mousedown', CMBHandler);
   document.removeEventListener('keyup', TKeyHandler);
 
-  document.dispatchEvent(new Event('gameOver'));
-
   receivedDamageStatistic();
   firstAidUseStatistic();
+
+  document.dispatchEvent(new Event('gameOver'));
 }
 
 document.addEventListener('buyFirstAid', addFirstAid);

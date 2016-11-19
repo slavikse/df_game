@@ -1,5 +1,5 @@
-import {audioURI, audioSprite} from './../helper/audio_sprite.js';
-import noise from './../helper/noise.js';
+import {audioURI, audioSprite} from './../helper/audio_sprite';
+import noise from './../helper/noise';
 
 const $ticker = document.querySelector('.ticker');
 const tickDefault = 4;
@@ -11,7 +11,7 @@ let waveCountStat = 0;
 let isWaveEnd;
 let tickTimeout;
 let tickCurrent = 0;
-let numberWaveDefault = 4;
+let numberWaveDefault = 1; // 3
 let numberWaveCurrent = 0;
 
 function run() {
@@ -87,7 +87,7 @@ function saveWaveCountStat() {
 function waveCountStatistic() {
   let waveCountEvent = new Event('waveCount');
   waveCountEvent.waveCount = waveCountStat;
-  document.dispatchEvent(waveCountEvent)
+  document.dispatchEvent(waveCountEvent);
 }
 
 function gameOver() {

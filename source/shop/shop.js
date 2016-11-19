@@ -1,6 +1,6 @@
-import {audioURI, audioSprite} from './../helper/audio_sprite.js';
-import noise from './../helper/noise.js';
-import '../shop_time/shop_time.js';
+import {audioURI, audioSprite} from './../helper/audio_sprite';
+import noise from './../helper/noise';
+import '../shop_time/shop_time';
 
 const $body = document.body;
 const $ambient = $body.querySelector('.ambient');

@@ -1,6 +1,6 @@
 import debounce from 'libs/debounce';
-import {audioURI, audioSprite} from './../helper/audio_sprite.js';
-import noise from './../helper/noise.js';
+import {audioURI, audioSprite} from './../helper/audio_sprite';
+import noise from './../helper/noise';
 
 const $body = document.body;
 const fireRate = 166.6;

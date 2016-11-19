@@ -1,6 +1,6 @@
-import fb from './../helper/fb.js';
-import {audioURI, audioSprite} from './../helper/audio_sprite.js';
-import noise from './../helper/noise.js';
+import fb from './../helper/fb';
+import {audioURI, audioSprite} from './../helper/audio_sprite';
+import noise from './../helper/noise';
 
 const $startScreen = document.querySelector('.start-screen');
 const $authShow = $startScreen.querySelector('.auth-show');
@@ -58,7 +58,7 @@ function authChanged(user) {
   }
 
   //fix: Uncaught (in promise) DOMException: The play() request was interrupted by a call to pause()
-  setTimeout(noise.bind(null, audioURI, authAudio), 100);
+  setTimeout(noise.bind(null, audioURI, authAudio), 200);
 
   $authOpener.classList.remove('auth-opener-on');
   $authLoader.classList.remove('auth-loader');

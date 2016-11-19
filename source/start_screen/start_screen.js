@@ -1,8 +1,8 @@
-import fb from './../helper/fb.js';
-import './../auth/auth.js';
-import './../guide/guide.js';
-import {audioURI, audioSprite} from './../helper/audio_sprite.js';
-import noise from './../helper/noise.js';
+import fb from './../helper/fb';
+import './../auth/auth';
+import './../guide/guide';
+import {audioURI, audioSprite} from './../helper/audio_sprite';
+import noise from './../helper/noise';
 
 const $body = document.body;
 const $startScreen = $body.querySelector('.start-screen');
