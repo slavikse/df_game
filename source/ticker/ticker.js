@@ -11,7 +11,7 @@ let waveCountStat = 0;
 let isWaveEnd;
 let tickTimeout;
 let tickCurrent = 0;
-let numberWaveDefault = 1; // 3
+let numberWaveDefault = 3; // 3
 let numberWaveCurrent = 0;
 
 function run() {
