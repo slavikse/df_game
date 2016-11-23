@@ -5,8 +5,7 @@ const name = 'audio_sprite';
 const files = 'source/**/audio_sprite/*';
 const there = 'public/audio';
 const production = process.env.NODE_ENV === 'production';
-
-let config = {
+const config = {
   output: 'audio_sprite',
   path: 'audio',
   export: 'mp3',

@@ -10,13 +10,13 @@ const $toBad = $body.querySelector('.to-bad');
 const audioToBad = audioSprite.to_bad;
 const playingFieldResize = throttle(playingField, 500);
 const moveTime = 5000;
+const eventEnemyCreate = new Event('enemyCreate');
 
 let moveTimerID;
 let hideTimerID;
 let runTimerID;
 let playingFieldWidth;
 let playingFieldHeight;
-let eventEnemyCreate = new Event('enemyCreate');
 
 eventEnemyCreate.enemyCloneCount = 2;
 

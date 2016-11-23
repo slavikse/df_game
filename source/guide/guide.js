@@ -5,10 +5,7 @@ const $guideHelp = document.querySelector('.guide-help');
 const $guideWrap = document.querySelector('.guide-wrap');
 const audioHoverMenu = audioSprite.hover_menu;
 const audioAuthShow = audioSprite.auth_show;
-const texts = [
-  'X',
-  '?'
-];
+const texts = ['X', '?'];
 const textsLength = texts.length - 1;
 
 let i = 0;

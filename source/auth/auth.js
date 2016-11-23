@@ -46,7 +46,7 @@ function authChanged(user) {
     isGetAuthBonus = true;
 
     userName = getUserName(user);
-    showUserName(userName);
+    showUserName(userName || '');
   } else {
     authAudio = audioAuthOut;
 
@@ -57,7 +57,8 @@ function authChanged(user) {
     showUserName();
   }
 
-  //fix: Uncaught (in promise) DOMException: The play() request was interrupted by a call to pause()
+  //fix: Uncaught (in promise) DOMException: The play() request was interrupted
+  // by a call to pause()
   setTimeout(noise.bind(null, audioURI, authAudio), 200);
 
   $authOpener.classList.remove('auth-opener-on');
@@ -66,8 +67,9 @@ function authChanged(user) {
 }
 
 function getUserName(user) {
-  const name = (user && user.email) ? user.email : null;
-  return name.replace(/@.+/, ''); // remove @...
+  if (user && user.email) {
+    return user.email.replace(/@.+/, ''); // remove @...
+  }
 }
 
 function authShowToggle() {
@@ -118,19 +120,15 @@ function auth(e) {
   emailSave = email;
   passwordSave = password;
 
-  $authSubmit.style.animationName = 'auth-submit-waited'; // анимация ожидания входа
+  $authSubmit.style.animationName = 'auth-submit-waited';
   fbAuth(email, password);
 }
 
 function dataCorrect(email, password) {
-  if ((
+  return (
     /^.{1,20}@.{1,6}\..{2,6}$/.test(email) &&
-    /^.{6,30}$/.test(password))
-  ) {
-    return true;
-  }
-
-  return false;
+    /^.{6,30}$/.test(password)
+  );
 }
 
 function fbAuth(email, password) {

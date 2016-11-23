@@ -12,14 +12,16 @@ import './statistic/statistic.js';
 
 /** загрузив игру, создаст событие, которое слушает стартовый экран */
 
-//window.onerror = (message, url, lineNumber) => {
-//  console.log('Отловил:', message, url, lineNumber);
-//};
+window.onerror = error;
 
-//const NODE_ENV = process.env.NODE_ENV;
+function error(message, url, lineNumber) {
+  console.error('Ошибочки:', message, url, lineNumber);
+}
+
+// const NODE_ENV = process.env.NODE_ENV;
 //
-//if (NODE_ENV === 'production') {
-//  if ('serviceWorker' in navigator) {
-//    navigator.serviceWorker.register('sw.js');
-//  }
-//}
+// if (NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+//   navigator.serviceWorker.register('sw.js');
+// }
+//
+// console.log('[sw] version 23.11.16');

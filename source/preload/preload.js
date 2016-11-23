@@ -55,3 +55,5 @@ function loadEnd() {
 }
 
 window.addEventListener('load', load);
+
+//TODO вставить ресурсы на страницу, по загрузке удалить элемент

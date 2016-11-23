@@ -22,8 +22,7 @@ const config = {
     }
   }]
 };
-
-let param = {
+const param = {
   quality: 100,
   progressive: false,
   compressionLevel: 0,

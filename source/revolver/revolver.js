@@ -148,14 +148,14 @@ function saveDiscardedBulletStat() {
 }
 
 function discardedBulletStatistic() {
-  let discardedBulletEvent = new Event('discardedBullet');
+  const discardedBulletEvent = new Event('discardedBullet');
   discardedBulletEvent.discardedBullet = discardedBulletStat;
 
   document.dispatchEvent(discardedBulletEvent);
 }
 
 function drumReloadCountStatistic() {
-  let drumReloadCountEvent = new Event('drumReloadCount');
+  const drumReloadCountEvent = new Event('drumReloadCount');
   drumReloadCountEvent.drumReloadCount = drumReloadCountStat;
 
   document.dispatchEvent(drumReloadCountEvent);

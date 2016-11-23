@@ -1,68 +1,68 @@
 .ticker {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 4em;
-  transform-style: preserve-3d;
-  transform: rotateY(90deg); /* начинается с паузы || */
-  transition: transform 0.4s ease-in; /* tick */
+  display         : flex;
+  align-items     : center;
+  justify-content : center;
+  height          : 4em;
+  transform-style : preserve-3d;
+  transform       : rotateY(90deg); /* начинается с паузы || */
+  transition      : transform 0.4s ease-in; /* tick */
 
   & .edge {
-    position: absolute;
-    width: 1em;
-    height: 1em;
-    color: black;
-    font-size: 3em;
-    text-align: center;
-    background-color: white;
-    box-shadow: inset 0 0 20px #3e3e3e;
-    overflow: hidden;
+    position         : absolute;
+    width            : 1em;
+    height           : 1em;
+    color            : black;
+    font-size        : 3em;
+    text-align       : center;
+    background-color : white;
+    box-shadow       : inset 0 0 6px #3e3e3e;
+    overflow         : hidden;
   }
 
   & .edge-left { /* || */
-    transform: translateX(-0.5em) rotateY(90deg);
+    transform    : translateX(-0.5em) rotateY(90deg);
   }
 
   & .edge-front { /* :: */
-    line-height: 0.85;
-    transform: translateZ(0.5em);
+    line-height   : 0.85;
+    transform     : translateZ(0.5em);
   }
 
   & .edge-top { /* :. */
-    position: relative;
-    line-height: 0.6;
-    transform: translateY(-0.5em) rotateX(90deg);
+    position    : relative;
+    line-height : 0.6;
+    transform   : translateY(-0.5em) rotateX(90deg);
 
     &::before,
     &::after {
-      position: absolute;
-      content: '.';
+      position : absolute;
+      content  : '.';
     }
 
     &::before {
-      top: -10px;
-      left: 6px;
+      top  : -10px;
+      left : 6px;
     }
 
     &::after {
-      right: 6px;
-      bottom: 10px;
+      right  : 6px;
+      bottom : 10px;
     }
   }
 
   & .edge-back { /* : */
-    line-height: 0.9;
-    transform: translateZ(-0.5em);
+    line-height  : 0.9;
+    transform    : translateZ(-0.5em);
   }
 
   & .edge-bottom { /* . */
-    line-height: 0.6;
-    transform: translateY(0.5em) rotateX(90deg);
+    line-height    : 0.6;
+    transform      : translateY(0.5em) rotateX(90deg);
   }
 
   & .edge-right { /* + */
-    line-height: 0.9;
-    transform: translateX(0.5em) rotateY(90deg);
+    line-height   : 0.9;
+    transform     : translateX(0.5em) rotateY(90deg);
   }
 }
 

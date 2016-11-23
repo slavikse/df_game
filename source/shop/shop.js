@@ -133,7 +133,7 @@ function saveCostsStat(scoreDec) {
 }
 
 function costsStatistic() {
-  let costsEvent = new Event('costs');
+  const costsEvent = new Event('costs');
   costsEvent.costs = costsStat;
   document.dispatchEvent(costsEvent);
 }

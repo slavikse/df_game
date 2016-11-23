@@ -18,15 +18,18 @@ const db = fb.database();
 fb.auth().onAuthStateChanged(auth);
 
 function auth(user) {
-  const uid = (user && user.uid) ? user.uid : null;
+  let uid = null;
+
+  if (user && user.uid) {
+    uid = user.uid;
+  }
+
   getBestScore(uid);
 }
 
 function getBestScore(uid) {
   if (uid) {
-    db.ref(uid)
-    .once('value')
-    .then(bestScore);
+    db.ref(uid).once('value').then(bestScore);
   } else {
     $bestScore.textContent = localStorage.getItem('best-score') || 0;
   }

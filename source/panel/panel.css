@@ -5,19 +5,19 @@
 @import '../revolver/revolver.css';
 
 .panel {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  margin-bottom: 5px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  width: 100%;
-  opacity: 0;
-  pointer-events: none;
-  transition: 1.5s opacity;
+  position        : absolute;
+  bottom          : 0;
+  left            : 0;
+  margin-bottom   : 5px;
+  display         : flex;
+  justify-content : space-between;
+  align-items     : flex-end;
+  width           : 100%;
+  opacity         : 0;
+  pointer-events  : none;
+  transition      : 1.5s opacity;
 
   &-show {
-    opacity: 1;
+    opacity : 1;
   }
 }

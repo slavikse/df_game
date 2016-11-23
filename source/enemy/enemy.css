@@ -1,93 +1,93 @@
 .enemy-position {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  animation: 0.4s enemy-position-show both;
-  will-change: opacity;
+  position        : absolute;
+  display         : flex;
+  align-items     : center;
+  justify-content : center;
+  opacity         : 0;
+  animation       : 0.4s enemy-position-show both;
+  will-change     : opacity;
 }
 
 @keyframes enemy-position-show {
   100% {
-    opacity: 1;
+    opacity : 1;
   }
 }
 
 .enemy-hide {
-  pointer-events: none;
+  pointer-events : none;
 }
 
 .enemy-warning {
-  position: absolute;
-  z-index: 1;
-  opacity: 0;
-  pointer-events: none;
+  position       : absolute;
+  z-index        : 1;
+  opacity        : 0;
+  pointer-events : none;
 }
 
 .enemy-damage {
-  position: absolute;
-  z-index: 1;
-  pointer-events: none;
-  animation: 0.15s linear enemy-damage both paused;
-  will-change: transform, opacity;
+  position       : absolute;
+  z-index        : 1;
+  pointer-events : none;
+  animation      : 0.15s linear enemy-damage both paused;
+  will-change    : transform, opacity;
 }
 
 @keyframes enemy-damage {
   0% {
-    opacity: 0;
-    transform: translate(20%, -20%);
+    opacity   : 0;
+    transform : translate(20%, -20%);
   }
 
   20%,
   80% {
-    opacity: 1;
+    opacity : 1;
   }
 
   100% {
-    opacity: 0;
-    transform: translate(-20%, 20%);
+    opacity   : 0;
+    transform : translate(-20%, 20%);
   }
 }
 
 .enemy {
-  backface-visibility: visible;
-  animation: 0.1s; /* enemy-shoot */
-  will-change: transform;
+  backface-visibility : visible;
+  animation           : 0.1s; /* enemy-shoot */
+  will-change         : transform;
 }
 
 @keyframes enemy-shoot {
   50% {
-    transform: scale(1.2);
+    transform : scale(1.2);
   }
 }
 
 .enemy-kill {
-  animation: 0.5s enemy-kill; /* enemy-kill */
+  animation : 0.5s enemy-kill; /* enemy-kill */
 }
 
 @keyframes enemy-kill {
   100% {
-    transform: rotateY(810deg);
+    transform : rotateY(810deg);
   }
 }
 
 .enemy-health {
-  position: absolute;
-  right: 5px;
-  bottom: 5px;
-  padding: 1px 4px;
-  border-radius: 50%;
-  color: white;
-  font-family: sans-serif;
-  font-size: 1em;
-  pointer-events: none;
-  background-color: red;
-  animation: 0.1s alternate; /* enemy-health */
+  position         : absolute;
+  right            : 5px;
+  bottom           : 5px;
+  padding          : 1px 4px;
+  border-radius    : 50%;
+  color            : white;
+  font-family      : sans-serif;
+  font-size        : 1em;
+  pointer-events   : none;
+  background-color : red;
+  animation        : 0.1s alternate; /* enemy-health */
 }
 
 @keyframes enemy-health {
   50% {
-    transform: scale(1.5);
+    transform : scale(1.5);
   }
 }

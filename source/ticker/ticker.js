@@ -4,6 +4,7 @@ import noise from './../helper/noise';
 const $ticker = document.querySelector('.ticker');
 const tickDefault = 4;
 const audioTick = audioSprite.tick;
+const numberWaveDefault = 3; // 3
 const eventEnemyCreate = new Event('enemyCreate');
 const eventWaveEnd = new Event('waveEnd');
 
@@ -11,7 +12,6 @@ let waveCountStat = 0;
 let isWaveEnd;
 let tickTimeout;
 let tickCurrent = 0;
-let numberWaveDefault = 3; // 3
 let numberWaveCurrent = 0;
 
 function run() {
@@ -27,7 +27,7 @@ function nextTick() {
   const tickerRotateX = 360 - 90 * tickCurrent;
   $ticker.style.transform = `rotateX(${tickerRotateX}deg)`;
 
-  setTimeout(noise.bind(null, audioURI, audioTick), 400); // анимация поворота тикера
+  setTimeout(noise.bind(null, audioURI, audioTick), 400);
 
   if (tickCurrent === tickDefault) {
     extraWave();
@@ -85,7 +85,7 @@ function saveWaveCountStat() {
 }
 
 function waveCountStatistic() {
-  let waveCountEvent = new Event('waveCount');
+  const waveCountEvent = new Event('waveCount');
   waveCountEvent.waveCount = waveCountStat;
   document.dispatchEvent(waveCountEvent);
 }

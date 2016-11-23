@@ -118,3 +118,9 @@ new FormData
 
 ----------------------------- NPM ---------------------------
 opener: npmjs.com/package/opener
+
+Оформление незагруженных изображений:
+http://css-live.ru/articles/oformlenie-nezagruzhennyx-izobrazhenij.html
+
+При достаточной поддержки HTTP/2 перейти на подключение атомарных файлов в конце модуля??? (разметки):
+http://css-live.ru/articles/budushhee-zagruzki-css.html

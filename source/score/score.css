@@ -1,12 +1,12 @@
 .score {
-  position: relative;
-  z-index: 1; /* в магазе */
-  width: 70px;
-  color: white;
-  font-size: 2.5em;
-  will-change: contents;
+  position    : relative;
+  z-index     : 1; /* в магазе */
+  width       : 70px;
+  color       : white;
+  font-size   : 2.5em;
+  will-change : contents;
 
   &::before {
-    content: '$';
+    content : '$';
   }
 }

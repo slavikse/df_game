@@ -2,10 +2,10 @@ import delay from 'libs/delay';
 
 const $score = document.querySelector('.score');
 const scoreShopDelay = delay(scoreShop, 5); // чтобы успел записать счет
+const eventScoreShop = new Event('scoreShop');
+const scoreEvent = new Event('score');
 
 let score = 0;
-let eventScoreShop = new Event('scoreShop');
-let scoreEvent = new Event('score');
 
 function scoreAdd(e) {
   score += e.add;

@@ -1,41 +1,41 @@
 .health-wrap {
-  position: relative;
-  z-index: 1; /* в магазе */
-  display: flex;
-  flex-direction: column;
-  margin-left: 5px;
+  position       : relative;
+  z-index        : 1; /* в магазе */
+  display        : flex;
+  flex-direction : column;
+  margin-left    : 5px;
 }
 
 .first-aid {
-  display: flex;
-  margin-bottom: 10px;
+  display       : flex;
+  margin-bottom : 10px;
 
   & div {
-    margin: 0 2px;
-    animation: 0.6s alternate both; /* first-aid-blink */
-    will-change: transform;
+    margin      : 0 2px;
+    animation   : 0.6s alternate both; /* first-aid-blink */
+    will-change : transform;
   }
 }
 
 @keyframes first-aid-blink {
   50% {
-    transform: scale(1.5);
+    transform : scale(1.5);
   }
 }
 
 .health {
-  display: flex;
+  display : flex;
 
   & div {
-    margin: 0 2px;
-    animation: 0.6s alternate both; /* health-blink */
-    will-change: opacity, transform;
+    margin      : 0 2px;
+    animation   : 0.6s alternate both; /* health-blink */
+    will-change : opacity, transform;
   }
 }
 
 @keyframes health-blink {
   50% {
-    opacity: 0;
-    transform: scale(1.5);
+    opacity   : 0;
+    transform : scale(1.5);
   }
 }

@@ -6,6 +6,8 @@ const $body = document.body;
 const fireRate = 166.6;
 const shootFire = debounce(shoot, fireRate);
 const audioIdle = audioSprite.idle;
+const shootEvent = new Event('shoot');
+const shootCountEvent = new Event('shootCount');
 const eventCatShoot = new Event('catShoot');
 const eventEnemyKill = new Event('enemyKill');
 
@@ -14,8 +16,6 @@ let shootCountInTargetStat = 0;
 let shootCountInCatStat = 0;
 let shootMoveTimerID;
 let shootDownTimerID;
-let shootEvent = new Event('shoot');
-let shootCountEvent = new Event('shootCount');
 
 function shoot(e) {
   /** нажата не ЛКМ */
@@ -36,29 +36,33 @@ function shoot(e) {
     return;
   }
 
-  shootDownTimerID = setTimeout(shoot.bind(null, e), fireRate);
+  // $event.dispatchEvent(new Event('damage'));
 
-  const target = e.target;
   const x = e.clientX;
   const y = e.clientY;
 
   shootEvent.shoot = {x, y};
   document.dispatchEvent(shootEvent);
-  saveShootCountTotalStat();
+  shootCountTotalStatistic();
 
-  // $event.dispatchEvent(new Event('damage'));
+  shootDelegate(e);
+  shootDownTimerID = setTimeout(shoot.bind(null, e), fireRate);
+}
+
+function shootDelegate(e) {
+  const target = e.target;
 
   /** выстрел по монстру */
   if (target.classList.contains('enemy')) {
-    eventEnemyKill.enemy = e.target;
+    eventEnemyKill.enemy = target;
     document.dispatchEvent(eventEnemyKill);
-    saveShootCountInTargetStat();
+    shootCountInTargetStatistic();
 
     /** выстрел по котику */
   } else if (target.classList.contains('cat')) {
     document.dispatchEvent(eventCatShoot);
-    saveShootCountInTargetStat();
-    saveShootCountInCatStat();
+    shootCountInTargetStatistic();
+    shootCountInCatStatistic();
   }
 }
 
@@ -80,10 +84,15 @@ function shootUp() {
 }
 
 function shootMove(e) {
-  clearTimeout(shootDownTimerID); // удаляет остатки выстрела (shootDown)
-  clearTimeout(shootMoveTimerID); // предотвращает преждевременную остановку выстрелов при движении
+  // удаляет остатки выстрела (shootDown)
+  clearTimeout(shootDownTimerID);
+  // предотвращает преждевременную остановку выстрелов при движении
+  clearTimeout(shootMoveTimerID);
 
-  shootMoveTimerID = setTimeout(shootMoveStopAndShootDown.bind(null, e), fireRate);
+  shootMoveTimerID = setTimeout(
+    shootMoveStopAndShootDown.bind(null, e),
+    fireRate
+  );
   shootFire(e); // при движении вызывается выстрел
 }
 
@@ -101,19 +110,19 @@ function shootEnd() {
   document.removeEventListener('mousemove', shootMove);
 }
 
-function saveShootCountTotalStat() {
+function shootCountTotalStatistic() {
   shootCountTotalStat += 1;
 }
 
-function saveShootCountInTargetStat() {
+function shootCountInTargetStatistic() {
   shootCountInTargetStat += 1;
 }
 
-function saveShootCountInCatStat() {
+function shootCountInCatStatistic() {
   shootCountInCatStat += 1;
 }
 
-function shootCountStatistic() {
+function shootStatistic() {
   shootCountEvent.shootCountTotal = shootCountTotalStat;
   shootCountEvent.shootCountInTarget = shootCountInTargetStat;
   shootCountEvent.shootCountInCat = shootCountInCatStat;
@@ -123,7 +132,7 @@ function shootCountStatistic() {
 
 function gameOver() {
   shootEnd();
-  shootCountStatistic();
+  shootStatistic();
 }
 
 document.addEventListener('startGame', shootStart);

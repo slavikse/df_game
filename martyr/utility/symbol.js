@@ -18,10 +18,9 @@ const options = {
   sortClassName: true
 };
 
-let
-  words = [],
-  filterWords = [],
-  symbols = [];
+let words = [];
+let filterWords = [];
+let symbols = [];
 
 gulp.task(name,
   gulp.series(

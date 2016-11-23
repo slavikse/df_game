@@ -11,13 +11,15 @@ import getWaveCount from './wave_count';
 
 const db = fb.database();
 
-let uid;
+let uid = null;
 let score;
 
 fb.auth().onAuthStateChanged(auth);
 
 function auth(user) {
-  uid = (user && user.uid) ? user.uid : null;
+  if (user && user.uid) {
+    uid = user.uid;
+  }
 }
 
 function getStatistic() {
@@ -79,7 +81,7 @@ function localSaveBestScore() {
 }
 
 function resultStatistic(data) {
-  let statisticEvent = new Event('statistic');
+  const statisticEvent = new Event('statistic');
   statisticEvent.statistic = data;
   document.dispatchEvent(statisticEvent);
 }

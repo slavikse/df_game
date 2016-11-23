@@ -17,8 +17,7 @@ const files = [
 const wFiles = '{source,temp}/**/*.css';
 const there = 'public';
 const production = process.env.NODE_ENV === 'production';
-
-let options = [
+const options = [
   atImport,
   nested,
   media

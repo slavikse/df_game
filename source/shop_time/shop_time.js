@@ -1,8 +1,5 @@
 const $shopTime = document.querySelector('.shop-time');
-const texts = [
-  'Передохни!',
-  'Понеслась!'
-];
+const texts = ['Передохни!', 'Понеслась!'];
 const textsLength = texts.length - 1;
 
 let i = 0;

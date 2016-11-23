@@ -16,9 +16,9 @@ function templateCompile(e) {
 
 function getTemplate(key) {
   return `
-    <div class="item">
-      <div class="key">${key}</div>
-      <div class="value">${statistic[key]}</div>
+    <div class='item'>
+      <div class='key'>${key}</div>
+      <div class='value'>${statistic[key]}</div>
     </div>
   `;
 }

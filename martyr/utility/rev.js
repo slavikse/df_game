@@ -11,8 +11,7 @@ const revFiles = [/* 2 */
   '!public/*.{html,txt,xml}'
 ];
 const there = 'public';
-
-let delFiles = [];
+const delFiles = [];
 
 gulp.task(name,
   gulp.series(

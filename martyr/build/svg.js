@@ -11,8 +11,7 @@ const name = 'svg';
 const files = 'source/**/svg/*';
 const there = 'temp';
 const production = process.env.NODE_ENV === 'production';
-
-let config = {
+const config = {
   shape: {
     transform: []
   },

@@ -1,103 +1,103 @@
 .preload-screen {
-  position: absolute;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  background-color: #0e2e00;
-  transition: 0.6s opacity;
+  position         : absolute;
+  z-index          : 1;
+  width            : 100%;
+  height           : 100%;
+  background-color : #0e2e00;
+  transition       : 0.6s opacity;
 }
 
 .loader-frame {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
+  position        : absolute;
+  display         : flex;
+  align-items     : center;
+  justify-content : center;
+  width           : 100%;
+  height          : 100%;
 
-  & svg { /* FF bug fix */
-    position: absolute;
-    z-index: -1;
-    pointer-events: none;
+  & svg {          /* FF bug fix */
+    position       : absolute;
+    z-index        : -1;
+    pointer-events : none;
   }
 }
 
 .loader {
-  position: relative;
-  width: 100%;
-  max-width: 500px;
-  height: 120px;
-  transform: translateY(40%);
-  -webkit-filter: url("#goo");
-  filter: url("#goo");
+  position       : relative;
+  width          : 100%;
+  max-width      : 500px;
+  height         : 120px;
+  transform      : translateY(40%);
+  -webkit-filter : url("#goo");
+  filter         : url("#goo");
 
   &::after {
-    position: absolute;
-    top: 30px;
-    left: 220px;
-    margin: 0 auto;
-    display: block;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: #048200;
-    animation: scale 1.5s ease-in-out infinite;
-    will-change: transform;
-    content: '';
+    position      : absolute;
+    top           : 30px;
+    left          : 220px;
+    margin        : 0 auto;
+    display       : block;
+    width         : 60px;
+    height        : 60px;
+    border-radius : 50%;
+    background    : #048200;
+    animation     : scale 1.5s ease-in-out infinite;
+    will-change   : transform;
+    content       : '';
   }
 
   & div {
-    position: absolute;
-    top: 45px;
-    left: 235px;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background: #048200;
-    animation: move 1.5s ease-in-out infinite alternate;
-    will-change: transform;
+    position      : absolute;
+    top           : 45px;
+    left          : 235px;
+    width         : 30px;
+    height        : 30px;
+    border-radius : 50%;
+    background    : #048200;
+    animation     : move 1.5s ease-in-out infinite alternate;
+    will-change   : transform;
 
     &::after,
     &::before {
-      position: absolute;
-      display: block;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: #048200;
-      content: '';
+      position      : absolute;
+      display       : block;
+      width         : 30px;
+      height        : 30px;
+      border-radius : 50%;
+      background    : #048200;
+      content       : '';
     }
 
     &::before {
-      left: -75px;
+      left : -75px;
     }
 
     &::after {
-      left: 75px;
+      left : 75px;
     }
   }
 }
 
 @keyframes scale {
   10% {
-    transform: scale(1);
+    transform : scale(1);
   }
 
   50% {
-    transform: scale(1.25);
+    transform : scale(1.25);
   }
 
   90% {
-    transform: scale(1);
+    transform : scale(1);
   }
 }
 
 @keyframes move {
   0% {
-    transform: translateX(-150px);
+    transform : translateX(-150px);
   }
 
   100% {
-    transform: translateX(150px);
+    transform : translateX(150px);
   }
 }

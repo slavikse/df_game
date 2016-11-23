@@ -23,16 +23,16 @@ const dieAudios = [
   audioSprite.enemy_die4,
 ];
 const playingFieldResize = throttle(playingField, 500);
+const enemyDec = 1;
+const scoreAdd = 7;
+const enemyHealthDefault = [1, 2];
+const enemyDamageTimeDefault = [6, 8];
+const enemyCloneCountDefault = 4;
+const enemyCloneCount = enemyCloneCountDefault;
 
 let $paddock = $body.querySelector('.paddock');
 let timerIDs = [];
-let enemyCloneCountDefault = 4;
 let enemyCloneCurrent = 0;
-let enemyDec = 1;
-let scoreAdd = 7;
-let enemyHealthDefault = [1, 2];
-let enemyDamageTimeDefault = [6, 8];
-let enemyCloneCount = enemyCloneCountDefault;
 let playingFieldWidth;
 let playingFieldHeight;
 
@@ -43,7 +43,7 @@ playingField();
 
 function cloneEnemy(e) {
   const enemyCloneCountCurrent = e.enemyCloneCount || enemyCloneCount;
-  let fragment = document.createDocumentFragment();
+  const fragment = document.createDocumentFragment();
 
   /** при попадании в котика, генерит e.enemyCloneCount */
   for (let i = 0; i < enemyCloneCountCurrent; i++) {
@@ -85,7 +85,13 @@ function setDamage(clone) {
 
   /** сохраняет таймер урона для дальнейшего его удаления */
   const timerID = setTimeout(
-    enemyDamage.bind(null, {clone, warningNode, damageNode, enemyNode, healthNode}),
+    enemyDamage.bind(null, {
+      clone,
+      warningNode,
+      damageNode,
+      enemyNode,
+      healthNode
+    }),
     damageTimer
   );
 
@@ -206,14 +212,14 @@ function playingField() {
 }
 
 function createEnemyNode() {
-  let paddockNode = document.createElement('div');
+  const paddockNode = document.createElement('div');
   paddockNode.classList.add('paddock');
   $body.appendChild(paddockNode);
   $paddock = $body.querySelector('.paddock');
 }
 
 function removeEnemyNode() {
-  setTimeout(removeEnemyNodeDelay, 500); // чтобы успеть последнему мобу доанимировать
+  setTimeout(removeEnemyNodeDelay, 500);
 }
 
 function removeEnemyNodeDelay() {

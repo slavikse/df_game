@@ -1,79 +1,79 @@
 .result {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  background-color: #000;
-  pointer-events: none;
-  transition: 1.5s opacity;
-  will-change: opacity;
+  position         : absolute;
+  display          : flex;
+  justify-content  : center;
+  align-items      : center;
+  flex-direction   : column;
+  width            : 100%;
+  height           : 100%;
+  opacity          : 0;
+  background-color : #000;
+  pointer-events   : none;
+  transition       : 1.5s opacity;
+  will-change      : opacity;
 
   &-show {
-    opacity: 1;
+    opacity : 1;
 
     & .statistic-show,
     & .restart {
-      pointer-events: auto;
+      pointer-events : auto;
     }
   }
 
   & .title {
-    color: red;
-    font-size: 3.5em;
-    text-shadow: 0 0 10px red;
+    color       : red;
+    font-size   : 3.5em;
+    text-shadow : 0 0 10px red;
   }
 
   & .statistic-show {
-    color: #ffeb3b;
-    font-size: 3em;
-    outline: 0;
-    cursor: pointer;
+    color     : #ffeb3b;
+    font-size : 3em;
+    outline   : 0;
+    cursor    : pointer;
 
     &:focus ~ .statistic {
-      transform: translateX(0);
+      transform : translateX(0);
     }
   }
 
   & .statistic {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    border: 4px dashed white;
-    background-color: red;
-    overflow-y: auto;
-    outline: 0;
-    pointer-events: auto;
-    transition: transform 0.4s;
-    transform: translateX(-100%);
-    will-change: transform;
+    position         : absolute;
+    top              : 0;
+    left             : 0;
+    height           : 100%;
+    border           : 4px dashed white;
+    background-color : red;
+    overflow-y       : auto;
+    outline          : 0;
+    pointer-events   : auto;
+    transition       : transform 0.4s;
+    transform        : translateX(-100%);
+    will-change      : transform;
 
     &:focus {
-      transform: translateX(0);
+      transform : translateX(0);
     }
   }
 
   & .item {
-    display: flex;
-    justify-content: space-between;
+    display         : flex;
+    justify-content : space-between;
   }
 
   & .key,
   & .value {
-    margin: 4px 8px;
-    font-family: sans-serif;
-    color: white;
-    font-size: 1.3em;
+    margin      : 4px 8px;
+    font-family : sans-serif;
+    color       : white;
+    font-size   : 1.3em;
   }
 
   & .restart {
-    color: #06d600;
-    font-size: 3.2em;
-    text-shadow: 0 0 6px green;
-    cursor: pointer;
+    color       : #06d600;
+    font-size   : 3.2em;
+    text-shadow : 0 0 6px green;
+    cursor      : pointer;
   }
 }

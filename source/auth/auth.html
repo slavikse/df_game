@@ -18,36 +18,31 @@
 </div>
 
 <div class='auth-wrap'>
-  <div class="auth-notify-wrap">
+  <div class='auth-notify-wrap'>
     <div class='auth-notify auth-correct'>Вход выполнен!</div>
     <div class='auth-notify auth-wrong'>Не верные данные!</div>
     <div class='auth-notify auth-incorrect'>Не корректные данные!</div>
   </div>
 
-  <form
-    class='auth-form'
-    name='auth'
-    autocomplete='off'
-  >
-    <input
-      class='auth-email'
-      name='email'
-      type='email'
-      pattern='^.{1,20}@.{1,6}\..{2,6}$'
-      placeholder='email, ковбой'
-      required>
+  <form class='auth-form'
+        name='auth'
+        autocomplete='off'>
+    <input class='auth-email'
+           name='email'
+           type='email'
+           pattern='^.{1,20}@.{1,6}\..{2,6}$'
+           placeholder='email, ковбой'
+           required>
 
-    <input
-      class='auth-password'
-      name='password'
-      type='password'
-      pattern='^.{6,30}$'
-      placeholder='личный шифр'
-      required>
+    <input class='auth-password'
+           name='password'
+           type='password'
+           pattern='^.{6,30}$'
+           placeholder='личный шифр'
+           required>
 
-    <input
-      class='auth-submit'
-      type='submit'
-      value='+1 обойма за вход!'>
+    <input class='auth-submit'
+           type='submit'
+           value='+1 обойма за вход!'>
   </form>
 </div>

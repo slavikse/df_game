@@ -19,13 +19,13 @@ const healthFull = healthStateClasses.length;
 const healthStateFull = healthStateClasses.length - 1;
 const audioHeart = audioSprite.heart;
 const eventRegeneration = new Event('regeneration');
+const eventFirstAidShop = new Event('firstAidShop');
 
 let receivedDamageStat = 0;
 let firstAidUseStat = 0;
 let firstAid = firstAidFull;
 let health = healthFull;
 let healthState = healthStateFull;
-let eventFirstAidShop = new Event('firstAidShop');
 
 function damage() {
 
@@ -131,13 +131,13 @@ function saveReceivedDamageStat() {
 }
 
 function receivedDamageStatistic() {
-  let receivedDamageEvent = new Event('receivedDamage');
+  const receivedDamageEvent = new Event('receivedDamage');
   receivedDamageEvent.receivedDamage = receivedDamageStat;
   document.dispatchEvent(receivedDamageEvent);
 }
 
 function firstAidUseStatistic() {
-  let firstAidUseEvent = new Event('firstAidUse');
+  const firstAidUseEvent = new Event('firstAidUse');
   firstAidUseEvent.firstAidUse = firstAidUseStat;
   document.dispatchEvent(firstAidUseEvent);
 }
