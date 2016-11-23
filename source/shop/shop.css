@@ -1,91 +1,91 @@
 @import "../shop_time/shop_time.css";
 
 .shop {
-  position         : absolute;
-  display          : flex;
-  flex-direction   : column;
-  justify-content  : space-between;
-  align-items      : center;
-  width            : 100%;
-  height           : 100%;
-  opacity          : 0;
-  pointer-events   : none;
-  background-color : rgba(0, 0, 0, 0.8);
-  transform        : scale(0.6);
-  transition       : opacity 0.4s, transform 0.4s;
-  will-change      : opacity, transform;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  background-color: rgba(0, 0, 0, 0.8);
+  transform: scale(0.6);
+  transition: opacity 0.4s, transform 0.4s;
+  will-change: opacity, transform;
 
   &-open {
-    opacity   : 1;
-    transform : scale(1);
+    opacity: 1;
+    transform: scale(1);
 
     & .item {
-      pointer-events : auto;
+      pointer-events: auto;
     }
   }
 
   &-title {
-    position    : absolute;
-    left        : 0;
-    margin      : 10px;
-    font-family : gun_store, sans-serif;
-    font-size   : 2em;
-    font-style  : italic;
-    color       : #32ac00;
+    position: absolute;
+    left: 0;
+    margin: 10px;
+    font-family: gun_store, sans-serif;
+    font-size: 2em;
+    font-style: italic;
+    color: #32ac00;
   }
 
   & .guns {
-    display : flex;
+    display: flex;
   }
 
   & .item {
-    margin           : 6px;
-    display          : flex;
-    flex-direction   : column;
-    align-items      : center;
-    padding          : 10px;
-    border           : 3px dashed #2d9b00;
-    color            : #fff;
-    font-size        : 2em;
-    background-color : rgba(5, 123, 0, 0.4);
-    text-shadow      : 1px 1px 3px black;
-    box-shadow       : inset 0 0 4px black;
-    cursor           : pointer;
+    margin: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border: 3px dashed #2d9b00;
+    color: #fff;
+    font-size: 2em;
+    background-color: rgba(5, 123, 0, 0.4);
+    text-shadow: 1px 1px 3px black;
+    box-shadow: inset 0 0 4px black;
+    cursor: pointer;
 
     & .icon {
-      pointer-events : none;
+      pointer-events: none;
     }
 
     &:hover,
     &:active {
-      background-color : rgba(3, 103, 0, 0.6);
+      background-color: rgba(3, 103, 0, 0.6);
     }
   }
 
   & .buy-block {
-    border           : 3px dashed #888;
-    background-color : rgba(99, 100, 100, 0.4);
-    cursor           : no-drop;
+    border: 3px dashed #888;
+    background-color: rgba(99, 100, 100, 0.4);
+    cursor: no-drop;
 
     &:hover,
     &:active {
-      background-color : rgba(85, 86, 86, 0.6);
+      background-color: rgba(85, 86, 86, 0.6);
     }
   }
 
   &-close {
-    position       : absolute;
-    right          : 0;
-    margin         : 10px;
-    font-size      : 3em;
-    color          : #ff0;
-    text-shadow    : 0 0 10px #4f1100;
-    pointer-events : auto;
-    cursor         : pointer;
-    transition     : color 0.2s;
+    position: absolute;
+    right: 0;
+    margin: 10px;
+    font-size: 3em;
+    color: #ff0;
+    text-shadow: 0 0 10px #4f1100;
+    pointer-events: auto;
+    cursor: pointer;
+    transition: color 0.2s;
 
     &:hover {
-      color : #db5c1c;
+      color: #db5c1c;
     }
   }
 }

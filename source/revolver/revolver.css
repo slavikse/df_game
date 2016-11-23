@@ -1,84 +1,84 @@
 .revolver-wrap {
-  position    : relative;
-  display     : flex;
-  align-items : flex-end;
-  overflow    : hidden; /* барабан выезжает */
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden; /* барабан выезжает */
 
   & .drum {
-    position    : relative;
-    z-index     : 1; /* в магазе */
-    transition  : transform 0.2s; /* поворот при выстреле */
-    animation   : 0.7s both ease-out; /* drum-rotate */
-    will-change : transform;
+    position: relative;
+    z-index: 1; /* в магазе */
+    transition: transform 0.2s; /* поворот при выстреле */
+    animation: 0.7s both ease-out; /* drum-rotate */
+    will-change: transform;
   }
 
   & .bullet {
-    position    : absolute;
-    transition  : opacity 0.2s;
-    will-change : opacity;
+    position: absolute;
+    transition: opacity 0.2s;
+    will-change: opacity;
   }
 
   & .hide {
-    opacity : 0;
+    opacity: 0;
   }
 
   & .bullet1 {
-    top  : 4px;
-    left : 29px;
+    top: 4px;
+    left: 29px;
   }
 
   & .bullet2 {
-    top   : 17px;
-    right : 6px;
+    top: 17px;
+    right: 6px;
   }
 
   & .bullet3 {
-    bottom : 16px;
-    right  : 6px;
+    bottom: 16px;
+    right: 6px;
   }
 
   & .bullet4 {
-    bottom : 3px;
-    right  : 30px;
+    bottom: 3px;
+    right: 30px;
   }
 
   & .bullet5 {
-    bottom : 16px;
-    left   : 6px;
+    bottom: 16px;
+    left: 6px;
   }
 
   & .bullet6 {
-    top  : 18px;
-    left : 6px;
+    top: 18px;
+    left: 6px;
   }
 
   & .drum-count {
-    position    : relative;
-    z-index     : 1; /* в магазе */
-    width       : 50px;
-    color       : white;
-    font-size   : 2.5em;
-    will-change : contents;
+    position: relative;
+    z-index: 1; /* в магазе */
+    width: 50px;
+    color: white;
+    font-size: 2.5em;
+    will-change: contents;
   }
 }
 
 @keyframes drum-rotate {
   100% {
-    transform : rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 
 /* огонь при выстрела. в index.html */
 .shoot {
-  position       : absolute;
-  z-index        : 3;
-  top            : -16.5px; /* огонек по центру */
-  left           : -16.5px;
-  opacity        : 0;
-  pointer-events : none;
-  will-change    : opacity, transform;
+  position: absolute;
+  z-index: 3;
+  top: -16.5px; /* огонек по центру */
+  left: -16.5px;
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity, transform;
 
   &-visible {
-    opacity : 1;
+    opacity: 1;
   }
 }

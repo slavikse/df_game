@@ -1,33 +1,33 @@
 .shop-time {
-  position        : absolute;
-  display         : flex;
-  justify-content : center;
-  align-items     : center;
-  height          : 100%;
-  width           : 100%;
-  font-size       : 5em;
-  color           : #fff;
-  text-shadow     : 0 0 4px black;
-  pointer-events  : none;
-  animation       : 1.5s both; /* shop-time */
-  will-change     : opacity, transform;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  font-size: 5em;
+  color: #fff;
+  text-shadow: 0 0 4px black;
+  pointer-events: none;
+  animation: 1.5s both; /* shop-time */
+  will-change: opacity, transform;
 }
 
 @keyframes shop-time {
   0%,
   30% {
-    opacity   : 0;
-    transform : scale(2.6);
+    opacity: 0;
+    transform: scale(2.6);
   }
 
   30%,
   80% {
-    opacity   : 1;
-    transform : scale(1);
+    opacity: 1;
+    transform: scale(1);
   }
 
   100% {
-    opacity   : 0;
-    transform : scale(0.6);
+    opacity: 0;
+    transform: scale(0.6);
   }
 }

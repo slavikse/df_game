@@ -1,274 +1,274 @@
 .auth-show {
-  margin-bottom   : 0.5em;
-  display         : flex;
-  align-items     : center;
-  justify-content : center;
-  height          : 50px;
-  transition      : filter 0.3s;
+  margin-bottom: 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  transition: filter 0.3s;
 
   &-logout {
-    filter : blur(3px);
+    filter: blur(3px);
   }
 }
 
 .auth-user-name {
-  position    : relative;
-  z-index     : 3;
-  font-size   : 3.6em;
-  color       : #51d83f;
-  text-shadow : 0 0 10px black;
-  transition  : color 0.1s, text-shadow 0.1s;
+  position: relative;
+  z-index: 3;
+  font-size: 3.6em;
+  color: #51d83f;
+  text-shadow: 0 0 10px black;
+  transition: color 0.1s, text-shadow 0.1s;
 
   &-login {
-    color       : #060;
-    text-shadow : 2px 2px 0 #ff0, -2px -2px 0 #ff0;
+    color: #060;
+    text-shadow: 2px 2px 0 #ff0, -2px -2px 0 #ff0;
   }
 }
 
 .auth-opener {
-  position    : relative;
-  z-index     : 3;
-  display     : none;
-  color       : #51d83f;
-  line-height : 0.5;
-  text-shadow : 0 0 10px black;
-  cursor      : pointer;
-  transition  : color 0.2s;
+  position: relative;
+  z-index: 3;
+  display: none;
+  color: #51d83f;
+  line-height: 0.5;
+  text-shadow: 0 0 10px black;
+  cursor: pointer;
+  transition: color 0.2s;
 
   &:hover {
-    color : #ff0;
+    color: #ff0;
   }
 
   & .cogwheel {
-    display          : flex;
-    transition       : transform 0.4s;
-    transform-origin : center 27px;
-    pointer-events   : none;
-    will-change      : transform;
+    display: flex;
+    transition: transform 0.4s;
+    transform-origin: center 27px;
+    pointer-events: none;
+    will-change: transform;
   }
 
   & .letter {
-    pointer-events : none;
+    pointer-events: none;
   }
 
   & .letter-o {
-    font-size      : 5em;
-    letter-spacing : 2px;
+    font-size: 5em;
+    letter-spacing: 2px;
   }
 
   & .letter-cl {
-    font-size      : 4.7em;
-    letter-spacing : -5px;
-    transform      : rotate(180deg) translateY(-7px);
+    font-size: 4.7em;
+    letter-spacing: -5px;
+    transform: rotate(180deg) translateY(-7px);
   }
 
   & .letter-e {
-    font-size   : 4.5em;
-    transition  : transform 0.4s;
-    will-change : transform;
+    font-size: 4.5em;
+    transition: transform 0.4s;
+    will-change: transform;
   }
 
   & .letter-s {
-    font-size   : 5.6em;
-    transform   : rotate(70deg) translate(4px, -6px);
-    transition  : transform 0.4s;
-    will-change : transform;
+    font-size: 5.6em;
+    transform: rotate(70deg) translate(4px, -6px);
+    transition: transform 0.4s;
+    will-change: transform;
   }
 
   &.auth-opener-on {
     & .cogwheel-1 {
-      transform : rotate(180deg);
+      transform: rotate(180deg);
     }
 
     & .cogwheel-2 {
-      transform : rotate(-180deg);
+      transform: rotate(-180deg);
     }
 
     & .letter-e {
-      transform : rotate(180deg) translate(-4px, -4px);
+      transform: rotate(180deg) translate(-4px, -4px);
     }
 
     & .letter-s {
-      transform : rotate(180deg) translate(0, -14px);
+      transform: rotate(180deg) translate(0, -14px);
     }
   }
 }
 
 .auth-logout {
-  margin-left : 10px;
-  display     : none;
-  cursor      : pointer;
+  margin-left: 10px;
+  display: none;
+  cursor: pointer;
 }
 
 .auth-loader {
-  position      : relative;
-  width         : 50px;
-  height        : 50px;
-  border        : 25px solid rgba(96, 255, 74, 0.4);
-  border-left   : 25px solid rgba(12, 32, 9, 0.8);
-  border-right  : 25px solid rgba(12, 32, 9, 0.8);
-  border-radius : 50%;
-  box-shadow    : 0 0 4px #000;
-  animation     : auth-loader 2s linear infinite;
-  will-change   : transform;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border: 25px solid rgba(96, 255, 74, 0.4);
+  border-left: 25px solid rgba(12, 32, 9, 0.8);
+  border-right: 25px solid rgba(12, 32, 9, 0.8);
+  border-radius: 50%;
+  box-shadow: 0 0 4px #000;
+  animation: auth-loader 2s linear infinite;
+  will-change: transform;
 
   &::before,
   &::after {
-    position  : absolute;
-    color     : #51d83f;
-    font-size : 2.4em;
-    content   : '*';
+    position: absolute;
+    color: #51d83f;
+    font-size: 2.4em;
+    content: '*';
   }
 
   &::before {
-    top   : -8px;
-    right : 2px;
+    top: -8px;
+    right: 2px;
   }
 
   &::after {
-    top  : -8px;
-    left : 3px;
+    top: -8px;
+    left: 3px;
   }
 }
 
 @keyframes auth-loader {
   0% {
-    transform : scale(0.7) rotate(0deg);
+    transform: scale(0.7) rotate(0deg);
   }
 
   50% {
-    transform : scale(1) rotate(180deg);
+    transform: scale(1) rotate(180deg);
   }
 
   100% {
-    transform : scale(0.7) rotate(360deg);
+    transform: scale(0.7) rotate(360deg);
   }
 }
 
 .auth-wrap {
-  position         : absolute;
-  padding-top      : 30px;
-  display          : flex;
-  flex-direction   : column;
-  align-items      : center;
-  justify-content  : center;
-  width            : 100%;
-  height           : 100%;
-  opacity          : 0;
-  background-color : rgba(0, 0, 0, 0);
-  pointer-events   : none;
-  transform        : scale(0.6);
-  transition       : opacity 0.4s, transform 0.4s, background-color 0.4s;
-  will-change      : opacity, transform;
+  position: absolute;
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0);
+  pointer-events: none;
+  transform: scale(0.6);
+  transition: opacity 0.4s, transform 0.4s, background-color 0.4s;
+  will-change: opacity, transform;
 
   &-show {
-    z-index          : 2;
-    opacity          : 1;
-    pointer-events   : auto;
-    transform        : scale(1);
-    background-color : rgba(0, 0, 0, 0.6);
+    z-index: 2;
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
+    background-color: rgba(0, 0, 0, 0.6);
   }
 }
 
 .auth-notify-wrap {
-  display         : flex;
-  justify-content : center;
-  align-items     : flex-end;
-  width           : 100%;
-  height          : 54px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+  height: 54px;
 }
 
 .auth-notify {
-  position    : absolute;
-  font-size   : 2.6em;
-  line-height : 1;
-  opacity     : 0;
-  transition  : opacity 0.4s;
+  position: absolute;
+  font-size: 2.6em;
+  line-height: 1;
+  opacity: 0;
+  transition: opacity 0.4s;
 }
 
 .auth-correct {
-  color : #51d83f;
+  color: #51d83f;
 }
 
 .auth-wrong {
-  color : red;
+  color: red;
 }
 
 .auth-incorrect {
-  color : red;
+  color: red;
 }
 
 .auth-form {
-  width            : 100%;
-  border-top       : 4px solid #000;
-  border-bottom    : 4px solid #000;
-  background-color : rgba(2, 64, 0, 0.6);
+  width: 100%;
+  border-top: 4px solid #000;
+  border-bottom: 4px solid #000;
+  background-color: rgba(2, 64, 0, 0.6);
 }
 
 .auth-email,
 .auth-password {
-  width            : 100%;
-  border-bottom    : 2px solid rgba(0, 0, 0, 0.6);
-  color            : #fff;
-  font-size        : 3em;
-  text-align       : center;
-  text-shadow      : 0 0 10px black;
-  background-color : rgba(0, 0, 0, 0.2);
-  transition       : border-color 0.4s;
+  width: 100%;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 3em;
+  text-align: center;
+  text-shadow: 0 0 10px black;
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: border-color 0.4s;
 
   &::-webkit-input-placeholder {
-    color : #fff;
+    color: #fff;
   }
 
   &::-moz-placeholder {
-    color : #fff;
+    color: #fff;
   }
 
   &:-ms-input-placeholder {
-    color : #fff;
+    color: #fff;
   }
 
   &:-moz-placeholder {
-    color : #fff;
+    color: #fff;
   }
 
   &:valid {
-    border-color : #51d83f;
+    border-color: #51d83f;
   }
 
   &:invalid {
-    border-color : #e20000;
+    border-color: #e20000;
   }
 }
 
 .auth-submit {
-  width            : 100%;
-  padding          : 6px 0;
-  color            : #51d83f;
-  font-size        : 3em;
-  text-shadow      : 0 0 10px black;
-  background-color : rgba(0, 0, 0, 0.5);
-  cursor           : pointer;
-  animation        : 0.4s infinite alternate both; /* auth-submit-* */
-  will-change      : transform;
+  width: 100%;
+  padding: 6px 0;
+  color: #51d83f;
+  font-size: 3em;
+  text-shadow: 0 0 10px black;
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  animation: 0.4s infinite alternate both; /* auth-submit-* */
+  will-change: transform;
 }
 
 @keyframes auth-submit-waited {
   100% {
-    transform : scale(0.9);
+    transform: scale(0.9);
   }
 }
 
 @keyframes auth-submit-error {
   0% {
-    transform : translateX(0);
+    transform: translateX(0);
   }
 
   20%,
   40%,
   60%,
   80% {
-    transform : translateX(10px);
+    transform: translateX(10px);
   }
 
   10%,
@@ -276,16 +276,16 @@
   50%,
   70%,
   90% {
-    transform : translateX(-10px);
+    transform: translateX(-10px);
   }
 
   100% {
-    transform : translateX(0);
+    transform: translateX(0);
   }
 }
 
 @keyframes auth-submit-success {
   50% {
-    transform : scale(1.3);
+    transform: scale(1.3);
   }
 }
