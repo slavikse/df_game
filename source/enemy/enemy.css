@@ -53,7 +53,7 @@
 .enemy {
   backface-visibility: visible;
   animation: 0.1s; /* enemy-shoot */
-  will-change: transform;
+  will-change: transform, opacity;
 }
 
 @keyframes enemy-shoot {
@@ -63,10 +63,15 @@
 }
 
 .enemy-kill {
-  animation: 0.5s enemy-kill; /* enemy-kill */
+  animation: 0.5s enemy-kill;
 }
 
 @keyframes enemy-kill {
+  98%,
+  100% {
+    opacity: 0;
+  }
+
   100% {
     transform: rotateY(810deg);
   }
@@ -74,15 +79,13 @@
 
 .enemy-health {
   position: absolute;
-  right: 5px;
-  bottom: 5px;
-  padding: 1px 4px;
+  padding: 1px 2px;
   border-radius: 50%;
   color: white;
   font-family: sans-serif;
-  font-size: 1em;
+  font-size: 0.8em;
   pointer-events: none;
-  background-color: red;
+  background-color: #b90000;
   animation: 0.1s alternate; /* enemy-health */
 }
 

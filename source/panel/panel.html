@@ -3,5 +3,15 @@
   @include('./../score/score.html')
   @include('./../ticker/ticker.html')
   @include('./../enemy_count/enemy_count.html')
-  @include('./../revolver/revolver.html')
+
+  <div class='gun'>
+    <div class='weapon'>
+      @include('./../revolver/icon_revolver.html')
+      @include('./../grenade/grenade.html')
+    </div>
+
+    <div class='ammo'>
+      @include('./../revolver/revolver.html')
+    </div>
+  </div>
 </div>

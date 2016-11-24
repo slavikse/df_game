@@ -7,7 +7,6 @@ const fireRate = 166.6;
 const shootFire = debounce(shoot, fireRate);
 const audioIdle = audioSprite.idle;
 const shootEvent = new Event('shoot');
-const shootCountEvent = new Event('shootCount');
 const eventCatShoot = new Event('catShoot');
 const eventEnemyKill = new Event('enemyKill');
 
@@ -123,6 +122,8 @@ function shootCountInCatStatistic() {
 }
 
 function shootStatistic() {
+  const shootCountEvent = new Event('shootCount');
+  
   shootCountEvent.shootCountTotal = shootCountTotalStat;
   shootCountEvent.shootCountInTarget = shootCountInTargetStat;
   shootCountEvent.shootCountInCat = shootCountInCatStat;

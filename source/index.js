@@ -1,14 +1,13 @@
-import './preload/preload.js';
-import './helper/audio_sprite.js';
-import './start_screen/start_screen.js';
-import './shoot/shoot.js';
-import './cat/cat.js';
-import './enemy/enemy.js';
-import './panel/panel.js';
-import './bomb/bomb.js';
-import './shop/shop.js';
-import './result/result.js';
-import './statistic/statistic.js';
+import './preload/preload';
+import './helper/audio_sprite';
+import './start_screen/start_screen';
+import './shoot/shoot';
+import './cat/cat';
+import './enemy/enemy';
+import './panel/panel';
+import './shop/shop';
+import './result/result';
+import './statistic/statistic';
 
 /** загрузив игру, создаст событие, которое слушает стартовый экран */
 
@@ -18,10 +17,10 @@ function error(message, url, lineNumber) {
   console.error('Ошибочки:', message, url, lineNumber);
 }
 
-// const NODE_ENV = process.env.NODE_ENV;
+//const NODE_ENV = process.env.NODE_ENV;
 //
-// if (NODE_ENV === 'production' && 'serviceWorker' in navigator) {
-//   navigator.serviceWorker.register('sw.js');
-// }
+//if (NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+//  navigator.serviceWorker.register('sw');
+//}
 //
-// console.log('[sw] version 23.11.16');
+//console.log('[sw v10] version 24.11.16');

@@ -2,6 +2,7 @@
 @import '../score/score.css';
 @import '../ticker/ticker.css';
 @import '../enemy_count/enemy_count.css';
+@import '../grenade/grenade.css';
 @import '../revolver/revolver.css';
 
 .panel {
@@ -19,5 +20,20 @@
 
   &-show {
     opacity: 1;
+  }
+
+  & .gun {
+    display: flex;
+  }
+
+  & .weapon {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  & .ammo {
+    display: flex;
+    justify-content: flex-end;
   }
 }

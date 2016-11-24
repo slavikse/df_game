@@ -8,7 +8,7 @@ const $shop = $body.querySelector('.shop');
 const $store = $shop.querySelector('.store');
 const $storeItems = $store.querySelectorAll('.item');
 const storeItemsLength = $storeItems.length;
-const $firstAid = $store.querySelector('.first-aid');
+const $firstAid = $store.querySelector('.first-aid-shop');
 const $shopClose = $shop.querySelector('.shop-close');
 const audioBuyHover = audioSprite.buy_hover;
 const audioBuy = audioSprite.buy;
@@ -17,6 +17,7 @@ const audioClick = audioSprite.hover_menu;
 const audioNextWave = audioSprite.next_wave;
 const eventBuyDrum = new Event('buyDrum');
 const eventBuyFirstAid = new Event('buyFirstAid');
+const eventBuyGrenade = new Event('buyGrenade');
 const eventScoreDec = new Event('scoreDec');
 const eventWaveStart = new Event('waveStart');
 
@@ -87,6 +88,8 @@ function buy(e) {
     buyDrum();
   } else if (item === 'first-aid') {
     buyFirstAid();
+  } else if (item === 'grenade') {
+    buyGrenade();
   } else {
     return;
   }
@@ -108,6 +111,10 @@ function buyDrum() {
 function buyFirstAid() {
   firstAid += 1;
   document.dispatchEvent(eventBuyFirstAid);
+}
+
+function buyGrenade() {
+  document.dispatchEvent(eventBuyGrenade);
 }
 
 function hoverShopClose() {

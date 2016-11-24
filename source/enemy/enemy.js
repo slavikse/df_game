@@ -227,8 +227,8 @@ function removeEnemyNodeDelay() {
   $paddock.remove();
 }
 
-function bomb() {
-  bombEvents();
+function grenade() {
+  pointsCount();
 
   timerIDs.forEach(id => {
     clearTimeout(id);
@@ -240,7 +240,7 @@ function bomb() {
   createEnemyNode();
 }
 
-function bombEvents() {
+function pointsCount() {
   eventEnemyDec.dec = enemyCloneCurrent;
   eventScoreAdd.add = scoreAdd * enemyCloneCurrent;
 
@@ -254,7 +254,7 @@ function bombEvents() {
 document.addEventListener('startGame', createEnemyNode);
 document.addEventListener('enemyCreate', cloneEnemy);
 document.addEventListener('enemyKill', enemyKill);
-document.addEventListener('bomb', bomb);
+document.addEventListener('grenade', grenade);
 document.addEventListener('waveStart', createEnemyNode);
 document.addEventListener('waveEnd', removeEnemyNode);
 window.addEventListener('resize', playingFieldResize);

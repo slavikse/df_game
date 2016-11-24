@@ -1,6 +1,4 @@
-/* pointer events ! */
-
-.bomb {
+.grenade-notice {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -8,8 +6,8 @@
   animation: 0.6s alternate;
 }
 
-@keyframes bomb {
-  50% {
+@keyframes grenade-notice {
+  0% {
     background-color: rgba(219, 92, 28, 0.2);
     box-shadow: inset 0 0 30px #e25f21;
   }

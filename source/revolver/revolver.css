@@ -1,4 +1,6 @@
-.revolver-wrap {
+@import "icon_revolver.css";
+
+.revolver-drum {
   position: relative;
   display: flex;
   align-items: flex-end;
@@ -54,10 +56,11 @@
 
   & .drum-count {
     position: relative;
+    margin-left: -4px;
     z-index: 1; /* в магазе */
-    width: 50px;
+    width: 40px;
     color: white;
-    font-size: 2.5em;
+    font-size: 2em;
     will-change: contents;
   }
 }

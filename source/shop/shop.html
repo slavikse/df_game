@@ -1,27 +1,36 @@
 @include('../shop_time/shop_time.html')
 
 <div class='shop'>
-  <div class='shop-title'>GUN STORE</div>
+  <div class='title'>GUN STORE</div>
+  <div class='shop-close'>Продолжить</div>
 
   <div class='store'>
-    <div class='guns'>
-      <div class='item'
-           data-item='drum'
-           data-add='1'
-           data-score='15'>
-        <div class='icon icon-drum_shop'></div>
-        15$
+    <div class='item'
+         data-item='drum'
+         data-score='15'>
+      <div class='item-icon'>
+        <div class='icon-drum_shop'></div>
       </div>
+      15$
     </div>
 
-    <div class='item first-aid'
+    <div class='item first-aid-shop'
          data-item='first-aid'
-         data-add='1'
          data-score='60'>
-      <div class='icon icon-first_aid'></div>
-      60$
+      <div class='item-icon'>
+        <div class='icon-first_aid'></div>
+      </div>
+      50$
+    </div>
+
+    <div class='item'
+         data-item='grenade'
+         data-score='80'>
+      <div class='item-icon'>
+        <div class='icon-grenade'></div>
+      </div>
+      80$
     </div>
   </div>
 
-  <div class='shop-close'>Продолжить</div>
 </div>

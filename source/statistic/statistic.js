@@ -4,6 +4,7 @@ import getDiscardedBullet from './discarded_bullet';
 import getDrumReloadCount from './drum_reload_count';
 import getFirstAidUse from './first_aid_use';
 import gameTimeEnd from './game_time';
+import getGrenade from './grenade';
 import getReceivedDamage from './received_damage';
 import getScore from './score';
 import getShootCount from './shoot_count';
@@ -30,6 +31,7 @@ function getStatistic() {
   const drumReload = getDrumReloadCount();
   const firstAid = getFirstAidUse();
   const {minutes, second} = gameTimeEnd();
+  const grenade = getGrenade();
   const receivedDamage = getReceivedDamage();
   const {shoots, inTarget, miss, inTargetPercent, bonusWave} = getShootCount();
   const waveCount = getWaveCount();
@@ -46,7 +48,8 @@ function getStatistic() {
     'Выстрелов': shoots,
     'В цель': inTarget,
     'Промахов': miss,
-    'Точность': `${inTargetPercent}%`
+    'Точность': `${inTargetPercent}%`,
+    'Гранаты:': grenade
   };
 
   getBestScore();

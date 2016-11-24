@@ -8,7 +8,5 @@
 @import 'cat/cat.css';
 @import 'enemy/enemy.css';
 @import 'panel/panel.css';
-@import 'bomb/bomb.css';
-@import 'health_notice/health_notice.css';
 @import 'shop/shop.css';
 @import 'result/result.css';

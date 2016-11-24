@@ -2,10 +2,11 @@ import {audioURI, audioSprite} from './../helper/audio_sprite';
 import noise from './../helper/noise';
 
 const $body = document.body;
-const $revolverWrap = $body.querySelector('.revolver-wrap');
-const $drum = $revolverWrap.querySelector('.drum');
+const $revolverDrum = $body.querySelector('.revolver-drum');
+const $iconRevolver = $body.querySelector('.icon-revolver');
+const $drum = $revolverDrum.querySelector('.drum');
 const $bullets = $drum.querySelectorAll('.bullet');
-const $drumCount = $revolverWrap.querySelector('.drum-count');
+const $drumCount = $revolverDrum.querySelector('.drum-count');
 const $shoot = $body.querySelector('.shoot');
 const bulletDrum = 6;
 const audioShoots = [
@@ -128,12 +129,6 @@ function reloaded() {
   $drum.style.transform = 'rotate(0deg)';
 }
 
-function RKeyHandler(e) {
-  if (e.keyCode === 82) {
-    drumRotate();
-  }
-}
-
 function drumReloadHandler(e) {
   e.preventDefault();
   drumRotate();
@@ -162,14 +157,18 @@ function drumReloadCountStatistic() {
 }
 
 function startGame() {
+  setTimeout(hideIconRevolver, 2000);
+
   document.addEventListener('shoot', shoot);
-  document.addEventListener('keyup', RKeyHandler);
   document.addEventListener('contextmenu', drumReloadHandler);
+}
+
+function hideIconRevolver() {
+  $iconRevolver.style.opacity = 0;
 }
 
 function gameOver() {
   document.removeEventListener('shoot', shoot);
-  document.removeEventListener('keyup', RKeyHandler);
   document.removeEventListener('contextmenu', drumReloadHandler);
 
   discardedBulletStatistic();
