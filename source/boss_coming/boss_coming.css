@@ -1,0 +1,36 @@
+.boss-coming-wrap {
+  position: fixed;
+  z-index: 2;
+  top: 10px;
+  left: 6px;
+  margin: 6px 0 0 6px;
+  width: 200px;
+  border-radius: 10px;
+}
+
+.boss-coming-road {
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgb(76, 255, 0), rgb(0, 88, 12));
+  overflow: hidden;
+}
+
+.boss-coming {
+  height: 10px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgb(25, 84, 0), rgb(0, 31, 4));
+  transition: transform 0.6s;
+  will-change: transform;
+}
+
+.boss-coming-head-road {
+  height: 10px;
+  border-radius: 10px;
+  transition: transform 0.6s;
+  will-change: transform;
+}
+
+.boss-coming-head {
+  position: relative;
+  top: -20px;
+  left: -12px;
+}

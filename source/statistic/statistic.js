@@ -33,12 +33,20 @@ function getStatistic() {
   const {minutes, second} = gameTimeEnd();
   const grenade = getGrenade();
   const receivedDamage = getReceivedDamage();
-  const {shoots, inTarget, miss, inTargetPercent, bonusWave} = getShootCount();
+  const {
+    shoots,
+    inTarget,
+    miss,
+    inTargetPercent,
+    shootCat,
+    shootBoss
+  } = getShootCount();
   const waveCount = getWaveCount();
   const data = {
     'Время игры': `${minutes}m ${second}s`,
     'Волн пройдено': waveCount,
-    'Доп волн': bonusWave,
+    'Доп волн': shootCat,
+    'Боль Боссу!': shootBoss,
     'Заработано': `${score}$`,
     'Расходы': `${costs}$`,
     'Перезарядок': drumReload,

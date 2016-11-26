@@ -3,7 +3,8 @@ let shootStat;
 function setShootCount(e) {
   const shoots = e.shootCountTotal;
   const inTarget = e.shootCountInTarget;
-  const bonusWave = e.shootCountInCat;
+  const shootCat = e.shootCountInCat;
+  const shootBoss = e.shootCountInBoss;
   const miss = shoots - inTarget;
   const inTargetPercent = (inTarget * 100 / shoots).toFixed(2);
 
@@ -12,7 +13,8 @@ function setShootCount(e) {
     inTarget,
     miss,
     inTargetPercent,
-    bonusWave
+    shootCat,
+    shootBoss
   }
 }
 

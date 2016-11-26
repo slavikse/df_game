@@ -25,7 +25,7 @@ import './martyr/build/view';
 import './martyr/utility/bs';
 import './martyr/utility/del';
 import './martyr/utility/gzip';
-// import './martyr/utility/kraken';
+//import './martyr/utility/kraken';
 import './martyr/utility/rev';
 // import './martyr/utility/symbol';
 import './martyr/utility/zip';
@@ -59,7 +59,7 @@ function production() {
     gulp.series(
       'del',
       'build',
-      // 'kraken', /** включать только для выкладки. Лимит 100 Mb */
+      //'kraken', /** включать только для выкладки. Лимит 100 Mb */
       // 'symbol', /** уникальные символы в текстах в html файлах */
       'rev',
       'gzip',

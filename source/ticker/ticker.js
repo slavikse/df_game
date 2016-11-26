@@ -30,7 +30,7 @@ function nextTick() {
   setTimeout(noise.bind(null, audioURI, audioTick), 400);
 
   if (tickCurrent === tickDefault) {
-    extraWave();
+    //extraWave();
 
     tickCurrent = 0;
 

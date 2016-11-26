@@ -15,7 +15,7 @@ function changeCount(change = 0) {
 }
 
 function grenade() {
-  if (grenadeCount - 1 < 0) {
+  if (grenadeCount < 1) {
     return;
   }
 

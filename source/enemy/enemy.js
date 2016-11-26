@@ -131,29 +131,30 @@ function setHealth(clone) {
   return clone;
 }
 
-function enemyKill(e) {
+function enemyShoot(e) {
   const clone = e.enemy.parentNode;
   const warningNode = clone.querySelector('.enemy-warning');
   const damageNode = clone.querySelector('.enemy-damage');
   const enemyNode = clone.querySelector('.enemy');
   const healthNode = clone.querySelector('.enemy-health');
 
-  enemyShoot(enemyNode);
+  enemyShootAnimate(enemyNode);
   enemyHealthDec(healthNode);
 
-  if (healthNode.death || !enemyIsDeath(healthNode)) {
-    return;
+  if (healthNode.health <= 1) {
+    enemyDeath({clone, warningNode, damageNode, enemyNode, healthNode});
+  } else {
+    healthNode.health -= 1;
+    healthNode.textContent = healthNode.health;
   }
-
-  enemyDeath({clone, warningNode, damageNode, enemyNode, healthNode});
 }
 
-function enemyShoot(enemyNode) {
+function enemyShootAnimate(enemyNode) {
   enemyNode.style.animationName = 'enemy-shoot';
-  setTimeout(enemyShootEnd.bind(null, enemyNode), 100);
+  setTimeout(enemyShootAnimateEnd.bind(null, enemyNode), 100);
 }
 
-function enemyShootEnd(enemyNode) {
+function enemyShootAnimateEnd(enemyNode) {
   enemyNode.style.animationName = '';
 }
 
@@ -164,17 +165,6 @@ function enemyHealthDec(healthNode) {
 
 function enemyHealthDecEnd(healthNode) {
   healthNode.style.animationName = '';
-}
-
-function enemyIsDeath(healthNode) {
-  if (healthNode.health > 1) {
-    healthNode.health -= 1;
-    healthNode.textContent = healthNode.health;
-    return false; // еще жив
-  }
-
-  healthNode.death = true;
-  return true;
 }
 
 function enemyDeath(nodes) {
@@ -253,7 +243,7 @@ function pointsCount() {
 
 document.addEventListener('startGame', createEnemyNode);
 document.addEventListener('enemyCreate', cloneEnemy);
-document.addEventListener('enemyKill', enemyKill);
+document.addEventListener('enemyShoot', enemyShoot);
 document.addEventListener('grenade', grenade);
 document.addEventListener('waveStart', createEnemyNode);
 document.addEventListener('waveEnd', removeEnemyNode);

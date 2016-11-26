@@ -8,11 +8,13 @@ const shootFire = debounce(shoot, fireRate);
 const audioIdle = audioSprite.idle;
 const shootEvent = new Event('shoot');
 const eventCatShoot = new Event('catShoot');
-const eventEnemyKill = new Event('enemyKill');
+const eventEnemyShoot = new Event('enemyShoot');
+const eventBossShoot = new Event('bossShoot');
 
 let shootCountTotalStat = 0;
 let shootCountInTargetStat = 0;
 let shootCountInCatStat = 0;
+let shootCountInBossStat = 0;
 let shootMoveTimerID;
 let shootDownTimerID;
 
@@ -51,18 +53,32 @@ function shoot(e) {
 function shootDelegate(e) {
   const target = e.target;
 
-  /** выстрел по монстру */
   if (target.classList.contains('enemy')) {
-    eventEnemyKill.enemy = target;
-    document.dispatchEvent(eventEnemyKill);
-    shootCountInTargetStatistic();
-
-    /** выстрел по котику */
+    shootEnemy(target);
   } else if (target.classList.contains('cat')) {
-    document.dispatchEvent(eventCatShoot);
-    shootCountInTargetStatistic();
-    shootCountInCatStatistic();
+    shootCat();
+  } else if (target.classList.contains('boss-part')) {
+    shootBoss(target);
   }
+}
+
+function shootEnemy(target) {
+  eventEnemyShoot.enemy = target;
+  document.dispatchEvent(eventEnemyShoot);
+  shootCountInTargetStatistic();
+}
+
+function shootCat() {
+  document.dispatchEvent(eventCatShoot);
+  shootCountInTargetStatistic();
+  shootCountInCatStatistic();
+}
+
+function shootBoss(target) {
+  eventBossShoot.bossPart = target;
+  document.dispatchEvent(eventBossShoot);
+  shootCountInTargetStatistic();
+  shootCountInBossStatistic();
 }
 
 function shootStart() {
@@ -92,6 +108,7 @@ function shootMove(e) {
     shootMoveStopAndShootDown.bind(null, e),
     fireRate
   );
+
   shootFire(e); // при движении вызывается выстрел
 }
 
@@ -121,12 +138,17 @@ function shootCountInCatStatistic() {
   shootCountInCatStat += 1;
 }
 
+function shootCountInBossStatistic() {
+  shootCountInBossStat += 1;
+}
+
 function shootStatistic() {
   const shootCountEvent = new Event('shootCount');
-  
+
   shootCountEvent.shootCountTotal = shootCountTotalStat;
   shootCountEvent.shootCountInTarget = shootCountInTargetStat;
   shootCountEvent.shootCountInCat = shootCountInCatStat;
+  shootCountEvent.shootCountInBoss = shootCountInBossStat;
 
   document.dispatchEvent(shootCountEvent);
 }

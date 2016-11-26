@@ -6,6 +6,7 @@ import './cat/cat';
 import './enemy/enemy';
 import './panel/panel';
 import './shop/shop';
+import './boss/boss';
 import './result/result';
 import './statistic/statistic';
 

@@ -1,3 +1,221 @@
-.boss {
+@import "../boss_coming/boss_coming.css";
 
+.boss {
+  margin: 50px 150px;
+  position: absolute;
+
+  & .boss-part {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    animation: 1s cubic-bezier(1, 0.04, 0.72, 1.38) both paused;
+    will-change: opacity, transform;
+  }
+
+  & .boss-part-health {
+    position: relative;
+    padding: 2px 4px;
+    font-family: sans-serif;
+    background-color: #7f0000;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  & .boss-body-not-crash {
+    color: #000;
+  }
+
+  &.boss-docking .boss-part {
+    animation-play-state: running;
+  }
+
+  &.boss-undocking .boss-part {
+    animation-delay: 0s;
+    animation-timing-function: ease-out;
+  }
+
+  & .boss-body {
+    z-index: 2;
+    animation-name: boss-body;
+    animation-delay: 0.2s;
+  }
+
+  & .boss-body-health {
+    top: 36px;
+    left: 9px;
+  }
+
+  & .boss-hand-l {
+    z-index: 2;
+    animation-name: boss-hand-l;
+    animation-delay: 1s;
+  }
+
+  & .boss-hand-l-health {
+    top: 28px;
+    left: 10px;
+  }
+
+  & .boss-hand-r {
+    z-index: 1;
+    animation-name: boss-hand-r;
+    animation-delay: 1.4s;
+  }
+
+  & .boss-hand-r-health {
+    top: 20px;
+    left: 3px;
+  }
+
+  & .boss-leg-l {
+    z-index: 1;
+    animation-name: boss-leg-l;
+    animation-delay: 1.8s;
+  }
+
+  & .boss-leg-l-health {
+    top: -4px;
+    left: 13px;
+  }
+
+  & .boss-leg-r {
+    z-index: 1;
+    animation-name: boss-leg-r;
+    animation-delay: 2.2s;
+  }
+
+  & .boss-leg-r-health {
+    top: -28px;
+    left: -10px;
+  }
+
+  & .crash {
+    pointer-events: none;
+  }
 }
+
+/***************************** СТЫКОВКА ***********************/
+
+@keyframes boss-body {
+  0% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes boss-hand-l {
+  0% {
+    opacity: 0;
+    transform: translate(-116px, 45px);
+  }
+
+  40%,
+  100% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(-63px, 16px);
+  }
+}
+
+@keyframes boss-hand-r {
+  0% {
+    opacity: 0;
+    transform: translate(159px, 51px);
+  }
+
+  40%,
+  100% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(97px, 31px);
+  }
+}
+
+@keyframes boss-leg-l {
+  0% {
+    opacity: 0;
+    transform: translate(-88px, 174px);
+  }
+
+  40%,
+  100% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(-53px, 134px);
+  }
+}
+
+@keyframes boss-leg-r {
+  0% {
+    opacity: 0;
+    transform: translate(103px, 162px);
+  }
+
+  40%,
+  100% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(66px, 143px);
+  }
+}
+
+/* / СТЫКОВКА */
+
+/************************* РАССТЫКОВКА **************************/
+
+@keyframes boss-hand-l-crash {
+  0% {
+    transform: translate(-63px, 16px);
+  }
+
+  100% {
+    transform: translate(-116px, 45px);
+  }
+}
+
+@keyframes boss-hand-r-crash {
+  0% {
+    transform: translate(97px, 31px);
+  }
+
+  100% {
+    transform: translate(159px, 51px);
+  }
+}
+
+@keyframes boss-leg-l-crash {
+  0% {
+    transform: translate(-53px, 134px);
+  }
+
+  100% {
+    transform: translate(-88px, 174px);
+  }
+}
+
+@keyframes boss-leg-r-crash {
+  0% {
+    transform: translate(66px, 143px);
+  }
+
+  100% {
+    transform: translate(103px, 162px);
+  }
+}
+
+/* / РАССТЫКОВКА */

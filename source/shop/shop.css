@@ -38,13 +38,16 @@
     font-size: 3em;
     color: #ff0;
     text-shadow: 0 0 6px #4f1100;
-    pointer-events: auto;
     cursor: pointer;
     transition: color 0.2s;
 
     &:hover {
       color: #db5c1c;
     }
+  }
+
+  &-open &-close {
+    pointer-events: auto;
   }
 
   & .store {
