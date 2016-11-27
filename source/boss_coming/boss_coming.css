@@ -1,36 +1,85 @@
-.boss-coming-wrap {
-  position: fixed;
-  z-index: 2;
-  top: 10px;
-  left: 6px;
-  margin: 6px 0 0 6px;
-  width: 200px;
-  border-radius: 10px;
-}
-
-.boss-coming-road {
-  border-radius: 10px;
-  background: linear-gradient(180deg, rgb(76, 255, 0), rgb(0, 88, 12));
-  overflow: hidden;
-}
-
 .boss-coming {
+  position: absolute;
+  z-index: 2;
+  top: 14px;
+  left: 0;
+  width: 200px;
   height: 10px;
-  border-radius: 10px;
-  background: linear-gradient(180deg, rgb(25, 84, 0), rgb(0, 31, 4));
+  opacity: 0;
+  border-top-right-radius: 16px;
+  background: linear-gradient(0deg, rgb(21, 71, 0), rgb(6, 17, 0));
+  box-shadow: 0 0 6px #32a500;
+  transition: opacity 1.5s;
+  pointer-events: none;
+
+  &-show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.boss-progress {
+  position: absolute;
+  z-index: 1;
+  transform: translateX(-100%);
+  width: 200px;
+  height: 10px;
+  border-top-right-radius: 16px;
+  background: linear-gradient(0deg, rgb(0, 88, 12), rgb(76, 255, 0));
+  box-shadow: 0 0 12px black;
   transition: transform 0.6s;
+  will-change: transform;
+
+  &::after {
+    position: absolute;
+    top: -3px;
+    right: 3px;
+    display: block;
+    font-size: 2.2em;
+    line-height: 0;
+    color: #002405;
+    content: '.';
+  }
+
+  &::before {
+    position: absolute;
+    top: 10px;
+    right: 2px;
+    transform: rotate(21deg);
+    display: block;
+    height: 5px;
+    width: 25px;
+    border-top-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    background: linear-gradient(-10deg, rgb(0, 81, 11), rgb(41, 140, 0));
+    content: '';
+  }
+}
+
+.boss-head {
+  position: absolute;
+  z-index: 1;
+  top: -10px;
+  right: -30px;
+  animation: ease-in-out boss-head-twitch alternate infinite;
   will-change: transform;
 }
 
-.boss-coming-head-road {
-  height: 10px;
-  border-radius: 10px;
-  transition: transform 0.6s;
-  will-change: transform;
-}
+@keyframes boss-head-twitch {
+  0%,
+  20%,
+  40%,
+  60%,
+  80%,
+  100% {
+    transform: rotate(15deg);
+  }
 
-.boss-coming-head {
-  position: relative;
-  top: -20px;
-  left: -12px;
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: rotate(-15deg);
+  }
 }

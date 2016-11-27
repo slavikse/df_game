@@ -6,6 +6,7 @@ const $handL = $boss.querySelector('.boss-hand-l');
 const $handR = $boss.querySelector('.boss-hand-r');
 const $legL = $boss.querySelector('.boss-leg-l');
 const $legR = $boss.querySelector('.boss-leg-r');
+const eventEnemyCreate = new Event('enemyCreate');
 const bossParts = [
   [$body, 6],
   [$handL, 3],
@@ -13,12 +14,10 @@ const bossParts = [
   [$legL, 3],
   [$legR, 3]
 ];
-const eventEnemyCreate = new Event('enemyCreate');
 
 let partsCount = bossParts.length - 1; // -1 торс
 
 setHealth();
-docking();
 
 function setHealth() {
   for (let i = 0, len = bossParts.length; i < len; i++) {
@@ -30,7 +29,11 @@ function setHealth() {
     part.children[0].textContent = health;
   }
 
-  $body.isCrash = false;
+  bodyNotCrash();
+}
+
+function bodyNotCrash() {
+  $body.isCrash = false; // торс в последнюю очередь
   $body.classList.add('boss-body-not-crash');
 }
 
@@ -38,7 +41,7 @@ function docking() {
   $boss.classList.add('boss-docking');
 }
 
-function shoot(e) {
+function damagePart(e) {
   const target = e.bossPart || e; // e - может быть частью
 
   if (target.isCrash) {
@@ -56,11 +59,9 @@ function damage(target) {
 }
 
 function crash(target) {
-  target.classList.add('crash');
-  target.isCrash = false; // уже разрушен. хватит
-  document.dispatchEvent(eventEnemyCreate);
-
+  crashTarget(target);
   changePartModel(target);
+
   partsCount -= 1;
 
   // можно стрелять в торс?
@@ -72,6 +73,13 @@ function crash(target) {
   if (partsCount === -1) {
     undocking();
   }
+
+  document.dispatchEvent(eventEnemyCreate);
+}
+
+function crashTarget(target) {
+  target.classList.add('crash');
+  target.isCrash = false; // уже разрушен. хватит
 }
 
 function changePartModel(target) {
@@ -110,9 +118,10 @@ function grenade() {
   for (let i = 0, len = bossParts.length; i < len; i++) {
     const part = bossParts[i][0];
 
-    shoot(part);
+    damagePart(part);
   }
 }
 
-document.addEventListener('bossShoot', shoot);
+document.addEventListener('bossShoot', damagePart);
 document.addEventListener('grenade', grenade);
+document.addEventListener('boss', docking);

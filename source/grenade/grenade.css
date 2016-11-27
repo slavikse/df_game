@@ -9,8 +9,8 @@
   transition: opacity 0.6s;
 
   &-count {
-    margin-left: -14px;
-    width: 24px;
+    margin-left: -26px;
+    width: 30px;
     color: white;
     font-size: 2em;
     will-change: contents;

@@ -4,15 +4,17 @@ import noise from './../helper/noise';
 const $ticker = document.querySelector('.ticker');
 const tickDefault = 4;
 const audioTick = audioSprite.tick;
-const numberWaveDefault = 3; // 3
+const numberWaveDefault = 2; // 3
 const eventEnemyCreate = new Event('enemyCreate');
 const eventWaveEnd = new Event('waveEnd');
+const eventBossComing = new Event('bossComing');
 
 let waveCountStat = 0;
 let isWaveEnd;
-let tickTimeout;
 let tickCurrent = 0;
 let numberWaveCurrent = 0;
+let nextTickTimerID;
+let pauseTimerID;
 
 function run() {
   isWaveEnd = false;
@@ -20,7 +22,7 @@ function run() {
 }
 
 function tick() {
-  tickTimeout = setTimeout(nextTick, 1000);
+  nextTickTimerID = setTimeout(nextTick, 1000);
 }
 
 function nextTick() {
@@ -30,7 +32,7 @@ function nextTick() {
   setTimeout(noise.bind(null, audioURI, audioTick), 400);
 
   if (tickCurrent === tickDefault) {
-    //extraWave();
+    extraWave();
 
     tickCurrent = 0;
 
@@ -54,6 +56,7 @@ function extraWave() {
   }
 
   document.dispatchEvent(eventEnemyCreate);
+  document.dispatchEvent(eventBossComing);
 }
 
 function tickExtra() {
@@ -61,7 +64,7 @@ function tickExtra() {
 }
 
 function waveEnd() {
-  setTimeout(tickPause, 1000); // для показа + перед паузой
+  pauseTimerID = setTimeout(tickPause, 1000); // для показа + перед паузой
 
   isWaveEnd = true;
   numberWaveCurrent = 0;
@@ -80,6 +83,15 @@ function noEnemy() {
   }
 }
 
+function boss() {
+
+  console.log('1');
+
+  clearTimeout(nextTickTimerID);
+  clearTimeout(pauseTimerID);
+  tickPause();
+}
+
 function saveWaveCountStat() {
   waveCountStat += 1;
 }
@@ -91,11 +103,12 @@ function waveCountStatistic() {
 }
 
 function gameOver() {
-  clearTimeout(tickTimeout);
+  clearTimeout(nextTickTimerID);
   waveCountStatistic();
 }
 
 document.addEventListener('startGame', run);
 document.addEventListener('noEnemy', noEnemy);
 document.addEventListener('waveStart', run);
+document.addEventListener('boss', boss);
 document.addEventListener('gameOver', gameOver);

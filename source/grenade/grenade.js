@@ -15,13 +15,20 @@ function changeCount(change = 0) {
 }
 
 function grenade() {
-  if (grenadeCount < 1) {
-    return;
+
+  /** GOD MOD */
+
+  if (window.god) {
+    grenadeCount = 10;
   }
 
-  changeCount(-1);
-  grenadeCountTotalStat += 1;
-  document.dispatchEvent(eventGrenade);
+  /** / GOD MOD */
+
+  if (grenadeCount > 0) {
+    changeCount(-1);
+    grenadeCountTotalStat += 1;
+    document.dispatchEvent(eventGrenade);
+  }
 }
 
 function buyGrenade() {
@@ -37,18 +44,18 @@ function startGame() {
   addListenKey();
 }
 
-function GKeyHandler(e) {
+function gKeyHandler(e) {
   if (e.keyCode === 71) {
     grenade();
   }
 }
 
 function addListenKey() {
-  document.addEventListener('keyup', GKeyHandler);
+  document.addEventListener('keyup', gKeyHandler);
 }
 
 function removeListenKey() {
-  document.removeEventListener('keyup', GKeyHandler);
+  document.removeEventListener('keyup', gKeyHandler);
 }
 
 function grenadeStatistic() {

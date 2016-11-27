@@ -13,6 +13,7 @@ const moveTime = 5000;
 const eventEnemyCreate = new Event('enemyCreate');
 
 let moveTimerID;
+let showTimerID;
 let hideTimerID;
 let runTimerID;
 let playingFieldWidth;
@@ -24,7 +25,7 @@ playingField();
 
 function run() {
   moveTimerID = setTimeout(move, moveTime);
-  setTimeout(show, moveTime + 100);
+  showTimerID = setTimeout(show, moveTime + 100);
   hideTimerID = setTimeout(hide, moveTime * 3 + 100);
 }
 
@@ -49,6 +50,7 @@ function stop() {
   $catPosition.classList.remove('cat-show');
 
   clearTimeout(moveTimerID);
+  clearTimeout(showTimerID);
   clearTimeout(hideTimerID);
   clearTimeout(runTimerID);
 }

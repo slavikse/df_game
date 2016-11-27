@@ -1,8 +1,9 @@
 @import "../boss_coming/boss_coming.css";
 
 .boss {
-  margin: 50px 150px;
   position: absolute;
+  margin: 50px 150px;
+  pointer-events: none;
 
   & .boss-part {
     position: absolute;
@@ -24,11 +25,15 @@
   }
 
   & .boss-body-not-crash {
-    color: #000;
+    color: grey;
   }
 
-  &.boss-docking .boss-part {
-    animation-play-state: running;
+  &.boss-docking {
+    pointer-events: auto;
+
+    & .boss-part {
+      animation-play-state: running;
+    }
   }
 
   &.boss-undocking .boss-part {
