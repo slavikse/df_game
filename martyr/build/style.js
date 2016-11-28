@@ -1,6 +1,6 @@
 import gulp from 'gulp';
 import plumber from 'gulp-plumber';
-import notify from '../utility/notify';
+import notify from 'gulp-notify';
 import postcss from 'gulp-postcss';
 import atImport from 'postcss-import';
 import nested from 'postcss-nested';
@@ -33,7 +33,7 @@ if (production) {
 
 gulp.task(name, () => {
   return gulp.src(files)
-  .pipe(plumber({errorHandler: notify}))
+  .pipe(plumber({errorHandler: notify.onError(name)}))
   .pipe(postcss(options))
   .pipe(gulp.dest(there))
 });

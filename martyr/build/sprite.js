@@ -1,6 +1,6 @@
 import gulp from 'gulp';
 import spritesmith from 'gulp.spritesmith';
-import util from 'gulp-util';
+import notify from 'gulp-notify';
 
 const name = 'sprite';
 const files = 'source/**/sprite/*';
@@ -35,7 +35,7 @@ function spriteCreate(cb) {
 function imageStream() {
   return spriteData.img
   .pipe(gulp.dest(thereImage))
-  .on('data', () => util.log('                      Обнови вкладку: ' + name))
+  .pipe(notify(`Обнови вкладку: ${name}`))
 }
 
 function styleStream() {

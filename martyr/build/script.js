@@ -1,6 +1,6 @@
 import gulp from 'gulp';
 import plumber from 'gulp-plumber';
-import notify from '../utility/notify';
+import notify from 'gulp-notify';
 import named from 'vinyl-named';
 import webpackStream from 'webpack-stream';
 
@@ -87,7 +87,7 @@ if (production) {
 
 gulp.task(name, cb => {
   return gulp.src(files)
-  .pipe(plumber({errorHandler: notify}))
+  .pipe(plumber({errorHandler: notify.onError(name)}))
   .pipe(named())
   .pipe(webpackStream(options, null, done))
   .pipe(gulp.dest(there))

@@ -48,6 +48,8 @@ function openShop() {
 function buyLockUnlock() {
   for (let i = 0, len = storeItemsLength; i < len; i++) {
     const item = $storeItems[i];
+
+
     const itemScore = parseInt(item.dataset.score, 10);
 
     if (itemScore > score) {
@@ -158,3 +160,5 @@ document.addEventListener('waveEnd', openShopDelay);
 document.addEventListener('scoreShop', scoreShop);
 document.addEventListener('firstAidShop', firstAidShop);
 document.addEventListener('gameOver', gameOver);
+
+//TODO ценники. их можно подправить в html... перевести ценники в модуль
