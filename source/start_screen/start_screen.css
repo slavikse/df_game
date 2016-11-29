@@ -16,8 +16,8 @@
     pointer-events: none !important;
   }
 
-  &-shading .best-score-wrap,
-  &-shading .new-game {
+  &-open .best-score-wrap,
+  &-open .new-game {
     opacity: 0;
   }
 

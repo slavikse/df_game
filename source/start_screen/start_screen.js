@@ -45,11 +45,11 @@ function initGame() {
   /** / god mod */
 
   $newGame.removeEventListener('click', initGame);
-  noise(audioURI, audioIntro);
 
   $startScreen.classList.add('start-screen-no-events');
   $newGame.classList.add('new-game-start');
 
+  noise(audioURI, audioIntro);
   changeBackground();
 
   document.dispatchEvent(eventStartGame);

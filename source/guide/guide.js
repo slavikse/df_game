@@ -5,27 +5,22 @@ const $guideHelp = document.querySelector('.guide-help');
 const $guideWrap = document.querySelector('.guide-wrap');
 const audioHoverMenu = audioSprite.hover_menu;
 const audioAuthShow = audioSprite.auth_show;
-const texts = ['X', '?'];
-const textsLength = texts.length - 1;
+const signs = ['X', '?'];
+const signsLength = signs.length;
 
-let i = 0;
+let currentSign = 0;
 
 function hoverGuide() {
   noise(audioURI, audioHoverMenu);
 }
 
-function textToggle() {
-  $guideHelp.textContent = texts[i];
-
-  if (i === textsLength) {
-    i = 0;
-  } else {
-    i += 1;
-  }
+function signToggle() {
+  $guideHelp.textContent = signs[currentSign];
+  currentSign = (currentSign + 1) % signsLength;
 }
 
 function showGuide() {
-  textToggle();
+  signToggle();
 
   $guideWrap.classList.toggle('guide-wrap-show');
   noise(audioURI, audioAuthShow);

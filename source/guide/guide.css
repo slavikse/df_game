@@ -1,26 +1,26 @@
 .guide-help {
   position: relative;
   z-index: 1;
-  margin-top: 20px;
-  width: 44px;
+  margin-top: 30px;
+  width: 46px;
   border: 5px double #bfff40;
   border-radius: 50%;
   color: #fff;
   font-size: 2.2em;
   text-shadow: 0 0 2px black;
   text-align: center;
-  cursor: pointer;
   box-shadow: 0 0 2px black;
+  cursor: pointer;
   transition: background-color 0.2s, opacity 0.2s;
   will-change: opacity;
 
-  &:hover,
-  &:active {
+  &:hover {
     background-color: rgba(4, 130, 0, 0.6);
   }
 }
 
-.start-screen-shading .guide-help {
+/* при открытии формы логина */
+.start-screen-open .guide-help {
   opacity: 0;
 }
 
@@ -30,7 +30,7 @@
   left: 0;
   width: 100%;
   padding: 10px 0;
-  border-top: 4px solid rgba(4, 130, 0, 0.4);
+  border-top: 4px solid black;
   background-color: rgba(0, 0, 0, 0.6);
   opacity: 0;
   pointer-events: none;
@@ -44,6 +44,8 @@
   & .guide {
     display: flex;
     justify-content: space-around;
+
+    /*TODO при новом туторе упростить */
     align-items: center;
     margin: 0 auto;
     max-width: 900px;

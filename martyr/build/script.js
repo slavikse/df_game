@@ -58,11 +58,11 @@ const options = {
   ]
 };
 
-//if (!production) {
-//  options.plugins.push(
-//    new webpack.HotModuleReplacementPlugin()
-//  )
-//}
+if (!production) {
+  options.plugins.push(
+    new webpack.HotModuleReplacementPlugin()
+  )
+}
 
 if (production) {
   options.plugins.push(

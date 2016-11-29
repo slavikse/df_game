@@ -1,6 +1,6 @@
 @import '_reset.css';
 @import '_base.css';
-@import '_font.css';
+@import 'font/font.css';
 
 @import 'preload/preload.css';
 @import 'start_screen/start_screen.css';

@@ -94,7 +94,7 @@ function authShowToggle() {
 
   noise(audioURI, audioAuthShow);
 
-  $startScreen.classList.toggle('start-screen-shading');
+  $startScreen.classList.toggle('start-screen-open');
   $authWrap.classList.toggle('auth-wrap-show');
   $authOpener.classList.toggle('auth-opener-on');
 }
