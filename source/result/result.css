@@ -25,7 +25,7 @@
   & .title {
     color: red;
     font-size: 3.5em;
-    text-shadow: 0 0 10px red;
+    text-shadow: 0 0 2px red;
   }
 
   & .statistic-show {
@@ -45,7 +45,7 @@
     left: 0;
     height: 100%;
     border: 4px dashed white;
-    background-color: red;
+    background-color: #000;
     overflow-y: auto;
     outline: 0;
     pointer-events: auto;
@@ -74,7 +74,7 @@
   & .restart {
     color: #06d600;
     font-size: 3.2em;
-    text-shadow: 0 0 6px green;
+    text-shadow: 0 0 2px green;
     cursor: pointer;
   }
 }

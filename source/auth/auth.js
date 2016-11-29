@@ -12,6 +12,7 @@ const $authWrap = $startScreen.querySelector('.auth-wrap');
 const $authCorrect = $startScreen.querySelector('.auth-correct');
 const $authInCorrect = $startScreen.querySelector('.auth-incorrect');
 const $authWrong = $startScreen.querySelector('.auth-wrong');
+const $authEmail = $startScreen.querySelector('.auth-email');
 const $authSubmit = $startScreen.querySelector('.auth-submit');
 const audioAuthHover = audioSprite.hover_menu;
 const audioAuthShow = audioSprite.auth_show;
@@ -20,6 +21,7 @@ const audioAuthOut = audioSprite.auth_out;
 const audioCancel = audioSprite.cancel;
 const eventAuthBonus = new Event('authBonus');
 
+let authAudio;
 let userName;
 let isGetAuthBonus = false;
 let emailSave;
@@ -30,46 +32,55 @@ let isAuthProgress = false;
 fb.auth().onAuthStateChanged(authChanged);
 
 function authChanged(user) {
-  let authAudio;
-
   if (user) {
-    authAudio = audioAuthIn;
-
-    $authSubmit.removeEventListener('click', auth);
-    $authOpener.removeEventListener('click', authShowToggle);
-    $authLogout.style.display = 'inline-block';
-
-    if (!isGetAuthBonus) {
-      document.dispatchEvent(eventAuthBonus);
-    }
-
-    isGetAuthBonus = true;
-
-    userName = getUserName(user);
-    showUserName(userName || '');
+    login(user);
   } else {
-    authAudio = audioAuthOut;
-
-    $authSubmit.addEventListener('click', auth);
-    $authOpener.addEventListener('click', authShowToggle);
-    $authLogout.style.display = '';
-
-    showUserName();
+    logout();
   }
 
   //fix: Uncaught (in promise) DOMException: The play() request was interrupted
   // by a call to pause()
-  setTimeout(noise.bind(null, audioURI, authAudio), 200);
+  setTimeout(noise.bind(null, audioURI, authAudio), 500);
 
   $authOpener.classList.remove('auth-opener-on');
   $authLoader.classList.remove('auth-loader');
+}
 
+function login(user) {
+  isGetAuthBonus = true;
+
+  authAudio = audioAuthIn;
+  $authLogout.style.display = 'inline-block';
+
+  $authSubmit.removeEventListener('click', auth);
+  $authOpener.removeEventListener('click', authShowToggle);
+
+  userName = getUserName(user);
+  showUserName(userName);
+}
+
+function logout() {
+  isGetAuthBonus = false;
+
+  authAudio = audioAuthOut;
+  $authLogout.style.display = '';
+
+  $authSubmit.addEventListener('click', auth);
+  $authOpener.addEventListener('click', authShowToggle);
+
+  userName = '';
+  showUserName(userName);
 }
 
 function getUserName(user) {
-  if (user && user.email) {
-    return user.email.replace(/@.+/, ''); // remove @...
+  const email = user.email;
+  let name = '';
+
+  if (email) {
+    name = email.replace(/@.+/, ''); // remove @...
   }
+
+  return name;
 }
 
 function authShowToggle() {
@@ -78,6 +89,7 @@ function authShowToggle() {
     showUserName(userName);
   } else {
     isAuthShow = true;
+    $authEmail.focus();
   }
 
   noise(audioURI, audioAuthShow);
@@ -98,25 +110,31 @@ function showUserName(userName) {
 }
 
 function auth(e) {
-  e.preventDefault();
-
-  if (isAuthProgress) {
+  if (!isAuthProgress) {
     return;
   }
+
+  e.preventDefault();
 
   const form = document.forms.auth;
   const email = form.email.value;
   const password = form.password.value;
 
-  if (!dataCorrect(email, password)) {
-    $authSubmit.style.animationName = 'auth-submit-error';
-
-    noise(audioURI, audioCancel);
-    authNotify($authInCorrect);
-
-    return;
+  if (isDataCorrect(email, password)) {
+    dataCorrect(email, password);
+  } else {
+    dataInCorrect();
   }
+}
 
+function isDataCorrect(email, password) {
+  return (
+    /^.{1,20}@.{1,6}\..{2,6}$/.test(email) &&
+    /^.{6,30}$/.test(password)
+  );
+}
+
+function dataCorrect(email, password) {
   emailSave = email;
   passwordSave = password;
 
@@ -124,11 +142,11 @@ function auth(e) {
   fbAuth(email, password);
 }
 
-function dataCorrect(email, password) {
-  return (
-    /^.{1,20}@.{1,6}\..{2,6}$/.test(email) &&
-    /^.{6,30}$/.test(password)
-  );
+function dataInCorrect() {
+  $authSubmit.style.animationName = 'auth-submit-error';
+
+  noise(audioURI, audioCancel);
+  authNotify($authInCorrect);
 }
 
 function fbAuth(email, password) {
@@ -190,21 +208,19 @@ function authLoginAnimateEnd() {
   $authUserName.classList.remove('auth-user-name-login');
 }
 
-function logout() {
-  authLogoutAnimate();
-  setTimeout(logoutEnd, 300);
+function getAuthBonus() {
+  if (isGetAuthBonus) {
+    document.dispatchEvent(eventAuthBonus);
+  }
 }
 
-function logoutEnd() {
-  fb.auth().signOut();
-}
-
-function authLogoutAnimate() {
+function fbLogout() {
   $authShow.classList.add('auth-show-logout');
-  setTimeout(authLogoutAnimateEnd, 300);
+  setTimeout(fbLogoutEnd, 300);
 }
 
-function authLogoutAnimateEnd() {
+function fbLogoutEnd() {
+  fb.auth().signOut();
   $authShow.classList.remove('auth-show-logout');
 }
 
@@ -213,4 +229,5 @@ function hoverAuthOpener() {
 }
 
 $authOpener.addEventListener('mouseover', hoverAuthOpener);
-$authLogout.addEventListener('click', logout);
+$authLogout.addEventListener('click', fbLogout);
+document.addEventListener('startGame', getAuthBonus);

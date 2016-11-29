@@ -7,6 +7,7 @@ const $handR = $boss.querySelector('.boss-hand-r');
 const $legL = $boss.querySelector('.boss-leg-l');
 const $legR = $boss.querySelector('.boss-leg-r');
 const eventEnemyCreate = new Event('enemyCreate');
+const eventScoreAdd = new Event('scoreAdd');
 const bossParts = [
   [$body, 6],
   [$handL, 3],
@@ -14,13 +15,15 @@ const bossParts = [
   [$legL, 3],
   [$legR, 3]
 ];
+const partsLength = bossParts.length;
 
-let partsCount = bossParts.length - 1; // -1 торс
+let partsCount = partsLength - 1; // - торс, он в последнюю очередь
 
+eventScoreAdd.add = 100;
 setHealth();
 
 function setHealth() {
-  for (let i = 0, len = bossParts.length; i < len; i++) {
+  for (let i = 0, len = partsLength; i < len; i++) {
     const part = bossParts[i][0];
     const health = bossParts[i][1];
 
@@ -39,10 +42,13 @@ function bodyNotCrash() {
 
 function docking() {
   $boss.classList.add('boss-docking');
+
+  document.addEventListener('bossShoot', damagePart);
+  document.addEventListener('grenade', grenade);
 }
 
 function damagePart(e) {
-  const target = e.bossPart || e; // e - может быть частью
+  const target = e.bossPart || e; // e - может быть частью босса
 
   if (target.isCrash) {
     damage(target);
@@ -69,9 +75,10 @@ function crash(target) {
     bodyCrash();
   }
 
-  // уничтожены все части
+  // уничтожены все части?
   if (partsCount === -1) {
     undocking();
+    bossGone();
   }
 
   document.dispatchEvent(eventEnemyCreate);
@@ -97,10 +104,13 @@ function bodyCrash() {
 }
 
 function undocking() {
+  document.removeEventListener('bossShoot', damagePart);
+  document.removeEventListener('grenade', grenade);
+
   $boss.classList.add('boss-undocking');
 
   // 0 - торс не участвует
-  for (let i = 1, len = bossParts.length; i < len; i++) {
+  for (let i = 1, len = partsLength; i < len; i++) {
     const part = bossParts[i][0];
 
     undockingPart(part);
@@ -114,14 +124,16 @@ function undockingPart(part) {
   part.style.animationName = animationName;
 }
 
+function bossGone() {
+  document.dispatchEvent(eventScoreAdd);
+}
+
 function grenade() {
-  for (let i = 0, len = bossParts.length; i < len; i++) {
+  for (let i = 0, len = partsLength; i < len; i++) {
     const part = bossParts[i][0];
 
     damagePart(part);
   }
 }
 
-document.addEventListener('bossShoot', damagePart);
-document.addEventListener('grenade', grenade);
 document.addEventListener('boss', docking);

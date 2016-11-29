@@ -37,7 +37,7 @@
     right: 6px;
     font-size: 3em;
     color: #ff0;
-    text-shadow: 0 0 6px #4f1100;
+    text-shadow: 0 0 2px #4f1100;
     cursor: pointer;
     transition: color 0.2s;
 
@@ -66,8 +66,8 @@
     border: 3px dashed #2d9b00;
     color: #fff;
     font-size: 2em;
-    text-shadow: 1px 1px 4px black;
-    box-shadow: inset 0 0 10px black;
+    text-shadow: 0 0 2px black;
+    box-shadow: inset 0 0 6px black;
     background-color: rgba(5, 123, 0, 0.4);
     cursor: pointer;
 

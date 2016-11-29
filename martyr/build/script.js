@@ -46,7 +46,7 @@ const options = {
     ]
   },
   watch: !production,
-  watchOptions: {aggregateTimeout: 20},
+  watchOptions: {aggregateTimeout: 100},
   devtool: production ? null : 'cheap-eval-source-map',
   plugins: [
     new webpack.NoErrorsPlugin(),
@@ -58,11 +58,11 @@ const options = {
   ]
 };
 
-if (!production) {
-  options.plugins.push(
-    new webpack.HotModuleReplacementPlugin()
-  )
-}
+//if (!production) {
+//  options.plugins.push(
+//    new webpack.HotModuleReplacementPlugin()
+//  )
+//}
 
 if (production) {
   options.plugins.push(

@@ -6,9 +6,11 @@ const $body = document.body;
 const $ambient = $body.querySelector('.ambient');
 const $shop = $body.querySelector('.shop');
 const $store = $shop.querySelector('.store');
-const $storeItems = $store.querySelectorAll('.item');
-const storeItemsLength = $storeItems.length;
-const $firstAid = $store.querySelector('.first-aid-shop');
+const $drumItem = $store.querySelector('.drum-shop');
+const $grenadeItem = $store.querySelector('.grenade-shop');
+const $firstAidItem = $store.querySelector('.first-aid-shop');
+const items = [$drumItem, $grenadeItem, $firstAidItem];
+const itemsLength = items.length;
 const $shopClose = $shop.querySelector('.shop-close');
 const audioBuyHover = audioSprite.buy_hover;
 const audioBuy = audioSprite.buy;
@@ -22,8 +24,23 @@ const eventScoreDec = new Event('scoreDec');
 const eventWaveStart = new Event('waveStart');
 
 let costsStat = 0;
-let score;
+let score; // деньги $
 let firstAid;
+
+$drumItem.shopDetail = {
+  type: 'drum',
+  price: 15
+};
+
+$grenadeItem.shopDetail = {
+  type: 'grenade',
+  price: 50
+};
+
+$firstAidItem.shopDetail = {
+  type: 'first-aid',
+  price: 60
+};
 
 function scoreShop(e) {
   score = e.score;
@@ -34,7 +51,7 @@ function firstAidShop(e) {
 }
 
 function openShopDelay() {
-  setTimeout(openShop, 1500); // уведомление
+  setTimeout(openShop, 1500); // показывается уведомление, потом магаз
 }
 
 function openShop() {
@@ -46,13 +63,11 @@ function openShop() {
 }
 
 function buyLockUnlock() {
-  for (let i = 0, len = storeItemsLength; i < len; i++) {
-    const item = $storeItems[i];
+  for (let i = 0, len = itemsLength; i < len; i++) {
+    const item = items[i];
+    const price = item.shopDetail.price;
 
-
-    const itemScore = parseInt(item.dataset.score, 10);
-
-    if (itemScore > score) {
+    if (price > score) {
       item.classList.add('buy-block');
     } else {
       item.classList.remove('buy-block');
@@ -61,7 +76,7 @@ function buyLockUnlock() {
 
   /** максимально аптечек [0-1], т.е. 2 штуки */
   if (firstAid === 1) {
-    $firstAid.classList.add('buy-block');
+    $firstAidItem.classList.add('buy-block');
   }
 }
 
@@ -82,32 +97,28 @@ function buy(e) {
     // return;
   }
 
-  const dataset = target.dataset;
-  const item = dataset.item;
-  const scoreDec = parseInt(dataset.score, 10);
+  const type = target.shopDetail.type;
+  const price = target.shopDetail.price;
 
-  if (item === 'drum') {
+  if (type === 'drum') {
     buyDrum();
-  } else if (item === 'first-aid') {
-    buyFirstAid();
-  } else if (item === 'grenade') {
+  } else if (type === 'grenade') {
     buyGrenade();
+  } else if (type === 'first-aid') {
+    buyFirstAid();
   } else {
     return;
   }
 
-  noise(audioURI, audioBuy);
-
-  eventScoreDec.dec = scoreDec;
-  document.dispatchEvent(eventScoreDec);
-
-  score -= scoreDec;
-  saveCostsStat(scoreDec);
-  buyLockUnlock();
+  buyCompletion(price);
 }
 
 function buyDrum() {
   document.dispatchEvent(eventBuyDrum);
+}
+
+function buyGrenade() {
+  document.dispatchEvent(eventBuyGrenade);
 }
 
 function buyFirstAid() {
@@ -115,8 +126,15 @@ function buyFirstAid() {
   document.dispatchEvent(eventBuyFirstAid);
 }
 
-function buyGrenade() {
-  document.dispatchEvent(eventBuyGrenade);
+function buyCompletion(price) {
+  noise(audioURI, audioBuy);
+
+  eventScoreDec.dec = price;
+  document.dispatchEvent(eventScoreDec);
+
+  score -= price;
+  saveCostsStat(price);
+  buyLockUnlock();
 }
 
 function hoverShopClose() {
@@ -160,5 +178,3 @@ document.addEventListener('waveEnd', openShopDelay);
 document.addEventListener('scoreShop', scoreShop);
 document.addEventListener('firstAidShop', firstAidShop);
 document.addEventListener('gameOver', gameOver);
-
-//TODO ценники. их можно подправить в html... перевести ценники в модуль
