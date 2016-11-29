@@ -1,5 +1,6 @@
 import './preload/preload';
 import './helper/audio_sprite';
+import './notify/notify';
 import './start_screen/start_screen';
 import './shoot/shoot';
 import './cat/cat';
@@ -10,7 +11,10 @@ import './boss/boss';
 import './result/result';
 import './statistic/statistic';
 
-/** загрузив игру, создаст событие, которое слушает стартовый экран */
+/**
+ * Загрузив игру, создаст событие,
+ * которое слушает стартовый экран
+ * */
 
 window.onerror = error;
 

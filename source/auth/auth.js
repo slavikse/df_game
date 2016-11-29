@@ -1,6 +1,7 @@
 import fb from './../helper/fb';
 import {audioURI, audioSprite} from './../helper/audio_sprite';
 import noise from './../helper/noise';
+import notify from './../notify/notify';
 
 const $startScreen = document.querySelector('.start-screen');
 const $authShow = $startScreen.querySelector('.auth-show');
@@ -9,9 +10,6 @@ const $authUserName = $authShow.querySelector('.auth-user-name');
 const $authOpener = $authShow.querySelector('.auth-opener');
 const $authLogout = $authShow.querySelector('.auth-logout');
 const $authWrap = $startScreen.querySelector('.auth-wrap');
-const $authCorrect = $startScreen.querySelector('.auth-correct');
-const $authInCorrect = $startScreen.querySelector('.auth-incorrect');
-const $authWrong = $startScreen.querySelector('.auth-wrong');
 const $authEmail = $startScreen.querySelector('.auth-email');
 const $authSubmit = $startScreen.querySelector('.auth-submit');
 const audioAuthHover = audioSprite.hover_menu;
@@ -110,11 +108,11 @@ function showUserName(userName) {
 }
 
 function auth(e) {
-  if (!isAuthProgress) {
+  e.preventDefault();
+
+  if (isAuthProgress) {
     return;
   }
-
-  e.preventDefault();
 
   const form = document.forms.auth;
   const email = form.email.value;
@@ -138,15 +136,14 @@ function dataCorrect(email, password) {
   emailSave = email;
   passwordSave = password;
 
-  $authSubmit.style.animationName = 'auth-submit-waited';
+  submitAnimateWaited();
   fbAuth(email, password);
 }
 
 function dataInCorrect() {
-  $authSubmit.style.animationName = 'auth-submit-error';
-
   noise(audioURI, audioCancel);
-  authNotify($authInCorrect);
+  notify('Не корректные данные!');
+  submitAnimate('auth-submit-error');
 }
 
 function fbAuth(email, password) {
@@ -161,9 +158,11 @@ function fbAuth(email, password) {
 function authSuccess() {
   isAuthProgress = false;
 
-  $authSubmit.style.animationName = 'auth-submit-success';
-  authNotify($authCorrect);
+  submitAnimateEnd();
   authLoginAnimate();
+
+  notify('Вход выполнен!');
+  submitAnimate('auth-submit-success');
 
   setTimeout(authShowToggle, 1200);
 }
@@ -178,25 +177,23 @@ function register() {
 /* когда email в базе, но пароль не подходит */
 function authWrong() {
   isAuthProgress = false;
-  $authSubmit.style.animationName = 'auth-submit-error';
 
   noise(audioURI, audioCancel);
-  authNotify($authWrong);
+  notify('Не верные данные!');
+  submitAnimate('auth-submit-error');
 }
 
-function authNotify(notify) {
-  notify.style.opacity = 1;
-
-  setTimeout(notifyAnimateEnd, 400);
-  setTimeout(notifyEnd.bind(null, notify), 1000);
+function submitAnimateWaited() {
+  $authSubmit.style.animationName = 'auth-submit-waited';
 }
 
-function notifyAnimateEnd() {
+function submitAnimate(animate) {
+  $authSubmit.style.animationName = animate;
+  setTimeout(submitAnimateEnd, 400);
+}
+
+function submitAnimateEnd() {
   $authSubmit.style.animationName = '';
-}
-
-function notifyEnd(notify) {
-  notify.style.opacity = 0;
 }
 
 function authLoginAnimate() {

@@ -1,5 +1,4 @@
 .auth-show {
-  margin-bottom: 10px;
   display: flex;
   height: 44px; /* чтобы не прыгал при смене */
   transition: filter 0.3s;
@@ -83,6 +82,8 @@
 
 .auth-logout {
   margin-left: 4px;
+  position: relative;
+  z-index: 1;
   display: none;
   cursor: pointer;
 }
@@ -133,6 +134,7 @@
 
 .auth-wrap {
   position: absolute;
+  padding-top: 60px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -151,32 +153,6 @@
     pointer-events: auto;
     transform: scale(1);
   }
-}
-
-.auth-notify-wrap {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  height: 60px;
-}
-
-.auth-notify {
-  position: absolute;
-  font-size: 2.2em;
-  opacity: 0;
-  transition: opacity 0.4s;
-}
-
-.auth-correct {
-  color: #51d83f;
-}
-
-.auth-wrong {
-  color: red;
-}
-
-.auth-incorrect {
-  color: #ff0;
 }
 
 .auth-form {

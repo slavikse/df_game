@@ -1,0 +1,40 @@
+.notify {
+  position: absolute;
+  right: 4px;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+
+  & .not {
+    margin: 4px 0;
+    padding: 8px 10px;
+    max-width: 160px;
+    border-radius: 4px;
+    font-size: 1.2em;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+
+  & .title {
+    font-weight: 800;
+    text-transform: uppercase;
+  }
+
+  & .info {
+    color: #51d83f;
+  }
+
+  & .warn {
+    color: #ff0;
+  }
+
+  & .error {
+    color: red;
+  }
+}
+
+/*
+каждая планочка имеет свои стили, указая их при передаче
+ три типа: уведомление, замечание, ошибка (info, warn, error)
+ для них определены стили в этом модуле
+ */

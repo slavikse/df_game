@@ -3,6 +3,7 @@
 @import 'font/font.css';
 
 @import 'preload/preload.css';
+@import 'notify/notify.css';
 @import 'start_screen/start_screen.css';
 @import '../temp/sprite.png.css';
 @import 'cat/cat.css';
