@@ -53,7 +53,7 @@ function initGame() {
   changeBackground();
 
   document.dispatchEvent(eventStartGame);
-  setTimeout(changeAmbient, 5500);
+  setTimeout(changeAmbient, 4000);
 }
 
 function changeBackground() {

@@ -69,10 +69,10 @@ function toBad() {
   $cat.style.animationName = 'cat-flip';
   $toBad.style.animationName = 'to-bad';
 
-  setTimeout(toBadHide, 1400); // анимация
+  setTimeout(toBadEnd, 1400); // анимация
 }
 
-function toBadHide() {
+function toBadEnd() {
   $body.classList.remove('dont-shoot');
   $cat.style.animationName = '';
   $toBad.style.animationName = '';

@@ -12,10 +12,6 @@ const imagesClasses = [
   'icon-enemy4'
 ];
 const imagesClassesLength = imagesClasses.length - 1;
-const eventEnemyAdd = new Event('enemyAdd');
-const eventEnemyDec = new Event('enemyDec');
-const eventScoreAdd = new Event('scoreAdd');
-const eventDamage = new Event('damage');
 const dieAudios = [
   audioSprite.enemy_die1,
   audioSprite.enemy_die2,
@@ -29,10 +25,14 @@ const enemyHealthDefault = [1, 2];
 const enemyDamageTimeDefault = [6, 8];
 const enemyCloneCountDefault = 4;
 const enemyCloneCount = enemyCloneCountDefault;
+const eventEnemyAdd = new Event('enemyAdd');
+const eventEnemyDec = new Event('enemyDec');
+const eventScoreAdd = new Event('scoreAdd');
+const eventDamage = new Event('damage');
 
 let $paddock = $body.querySelector('.paddock');
-let timerIDs = [];
-let enemyCloneCurrent = 0;
+let enemyTimerID = [];
+let allEnemyCurrent = 0; // для грены
 let playingFieldWidth;
 let playingFieldHeight;
 
@@ -42,24 +42,30 @@ eventScoreAdd.add = scoreAdd;
 playingField();
 
 function cloneEnemy(e) {
-  const enemyCloneCountCurrent = e.enemyCloneCount || enemyCloneCount;
+  // при попадании в котика, генерит e.enemyCloneCount
+  const cloneCount = e.enemyCloneCount || enemyCloneCount;
   const fragment = document.createDocumentFragment();
 
-  /** при попадании в котика, генерит e.enemyCloneCount */
-  for (let i = 0; i < enemyCloneCountCurrent; i++) {
-    let clone = $enemyPosition.cloneNode(true);
-    clone = setPosition(clone);
-    clone = setDamage(clone);
-    clone = setImage(clone);
-    clone = setHealth(clone);
-    fragment.appendChild(clone);
-  }
+  allEnemyCurrent += cloneCount;
 
+  cloneCreate(cloneCount, fragment);
   $paddock.appendChild(fragment);
 
-  enemyCloneCurrent += enemyCloneCountCurrent;
-  eventEnemyAdd.add = enemyCloneCountCurrent;
+  eventEnemyAdd.add = cloneCount;
   document.dispatchEvent(eventEnemyAdd);
+}
+
+function cloneCreate(cloneCount, fragment) {
+  for (let i = 0; i < cloneCount; i++) {
+    const clone = $enemyPosition.cloneNode(true);
+
+    setPosition(clone);
+    setDamage(clone);
+    setImage(clone);
+    setHealth(clone);
+
+    fragment.appendChild(clone);
+  }
 }
 
 function setPosition(clone) {
@@ -67,8 +73,6 @@ function setPosition(clone) {
   const y = range(0, playingFieldHeight);
 
   clone.style.transform = `translate(${x}px, ${y}px)`;
-
-  return clone;
 }
 
 function setDamage(clone) {
@@ -96,9 +100,7 @@ function setDamage(clone) {
   );
 
   clone.damageTimer = timerID;
-  timerIDs.push(timerID);
-
-  return clone;
+  enemyTimerID.push(timerID);
 }
 
 function enemyWarning(warningNode) {
@@ -117,8 +119,6 @@ function setImage(clone) {
   const random = range(0, imagesClassesLength);
 
   enemyNode.classList.add(imagesClasses[random]);
-
-  return clone;
 }
 
 function setHealth(clone) {
@@ -127,8 +127,6 @@ function setHealth(clone) {
 
   healthNode.health = health;
   healthNode.textContent = health;
-
-  return clone;
 }
 
 function enemyShoot(e) {
@@ -138,33 +136,12 @@ function enemyShoot(e) {
   const enemyNode = clone.querySelector('.enemy');
   const healthNode = clone.querySelector('.enemy-health');
 
-  enemyShootAnimate(enemyNode);
-  enemyHealthDec(healthNode);
-
   if (healthNode.health <= 1) {
     enemyDeath({clone, warningNode, damageNode, enemyNode, healthNode});
   } else {
     healthNode.health -= 1;
     healthNode.textContent = healthNode.health;
   }
-}
-
-function enemyShootAnimate(enemyNode) {
-  enemyNode.style.animationName = 'enemy-shoot';
-  setTimeout(enemyShootAnimateEnd.bind(null, enemyNode), 100);
-}
-
-function enemyShootAnimateEnd(enemyNode) {
-  enemyNode.style.animationName = '';
-}
-
-function enemyHealthDec(healthNode) {
-  healthNode.style.animationName = 'enemy-health';
-  setTimeout(enemyHealthDecEnd.bind(null, healthNode), 100); // animate
-}
-
-function enemyHealthDecEnd(healthNode) {
-  healthNode.style.animationName = '';
 }
 
 function enemyDeath(nodes) {
@@ -180,16 +157,59 @@ function enemyHide(nodes) {
   nodes.warningNode.style.visibility = 'hidden';
   nodes.healthNode.style.visibility = 'hidden';
 
-  nodes.enemyNode.classList.add('enemy-kill');
+  nodes.enemyNode.style.animationName = 'enemy-kill';
   nodes.clone.classList.add('enemy-hide');
 
-  enemyCloneCurrent -= 1;
+  allEnemyCurrent -= 1;
   document.dispatchEvent(eventEnemyDec);
-  setTimeout(enemyHideDelay.bind(null, nodes.clone), 500); // анимация
+  setTimeout(enemyHideDelay.bind(null, nodes.clone), 600); // анимация
 }
 
 function enemyHideDelay(clone) {
   clone.style.visibility = 'hidden';
+}
+
+function removeEnemyNode() {
+  setTimeout(removeEnemyNodeDelay, 600);
+}
+
+function removeEnemyNodeDelay() {
+  enemyTimerID = [];
+  $paddock.remove();
+}
+
+function grenade() {
+  pointsCount();
+  allEnemyCurrent = 0;
+
+  $paddock.remove();
+  createPaddock();
+
+  enemyTimerID.forEach(clearTimer);
+  enemyTimerID = [];
+}
+
+function createPaddock() {
+  const paddockNode = document.createElement('div');
+  paddockNode.classList.add('paddock');
+  $body.appendChild(paddockNode);
+  $paddock = $body.querySelector('.paddock');
+}
+
+function clearTimer(id) {
+  clearTimeout(id);
+}
+
+function pointsCount() {
+  eventEnemyDec.dec = allEnemyCurrent;
+  eventScoreAdd.add = scoreAdd * allEnemyCurrent;
+
+  document.dispatchEvent(eventEnemyDec);
+  document.dispatchEvent(eventScoreAdd);
+
+  // возвращаем значения по умолчанию
+  eventEnemyDec.dec = enemyDec;
+  eventScoreAdd.add = scoreAdd;
 }
 
 function playingField() {
@@ -201,51 +221,11 @@ function playingField() {
   playingFieldHeight = window.innerHeight - enemyHeight - panelHeight;
 }
 
-function createEnemyNode() {
-  const paddockNode = document.createElement('div');
-  paddockNode.classList.add('paddock');
-  $body.appendChild(paddockNode);
-  $paddock = $body.querySelector('.paddock');
-}
-
-function removeEnemyNode() {
-  setTimeout(removeEnemyNodeDelay, 500);
-}
-
-function removeEnemyNodeDelay() {
-  timerIDs = [];
-  $paddock.remove();
-}
-
-function grenade() {
-  pointsCount();
-
-  timerIDs.forEach(id => {
-    clearTimeout(id);
-  });
-
-  $paddock.remove();
-  timerIDs = [];
-  enemyCloneCurrent = 0;
-  createEnemyNode();
-}
-
-function pointsCount() {
-  eventEnemyDec.dec = enemyCloneCurrent;
-  eventScoreAdd.add = scoreAdd * enemyCloneCurrent;
-
-  document.dispatchEvent(eventEnemyDec);
-  document.dispatchEvent(eventScoreAdd);
-
-  eventEnemyDec.dec = enemyDec;
-  eventScoreAdd.add = scoreAdd;
-}
-
-document.addEventListener('startGame', createEnemyNode);
+document.addEventListener('startGame', createPaddock);
 document.addEventListener('enemyCreate', cloneEnemy);
 document.addEventListener('enemyShoot', enemyShoot);
 document.addEventListener('grenade', grenade);
-document.addEventListener('waveStart', createEnemyNode);
+document.addEventListener('waveStart', createPaddock);
 document.addEventListener('waveEnd', removeEnemyNode);
 window.addEventListener('resize', playingFieldResize);
 document.addEventListener('gameOver', removeEnemyNode);
