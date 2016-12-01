@@ -1,59 +1,41 @@
-const $screen = document.querySelector('.preload-screen');
+const $preLoaderWrap = document.querySelector('.pre-loader-wrap');
 const resource = {
   audios: [
     'audio/audio_sprite.mp3',
     'audio/dark_ambient.mp3',
+    //'audio/light_ambient.mp3', // брауз запрашивает сам
     'audio/shop_ambient.mp3'
   ],
   images: [
-    // 'image/sprite.png' # брауз сразу запрашивает
+    //'image/sprite.png' // брауз запрашивает сам
   ]
 };
 
-addResource();
-resourcePreload();
+resource.audios.forEach(audioPreload);
 
-function addResource() {
-  const winWidth = window.innerWidth;
-  let preloadImageForestNight = 'image/forest_night_mobile.jpg';
+// хитрость, чтобы брауз реально запросил звуковые файлы. может и не работает
+function audioPreload(audioSrc) {
+  const audio = new Audio(audioSrc);
+  audio.volume = 0;
+  audio.play();
 
-  if (winWidth >= 544 && winWidth <= 992) {
-    preloadImageForestNight = 'image/forest_night_tablet.jpg';
-  } else if (winWidth > 992) {
-    preloadImageForestNight = 'image/forest_night.jpg';
-  }
-
-  resource.images.push(preloadImageForestNight);
+  //fix: Uncaught (in promise) DOMException: The play() request was interrupted
+  // by a call to pause()
+  setTimeout(audioStop.bind(null, audio), 1000);
 }
 
-function resourcePreload() {
-  preparationAudios();
-  preparationImages();
-}
-
-function preparationAudios() {
-  resource.audios.forEach(audioSrc => {
-    new Audio(audioSrc);
-  });
-}
-
-function preparationImages() {
-  resource.images.forEach(imageSrc => {
-    new Image(imageSrc);
-  });
+function audioStop(audio) {
+  audio.pause();
 }
 
 function load() {
   window.removeEventListener('load', load);
-  $screen.style.opacity = 0;
-
-  setTimeout(loadEnd, 600); // animate
+  $preLoaderWrap.style.opacity = 0;
+  setTimeout(loadEnd, 1000); // animate
 }
 
 function loadEnd() {
-  $screen.remove();
+  $preLoaderWrap.remove();
 }
 
 window.addEventListener('load', load);
-
-//TODO вставить ресурсы на страницу, по загрузке удалить элемент

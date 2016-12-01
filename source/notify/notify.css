@@ -1,6 +1,6 @@
 .notify {
   position: absolute;
-  right: 4px;
+  right: 0;
   display: flex;
   height: 100%;
   flex-direction: column;
@@ -8,20 +8,17 @@
 
   & .note {
     margin: 4px 0;
-    padding: 6px 0;
+    padding: 6px 0 6px 8px;
     width: 200px;
-    border-radius: 4px;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
     font-size: 1.6em;
-    text-align: center;
     background-color: rgba(0, 0, 0, 0.6);
     opacity: 0;
-    animation: note-show 0.2s both;
+    animation: note-show 0.4s both;
     transition: transform 0.4s;
+    transform-origin: right;
     will-change: opacity, transform;
-  }
-
-  & .hide {
-    transform: translateX(100%);
   }
 
   & .info {
@@ -34,6 +31,10 @@
 
   & .error {
     color: red;
+  }
+
+  & .hide {
+    transform: rotateX(40deg) rotateY(90deg);
   }
 }
 

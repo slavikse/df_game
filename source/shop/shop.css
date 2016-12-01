@@ -19,6 +19,7 @@
     transform: scale(1);
 
     & .item {
+      /* для возможности покупать */
       pointer-events: auto;
     }
   }
@@ -37,7 +38,6 @@
     right: 6px;
     font-size: 3em;
     color: #ff0;
-    text-shadow: 0 0 2px #4f1100;
     cursor: pointer;
     transition: color 0.2s;
 
@@ -71,8 +71,7 @@
     background-color: rgba(5, 123, 0, 0.4);
     cursor: pointer;
 
-    &:hover,
-    &:active {
+    &:hover {
       background-color: rgba(3, 103, 0, 0.6);
     }
   }
@@ -85,15 +84,13 @@
   }
 
   & .buy-block {
-    color: #bbb;
     border: 3px dashed #888;
+    color: #bbb;
     background-color: rgba(99, 100, 100, 0.4);
     cursor: no-drop;
 
-    &:hover,
-    &:active {
+    &:hover {
       background-color: rgba(85, 86, 86, 0.6);
     }
   }
-
 }

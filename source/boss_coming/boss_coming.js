@@ -1,7 +1,7 @@
 const $coming = document.querySelector('.boss-coming');
 const $progress = $coming.querySelector('.boss-progress');
 const $bossHead = $coming.querySelector('.boss-head');
-const wavesBeforeComingDefault = 2 + 1; // волны + после магаза (+1)
+const wavesBeforeComingDefault = 2 + 1; // волны +1 (после магаза)
 const shiftX = (100 / wavesBeforeComingDefault).toFixed(2);
 const eventBoss = new Event('boss');
 
@@ -12,6 +12,10 @@ function bossComingShow() {
   $coming.classList.add('boss-coming-show');
 }
 
+function bossHeadTwitch() {
+  $bossHead.style.animationDuration = `${wavesBeforeComing}s`;
+}
+
 function bossComing() {
   wavesBeforeComing -= 1;
 
@@ -19,8 +23,7 @@ function bossComing() {
   bossHeadTwitch();
 
   if (wavesBeforeComing === 0) {
-    document.removeEventListener('bossComing', bossComing);
-    document.dispatchEvent(eventBoss);
+    bossCame();
   }
 }
 
@@ -28,8 +31,9 @@ function bossHeadMove() {
   $progress.style.transform = `translateX(-${wavesBeforeComing * shiftX}%)`;
 }
 
-function bossHeadTwitch() {
-  $bossHead.style.animationDuration = `${wavesBeforeComing}s`;
+function bossCame() {
+  document.removeEventListener('bossComing', bossComing);
+  document.dispatchEvent(eventBoss);
 }
 
 document.addEventListener('startGame', bossComingShow);

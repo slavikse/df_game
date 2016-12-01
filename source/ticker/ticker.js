@@ -3,8 +3,8 @@ import noise from './../helper/noise';
 
 const $ticker = document.querySelector('.ticker');
 const tickDefault = 4;
-const audioTick = audioSprite.tick;
 const numberWaveDefault = 2; // 3
+const audioTick = audioSprite.tick;
 const eventEnemyCreate = new Event('enemyCreate');
 const eventWaveEnd = new Event('waveEnd');
 const eventBossComing = new Event('bossComing');
@@ -84,9 +84,6 @@ function noEnemy() {
 }
 
 function boss() {
-
-  console.log('1');
-
   clearTimeout(nextTickTimerID);
   clearTimeout(pauseTimerID);
   tickPause();

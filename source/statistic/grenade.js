@@ -1,7 +1,7 @@
 let grenade;
 
 function setGrenade(e) {
-  grenade = e.grenadeCountTotal;
+  grenade = e.grenadeCount;
 }
 
 function getGrenade() {

@@ -12,6 +12,7 @@
   display: flex;
   margin-bottom: 10px;
 
+  /* при смене иконки перезаписывается класс */
   & div {
     margin: 0 2px;
     animation: 0.6s alternate both; /* first-aid-blink */
@@ -19,24 +20,28 @@
   }
 }
 
+/* покупка хилки */
 @keyframes first-aid-blink {
-  50% {
-    transform: scale(1.5);
+  0% {
+    transform: scale(1.3);
   }
 }
 
 .health {
   display: flex;
 
+  /*TODO придумать классовую систему смены иконок
+  при смене иконки перезаписывается класс */
   & div {
     margin: 0 2px;
-    animation: 0.6s alternate both; /* health-blink */
+    animation: 0.6s alternate; /* health-blink */
     will-change: opacity, transform;
   }
 }
 
+/* получение урона */
 @keyframes health-blink {
-  50% {
+  0% {
     opacity: 0;
     transform: scale(1.5);
   }

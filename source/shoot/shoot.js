@@ -37,7 +37,7 @@ function shoot(e) {
     return;
   }
 
-  // $event.dispatchEvent(new Event('damage'));
+  // document.dispatchEvent(new Event('damage'));
 
   const x = e.clientX;
   const y = e.clientY;
@@ -142,6 +142,11 @@ function shootCountInBossStatistic() {
   shootCountInBossStat += 1;
 }
 
+function gameOver() {
+  shootEnd();
+  shootStatistic();
+}
+
 function shootStatistic() {
   const shootCountEvent = new Event('shootCount');
 
@@ -151,11 +156,6 @@ function shootStatistic() {
   shootCountEvent.shootCountInBoss = shootCountInBossStat;
 
   document.dispatchEvent(shootCountEvent);
-}
-
-function gameOver() {
-  shootEnd();
-  shootStatistic();
 }
 
 document.addEventListener('startGame', shootStart);

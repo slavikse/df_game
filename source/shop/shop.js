@@ -18,14 +18,15 @@ const audioCancel = audioSprite.cancel;
 const audioClick = audioSprite.hover_menu;
 const audioNextWave = audioSprite.next_wave;
 const eventBuyDrum = new Event('buyDrum');
-const eventBuyFirstAid = new Event('buyFirstAid');
 const eventBuyGrenade = new Event('buyGrenade');
+const eventBuyFirstAid = new Event('buyFirstAid');
 const eventScoreDec = new Event('scoreDec');
 const eventWaveStart = new Event('waveStart');
 
 let costsStat = 0;
 let score; // деньги $
 let firstAid;
+let openShopDelayTimerID;
 
 $drumItem.shopDetail = {
   type: 'drum',
@@ -50,8 +51,9 @@ function firstAidShop(e) {
   firstAid = e.firstAid;
 }
 
+// показывается уведомление, потом магаз
 function openShopDelay() {
-  setTimeout(openShop, 1500); // показывается уведомление, потом магаз
+  openShopDelayTimerID = setTimeout(openShop, 1600);
 }
 
 function openShop() {
@@ -166,15 +168,15 @@ function costsStatistic() {
 }
 
 function gameOver() {
-  document.removeEventListener('waveEnd', openShopDelay);
+  clearTimeout(openShopDelayTimerID);
   costsStatistic();
 }
 
+document.addEventListener('scoreShop', scoreShop);
+document.addEventListener('firstAidShop', firstAidShop);
+document.addEventListener('waveEnd', openShopDelay);
 $store.addEventListener('mouseover', itemHandler);
 $store.addEventListener('click', buy);
 $shopClose.addEventListener('mouseover', hoverShopClose);
 $shopClose.addEventListener('click', shopClose);
-document.addEventListener('waveEnd', openShopDelay);
-document.addEventListener('scoreShop', scoreShop);
-document.addEventListener('firstAidShop', firstAidShop);
 document.addEventListener('gameOver', gameOver);

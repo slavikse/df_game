@@ -12,44 +12,34 @@ const damageAudiosURI = [
   audioSprite.damage3
 ];
 
-let healthNoticeTimer;
+let healthNoticeTimerID;
 
 function damage() {
-  clearTimeout(healthNoticeTimer);
-
+  healthAnimation('health-damage');
   noise(audioURI, damageAudiosURI);
-  $healthNotice.style.animationName = 'health-damage';
-
-  healthNoticeTimer = setTimeout(damageEnd, 600); // анимация
-}
-
-function damageEnd() {
-  $healthNotice.style.animationName = '';
 }
 
 function regeneration() {
-  clearTimeout(healthNoticeTimer);
-
+  healthAnimation('health-regeneration');
   noise(audioURI, healAudiosURI);
-  $healthNotice.style.animationName = 'health-regeneration';
-
-  healthNoticeTimer = setTimeout(regenerationEnd, 600); // анимация
 }
 
-function regenerationEnd() {
+function healthAnimation(animationName) {
+  clearTimeout(healthNoticeTimerID);
+  $healthNotice.style.animationName = animationName;
+  healthNoticeTimerID = setTimeout(healthAnimationEnd, 600);
+}
+
+function healthAnimationEnd() {
   $healthNotice.style.animationName = '';
 }
 
 function gameOver() {
-  clearTimeout(healthNoticeTimer);
-
+  clearTimeout(healthNoticeTimerID);
   noise(audioURI, audioSprite.death);
+
   $healthNotice.style.animationName = '';
   $healthNotice.classList.add('game-over');
-
-  document.removeEventListener('damage', damage);
-  document.removeEventListener('regeneration', regeneration);
-  document.removeEventListener('gameOver', gameOver);
 }
 
 document.addEventListener('damage', damage);

@@ -14,8 +14,10 @@ gulp.task(name, cb => {
     ui: false
   });
 
-  bs.watch(folder)
-  .on('change', bs.reload);
+  if (!tunnel) {
+    bs.watch(folder)
+    .on('change', bs.reload);
+  }
 
   cb();
 });

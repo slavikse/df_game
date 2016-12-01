@@ -25,14 +25,13 @@
   & .title {
     color: red;
     font-size: 3.5em;
-    text-shadow: 0 0 2px red;
   }
 
   & .statistic-show {
     color: #ffeb3b;
     font-size: 3em;
-    outline: 0;
     cursor: pointer;
+    outline: 0;
 
     &:focus ~ .statistic {
       transform: translateX(0);
@@ -46,8 +45,8 @@
     height: 100%;
     border-right: 4px dashed white;
     background-color: #000;
-    overflow-y: auto;
     outline: 0;
+    overflow-y: auto;
     pointer-events: auto;
     transition: transform 0.4s;
     transform: translateX(-100%);
@@ -74,7 +73,6 @@
   & .restart {
     color: #06d600;
     font-size: 3.2em;
-    text-shadow: 0 0 2px green;
     cursor: pointer;
   }
 }

@@ -3,6 +3,7 @@
 @import '../ticker/ticker.css';
 @import '../enemy_count/enemy_count.css';
 @import '../grenade/grenade.css';
+@import "../revolver/icon_revolver.css";
 @import '../revolver/revolver.css';
 
 .panel {
@@ -26,13 +27,9 @@
     display: flex;
   }
 
-  & .weapon {
-    position: relative;
-    display: flex;
-    justify-content: flex-end;
-  }
-
+  & .weapon,
   & .ammo {
+    position: relative;
     display: flex;
     justify-content: flex-end;
   }

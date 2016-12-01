@@ -14,16 +14,16 @@ function hoverGuide() {
   noise(audioURI, audioHoverMenu);
 }
 
-function signToggle() {
-  $guideHelp.textContent = signs[currentSign];
-  currentSign = (currentSign + 1) % signsLength;
-}
-
 function showGuide() {
   signToggle();
 
   $guideWrap.classList.toggle('guide-wrap-show');
   noise(audioURI, audioAuthShow);
+}
+
+function signToggle() {
+  $guideHelp.textContent = signs[currentSign];
+  currentSign = (currentSign + 1) % signsLength;
 }
 
 $guideHelp.addEventListener('mouseover', hoverGuide);

@@ -38,10 +38,10 @@ function authChanged(user) {
 
   //fix: Uncaught (in promise) DOMException: The play() request was interrupted
   // by a call to pause()
-  setTimeout(noise.bind(null, audioURI, authAudio), 500);
+  setTimeout(noise.bind(null, audioURI, authAudio), 300);
 
   $authOpener.classList.remove('auth-opener-on');
-  $authLoader.classList.remove('auth-loader');
+  $authLoader.classList.remove('loader');
 }
 
 function login(user) {
@@ -207,6 +207,7 @@ function authLoginAnimateEnd() {
 
 function getAuthBonus() {
   if (isGetAuthBonus) {
+    notify({type: 'info', message: '+1 обойма!'});
     document.dispatchEvent(eventAuthBonus);
   }
 }

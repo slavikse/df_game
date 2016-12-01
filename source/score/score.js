@@ -1,7 +1,7 @@
 import delay from 'libs/delay';
 
 const $score = document.querySelector('.score');
-const scoreShopDelay = delay(scoreShop, 5); // чтобы успел записать счет
+const scoreShopDelay = delay(scoreShop, 10); // чтобы успел записать счет
 const eventScoreShop = new Event('scoreShop');
 const scoreEvent = new Event('score');
 

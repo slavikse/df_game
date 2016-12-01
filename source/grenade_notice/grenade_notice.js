@@ -7,7 +7,6 @@ const audioGrenade = audioSprite.grenade;
 function grenadeEffect() {
   $grenadeNotice.style.animationName = 'grenade-notice';
   noise(audioURI, audioGrenade);
-
   setTimeout(grenadeEffectEnd, 600); // анимация
 }
 

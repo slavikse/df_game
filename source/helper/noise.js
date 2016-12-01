@@ -22,7 +22,6 @@ function setParam(audio, params) {
   const duration = param[1].toFixed(2); // продолжительность в ms
 
   audio.currentTime = startTime;
-
   setTimeout(playEnd.bind(null, audio), duration);
 
   return audio;

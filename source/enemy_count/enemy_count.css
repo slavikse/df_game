@@ -1,12 +1,12 @@
+.icon-enemy_count {
+  display: inline-block;
+  vertical-align: bottom;
+}
+
 .enemy-count {
   display: inline-block;
   width: 30px;
   color: white;
   font-size: 2.5em;
   will-change: contents;
-}
-
-.icon-enemy_count {
-  display: inline-block;
-  vertical-align: bottom;
 }

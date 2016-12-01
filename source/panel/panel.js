@@ -11,9 +11,4 @@ function showPanel() {
   $panel.classList.add('panel-show');
 }
 
-function removePanel() {
-  $panel.remove();
-}
-
 document.addEventListener('startGame', showPanel);
-document.addEventListener('gameOver', removePanel);

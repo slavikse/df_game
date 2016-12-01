@@ -1,5 +1,6 @@
 import range from 'libs/range';
 import throttle from 'libs/throttle';
+import delay from 'libs/delay';
 import {audioURI, audioSprite} from './../helper/audio_sprite';
 import noise from './../helper/noise';
 
@@ -25,13 +26,16 @@ const enemyHealthDefault = [1, 2];
 const enemyDamageTimeDefault = [6, 8];
 const enemyCloneCountDefault = 4;
 const enemyCloneCount = enemyCloneCountDefault;
+/** время для доанимирования врагов.
+ подчищаем остатки (актуально для конца игры) */
+const grenadeDelay = delay(grenade, 600);
 const eventEnemyAdd = new Event('enemyAdd');
 const eventEnemyDec = new Event('enemyDec');
 const eventScoreAdd = new Event('scoreAdd');
 const eventDamage = new Event('damage');
 
 let $paddock = $body.querySelector('.paddock');
-let enemyTimerID = [];
+let enemyTimerID = []; // для грены
 let allEnemyCurrent = 0; // для грены
 let playingFieldWidth;
 let playingFieldHeight;
@@ -64,6 +68,7 @@ function cloneCreate(cloneCount, fragment) {
     setImage(clone);
     setHealth(clone);
 
+    clone.isKill = false;
     fragment.appendChild(clone);
   }
 }
@@ -131,12 +136,19 @@ function setHealth(clone) {
 
 function enemyShoot(e) {
   const clone = e.enemy.parentNode;
+
+  // защита от частого выстрела в 1 точку, если враг уже мертв
+  if (clone.isKill) {
+    return;
+  }
+
   const warningNode = clone.querySelector('.enemy-warning');
   const damageNode = clone.querySelector('.enemy-damage');
   const enemyNode = clone.querySelector('.enemy');
   const healthNode = clone.querySelector('.enemy-health');
 
-  if (healthNode.health <= 1) {
+  if (healthNode.health === 1) { // когда будет 1, то значит уже готов
+    clone.isKill = true;
     enemyDeath({clone, warningNode, damageNode, enemyNode, healthNode});
   } else {
     healthNode.health -= 1;
@@ -158,7 +170,7 @@ function enemyHide(nodes) {
   nodes.healthNode.style.visibility = 'hidden';
 
   nodes.enemyNode.style.animationName = 'enemy-kill';
-  nodes.clone.classList.add('enemy-hide');
+  nodes.clone.classList.add('enemy-position-hide');
 
   allEnemyCurrent -= 1;
   document.dispatchEvent(eventEnemyDec);
@@ -167,15 +179,6 @@ function enemyHide(nodes) {
 
 function enemyHideDelay(clone) {
   clone.style.visibility = 'hidden';
-}
-
-function removeEnemyNode() {
-  setTimeout(removeEnemyNodeDelay, 600);
-}
-
-function removeEnemyNodeDelay() {
-  enemyTimerID = [];
-  $paddock.remove();
 }
 
 function grenade() {
@@ -226,6 +229,6 @@ document.addEventListener('enemyCreate', cloneEnemy);
 document.addEventListener('enemyShoot', enemyShoot);
 document.addEventListener('grenade', grenade);
 document.addEventListener('waveStart', createPaddock);
-document.addEventListener('waveEnd', removeEnemyNode);
+document.addEventListener('waveEnd', grenadeDelay);
 window.addEventListener('resize', playingFieldResize);
-document.addEventListener('gameOver', removeEnemyNode);
+document.addEventListener('gameOver', grenade);

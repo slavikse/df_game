@@ -11,6 +11,7 @@ function notify(note) {
 
   noteElement.classList.add('note');
   noteElement.insertAdjacentHTML('afterBegin', noteHtml);
+
   $notify.appendChild(noteElement);
   setTimeout(noteHide.bind(null, noteElement), 2000);
 }

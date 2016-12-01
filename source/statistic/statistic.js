@@ -12,7 +12,7 @@ import getWaveCount from './wave_count';
 
 const db = fb.database();
 
-let uid = null;
+let uid;
 let score;
 
 fb.auth().onAuthStateChanged(auth);
@@ -57,7 +57,7 @@ function getStatistic() {
     'В цель': inTarget,
     'Промахов': miss,
     'Точность': `${inTargetPercent}%`,
-    'Гранаты:': grenade
+    'Гранаты': grenade
   };
 
   getBestScore();

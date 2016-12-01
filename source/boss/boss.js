@@ -8,6 +8,7 @@ const $legL = $boss.querySelector('.boss-leg-l');
 const $legR = $boss.querySelector('.boss-leg-r');
 const eventEnemyCreate = new Event('enemyCreate');
 const eventScoreAdd = new Event('scoreAdd');
+// ссылки на части и их хп
 const bossParts = [
   [$body, 6],
   [$handL, 3],
@@ -17,7 +18,7 @@ const bossParts = [
 ];
 const partsLength = bossParts.length;
 
-let partsCount = partsLength - 1; // - торс, он в последнюю очередь
+let partsCount = partsLength - 1; // -1, торс в последнюю очередь
 
 eventScoreAdd.add = 100;
 setHealth();
@@ -27,12 +28,16 @@ function setHealth() {
     const part = bossParts[i][0];
     const health = bossParts[i][1];
 
-    part.health = health;
-    part.isCrash = true;
-    part.children[0].textContent = health;
+    setPartHealth(part, health);
   }
 
   bodyNotCrash();
+}
+
+function setPartHealth(part, health) {
+  part.health = health;
+  part.isCrash = true;
+  part.children[0].textContent = health;
 }
 
 function bodyNotCrash() {
@@ -43,12 +48,12 @@ function bodyNotCrash() {
 function docking() {
   $boss.classList.add('boss-docking');
 
-  document.addEventListener('bossShoot', damagePart);
+  document.addEventListener('bossShoot', isDamage);
   document.addEventListener('grenade', grenade);
 }
 
-function damagePart(e) {
-  const target = e.bossPart || e; // e - может быть частью босса
+function isDamage(e) {
+  const target = e.bossPart || e; // e - может быть частью босса (грена)
 
   if (target.isCrash) {
     damage(target);
@@ -72,7 +77,7 @@ function crash(target) {
 
   // можно стрелять в торс?
   if (partsCount === 0) {
-    bodyCrash();
+    nextBodyCrash();
   }
 
   // уничтожены все части?
@@ -89,6 +94,11 @@ function crashTarget(target) {
   target.isCrash = false; // уже разрушен. хватит
 }
 
+function nextBodyCrash() {
+  $body.isCrash = true;
+  $body.classList.remove('boss-body-not-crash');
+}
+
 function changePartModel(target) {
   // ищет класс начинающийся с icon-* и удаляет последний пробел
   const partClass = target.className.match(/icon-.* /)[0].slice(0, -1);
@@ -98,13 +108,8 @@ function changePartModel(target) {
   target.children[0].remove(); // del hp
 }
 
-function bodyCrash() {
-  $body.isCrash = true;
-  $body.classList.remove('boss-body-not-crash');
-}
-
 function undocking() {
-  document.removeEventListener('bossShoot', damagePart);
+  document.removeEventListener('bossShoot', isDamage);
   document.removeEventListener('grenade', grenade);
 
   $boss.classList.add('boss-undocking');
@@ -132,7 +137,7 @@ function grenade() {
   for (let i = 0, len = partsLength; i < len; i++) {
     const part = bossParts[i][0];
 
-    damagePart(part);
+    isDamage(part);
   }
 }
 

@@ -6,7 +6,8 @@
   display: flex;
   align-items: flex-end;
   opacity: 0;
-  transition: opacity 0.6s;
+  transition: opacity 0.6s; /* после начала игры замещает револьвер */
+  will-change: opacity;
 
   &-count {
     margin-left: -26px;

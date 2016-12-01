@@ -11,6 +11,7 @@
     justify-content: center;
     align-items: center;
     color: #fff;
+    /* общая для всех анимация сборки */
     animation: 1s cubic-bezier(1, 0.04, 0.72, 1.38) both paused;
     will-change: opacity, transform;
   }

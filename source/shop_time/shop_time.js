@@ -1,24 +1,24 @@
 const $shopTime = document.querySelector('.shop-time');
 const texts = ['Передохни!', 'Понеслась!'];
-const textsLength = texts.length - 1;
+const textsLength = texts.length;
 
-let i = 0;
+let currentTextIndex = 0;
+let shopTimeTimerID;
+
+// если конец игры, то успеет отменить показ уведомляшки
+function shopTimeDelay() {
+  shopTimeTimerID = setTimeout(shopTime, 200);
+}
 
 function shopTime() {
   textToggle();
   $shopTime.style.animationName = 'shop-time';
-
   setTimeout(shopTimeEnd, 1500);
 }
 
 function textToggle() {
-  $shopTime.textContent = texts[i];
-
-  if (i === textsLength) {
-    i = 0;
-  } else {
-    i += 1;
-  }
+  $shopTime.textContent = texts[currentTextIndex];
+  currentTextIndex = (currentTextIndex + 1) % textsLength;
 }
 
 function shopTimeEnd() {
@@ -26,9 +26,10 @@ function shopTimeEnd() {
   $shopTime.style.animationName = '';
 }
 
-function shopTimeDelay() {
-  setTimeout(shopTime, 300);
+function gameOver() {
+  clearTimeout(shopTimeTimerID);
 }
 
-document.addEventListener('waveEnd', shopTime);
+document.addEventListener('waveEnd', shopTimeDelay);
 document.addEventListener('waveStart', shopTimeDelay);
+document.addEventListener('gameOver', gameOver);

@@ -4,16 +4,16 @@ import './../guide/guide';
 import {audioURI, audioSprite} from './../helper/audio_sprite';
 import noise from './../helper/noise';
 
+const db = fb.database();
 const $body = document.body;
 const $startScreen = $body.querySelector('.start-screen');
 const $bestScore = $startScreen.querySelector('.best-score');
 const $newGame = $startScreen.querySelector('.new-game');
-const $ambient = $body.querySelector('.ambient');
 const $forestNight = $body.querySelector('.forest-night');
+const $ambient = $body.querySelector('.ambient');
 const audioHover = audioSprite.hover_menu;
 const audioIntro = audioSprite.intro;
 const eventStartGame = new Event('startGame');
-const db = fb.database();
 
 fb.auth().onAuthStateChanged(auth);
 
@@ -47,7 +47,7 @@ function initGame() {
   $newGame.removeEventListener('click', initGame);
 
   $startScreen.classList.add('start-screen-no-events');
-  $newGame.classList.add('new-game-start');
+  $newGame.style.animationName = 'new-game';
 
   noise(audioURI, audioIntro);
   changeBackground();
