@@ -43,12 +43,12 @@ function getStatistic() {
   } = getShootCount();
   const waveCount = getWaveCount();
   const data = {
-    'Время игры': `${minutes}m ${second}s`,
+    'Время игры': `${minutes}м ${second}с`,
     'Волн пройдено': waveCount,
     'Доп волн': shootCat,
     'Боль Боссу!': shootBoss,
-    'Заработано': `${score}$`,
-    'Расходы': `${costs}$`,
+    'Заработано': `$${score}`,
+    'Расходы': `$${costs}`,
     'Перезарядок': drumReload,
     'Пуль выброшено': discardedBullet,
     'Получено урона': receivedDamage,

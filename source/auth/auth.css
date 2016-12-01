@@ -189,11 +189,11 @@
   }
 
   &:valid {
-    border-color: #51d83f;
+    border-color: #3ea831;
   }
 
   &:invalid {
-    border-color: #e20000;
+    border-color: red;
   }
 }
 

@@ -44,7 +44,7 @@
     top: 0;
     left: 0;
     height: 100%;
-    border: 4px dashed white;
+    border-right: 4px dashed white;
     background-color: #000;
     overflow-y: auto;
     outline: 0;

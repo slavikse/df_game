@@ -6,18 +6,22 @@
   flex-direction: column;
   justify-content: center;
 
-  & .not {
+  & .note {
     margin: 4px 0;
-    padding: 8px 10px;
-    max-width: 160px;
+    padding: 6px 0;
+    width: 200px;
     border-radius: 4px;
-    font-size: 1.2em;
+    font-size: 1.6em;
+    text-align: center;
     background-color: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    animation: note-show 0.2s both;
+    transition: transform 0.4s;
+    will-change: opacity, transform;
   }
 
-  & .title {
-    font-weight: 800;
-    text-transform: uppercase;
+  & .hide {
+    transform: translateX(100%);
   }
 
   & .info {
@@ -33,8 +37,8 @@
   }
 }
 
-/*
-каждая планочка имеет свои стили, указая их при передаче
- три типа: уведомление, замечание, ошибка (info, warn, error)
- для них определены стили в этом модуле
- */
+@keyframes note-show {
+  100% {
+    opacity: 1;
+  }
+}

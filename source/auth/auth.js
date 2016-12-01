@@ -142,7 +142,7 @@ function dataCorrect(email, password) {
 
 function dataInCorrect() {
   noise(audioURI, audioCancel);
-  notify('Не корректные данные!');
+  notify({type: 'warn', message: 'Исправь данные!'});
   submitAnimate('auth-submit-error');
 }
 
@@ -161,7 +161,7 @@ function authSuccess() {
   submitAnimateEnd();
   authLoginAnimate();
 
-  notify('Вход выполнен!');
+  notify({type: 'info', message: 'Привет!'});
   submitAnimate('auth-submit-success');
 
   setTimeout(authShowToggle, 1200);
@@ -179,7 +179,7 @@ function authWrong() {
   isAuthProgress = false;
 
   noise(audioURI, audioCancel);
-  notify('Не верные данные!');
+  notify({type: 'error', message: 'Данные заняты!'});
   submitAnimate('auth-submit-error');
 }
 
@@ -219,6 +219,7 @@ function fbLogout() {
 function fbLogoutEnd() {
   fb.auth().signOut();
   $authShow.classList.remove('auth-show-logout');
+  notify({type: 'info', message: 'Пока!'});
 }
 
 function hoverAuthOpener() {
