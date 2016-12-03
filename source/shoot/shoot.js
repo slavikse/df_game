@@ -3,8 +3,9 @@ import {audioURI, audioSprite} from './../helper/audio_sprite';
 import noise from './../helper/noise';
 
 const $body = document.body;
+const $shoot = $body.querySelector('.shoot');
 const fireRate = 166.6;
-const shootFire = debounce(shoot, fireRate);
+const shootFire = debounce(canShoot, fireRate);
 const audioIdle = audioSprite.idle;
 const shootEvent = new Event('shoot');
 const eventCatShoot = new Event('catShoot');
@@ -18,36 +19,46 @@ let shootCountInBossStat = 0;
 let shootMoveTimerID;
 let shootDownTimerID;
 
-function shoot(e) {
-  /** нажата не ЛКМ */
-  if (e.which !== 1) {
-    return;
-  } else
-
-  /** выстрелы заблокированы
-   * (введен дополнительный идентификатор [nothing-shoot], потому,
-   * что dont-shoot используется многими модулями.
-   * Тем самым это некое разделение ответственности)
-   */
-  if (
-    $body.classList.contains('dont-shoot') ||
-    $body.classList.contains('nothing-shoot')
+/** нажата ЛКМ,
+ * выстрелы не заблокированы,
+ * (введен дополнительный идентификатор [nothing-shoot], потому,
+ * что dont-shoot используется многими модулями
+ */
+function canShoot(e) {
+  if (e.which === 1 &&
+    !$body.classList.contains('dont-shoot') &&
+    !$body.classList.contains('nothing-shoot')
   ) {
+    shoot(e);
+
+    // document.dispatchEvent(new Event('damage'));
+
+    // уведомляет о выстреле: оружие
+    document.dispatchEvent(shootEvent);
+    shootCountTotalStatistic();
+  } else {
     noise(audioURI, audioIdle);
-    return;
   }
+}
 
-  // document.dispatchEvent(new Event('damage'));
-
+function shoot(e) {
   const x = e.clientX;
   const y = e.clientY;
 
-  shootEvent.shoot = {x, y};
-  document.dispatchEvent(shootEvent);
-  shootCountTotalStatistic();
-
+  shootSetParams(x, y);
   shootDelegate(e);
-  shootDownTimerID = setTimeout(shoot.bind(null, e), fireRate);
+  shootDownTimerID = setTimeout(canShoot.bind(null, e), fireRate);
+}
+
+function shootSetParams(x, y) {
+  $shoot.style.transform = `translate(${x}px, ${y}px)`;
+  $shoot.style.opacity = 1;
+
+  setTimeout(shootHide, 40);
+}
+
+function shootHide() {
+  $shoot.style.opacity = 0;
 }
 
 function shootDelegate(e) {

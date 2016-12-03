@@ -2,26 +2,28 @@ import {audioURI, audioSprite} from '../helper/audio_sprite';
 import noise from '../helper/noise';
 
 const $healthNotice = document.querySelector('.health-notice');
-const healAudiosURI = [
-  audioSprite.heal1,
-  audioSprite.heal2
-];
-const damageAudiosURI = [
+const audioHeartBeat = audioSprite.heart_beat;
+const audioDamage = [
   audioSprite.damage1,
   audioSprite.damage2,
   audioSprite.damage3
+];
+const audioHeal = [
+  audioSprite.heal1,
+  audioSprite.heal2
 ];
 
 let healthNoticeTimerID;
 
 function damage() {
   healthAnimation('health-damage');
-  noise(audioURI, damageAudiosURI);
+  noise(audioURI, audioHeartBeat);
+  noise(audioURI, audioDamage);
 }
 
 function regeneration() {
   healthAnimation('health-regeneration');
-  noise(audioURI, healAudiosURI);
+  noise(audioURI, audioHeal);
 }
 
 function healthAnimation(animationName) {

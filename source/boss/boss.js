@@ -20,7 +20,7 @@ const partsLength = bossParts.length;
 
 let partsCount = partsLength - 1; // -1, торс в последнюю очередь
 
-eventScoreAdd.add = 100;
+eventScoreAdd.add = 100; // за килл босса
 setHealth();
 
 function setHealth() {
@@ -37,7 +37,7 @@ function setHealth() {
 function setPartHealth(part, health) {
   part.health = health;
   part.isCrash = true;
-  part.children[0].textContent = health;
+  part.children[0].textContent = health; // хп части
 }
 
 function bodyNotCrash() {
@@ -62,7 +62,7 @@ function isDamage(e) {
 
 function damage(target) {
   target.health -= 1;
-  target.children[0].textContent -= 1;
+  target.children[0].textContent -= 1; // хп части
 
   if (target.health === 0) {
     crash(target);
@@ -94,18 +94,18 @@ function crashTarget(target) {
   target.isCrash = false; // уже разрушен. хватит
 }
 
-function nextBodyCrash() {
-  $body.isCrash = true;
-  $body.classList.remove('boss-body-not-crash');
-}
-
 function changePartModel(target) {
   // ищет класс начинающийся с icon-* и удаляет последний пробел
   const partClass = target.className.match(/icon-.* /)[0].slice(0, -1);
   target.classList.remove(partClass);
   target.classList.add(`${partClass}_rock`);
 
-  target.children[0].remove(); // del hp
+  target.children[0].remove(); // удаляет хп
+}
+
+function nextBodyCrash() {
+  $body.isCrash = true;
+  $body.classList.remove('boss-body-not-crash');
 }
 
 function undocking() {
@@ -122,6 +122,7 @@ function undocking() {
   }
 }
 
+//TODO придумать более элегантный распад + стили
 function undockingPart(part) {
   let animationName = getComputedStyle(part).animationName;
 

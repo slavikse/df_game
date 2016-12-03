@@ -5,6 +5,7 @@
 @import 'preload/preload.css';
 @import 'helper/loader.css';
 @import 'notify/notify.css';
+@import 'shoot/shoot.css';
 @import 'start_screen/start_screen.css';
 @import '../temp/sprite.png.css';
 @import 'cat/cat.css';

@@ -1,0 +1,9 @@
+.shoot {
+  position: absolute;
+  z-index: 3;
+  top: -16.5px; /* моделька огонька по центру */
+  left: -16.5px;
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity, transform; /* выстрел */
+}

@@ -23,6 +23,7 @@
   z-index: 1;
   opacity: 0;
   pointer-events: none;
+  will-change: opacity;
 }
 
 .enemy-damage {
@@ -72,4 +73,5 @@
   font-size: 0.8em;
   background-color: #b90000;
   pointer-events: none;
+  will-change: opacity;
 }

@@ -21,7 +21,7 @@ function audioPreload(audioSrc) {
 
   //fix: Uncaught (in promise) DOMException: The play() request was interrupted
   // by a call to pause()
-  setTimeout(audioStop.bind(null, audio), 1000);
+  setTimeout(audioStop.bind(null, audio), 2000);
 }
 
 function audioStop(audio) {

@@ -7,7 +7,6 @@ const $iconRevolver = $body.querySelector('.icon-revolver');
 const $drum = $revolverDrum.querySelector('.drum');
 const $bullets = $drum.querySelectorAll('.bullet');
 const $drumCount = $revolverDrum.querySelector('.drum-count');
-const $shoot = $body.querySelector('.shoot');
 const bulletDrum = 6;
 const audioShoots = [
   audioSprite.shoot1,
@@ -25,14 +24,10 @@ let isDrumRotate = false;
 
 function authBonus() {
   drumCount += 1;
-  drumCountChange(drumCount);
 }
 
-drumCountChange(drumCount);
-
-function shoot(e) {
+function shoot() {
   noise(audioURI, audioShoots);
-  shootPositionChange(e.shoot.x, e.shoot.y);
 
   /** GOD MOD */
 
@@ -43,6 +38,12 @@ function shoot(e) {
   /** / GOD MOD */
 
   drumTurn();
+}
+
+function drumTurn() {
+  $bullets[bulletCurrent].style.opacity = 0;
+  bulletCurrent += 1;
+  $drum.style.transform = `rotate(-${bulletCurrent * 60}deg)`;
 
   /** пули в барабане закончились */
   if (bulletCurrent === bulletDrum) {
@@ -50,43 +51,21 @@ function shoot(e) {
   }
 }
 
-function shootPositionChange(x, y) {
-  $shoot.style.transform = `translate(${x}px, ${y}px)`;
-  $shoot.classList.add('shoot-visible');
-
-  setTimeout(shootHide, 40);
-}
-
-function shootHide() {
-  $shoot.classList.remove('shoot-visible');
-}
-
-function drumTurn() {
-  $bullets[bulletCurrent].classList.add('hide');
-  bulletCurrent += 1;
-  $drum.style.transform = `rotate(-${bulletCurrent * 60}deg)`;
-}
-
+/**
+ * барабан полон пуль или
+ * не перезаряжается в данный момент или
+ * не кончились барабаны для перезарядки
+ */
 function drumRotate() {
-  /**
-   * перезаряжен или
-   * перезаряжается или
-   * кончились пули
-   */
-  if (
-    bulletCurrent === 0 ||
-    isDrumRotate ||
-    drumCount === 0
-  ) {
-    return;
+  if (bulletCurrent !== 0 && !isDrumRotate && drumCount !== 0) {
+    isDrumRotate = true;
+    noise(audioURI, audioReload);
+
+    $body.classList.add('nothing-shoot');
+    $drum.style.animationName = 'drum-rotate';
+
+    drumReload();
   }
-
-  $body.classList.add('nothing-shoot');
-  isDrumRotate = true;
-  $drum.style.animationName = 'drum-rotate';
-  noise(audioURI, audioReload);
-
-  drumReload();
 }
 
 function drumReload() {
@@ -103,7 +82,7 @@ function drumReload() {
 
 function holeReload() {
   for (let i = 0; i < bulletDrum; i++) {
-    $bullets[i].classList.remove('hide');
+    $bullets[i].style.opacity = 1;
   }
 }
 
@@ -157,6 +136,7 @@ function drumReloadCountStatistic() {
 }
 
 function startGame() {
+  drumCountChange(drumCount);
   setTimeout(hideIconRevolver, 2000);
 
   document.addEventListener('shoot', shoot);

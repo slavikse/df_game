@@ -24,7 +24,7 @@ const enemyDec = 1;
 const scoreAdd = 7;
 const enemyHealthDefault = [1, 2];
 const enemyDamageTimeDefault = [6, 8];
-const enemyCloneCountDefault = 4;
+const enemyCloneCountDefault = 4; // 4
 const enemyCloneCount = enemyCloneCountDefault;
 /** время для доанимирования врагов.
  подчищаем остатки (актуально для конца игры) */
@@ -134,14 +134,16 @@ function setHealth(clone) {
   healthNode.textContent = health;
 }
 
-function enemyShoot(e) {
+function isEnemyShoot(e) {
   const clone = e.enemy.parentNode;
 
-  // защита от частого выстрела в 1 точку, если враг уже мертв
-  if (clone.isKill) {
-    return;
+  // защита от частого выстрела в 1 точку, если враг жив
+  if (!clone.isKill) {
+    enemyShoot(clone);
   }
+}
 
+function enemyShoot(clone) {
   const warningNode = clone.querySelector('.enemy-warning');
   const damageNode = clone.querySelector('.enemy-damage');
   const enemyNode = clone.querySelector('.enemy');
@@ -166,8 +168,8 @@ function enemyHide(nodes) {
   clearTimeout(nodes.clone.warningTimer);
   clearTimeout(nodes.clone.damageTimer);
 
-  nodes.warningNode.style.visibility = 'hidden';
-  nodes.healthNode.style.visibility = 'hidden';
+  nodes.warningNode.style.opacity = 0;
+  nodes.healthNode.style.opacity = 0;
 
   nodes.enemyNode.style.animationName = 'enemy-kill';
   nodes.clone.classList.add('enemy-position-hide');
@@ -178,7 +180,7 @@ function enemyHide(nodes) {
 }
 
 function enemyHideDelay(clone) {
-  clone.style.visibility = 'hidden';
+  clone.style.opacity = 0;
 }
 
 function grenade() {
@@ -226,7 +228,7 @@ function playingField() {
 
 document.addEventListener('startGame', createPaddock);
 document.addEventListener('enemyCreate', cloneEnemy);
-document.addEventListener('enemyShoot', enemyShoot);
+document.addEventListener('enemyShoot', isEnemyShoot);
 document.addEventListener('grenade', grenade);
 document.addEventListener('waveStart', createPaddock);
 document.addEventListener('waveEnd', grenadeDelay);
