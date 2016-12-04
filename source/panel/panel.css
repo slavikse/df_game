@@ -16,6 +16,7 @@
   align-items: flex-end;
   width: 100%;
   opacity: 0;
+  text-shadow: 2px 2px 0 black;
   pointer-events: none;
   transition: 1.5s opacity;
 

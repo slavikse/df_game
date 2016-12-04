@@ -25,19 +25,18 @@ let shootDownTimerID;
  * что dont-shoot используется многими модулями
  */
 function canShoot(e) {
-  if (e.which === 1 &&
-    !$body.classList.contains('dont-shoot') &&
-    !$body.classList.contains('nothing-shoot')
-  ) {
-    shoot(e);
-
-    // document.dispatchEvent(new Event('damage'));
-
-    // уведомляет о выстреле: оружие
-    document.dispatchEvent(shootEvent);
-    shootCountTotalStatistic();
-  } else {
-    noise(audioURI, audioIdle);
+  // пропустит дальше если только был выстрел (ЛКМ)
+  if (e.which === 1) {
+    if ($body.classList.contains('dont-shoot') ||
+      $body.classList.contains('nothing-shoot')) {
+      noise(audioURI, audioIdle);
+    } else {
+      shoot(e);
+      // document.dispatchEvent(new Event('damage'));
+      // уведомляет оружие о выстреле
+      document.dispatchEvent(shootEvent);
+      shootCountTotalStatistic();
+    }
   }
 }
 

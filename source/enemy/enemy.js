@@ -86,6 +86,7 @@ function setDamage(clone) {
   const damageNode = clone.querySelector('.enemy-damage');
   const enemyNode = clone.querySelector('.enemy');
   const healthNode = clone.querySelector('.enemy-health');
+  const nodes = {clone, warningNode, damageNode, enemyNode, healthNode};
 
   clone.warningTimer = setTimeout(
     enemyWarning.bind(null, warningNode),
@@ -93,17 +94,7 @@ function setDamage(clone) {
   );
 
   /** сохраняет таймер урона для дальнейшего его удаления */
-  const timerID = setTimeout(
-    enemyDamage.bind(null, {
-      clone,
-      warningNode,
-      damageNode,
-      enemyNode,
-      healthNode
-    }),
-    damageTimer
-  );
-
+  const timerID = setTimeout(enemyDamage.bind(null, nodes), damageTimer);
   clone.damageTimer = timerID;
   enemyTimerID.push(timerID);
 }

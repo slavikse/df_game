@@ -25,7 +25,7 @@
     display: flex;
     font-size: 2.8em;
     color: #fff;
-    text-shadow: 0 0 2px black;
+    text-shadow: 2px 2px 0 black;
     transition: opacity 0.4s;
     will-change: opacity;
   }
@@ -43,26 +43,21 @@
     font-size: 5em;
     line-height: 0.7;
     color: #ff0;
-    text-shadow: 2px 2px 0 green;
+    text-shadow: 2px 2px 0 black;
     cursor: pointer;
-    animation: 0.2s; /* new-game */
+    animation: 0.1s; /* new-game */
     transition: opacity 0.4s;
     will-change: opacity, transform;
 
     &:hover {
-      color: green;
-      text-shadow: 2px 2px 0 #ff0;
+      color: #00fe23;
     }
   }
 }
 
 @keyframes new-game {
   0% {
-    transform: scale(0.8);
-  }
-
-  50% {
-    transform: scale(1.2);
+    transform: scale(0.9);
   }
 
   100% {

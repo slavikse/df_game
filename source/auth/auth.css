@@ -29,6 +29,7 @@
   color: #51d83f;
   line-height: 0.5;
   cursor: pointer;
+  text-shadow: 2px 2px 0 black;
   transition: color 0.2s;
 
   &:hover {
@@ -125,7 +126,7 @@
   color: #fff;
   font-size: 2.6em;
   text-align: center;
-  text-shadow: 0 0 2px black;
+  text-shadow: 2px 2px 0 black;
   background-color: rgba(0, 0, 0, 0.2);
   transition: border-color 0.4s;
 
@@ -159,11 +160,15 @@
   padding: 6px 0;
   color: #51d83f;
   font-size: 2.8em;
-  text-shadow: 0 0 2px black;
+  text-shadow: 2px 2px 0 black;
   background-color: rgba(0, 0, 0, 0.5);
   cursor: pointer;
   animation: 0.4s infinite alternate both; /* auth-submit-* */
   will-change: transform;
+
+  &:hover {
+    color: #5eff4a;
+  }
 }
 
 @keyframes auth-submit-waited {

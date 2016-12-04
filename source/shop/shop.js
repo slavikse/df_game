@@ -9,7 +9,7 @@ const $store = $shop.querySelector('.store');
 const $drumItem = $store.querySelector('.drum-shop');
 const $grenadeItem = $store.querySelector('.grenade-shop');
 const $firstAidItem = $store.querySelector('.first-aid-shop');
-const items = [$drumItem, $grenadeItem, $firstAidItem];
+const items = [$drumItem, $grenadeItem]; // хилка уникальна
 const itemsLength = items.length;
 const $shopClose = $shop.querySelector('.shop-close');
 const audioBuyHover = audioSprite.buy_hover;
@@ -42,6 +42,8 @@ $firstAidItem.shopDetail = {
   type: 'first-aid',
   price: 60
 };
+
+const firstAidPrice = $firstAidItem.shopDetail.price;
 
 function scoreShop(e) {
   score = e.score;
@@ -76,9 +78,15 @@ function buyLockUnlock() {
     }
   }
 
-  /** максимально аптечек [0-1], т.е. 2 штуки */
-  if (firstAid === 1) {
+  canBuyFirstAid();
+}
+
+/** максимально аптечек [0-1], т.е. 2 штуки */
+function canBuyFirstAid() {
+  if (firstAid === 1 || firstAidPrice > score) {
     $firstAidItem.classList.add('buy-block');
+  } else {
+    $firstAidItem.classList.remove('buy-block');
   }
 }
 
@@ -139,6 +147,11 @@ function buyCompletion(price) {
   buyLockUnlock();
 }
 
+function useFirstAid() {
+  firstAid -= 1;
+  canBuyFirstAid();
+}
+
 function hoverShopClose() {
   noise(audioURI, audioClick);
 }
@@ -175,6 +188,7 @@ function gameOver() {
 document.addEventListener('scoreShop', scoreShop);
 document.addEventListener('firstAidShop', firstAidShop);
 document.addEventListener('waveEnd', openShopDelay);
+document.addEventListener('regeneration', useFirstAid);
 $store.addEventListener('mouseover', itemHandler);
 $store.addEventListener('click', buy);
 $shopClose.addEventListener('mouseover', hoverShopClose);

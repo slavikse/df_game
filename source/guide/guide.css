@@ -8,8 +8,8 @@
   color: #fff;
   font-size: 2.2em;
   text-align: center;
-  text-shadow: 0 0 2px black;
-  box-shadow: 0 0 2px black;
+  text-shadow: 1px 1px 0 black;
+  box-shadow: 0 0 6px black;
   cursor: pointer;
   transition: opacity 0.2s;
   will-change: opacity;
