@@ -3,51 +3,70 @@ import noise from './../helper/noise';
 
 const $ticker = document.querySelector('.ticker');
 const tickDefault = 4;
-const numberWaveDefault = 3; // 3
+const numberWaveDefault = 1; // 3
 const audioTick = audioSprite.tick;
 const eventEnemyCreate = new Event('enemyCreate');
 const eventWaveEnd = new Event('waveEnd');
 const eventBossComing = new Event('bossComing');
+const eventBoss = new Event('boss');
 
 let isWaveEnd;
 let tickCurrent = 0;
 let numberWaveCurrent = 0;
-let nextTickTimerID;
-let pauseTimerID;
+let tickerNextTimerID;
 let waveCountStat = 0;
+let isBossCame = false;
 
 function runWave() {
-  isWaveEnd = false;
-  tick();
-}
-
-function tick() {
-  nextTickTimerID = setTimeout(nextTick, 1000);
-}
-
-function nextTick() {
-  const tickerRotateX = 360 - 90 * tickCurrent;
-  $ticker.style.transform = `rotateX(${tickerRotateX}deg)`;
-  setTimeout(noise.bind(null, audioURI, audioTick), 400); // анимация падения
-
-  if (tickCurrent === tickDefault) {
-    extraWave();
-    tickCurrent = 0;
-
-    if (!isWaveEnd) {
-      tick();
-    }
-  } else if (!isWaveEnd) {
-    tickCurrent += 1;
-    tick();
+  if (isBossCame) {
+    // отписываемся после магаз паузы, мобы при боссе не отсчитываются
+    document.removeEventListener('noEnemy', noEnemy);
+    document.dispatchEvent(eventBoss);
+  } else {
+    isWaveEnd = false;
+    ticker();
   }
 }
 
-function extraWave() {
-  extraTick();
+function ticker() {
+  tickerNextTimerID = setTimeout(tick, 1000);
+}
 
+function tick() {
+  const tickerRotateX = 360 - 90 * tickCurrent;
+
+  $ticker.style.transform = `rotateX(${tickerRotateX}deg)`;
+  setTimeout(noise.bind(null, audioURI, audioTick), 400); // анимация падения
+
+  if (isWaveEnd) {
+    tickPause();
+  } else {
+    tickNext();
+  }
+}
+
+function tickPause() {
+  $ticker.style.transform = 'rotateY(90deg)'; // пауза ||
+}
+
+function tickNext() {
+  if (tickCurrent === tickDefault) {
+    tickPlus();
+    waveExtra();
+  } else {
+    tickCurrent += 1;
+  }
+
+  ticker();
+}
+
+function tickPlus() {
+  $ticker.style.transform = 'rotateY(-90deg)'; // волна +
+}
+
+function waveExtra() {
+  tickCurrent = 0;
   numberWaveCurrent += 1;
-  saveWaveCountStat();
 
   if (numberWaveCurrent === numberWaveDefault) {
     waveEnd();
@@ -55,21 +74,13 @@ function extraWave() {
 
   document.dispatchEvent(eventEnemyCreate);
   document.dispatchEvent(eventBossComing);
-}
-
-function extraTick() {
-  $ticker.style.transform = 'rotateY(-90deg)'; // доп волна +
+  saveWaveCountStat();
 }
 
 function waveEnd() {
-  pauseTimerID = setTimeout(tickPause, 1000); // для показа + перед паузой
-
   isWaveEnd = true;
   numberWaveCurrent = 0;
-}
-
-function tickPause() {
-  $ticker.style.transform = 'rotateY(90deg)'; // пауза ||
+  setTimeout(tickPause, 1000); // для показа '+' перед '||'
 }
 
 /** только когда все волны закончились по
@@ -81,10 +92,13 @@ function noEnemy() {
   }
 }
 
-function boss() {
-  clearTimeout(nextTickTimerID);
-  clearTimeout(pauseTimerID);
-  tickPause();
+function bossCame() {
+  isBossCame = true;
+}
+
+function bossGone() {
+  isBossCame = false;
+  document.addEventListener('noEnemy', noEnemy);
 }
 
 function saveWaveCountStat() {
@@ -93,17 +107,19 @@ function saveWaveCountStat() {
 
 function waveCountStatistic() {
   const waveCountEvent = new Event('waveCount');
+
   waveCountEvent.waveCount = waveCountStat;
   document.dispatchEvent(waveCountEvent);
 }
 
 function gameOver() {
-  clearTimeout(nextTickTimerID);
+  clearTimeout(tickerNextTimerID);
   waveCountStatistic();
 }
 
 document.addEventListener('startGame', runWave);
 document.addEventListener('noEnemy', noEnemy);
 document.addEventListener('waveStart', runWave);
-document.addEventListener('boss', boss);
+document.addEventListener('bossCame', bossCame);
+document.addEventListener('bossGone', bossGone);
 document.addEventListener('gameOver', gameOver);

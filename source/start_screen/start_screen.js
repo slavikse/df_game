@@ -37,7 +37,7 @@ function initGame() {
   window.god = false;
 
   document.addEventListener('keyup', e => {
-    if (e.keyCode === 191) { // ?/;
+    if (e.keyCode === 191) { // ?
       window.god = true;
     }
   });

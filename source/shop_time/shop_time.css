@@ -5,8 +5,7 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  font-size: 5em;
-  color: #fff;
+  font-size: 6em;
   text-shadow: 2px 2px 0 black;
   pointer-events: none;
   animation: 1.5s both; /* shop-time */
@@ -15,12 +14,12 @@
 
 @keyframes shop-time {
   0%,
-  30% {
+  20% {
     opacity: 0;
     transform: scale(2.6);
   }
 
-  30%,
+  20%,
   80% {
     opacity: 1;
     transform: scale(1);
@@ -30,4 +29,12 @@
     opacity: 0;
     transform: scale(0.6);
   }
+}
+
+.shop-time-text {
+  color: white;
+}
+
+.boss-time-text {
+  color: red;
 }

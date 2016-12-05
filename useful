@@ -2,8 +2,6 @@
 ------------------------ РАЗМЕТКА ---------------------------
 
 Экранировать пользовательский ввод. защищаться от CSRF
-CSP: stackoverflow.com/questions/30280370/how-does-content-security-policy-work
-
 img[width height alt], a[title], template, пробел: &#32;
 PICTURE: frontender.info/responsive-images
 webp:
@@ -40,26 +38,8 @@ webp:
     srcset="image/meet_pers2@2x.jpg 2x">
 </picture>
 
-<meta http-equiv="x-dns-prefetch-control" content="on">
 <link rel="dns-prefetch" href="https://URI.com">
 <link rel="prefetch" href="secondary.js">
-
-Social: Facebook / Open Graph
-<meta property="fb:ADD_ID" content="123456789">
-
-<meta property="og:title" content="Заголовок">
-<meta property="og:description" content="Описание">
-<meta property="og:url" content="http://site.com">
-<meta property="og:type" content="website">
-<meta property="og:image" content="https://">
-<meta property="og:locale" content="ru_RU">
-
-Twitter
-<meta name="twitter:title" content="Content Title">
-<meta name="twitter:description" content="less than 200 characters">
-<meta name="twitter:url" content="https://example.com/page.html">
-<meta name="twitter:image" content="https://example.com/image.jpg">
-<meta name="twitter:card" content="summary">
 
 
 --------------------------- СТИЛИ ----------------------------
@@ -71,11 +51,11 @@ Twitter
   Остальное
 
 Рекомендации:
-  Mobile first! Поиск справа налево. will-change для сложной анимации
+  Mobile first! Поиск справа налево
   Layout: раскладка (width, left..), дорогая операция
   Paint: отрисовка (color, opacity..), дешевая операция
   Composite: компоновка, самая дешевая операция
-  Opacity, transform: самые дешевые операции
+  will-change: Opacity, transform: самые дешевые операции
 
 Ширины экранов (основано на bstp4):
   xs = 544px
@@ -116,7 +96,7 @@ picturefill();
 
 new FormData
 
------------------------------ NPM ---------------------------
+---------------------------- ПРОЧЕЕ ---------------------------
 opener: npmjs.com/package/opener
 
 Оформление незагруженных изображений:

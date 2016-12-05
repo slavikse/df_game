@@ -9,7 +9,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transition: opacity 0.8s;
+  transition: opacity 1s;
   will-change: opacity;
 
   &-no-events {
@@ -33,7 +33,7 @@
   & .best-score {
     display: flex;
     justify-content: center;
-    width: 60px;
+    width: 70px;
     height: 44px; /* чтобы после loader не дергался */
   }
 
@@ -45,7 +45,7 @@
     color: #ff0;
     text-shadow: 2px 2px 0 black;
     cursor: pointer;
-    animation: 0.1s; /* new-game */
+    animation: 0.2s; /* new-game */
     transition: opacity 0.4s;
     will-change: opacity, transform;
 

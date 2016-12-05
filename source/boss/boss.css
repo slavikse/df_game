@@ -2,104 +2,107 @@
 
 .boss {
   position: absolute;
-  margin: 50px 150px;
+  opacity: 0;
   pointer-events: none;
+  transition: opacity 0.2s;
+  will-change: opacity, transform;
 
-  & .boss-part {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    /* общая для всех анимация сборки */
-    animation: 1s cubic-bezier(1, 0.04, 0.72, 1.38) both paused;
-    will-change: opacity, transform;
-  }
-
-  & .boss-part-health {
-    position: relative;
-    padding: 2px 4px;
-    font-family: sans-serif;
-    background-color: #7f0000;
-    border-radius: 50%;
-    pointer-events: none;
-  }
-
-  & .boss-body-not-crash {
-    color: grey;
-  }
-
-  &.boss-docking {
-    pointer-events: auto;
-
-    & .boss-part {
-      animation-play-state: running;
-    }
-  }
-
-  &.boss-undocking .boss-part {
-    animation-delay: 0s;
-    animation-timing-function: ease-out;
-  }
-
-  & .boss-body {
-    z-index: 2;
-    animation-name: boss-body;
-    animation-delay: 0.2s;
-  }
-
-  & .boss-body-health {
-    top: 36px;
-    left: 9px;
-  }
-
-  & .boss-hand-l {
-    z-index: 2;
-    animation-name: boss-hand-l;
-    animation-delay: 1s;
-  }
-
-  & .boss-hand-l-health {
-    top: 28px;
-    left: 10px;
-  }
-
-  & .boss-hand-r {
-    z-index: 1;
-    animation-name: boss-hand-r;
-    animation-delay: 1.4s;
-  }
-
-  & .boss-hand-r-health {
-    top: 20px;
-    left: 3px;
-  }
-
-  & .boss-leg-l {
-    z-index: 1;
-    animation-name: boss-leg-l;
-    animation-delay: 1.8s;
-  }
-
-  & .boss-leg-l-health {
-    top: -4px;
-    left: 13px;
-  }
-
-  & .boss-leg-r {
-    z-index: 1;
-    animation-name: boss-leg-r;
-    animation-delay: 2.2s;
-  }
-
-  & .boss-leg-r-health {
-    top: -28px;
-    left: -10px;
+  & .no-crash {
+    color: black;
   }
 
   & .crash {
     pointer-events: none;
   }
+
+  &.boss-docking {
+    opacity: 1;
+    pointer-events: auto;
+
+    & .boss-node {
+      animation-play-state: running;
+    }
+  }
+
+  &.boss-undocking .boss-node {
+    animation-delay: 0s;
+    animation-timing-function: ease-out;
+  }
+}
+
+.boss-node {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  /* общая для всех анимация сборки */
+  animation: 1s cubic-bezier(1, 0.04, 0.72, 1.38) both paused;
+  will-change: opacity, transform;
+
+  &-health {
+    position: relative;
+    padding: 2px 3px;
+    font-family: sans-serif;
+    background-color: rgba(128, 0, 0, 0.6);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+}
+
+.boss-body {
+  z-index: 2;
+  animation-name: boss-body;
+  animation-delay: 0.2s;
+}
+
+.boss-body-health {
+  top: 36px;
+  left: 9px;
+}
+
+.boss-hand-l {
+  z-index: 2;
+  animation-name: boss-hand-l;
+  animation-delay: 1s;
+}
+
+.boss-hand-l-health {
+  top: 28px;
+  left: 10px;
+}
+
+.boss-hand-r {
+  z-index: 1;
+  animation-name: boss-hand-r;
+  animation-delay: 1.4s;
+}
+
+.boss-hand-r-health {
+  top: 20px;
+  left: 3px;
+}
+
+.boss-leg-l {
+  z-index: 1;
+  animation-name: boss-leg-l;
+  animation-delay: 1.8s;
+}
+
+.boss-leg-l-health {
+  top: -4px;
+  left: 13px;
+}
+
+.boss-leg-r {
+  z-index: 1;
+  animation-name: boss-leg-r;
+  animation-delay: 2.2s;
+}
+
+.boss-leg-r-health {
+  top: -28px;
+  left: -10px;
 }
 
 /***************************** СТЫКОВКА ***********************/
@@ -184,13 +187,44 @@
 
 /************************* РАССТЫКОВКА **************************/
 
+@keyframes boss-body-crash {
+  30%,
+  50%,
+  70%,
+  90% {
+    opacity: 1;
+  }
+
+  40%,
+  60%,
+  80%,
+  100% {
+    opacity: 0;
+  }
+}
+
 @keyframes boss-hand-l-crash {
   0% {
     transform: translate(-63px, 16px);
   }
 
+  20%,
   100% {
     transform: translate(-116px, 45px);
+  }
+
+  30%,
+  50%,
+  70%,
+  90% {
+    opacity: 1;
+  }
+
+  40%,
+  60%,
+  80%,
+  100% {
+    opacity: 0;
   }
 }
 
@@ -199,8 +233,23 @@
     transform: translate(97px, 31px);
   }
 
+  20%,
   100% {
     transform: translate(159px, 51px);
+  }
+
+  30%,
+  50%,
+  70%,
+  90% {
+    opacity: 1;
+  }
+
+  40%,
+  60%,
+  80%,
+  100% {
+    opacity: 0;
   }
 }
 
@@ -209,8 +258,23 @@
     transform: translate(-53px, 134px);
   }
 
+  20%,
   100% {
     transform: translate(-88px, 174px);
+  }
+
+  30%,
+  50%,
+  70%,
+  90% {
+    opacity: 1;
+  }
+
+  40%,
+  60%,
+  80%,
+  100% {
+    opacity: 0;
   }
 }
 
@@ -219,8 +283,23 @@
     transform: translate(66px, 143px);
   }
 
+  20%,
   100% {
     transform: translate(103px, 162px);
+  }
+
+  30%,
+  50%,
+  70%,
+  90% {
+    opacity: 1;
+  }
+
+  40%,
+  60%,
+  80%,
+  100% {
+    opacity: 0;
   }
 }
 

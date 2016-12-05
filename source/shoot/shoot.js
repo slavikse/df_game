@@ -67,8 +67,8 @@ function shootDelegate(e) {
     shootEnemy(target);
   } else if (target.classList.contains('cat')) {
     shootCat();
-  } else if (target.classList.contains('boss-part')) {
-    shootBoss(target);
+  } else if (target.classList.contains('boss-node')) {
+    shootBossNode(target);
   }
 }
 
@@ -84,8 +84,8 @@ function shootCat() {
   shootCountInCatStatistic();
 }
 
-function shootBoss(target) {
-  eventBossShoot.bossPart = target;
+function shootBossNode(target) {
+  eventBossShoot.bossNode = target;
   document.dispatchEvent(eventBossShoot);
   shootCountInTargetStatistic();
   shootCountInBossStatistic();

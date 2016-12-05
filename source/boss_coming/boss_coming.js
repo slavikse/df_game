@@ -1,9 +1,10 @@
 const $coming = document.querySelector('.boss-coming');
 const $progress = $coming.querySelector('.boss-progress');
 const $bossHead = $coming.querySelector('.boss-head');
-const wavesBeforeComingDefault = 2 + 1; // волны +1 (после магаза)
+// 3 волны * 3 раза
+const wavesBeforeComingDefault = 1; // 3 * 3
 const shiftX = (100 / wavesBeforeComingDefault).toFixed(2);
-const eventBoss = new Event('boss');
+const eventBossCame = new Event('bossCame');
 
 let wavesBeforeComing = wavesBeforeComingDefault;
 
@@ -32,9 +33,16 @@ function bossHeadMove() {
 }
 
 function bossCame() {
-  document.removeEventListener('bossComing', bossComing);
-  document.dispatchEvent(eventBoss);
+  document.dispatchEvent(eventBossCame); // слушает ticker и он вызывает босса
+}
+
+function bossGone() {
+  wavesBeforeComing = wavesBeforeComingDefault;
+
+  bossHeadMove();
+  bossHeadTwitch();
 }
 
 document.addEventListener('startGame', bossComingShow);
 document.addEventListener('bossComing', bossComing);
+document.addEventListener('bossGone', bossGone);

@@ -1,9 +1,13 @@
 const $shopTime = document.querySelector('.shop-time');
-const texts = ['Передохни!', 'Понеслась!'];
-const textsLength = texts.length;
+const shopStyleTextDefault = 'shop-time-text';
+const shopTextDefault = ['Передохни!', 'Понеслась!'];
+const textLength = shopTextDefault.length;
+const bossStyleTextDefault = 'boss-time-text';
+const bossTextDefault = ['BOSS!', 'FIGHT!'];
 
 let currentTextIndex = 0;
 let shopTimeTimerID;
+let currentUseText = shopTextDefault;
 
 // если конец игры, то успеет отменить показ уведомляшки
 function shopTimeDelay() {
@@ -17,13 +21,27 @@ function shopTime() {
 }
 
 function textToggle() {
-  $shopTime.textContent = texts[currentTextIndex];
-  currentTextIndex = (currentTextIndex + 1) % textsLength;
+  $shopTime.textContent = currentUseText[currentTextIndex];
+  currentTextIndex = (currentTextIndex + 1) % textLength;
 }
 
 function shopTimeEnd() {
   $shopTime.textContent = '';
   $shopTime.style.animationName = '';
+}
+
+function bossCame() {
+  $shopTime.classList.remove(shopStyleTextDefault);
+  $shopTime.classList.add(bossStyleTextDefault);
+
+  currentUseText = bossTextDefault;
+}
+
+function bossGone() {
+  $shopTime.classList.add(shopStyleTextDefault);
+  $shopTime.classList.remove(bossStyleTextDefault);
+
+  currentUseText = shopTextDefault;
 }
 
 function gameOver() {
@@ -32,4 +50,6 @@ function gameOver() {
 
 document.addEventListener('waveEnd', shopTimeDelay);
 document.addEventListener('waveStart', shopTimeDelay);
+document.addEventListener('bossCame', bossCame);
+document.addEventListener('bossGone', bossGone);
 document.addEventListener('gameOver', gameOver);
