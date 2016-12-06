@@ -5,7 +5,7 @@ import noise from './../helper/noise';
 const $body = document.body;
 const $shoot = $body.querySelector('.shoot');
 const fireRate = 166.6;
-const shootFire = debounce(canShoot, fireRate);
+const shootFire = debounce(isShoot, fireRate);
 const audioIdle = audioSprite.idle;
 const shootEvent = new Event('shoot');
 const eventCatShoot = new Event('catShoot');
@@ -19,24 +19,25 @@ let shootCountInBossStat = 0;
 let shootMoveTimerID;
 let shootDownTimerID;
 
-/** нажата ЛКМ,
- * выстрелы не заблокированы,
- * (введен дополнительный идентификатор [nothing-shoot], потому,
- * что dont-shoot используется многими модулями
- */
-function canShoot(e) {
-  // пропустит дальше если только был выстрел (ЛКМ)
+// пропустит дальше только если был выстрел (ЛКМ)
+function isShoot(e) {
   if (e.which === 1) {
-    if ($body.classList.contains('dont-shoot') ||
-      $body.classList.contains('nothing-shoot')) {
-      noise(audioURI, audioIdle);
-    } else {
-      shoot(e);
-      // document.dispatchEvent(new Event('damage'));
-      // уведомляет оружие о выстреле
-      document.dispatchEvent(shootEvent);
-      shootCountTotalStatistic();
-    }
+    canShoot(e);
+  }
+}
+
+/** выстрелы не заблокированы,
+ * (введен дополнительный идентификатор [nothing-shoot], потому,
+ * что dont-shoot используется многими модулями */
+function canShoot(e) {
+  if ($body.classList.contains('dont-shoot') ||
+    $body.classList.contains('nothing-shoot')
+  ) {
+    noise(audioURI, audioIdle);
+  } else {
+    shoot(e);
+    shootGun();
+    // document.dispatchEvent(new Event('damage'));
   }
 }
 
@@ -46,7 +47,7 @@ function shoot(e) {
 
   shootSetParams(x, y);
   shootDelegate(e);
-  shootDownTimerID = setTimeout(canShoot.bind(null, e), fireRate);
+  shootDownTimerID = setTimeout(isShoot.bind(null, e), fireRate);
 }
 
 function shootSetParams(x, y) {
@@ -89,6 +90,12 @@ function shootBossNode(target) {
   document.dispatchEvent(eventBossShoot);
   shootCountInTargetStatistic();
   shootCountInBossStatistic();
+}
+
+// уведомляет оружие о выстреле
+function shootGun() {
+  document.dispatchEvent(shootEvent);
+  shootCountTotalStatistic();
 }
 
 function shootStart() {

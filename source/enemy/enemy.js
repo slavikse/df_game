@@ -24,8 +24,8 @@ const scoreAdd = 7;
 const enemyCloneCountDefault = 4; // 4
 const enemyHealthDefault = [1, 2];
 const enemyDamageTimeDefault = [6, 8];
-const enemyWidth = 150;
-const enemyHeight = 150;
+const enemyWidth = 200;
+const enemyHeight = 200;
 /** для доанимирования врагов и подчищаем остатки (актуально для конца игры) */
 const grenadeDelay = delay(grenade, 600);
 const eventEnemyDec = new Event('enemyDec');
@@ -90,8 +90,8 @@ function setNodes(clone) {
 }
 
 function setPosition(clone) {
-  const x = range(enemyWidth, playingFieldWidth);
-  const y = range(enemyHeight, playingFieldHeight);
+  const x = range(0, playingFieldWidth);
+  const y = range(0, playingFieldHeight);
 
   clone.style.transform = `translate(${x}px, ${y}px)`;
 }

@@ -1,26 +1,27 @@
 import './../boss_coming/boss_coming';
 import throttle from 'libs/throttle';
 import range from 'libs/range';
+import clone from 'libs/clone';
 import notify from '../notify/notify';
 
 const $body = document.body;
 const $paddock = $body.querySelector('.boss-paddock');
 const $boss = $body.querySelector('.boss');
 const playingFieldResize = throttle(playingField, 500);
-const bossWidth = 260;
-const bossHeight = 260;
+const bossWidth = 300;
+const bossHeight = 300;
 const eventEnemyCreate = new Event('enemyCreate');
 const eventBossGone = new Event('bossGone');
 const eventScoreAdd = new Event('scoreAdd');
 
-const scoreBossKilled = 100;
+const scoreBossKilled = 200;
 // настройки босса: анимация, хп, иконка. порядок важен для setNodes
-const bossSetting = [
-  {animation: 'boss-body', health: 6, icon: 'icon-boss_body'},
-  {animation: 'boss-hand-l', health: 3, icon: 'icon-boss_hand_l'},
-  {animation: 'boss-hand-r', health: 3, icon: 'icon-boss_hand_r'},
-  {animation: 'boss-leg-l', health: 3, icon: 'icon-boss_leg_l'},
-  {animation: 'boss-leg-r', health: 3, icon: 'icon-boss_leg_r'}
+const bossSettingDefault = [
+  {health: [6, 8], animation: 'boss-body', icon: 'icon-boss_body'},
+  {health: [2, 4], animation: 'boss-hand-l', icon: 'icon-boss_hand_l'},
+  {health: [2, 4], animation: 'boss-hand-r', icon: 'icon-boss_hand_r'},
+  {health: [2, 4], animation: 'boss-leg-l', icon: 'icon-boss_leg_l'},
+  {health: [2, 4], animation: 'boss-leg-r', icon: 'icon-boss_leg_r'}
 ];
 
 let playingFieldWidth;
@@ -29,44 +30,45 @@ let playingFieldHeight;
 playingField();
 
 function cloneBoss() {
-  const clone = $boss.cloneNode(true);
+  const boss = $boss.cloneNode(true);
+  const bossSetting = clone(bossSettingDefault);
 
-  setNodes(clone);
-  setPosition(clone);
-  setSetting(clone);
-  setQueueCrash(clone);
+  setNodes(boss);
+  setPosition(boss);
+  setSetting(boss, bossSetting);
+  setQueueCrash(boss);
 
-  $paddock.appendChild(clone);
-  docking(clone);
+  $paddock.appendChild(boss);
+  docking(boss);
 }
 
-function setNodes(clone) {
-  const bodyNode = clone.querySelector('.boss-body');
-  const handLNode = clone.querySelector('.boss-hand-l');
-  const handRNode = clone.querySelector('.boss-hand-r');
-  const legLNode = clone.querySelector('.boss-leg-l');
-  const legRNode = clone.querySelector('.boss-leg-r');
+function setNodes(boss) {
+  const bodyNode = boss.querySelector('.boss-body');
+  const handLNode = boss.querySelector('.boss-hand-l');
+  const handRNode = boss.querySelector('.boss-hand-r');
+  const legLNode = boss.querySelector('.boss-leg-l');
+  const legRNode = boss.querySelector('.boss-leg-r');
 
   // порядок node важен для bossSetting
   const nodes = {bodyNode, handLNode, handRNode, legLNode, legRNode};
   const nodeKeys = Object.keys(nodes);
 
   // сохраняем для последующего использования
-  clone.nodes = nodes;
-  clone.nodeKeys = nodeKeys;
+  boss.nodes = nodes;
+  boss.nodeKeys = nodeKeys;
 }
 
-function setPosition(clone) {
-  const x = range(bossWidth, playingFieldWidth);
-  const y = range(bossHeight, playingFieldHeight);
+function setPosition(boss) {
+  const x = range(0, playingFieldWidth);
+  const y = range(0, playingFieldHeight);
 
-  clone.style.transform = `translate(${x}px, ${y}px)`;
+  boss.style.transform = `translate(${x}px, ${y}px)`;
 }
 
 // в каждую часть босса записывает его конфигурацию
-function setSetting(clone) {
-  const nodes = clone.nodes;
-  const nodeKeys = clone.nodeKeys;
+function setSetting(boss, bossSetting) {
+  const nodes = boss.nodes;
+  const nodeKeys = boss.nodeKeys;
 
   for (let i = 0, len = nodeKeys.length; i < len; i++) {
     const node = nodes[nodeKeys[i]];
@@ -80,8 +82,11 @@ function setSetting(clone) {
 }
 
 function setSettingNode(node, setting) {
+  const health = range(...setting.health);
+
+  setting.health = health;
   node.setting = setting; // для этого важен порядок
-  node.children[0].textContent = setting.health; // хп части
+  node.children[0].textContent = health; // хп части
   node.isCrash = true;
 }
 
@@ -94,17 +99,17 @@ function setBodyNoCrash(bodyNode) {
  * очередь из частей босса, после того,
  * как все части будут уничтожены,
  * настанет очередь торса */
-function setQueueCrash(clone) {
-  clone.queue = clone.nodeKeys.length - 1;
+function setQueueCrash(boss) {
+  boss.queue = boss.nodeKeys.length - 1;
 }
 
 /*************** СБОРКА ***************/
 
-function docking(clone) {
-  clone.classList.add('boss-docking');
+function docking(boss) {
+  boss.classList.add('boss-docking');
 
   document.addEventListener('bossShoot', isDamage);
-  document.addEventListener('grenade', grenade.bind(null, clone));
+  document.addEventListener('grenade', grenade.bind(null, boss));
 }
 
 function isDamage(e) {
@@ -125,23 +130,23 @@ function damage(node) {
 }
 
 function crash(node) {
-  const clone = node.parentNode;
+  const boss = node.parentNode;
 
   nodeCrash(node);
   changeModel(node);
 
-  clone.queue -= 1;
-  const queue = clone.queue;
+  boss.queue -= 1;
+  const queue = boss.queue;
 
   // можно стрелять в торс?
   if (queue === 0) {
-    bodyCrash(clone);
+    bodyCrash(boss);
   }
 
   // уничтожены все части?
   if (queue === -1) {
-    undocking(clone);
-    bossGone();
+    undocking(boss);
+    bossGone(boss);
   }
 
   document.dispatchEvent(eventEnemyCreate);
@@ -161,18 +166,18 @@ function changeModel(node) {
   node.children[0].style.opacity = 0; // скрываем хп
 }
 
-function bodyCrash(clone) {
-  const bodyNode = clone.nodes.bodyNode;
+function bodyCrash(boss) {
+  const bodyNode = boss.nodes.bodyNode;
 
   bodyNode.isCrash = true;
   bodyNode.classList.remove('no-crash');
 }
 
-function undocking(clone) {
-  const nodes = clone.nodes;
-  const nodeKeys = clone.nodeKeys;
+function undocking(boss) {
+  const nodes = boss.nodes;
+  const nodeKeys = boss.nodeKeys;
 
-  clone.classList.add('boss-undocking');
+  boss.classList.add('boss-undocking');
 
   for (let i = 0, len = nodeKeys.length; i < len; i++) {
     const node = nodes[nodeKeys[i]];
@@ -182,7 +187,7 @@ function undocking(clone) {
   }
 }
 
-function bossGone() {
+function bossGone(boss) {
   notify({type: 'info', message: `+${scoreBossKilled}$`});
 
   document.removeEventListener('bossShoot', isDamage);
@@ -191,11 +196,17 @@ function bossGone() {
   eventScoreAdd.add = scoreBossKilled;
   document.dispatchEvent(eventScoreAdd);
   document.dispatchEvent(eventBossGone);
+
+  setTimeout(bossClear.bind(null, boss), 2000);
 }
 
-function grenade(clone) {
-  const nodes = clone.nodes;
-  const nodeKeys = clone.nodeKeys;
+function bossClear(boss) {
+  boss.remove();
+}
+
+function grenade(boss) {
+  const nodes = boss.nodes;
+  const nodeKeys = boss.nodeKeys;
 
   for (let i = 0, len = nodeKeys.length; i < len; i++) {
     const bossNode = {bossNode: nodes[nodeKeys[i]]};
@@ -214,4 +225,3 @@ function playingField() {
 document.addEventListener('boss', cloneBoss);
 window.addEventListener('resize', playingFieldResize);
 
-//TODO проверить!

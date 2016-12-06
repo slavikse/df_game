@@ -1,9 +1,8 @@
 const $shopTime = document.querySelector('.shop-time');
-const shopStyleTextDefault = 'shop-time-text';
-const shopTextDefault = ['Передохни!', 'Понеслась!'];
+const shopTextDefault = ['ЗАКУП', 'В БОЙ!'];
 const textLength = shopTextDefault.length;
 const bossStyleTextDefault = 'boss-time-text';
-const bossTextDefault = ['BOSS!', 'FIGHT!'];
+const bossTextDefault = ['BOSS', 'FIGHT!'];
 
 let currentTextIndex = 0;
 let shopTimeTimerID;
@@ -31,16 +30,12 @@ function shopTimeEnd() {
 }
 
 function bossCame() {
-  $shopTime.classList.remove(shopStyleTextDefault);
   $shopTime.classList.add(bossStyleTextDefault);
-
   currentUseText = bossTextDefault;
 }
 
 function bossGone() {
-  $shopTime.classList.add(shopStyleTextDefault);
   $shopTime.classList.remove(bossStyleTextDefault);
-
   currentUseText = shopTextDefault;
 }
 

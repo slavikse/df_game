@@ -5,6 +5,7 @@
   align-items: center;
   height: 100%;
   width: 100%;
+  color: white;
   font-size: 6em;
   text-shadow: 2px 2px 0 black;
   pointer-events: none;
@@ -29,10 +30,6 @@
     opacity: 0;
     transform: scale(0.6);
   }
-}
-
-.shop-time-text {
-  color: white;
 }
 
 .boss-time-text {

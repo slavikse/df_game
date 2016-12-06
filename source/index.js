@@ -16,11 +16,11 @@ import './statistic/statistic';
  * которое слушает стартовый экран
  * */
 
-window.onerror = error;
-
-function error(message, url, lineNumber) {
-  console.error('Ошибочки:', message, url, lineNumber);
-}
+//window.onerror = error;
+//
+//function error(message, url, lineNumber) {
+//  console.error('Ошибочки:', message, url, lineNumber);
+//}
 
 //const NODE_ENV = process.env.NODE_ENV;
 //
