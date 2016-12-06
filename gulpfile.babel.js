@@ -25,7 +25,7 @@ import './martyr/build/view';
 import './martyr/utility/bs';
 import './martyr/utility/del';
 import './martyr/utility/gzip';
-//import './martyr/utility/kraken';
+import './martyr/utility/kraken';
 import './martyr/utility/rev';
 // import './martyr/utility/symbol';
 import './martyr/utility/zip';
