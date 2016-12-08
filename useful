@@ -1,48 +1,11 @@
-
 ------------------------ РАЗМЕТКА ---------------------------
 
 Экранировать пользовательский ввод. защищаться от CSRF
 img[width height alt], a[title], template, пробел: &#32;
-PICTURE: frontender.info/responsive-images
-webp:
-<picture>
-  <source srcset="image/meet_pers1.webp" type="image/webp">
-  <img src="image/meet_pers2.jpg" alt="...">
-</picture>
-
-Разные размеры под ширину экрана с webp:
-<picture>
-  <source media="(min-width: 500px)" srcset="image/meet_pers1.webp" type="image/webp">
-  <source media="(min-width: 500px)" srcset="image/meet_pers1.jpg">
-  <source srcset="image/meet_pers2.webp" type="image/webp">
-  <img src="image/meet_pers2.jpg" alt="...">
-</picture>
-
-Двойная плотность:
-<picture>
-  <source
-    media="(min-width: 500px)"
-    srcset="image/meet_pers1.webp 1x,
-            image/meet_pers1@2x.webp 2x"
-    type="image/webp">
-  <source
-    media="(min-width: 500px)"
-    srcset="image/meet_pers1.jpg,
-            image/meet_pers1@2x.jpg 2x">
-  <source
-    srcset="image/meet_pers2.webp 1x,
-            image/meet_pers2@2x.webp 2x"
-    type="image/webp">
-  <img
-    src="image/meet_pers2.jpg" alt="..."
-    srcset="image/meet_pers2@2x.jpg 2x">
-</picture>
-
 <link rel="dns-prefetch" href="https://URI.com">
 <link rel="prefetch" href="secondary.js">
 
-
---------------------------- СТИЛИ ----------------------------
+-------------------------- СТИЛИ ----------------------------
 
 Сортировка стилей:
   Позиционирование
@@ -51,11 +14,11 @@ webp:
   Остальное
 
 Рекомендации:
-  Mobile first! Поиск справа налево
-  Layout: раскладка (width, left..), дорогая операция
-  Paint: отрисовка (color, opacity..), дешевая операция
-  Composite: компоновка, самая дешевая операция
-  will-change: Opacity, transform: самые дешевые операции
+  mobile first! Поиск справа налево
+  layout: раскладка (width, left..), дорогая операция
+  paint: отрисовка (color, opacity..), дешевая операция
+  composite: компоновка, самая дешевая операция
+  will-change: opacity, transform: самые дешевые операции
 
 Ширины экранов (основано на bstp4):
   xs = 544px
@@ -76,31 +39,14 @@ Responsive background image:
     }
   }
 
-  @media (device-pixel-ratio: 2) {
-    .image {
-      background-image: url(image@2x.png);
-    }
-  }
-
-
 --------------------------- СКРИПТЫ ---------------------------
 
-/** Support external SVG: IE 9-11 && Edge 12- */
+/** Support external SVG: IE 9-11 & Edge 12- */
 import svg4everybody from 'libs/svg4everybody';
 svg4everybody();
-
-/** A responsive sprite polyfill for <picture>, srcset, sizes: IE11- [~12kb minify]
- * При использовании webp поправить конфиг в сборке изображений */
-import picturefill from 'picturefill';
-picturefill();
-
-new FormData
 
 ---------------------------- ПРОЧЕЕ ---------------------------
 opener: npmjs.com/package/opener
 
 Оформление незагруженных изображений:
 http://css-live.ru/articles/oformlenie-nezagruzhennyx-izobrazhenij.html
-
-При достаточной поддержки HTTP/2 перейти на подключение атомарных файлов в конце модуля??? (разметки):
-http://css-live.ru/articles/budushhee-zagruzki-css.html

@@ -14,7 +14,7 @@
   z-index: 3;
   font-size: 3.6em;
   color: #51d83f;
-  text-shadow: 0 0 2px black;
+  text-shadow: 2px 2px 0 black;
 
   &-login {
     color: #060;
@@ -92,6 +92,8 @@
 
 .auth-wrap {
   position: absolute;
+  top: 0; /* ff fix */
+  left: 0; /* ff fix */
   padding-top: 60px;
   display: flex;
   flex-direction: column;

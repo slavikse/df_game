@@ -19,7 +19,7 @@ import './martyr/build/script';
 import './martyr/build/service';
 import './martyr/build/sprite';
 import './martyr/build/style';
-// import './martyr/build/svg';
+//import './martyr/build/svg';
 import './martyr/build/view';
 
 import './martyr/utility/bs';
@@ -27,7 +27,7 @@ import './martyr/utility/del';
 import './martyr/utility/gzip';
 import './martyr/utility/kraken';
 import './martyr/utility/rev';
-// import './martyr/utility/symbol';
+//import './martyr/utility/symbol';
 import './martyr/utility/zip';
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -41,7 +41,7 @@ gulp.task('build',
     'resize',
     'service',
     'sprite', // #2
-    // 'svg',
+    //'svg',
     'view',
     'script', // собирает json из аудио спрайта (#1)
     'style' // собирает css из спрайта изображений (#2)
@@ -60,7 +60,7 @@ function production() {
       'del',
       'build',
       //'kraken', /** включать только для выкладки. Лимит 100 Mb */
-      // 'symbol', /** уникальные символы в текстах в html файлах */
+      //'symbol', /** уникальные символы в текстах в html файлах */
       'rev',
       'gzip',
       'zip'

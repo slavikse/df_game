@@ -31,8 +31,7 @@ function isShoot(e) {
  * что dont-shoot используется многими модулями */
 function canShoot(e) {
   if ($body.classList.contains('dont-shoot') ||
-    $body.classList.contains('nothing-shoot')
-  ) {
+    $body.classList.contains('nothing-shoot')) {
     noise(audioURI, audioIdle);
   } else {
     shoot(e);

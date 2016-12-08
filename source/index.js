@@ -14,7 +14,7 @@ import './statistic/statistic';
 /**
  * Загрузив игру, создаст событие,
  * которое слушает стартовый экран
- * */
+ */
 
 //window.onerror = error;
 //

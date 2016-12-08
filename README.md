@@ -1,7 +1,7 @@
 # Для чего?  
 /!\ Мученик - машина, а не человек! Современный стек технологий для сборки веб проектов /!\    
-**Под капотом:**
-gulp, webpack + babel = ❤ es2015, postcss, png + svg sprite, image resize, browser-sync, версионирование, audio sprite (ffmpeg), zip, минификация.
+**В составе:**
+gulp4, webpack + babel = ❤ es2015, postcss, png/svg/audio sprite, image resize, live reload, rev, zip, minify.
 
 # Установка
 ```sh
@@ -17,41 +17,45 @@ $ sudo npm i -g gulp-cli &&
 
 # Модульность
 **Правила**:   
-* **Module**: не вкладывать остальное сделает fs   
+* **Module**: не вкладывать, остальное сделает fs (#1).   
   *Имя папки (module_name) === Имена файлов в папке:*   
   **ex:** module_name/{module_name.html,module_name.css,module_name.js}
 
-* **View**: логическая вложенность   
-  **ex:** @include('module_name/module_name.html')   
+* **View**: модульность за счет @include.   
+  **ex:** @include('./module_name/module_name.html')   
 
-* **Style**: каскад + не вкладывать = ❤ инкапсуляция стилей   
-  **ex:** .module-name .text {...}
+* **Style**: каскад + не вкладывать (#1) = ❤ инкапсуляция стилей   
+  **ex:** .module-name .text {...}   
 
-* **Script**: webpack, babel 
+* **Script**: webpack, babel   
 
-* **Image**: расположение ```image/```  
-  **ex:** подключаются: ``` src="image/moduleName_cat.jpg" ```
+* **Image**: в модуле: ```module_name/image/module_name_cat.jpg```  
+  **ex:** подключение: ```image/module_name_cat.jpg```
   
-* **Resize**: расположение ```resize/```   
-  Из большого изображения создаются 2 меньших: для _tablet и _mobile    
+* **Resize**: в модуле: ```module_name/resize/module_name_big_cat.jpg```   
+  Из большого изображения создаются 2 меньших: для tablet и mobile    
+  **ex:** подключение: ```image/module_name_cat{_big,_table,_mobile}.jpg```
   
-* **Sprite png**: расположение ```sprite/```   
-  **ex:** классы для использования в ```temp/sprite.png.css```
+* **Sprite png**: в модуле: ```module_name/sprite/```   
+  **ex:** классы для использования: ```temp/sprite.png.css```
 
-* **Sprite svg**: расположение ```svg/```   
-  **ex:** стили для использования в ```temp/sprite.css```   
-    и пример использования ```temp/sprite.symbol.html```
+* **Sprite svg**: в модуле: ```module_name/svg/```   
+  **ex:** стили для использования: ```temp/sprite.css```   
+    и пример использования: ```temp/sprite.symbol.html```
 
-* **Audio**: расположение ```audio/```
+* **Audio**: в модуле: ```module_name/audio/```
 
-* **Audio Sprite**: расположение ```audio_sprite/```   
-  **ex:** информация о спрайте ```temp/audio/audio_sprite.json```
+* **Audio Sprite**: в модуле: ```module_name/audio_sprite/```   
+  **ex:** информация о спрайте: ```temp/audio/audio_sprite.json```
 
 * **Font**: расположение ```font/```   
 
 ```
 source/
-    font/               
+    font/
+    image/
+    resize/
+    helper/
     header/
         audio/
         audio_sprite/
@@ -62,6 +66,9 @@ source/
         header.css
         header.html
         header.js
+    index.css
+    index.html
+    index.js
 ```
 # Запустить туннель
 ```sh

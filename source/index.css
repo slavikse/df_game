@@ -1,5 +1,5 @@
-@import '_reset.css';
-@import '_base.css';
+@import 'helper/reset.css';
+@import 'helper/base.css';
 @import 'font/font.css';
 
 @import 'preload/preload.css';

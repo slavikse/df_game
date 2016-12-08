@@ -10,10 +10,7 @@ import csso from 'postcss-csso';
 import flexFixed from 'postcss-flexbugs-fixes';
 
 const name = 'style';
-const files = [
-  'source/*.css',
-  '!source/_*.css'
-];
+const files = 'source/*.css';
 const wFiles = '{source,temp}/**/*.css';
 const there = 'public';
 const production = process.env.NODE_ENV === 'production';

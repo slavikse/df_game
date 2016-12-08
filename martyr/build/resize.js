@@ -50,36 +50,3 @@ gulp.task(name, () => {
 if (!production) {
   gulp.watch(files, gulp.parallel(name));
 }
-
-// configWebp = {
-//   '*': [{
-//     width: '100%'
-//   }, {
-//     width: '100%',
-//     rename: {
-//       extname: '.webp'
-//     }
-//   }, {
-//     width: '70%',
-//     rename: {
-//       suffix: '_tablet'
-//     }
-//   }, {
-//     width: '70%',
-//     rename: {
-//       suffix: '_tablet',
-//       extname: '.webp'
-//     }
-//   }, {
-//     width: '40%',
-//     rename: {
-//       suffix: '_mobile'
-//     }
-//   }, {
-//     width: '40%',
-//     rename: {
-//       suffix: '_mobile',
-//       extname: '.webp'
-//     }
-//   }]
-// };

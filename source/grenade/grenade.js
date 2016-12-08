@@ -19,7 +19,7 @@ function grenade() {
   /** GOD MOD */
 
   if (window.god) {
-    grenadeCount = 3;
+    grenadeCount = 2;
   }
 
   /** / GOD MOD */

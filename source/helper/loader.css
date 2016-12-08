@@ -6,6 +6,7 @@
   border-left: 25px solid rgba(12, 32, 9, 0.8);
   border-right: 25px solid rgba(12, 32, 9, 0.8);
   border-radius: 50%;
+  box-shadow: 0 0 10px black;
   animation: loader 2s linear infinite;
   will-change: transform;
 }

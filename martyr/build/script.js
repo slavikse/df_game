@@ -17,19 +17,19 @@ let firstBuildReady = false;
  * чтобы gulp смог продолжить выполнение
  * @type {Object} ошибку обрабатывает gulp
  */
-const done = err => {
+function done(error) {
   firstBuildReady = true;
 
-  if (err) {
+  if (error) {
     return null;
   }
-};
+}
 
-const buildReady = cb => {
+function buildReady(cb) {
   if (firstBuildReady) {
     cb();
   }
-};
+}
 
 const options = {
   module: {
@@ -49,8 +49,7 @@ const options = {
   watchOptions: {aggregateTimeout: 100},
   devtool: production ? null : 'cheap-eval-source-map',
   plugins: [
-    new webpack.NoErrorsPlugin(),
-    new webpack.EnvironmentPlugin(["NODE_ENV"]),
+    new webpack.EnvironmentPlugin(['NODE_ENV']),
     // new webpack.optimize.CommonsChunkPlugin({
     //   name: 'common',
     //   minChunks: 2
@@ -60,6 +59,7 @@ const options = {
 
 if (!production) {
   options.plugins.push(
+    new webpack.NoErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin()
   )
 }

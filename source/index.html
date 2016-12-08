@@ -1,39 +1,9 @@
 <!DOCTYPE html>
 <html lang='ru'>
 <head>
-  <meta charset='utf-8'>
-  <meta http-equiv='x-ua-compatible'
-        content='ie=edge'>
-  <meta name='viewport'
-        content='width=device-width, initial-scale=1.0, minimum-scale=1.0'>
-  <!--<meta http-equiv='Content-Security-Policy' content='default-src 'self''>-->
-  <meta name='robots'
-        content='index,follow,noodp'>
-  <meta name='googlebot'
-        content='index,follow'>
+  @include('./helper/meta.html')
 
-  <!-- limit to 150 characters -->
-  <meta name='description'
-        content='Шутер | Тайм киллер'>
-  <meta name='application-name'
-        content='dark | forest'>
-  <meta name='theme-color'
-        content='#048200'>
-
-  <meta property='og:title'
-        content='dark | forest'>
-  <meta property='og:description'
-        content='Шутер | Тайм киллер'>
-  <meta property='og:url'
-        content='https://slavikse.github.io/df_game'>
-  <meta property='og:type'
-        content='website'>
-  <meta property='og:image'
-        content='https://slavikse.github.io/df_game/image/darkforest_og.jpg'>
-  <meta property='og:locale'
-        content='ru_RU'>
   <title>dark | forest</title>
-
   <link href='index.css'
         rel='stylesheet'>
   <link href='image/dark.forest.png'
@@ -41,9 +11,6 @@
         sizes='32x32'>
 </head>
 <body>
-<!-- описание в start_screen -->
-<div class='forest-night'></div>
-
 @include('./preload/preload.html')
 @include('./start_screen/start_screen.html')
 
@@ -60,6 +27,7 @@
 
 <div class='paddock'></div>
 <div class='boss-paddock'></div>
+
 <audio class='ambient'
        src='audio/light_ambient.mp3'
        autoplay

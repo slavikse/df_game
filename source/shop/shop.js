@@ -90,7 +90,7 @@ function canBuyFirstAid() {
   }
 }
 
-function buy(e) {
+function itemBuy(e) {
   const target = e.target;
 
   if (target.classList.contains('buy-block')) {
@@ -112,15 +112,14 @@ function buy(e) {
 
   if (type === 'drum') {
     buyDrum();
+    buyCompletion(price);
   } else if (type === 'grenade') {
     buyGrenade();
+    buyCompletion(price);
   } else if (type === 'first-aid') {
     buyFirstAid();
-  } else {
-    return;
+    buyCompletion(price);
   }
-
-  buyCompletion(price);
 }
 
 function buyDrum() {
@@ -190,7 +189,7 @@ document.addEventListener('firstAidShop', firstAidShop);
 document.addEventListener('waveEnd', openShopDelay);
 document.addEventListener('regeneration', useFirstAid);
 $store.addEventListener('mouseover', itemHandler);
-$store.addEventListener('click', buy);
+$store.addEventListener('click', itemBuy);
 $shopClose.addEventListener('mouseover', hoverShopClose);
 $shopClose.addEventListener('click', shopClose);
 document.addEventListener('gameOver', gameOver);

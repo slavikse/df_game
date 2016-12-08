@@ -8,8 +8,8 @@ const $body = document.body;
 const $paddock = $body.querySelector('.boss-paddock');
 const $boss = $body.querySelector('.boss');
 const playingFieldResize = throttle(playingField, 500);
-const bossWidth = 300;
-const bossHeight = 300;
+const bossWidth = 280;
+const bossHeight = 280;
 const eventEnemyCreate = new Event('enemyCreate');
 const eventBossGone = new Event('bossGone');
 const eventScoreAdd = new Event('scoreAdd');
@@ -49,6 +49,7 @@ function setNodes(boss) {
   const legLNode = boss.querySelector('.boss-leg-l');
   const legRNode = boss.querySelector('.boss-leg-r');
 
+  //TODO Это крашит брауз???
   // порядок node важен для bossSetting
   const nodes = {bodyNode, handLNode, handRNode, legLNode, legRNode};
   const nodeKeys = Object.keys(nodes);
@@ -224,4 +225,3 @@ function playingField() {
 
 document.addEventListener('boss', cloneBoss);
 window.addEventListener('resize', playingFieldResize);
-

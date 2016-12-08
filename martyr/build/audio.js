@@ -7,7 +7,6 @@ import util from 'gulp-util';
 const name = 'audio';
 const files = 'source/**/audio/*';
 const there = 'public/audio';
-const config = audio => audio.audioBitrate(80);
 const production = process.env.NODE_ENV === 'production';
 
 gulp.task(name, () => {
@@ -17,6 +16,10 @@ gulp.task(name, () => {
   .pipe(production ? ffmpeg('mp3', config) : util.noop())
   .pipe(gulp.dest(there))
 });
+
+function config(audio) {
+  return audio.audioBitrate(80);
+}
 
 if (!production) {
   gulp.watch(files, gulp.parallel(name));

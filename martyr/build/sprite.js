@@ -35,7 +35,7 @@ function spriteCreate(cb) {
 function imageStream() {
   return spriteData.img
   .pipe(gulp.dest(thereImage))
-  .pipe(notify(`Обнови вкладку: ${name}`))
+  .pipe(notify(`refresh: ${name}`))
 }
 
 function styleStream() {
