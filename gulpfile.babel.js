@@ -13,6 +13,7 @@ import './martyr/build/svg';
 import './martyr/build/view';
 
 import './martyr/utility/bs';
+import './martyr/utility/critical'; // дописывать: .html и .css
 import './martyr/utility/del';
 import './martyr/utility/gzip';
 import './martyr/utility/kraken';
@@ -20,7 +21,6 @@ import './martyr/utility/rev';
 import './martyr/utility/zip';
 
 const production = process.env.NODE_ENV === 'production';
-
 const buildTasks = [
   'audio',
   'audio_sprite', // #1
@@ -34,16 +34,14 @@ const buildTasks = [
   'style', // собирает css из спрайта изображений (#2)
   'script' // собирает json из аудио спрайта (#1)
 ];
-
 const productionTasks = [
   'del',
   'build',
-  'kraken', // Лимит 100 Mb
+  'kraken', // лимит 100 Mb
   'rev',
   'gzip',
   'zip'
 ];
-
 const developmentTasks = [
   'del',
   'build',

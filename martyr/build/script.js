@@ -2,6 +2,7 @@ import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import notify from 'gulp-notify';
 import named from 'vinyl-named';
+import HappyPack from 'happypack';
 import webpackStream from 'webpack-stream';
 
 const name = 'script';
@@ -50,6 +51,9 @@ const options = {
   devtool: production ? null : 'cheap-eval-source-map',
   plugins: [
     new webpack.EnvironmentPlugin(['NODE_ENV']),
+    new HappyPack({
+      loaders: ['babel', 'json']
+    }),
     // new webpack.optimize.CommonsChunkPlugin({
     //   name: 'common',
     //   minChunks: 2

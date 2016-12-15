@@ -48,8 +48,9 @@ svg4everybody();
 ---------------------------- ПРОЧЕЕ ---------------------------
 npmjs.com/package/opener
 npmjs.com/package/gulp-connect
+github.com/amireh/happypack
 
 Удалять не используемые глифы в шрифтах: fontforge
 
 Оформление незагруженных изображений:
-http://css-live.ru/articles/oformlenie-nezagruzhennyx-izobrazhenij.html
+css-live.ru/articles/oformlenie-nezagruzhennyx-izobrazhenij.html

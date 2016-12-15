@@ -1,7 +1,7 @@
 {
   "name": "martyr",
   "description": "Мученик - машина, а не человек! Современный стек технологий для сборки веб проектов",
-  "version": "3.12.0",
+  "version": "3.12.1",
   "author": {
     "name": "Vyacheslav Lebedev",
     "email": "gslavikse@gmail.com",
@@ -21,14 +21,15 @@
     "npm": "4"
   },
   "scripts": {
-    "clean": "npm prune && npm dedupe",
     "dev": "gulp",
     "prod": "NODE_ENV=production gulp",
     "tunnel": "NODE_ENV=tunnel gulp bs",
     "fb-login": "firebase login",
     "fb-init": "firebase init",
     "fb-deploy": "firebase deploy",
-    "deploy": "npm run prod && npm run fb-deploy"
+    "deploy": "npm run prod && npm run fb-deploy",
+    "clean": "npm prune && npm dedupe",
+    "critical": "gulp critical"
   },
   "dependencies": {
     "@fdaciuk/ajax": "2.1.2",
@@ -47,6 +48,7 @@
     "gulp-file-include": "1.0.0",
     "gulp-fluent-ffmpeg": "1.0.2",
     "gulp-htmlmin": "3.0.0",
+    "gulp-inject-string": "1.1.0",
     "gulp-kraken": "0.2.0",
     "gulp-notify": "2.2.0",
     "gulp-plumber": "1.1.0",
@@ -61,8 +63,11 @@
     "gulp-util": "3.0.7",
     "gulp-zip": "3.2.0",
     "gulp.spritesmith": "6.2.1",
+    "happypack": "3.0.1",
     "json-loader": "0.5.4",
     "libs": "slavikse/libs",
+    "penthouse": "0.10.3",
+    "postcss-cached": "0.0.4",
     "postcss-csso": "1.1.2",
     "postcss-flexbugs-fixes": "2.1.0",
     "postcss-import": "9.0.0",
