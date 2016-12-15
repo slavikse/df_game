@@ -61,6 +61,7 @@ const options = {
   ]
 };
 
+// dev
 if (!production) {
   options.plugins.push(
     new webpack.NoErrorsPlugin(),
@@ -68,6 +69,7 @@ if (!production) {
   )
 }
 
+// prod
 if (production) {
   options.plugins.push(
     new webpack.optimize.DedupePlugin(),
