@@ -46,7 +46,7 @@ const options = {
     ]
   },
   watch: !production,
-  watchOptions: {aggregateTimeout: 100},
+  watchOptions: {aggregateTimeout: 20},
   devtool: production ? null : 'cheap-eval-source-map',
   plugins: [
     new webpack.EnvironmentPlugin(['NODE_ENV']),
@@ -78,8 +78,9 @@ if (production) {
         loops: true,
         unused: true,
         warnings: false,
-        // drop_console: true,
-        unsafe: true
+        dead_code: true,
+        //drop_console: true,
+        //unsafe: true
       }
     })
   )

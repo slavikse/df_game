@@ -18,6 +18,7 @@ const audioAuthIn = audioSprite.auth_in;
 const audioAuthOut = audioSprite.auth_out;
 const audioCancel = audioSprite.cancel;
 const eventAuthBonus = new Event('authBonus');
+const eventCloseGuide = new Event('closeGuide');
 
 let authAudio;
 let userName;
@@ -90,6 +91,7 @@ function authShowToggle() {
     $authEmail.focus();
   }
 
+  document.dispatchEvent(eventCloseGuide); // закроет гайд если открыт
   noise(audioURI, audioAuthShow);
 
   $startScreen.classList.toggle('start-screen-open');

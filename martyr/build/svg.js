@@ -4,8 +4,7 @@ import replace from 'gulp-replace';
 import svgSprite from 'gulp-svg-sprite';
 
 /**
- * 1. Путь для примеров использования svg спрайта
- * 2. Расположение svg спрайта
+ * 1. Расположение svg спрайта
  */
 const name = 'svg';
 const files = 'source/**/svg/*';
@@ -17,7 +16,7 @@ const config = {
   },
   mode: {
     symbol: {
-      sprite: '../public/image/sprite.svg', /* 2 */
+      sprite: '../public/image/sprite.svg', /* 1 */
       dest: '',
       example: true,
       render: {
@@ -44,17 +43,14 @@ gulp.task(name,
   )
 );
 
-/** 1. Удаляет стандартную заливку из svg,
- * чтобы можно было ее менять через стили */
 function createSvg() {
   return gulp.src(files)
   .pipe(rename({dirname: ''}))
-  .pipe(replace(/fill=".*?"/gi, '')) /* 1 */
   .pipe(svgSprite(config))
   .pipe(gulp.dest(there))
 }
 
-/** 1. Удаляет излишний путь ../public/ из примера для убодства */
+/** 1. Удаляет лишний путь ../public/ из примера */
 function changeExample() {
   return gulp.src('temp/sprite.symbol.*')
   .pipe(replace(/\.\.\/public\//gi, '')) /* 1 */

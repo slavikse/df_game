@@ -1,6 +1,6 @@
 ------------------------ РАЗМЕТКА ---------------------------
 
-Экранировать пользовательский ввод. защищаться от CSRF
+Экранировать пользовательский ввод. Защита от CSRF
 img[width height alt], a[title], template, пробел: &#32;
 <link rel="dns-prefetch" href="https://URI.com">
 <link rel="prefetch" href="secondary.js">
@@ -46,7 +46,10 @@ import svg4everybody from 'libs/svg4everybody';
 svg4everybody();
 
 ---------------------------- ПРОЧЕЕ ---------------------------
-opener: npmjs.com/package/opener
+npmjs.com/package/opener
+npmjs.com/package/gulp-connect
+
+Удалять не используемые глифы в шрифтах: fontforge
 
 Оформление незагруженных изображений:
 http://css-live.ru/articles/oformlenie-nezagruzhennyx-izobrazhenij.html

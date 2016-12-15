@@ -14,10 +14,10 @@ const eventEnemyCreate = new Event('enemyCreate');
 const eventBossGone = new Event('bossGone');
 const eventScoreAdd = new Event('scoreAdd');
 
-const scoreBossKilled = 200;
+let scoreBossKilled = 200;
 // настройки босса: анимация, хп, иконка. порядок важен для setNodes
 const bossSettingDefault = [
-  {health: [6, 8], animation: 'boss-body', icon: 'icon-boss_body'},
+  {health: [4, 6], animation: 'boss-body', icon: 'icon-boss_body'},
   {health: [2, 4], animation: 'boss-hand-l', icon: 'icon-boss_hand_l'},
   {health: [2, 4], animation: 'boss-hand-r', icon: 'icon-boss_hand_r'},
   {health: [2, 4], animation: 'boss-leg-l', icon: 'icon-boss_leg_l'},
@@ -49,7 +49,6 @@ function setNodes(boss) {
   const legLNode = boss.querySelector('.boss-leg-l');
   const legRNode = boss.querySelector('.boss-leg-r');
 
-  //TODO Это крашит брауз???
   // порядок node важен для bossSetting
   const nodes = {bodyNode, handLNode, handRNode, legLNode, legRNode};
   const nodeKeys = Object.keys(nodes);
@@ -198,7 +197,20 @@ function bossGone(boss) {
   document.dispatchEvent(eventScoreAdd);
   document.dispatchEvent(eventBossGone);
 
+  levelUp(boss);
   setTimeout(bossClear.bind(null, boss), 2000);
+}
+
+// повышение хп боссу и ценника за килл
+function levelUp(boss) {
+  const nodeKeys = boss.nodeKeys;
+
+  for (let i = 0, len = nodeKeys.length; i < len; i++) {
+    bossSettingDefault[i].health[0] += 2;
+    bossSettingDefault[i].health[1] += 2;
+  }
+
+  scoreBossKilled += 200;
 }
 
 function bossClear(boss) {

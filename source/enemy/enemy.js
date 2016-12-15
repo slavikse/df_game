@@ -6,13 +6,14 @@ import noise from './../helper/noise';
 
 const $body = document.body;
 const $enemyPosition = $body.querySelector('.enemy-position');
-const imagesClassesDefault = [
+const imagesClasses = [
   'icon-enemy1',
   'icon-enemy2',
   'icon-enemy3',
   'icon-enemy4'
 ];
-const dieAudiosDefault = [
+const imagesClassesLength = imagesClasses.length - 1;
+const dieAudios = [
   audioSprite.enemy_die1,
   audioSprite.enemy_die2,
   audioSprite.enemy_die3,
@@ -20,10 +21,10 @@ const dieAudiosDefault = [
 ];
 const playingFieldResize = throttle(playingField, 500);
 const enemyDec = 1;
-const scoreAdd = 7;
-const enemyCloneCountDefault = 4; // 4
-const enemyHealthDefault = [1, 2];
-const enemyDamageTimeDefault = [6, 8];
+let scoreAdd = 7;
+let enemyCloneCount = 4; // 4
+const enemyHealth = [1, 2];
+const enemyDamageTime = [6, 8];
 const enemyWidth = 200;
 const enemyHeight = 200;
 /** для доанимирования врагов и подчищаем остатки (актуально для конца игры) */
@@ -38,13 +39,6 @@ let enemyTimerID = []; // для грены
 let allEnemyCurrent = 0; // для грены
 let playingFieldWidth;
 let playingFieldHeight;
-
-let imagesClasses = imagesClassesDefault;
-let imagesClassesLength = imagesClasses.length - 1;
-let dieAudios = dieAudiosDefault;
-let enemyHealth = enemyHealthDefault;
-let enemyDamageTime = enemyDamageTimeDefault;
-let enemyCloneCount = enemyCloneCountDefault;
 
 eventEnemyDec.dec = enemyDec;
 eventScoreAdd.add = scoreAdd;
@@ -138,7 +132,7 @@ function setHealth(clone) {
   const health = range(...enemyHealth);
 
   healthNode.health = health;
-  healthNode.textContent = health;
+  healthNode.textContent = health.toString();
 }
 
 function isEnemyShoot(e) {
@@ -192,7 +186,7 @@ function enemyHideDelay(clone) {
 }
 
 function grenade() {
-  getPoints();
+  additionPoints();
   allEnemyCurrent = 0;
 
   $paddock.remove();
@@ -202,7 +196,21 @@ function grenade() {
   enemyTimerID = [];
 }
 
-function getPoints() {
+function levelUp() {
+  scoreAdd += 2;
+  enemyCloneCount += 1;
+
+  // увеличение хп монстра
+  enemyHealth[0] += 1;
+  enemyHealth[1] += 1;
+
+  // уменьшение таймера для укуса монстром
+  enemyDamageTime[0] -= 1;
+  enemyDamageTime[1] -= 1;
+}
+
+// начисление очков за использование грены
+function additionPoints() {
   eventEnemyDec.dec = allEnemyCurrent;
   eventScoreAdd.add = scoreAdd * allEnemyCurrent;
 
@@ -244,5 +252,6 @@ document.addEventListener('enemyCreate', cloneEnemy);
 document.addEventListener('enemyShoot', isEnemyShoot);
 document.addEventListener('grenade', grenade);
 document.addEventListener('waveEnd', grenadeDelay);
+document.addEventListener('bossGone', levelUp);
 window.addEventListener('resize', playingFieldResize);
 document.addEventListener('gameOver', grenade);

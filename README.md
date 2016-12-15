@@ -1,30 +1,31 @@
 # Для чего?  
 /!\ Мученик - машина, а не человек! Современный стек технологий для сборки веб проектов /!\    
 **В составе:**
-gulp4, webpack + babel = ❤ es2015, postcss, png/svg/audio sprite, image resize, live reload, rev, zip, minify.
+gulp4, webpack + babel = ❤ es2015, postcss, png/jpg/svg/mp3 sprite, image resize, minify, live reload, rev, zip.
 
 # Установка
 ```sh
-$ curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-$ sudo apt install ffmpeg
-$ sudo npm i -g gulp-cli &&
-    git clone https://github.com/slavikse/martyr.git my_project &&
-    cd my_project && npm i
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - &&
+sudo apt install ffmpeg &&
+git clone https://github.com/slavikse/martyr.git my_martyr &&
+cd my_martyr && npm i && node run dev
 ```
 # Запуск
-Разработка: ```$ gulp```   
-Продакшн: ```$ NODE_ENV=production gulp```
+dev: ```$ node run dev```   
+production: ```$ node run production```   
+tunnel: ```$ node run tunnel```   
+deploy: ```$ node run deploy```   
 
 # Модульность
 **Правила**:   
-* **Module**: не вкладывать, остальное сделает fs (#1).   
+* **Module**: #1: не вкладывать директории, остальное сделает fs.   
   *Имя папки (module_name) === Имена файлов в папке:*   
   **ex:** module_name/{module_name.html,module_name.css,module_name.js}
 
 * **View**: модульность за счет @include.   
   **ex:** @include('./module_name/module_name.html')   
 
-* **Style**: каскад + не вкладывать (#1) = ❤ инкапсуляция стилей   
+* **Style**: каскад и #1 = ❤ инкапсуляция стилей   
   **ex:** .module-name .text {...}   
 
 * **Script**: webpack, babel   
@@ -69,9 +70,5 @@ source/
     index.css
     index.html
     index.js
-```
-# Запустить туннель
-```sh
-$ NODE_ENV=tunnel gulp
 ```
 # MIT License

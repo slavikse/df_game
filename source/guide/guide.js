@@ -26,5 +26,12 @@ function signToggle() {
   currentSign = (currentSign + 1) % signsLength;
 }
 
+function closeGuide() {
+  currentSign = 0;
+  $guideHelp.textContent = '?';
+  $guideWrap.classList.remove('guide-wrap-show');
+}
+
 $guideHelp.addEventListener('mouseover', hoverGuide);
 $guideHelp.addEventListener('click', showGuide);
+document.addEventListener('closeGuide', closeGuide);

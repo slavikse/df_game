@@ -1,5 +1,6 @@
 import gulp from 'gulp';
 import audioSprite from 'gulp-audiosprite';
+import notify from 'gulp-notify';
 
 const name = 'audio_sprite';
 const files = 'source/**/audio_sprite/*';
@@ -22,6 +23,7 @@ gulp.task(name, () => {
   return gulp.src(files)
   .pipe(audioSprite(config))
   .pipe(gulp.dest(there))
+  .pipe(notify(`restart: ${name}`))
 });
 
 if (!production) {

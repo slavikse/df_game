@@ -34,9 +34,9 @@ const param = {
 };
 
 if (production) {
-  param.quality = 60;
+  param.quality = 80;
   param.progressive = true;
-  param.compressionLevel = 8;
+  param.compressionLevel = 6;
 }
 
 gulp.task(name, () => {
