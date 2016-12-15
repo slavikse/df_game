@@ -6,9 +6,11 @@ import cached from 'postcss-cached';
 import atImport from 'postcss-import';
 import nested from 'postcss-nested';
 import media from 'postcss-media-minmax';
+import willChange from 'postcss-will-change'; // fallback
+import zIndex from 'postcss-zindex';
 import autoprefixer from 'autoprefixer';
 import csso from 'postcss-csso';
-import flexFixed from 'postcss-flexbugs-fixes';
+import flexbugs from 'postcss-flexbugs-fixes';
 
 const name = 'style';
 const files = 'source/*.css';
@@ -24,9 +26,11 @@ const options = [
 
 if (production) {
   options.push(
+    willChange,
+    zIndex,
     autoprefixer,
     csso,
-    flexFixed // fixed IE10 bugs
+    flexbugs
   )
 }
 
