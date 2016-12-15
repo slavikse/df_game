@@ -1,27 +1,25 @@
 {
   "name": "martyr",
-  "version": "3.12.0",
   "description": "Мученик - машина, а не человек! Современный стек технологий для сборки веб проектов",
-  "author": "slavikse",
-  "license": "MIT",
+  "version": "3.12.0",
+  "author": {
+    "name": "Vyacheslav Lebedev",
+    "email": "gslavikse@gmail.com",
+    "url": "https://github.com/slavikse"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/slavikse/martyr.git"
+    "url": "git://github.com/slavikse/martyr.git"
   },
-  "keywords": [
-    "makeup",
-    "markup",
-    "builder",
-    "gulp",
-    "webpack",
-    "babel",
-    "postcss"
-  ],
+  "bugs": {
+    "url": "https://github.com/slavikse/martyr/issues"
+  },
+  "license": "MIT",
+  "main": "gulpfile.babel.js",
   "engines": {
     "node": "6",
     "npm": "4"
   },
-  "main": "gulpfile.babel.js",
   "scripts": {
     "clean": "npm prune && npm dedupe",
     "dev": "gulp",
@@ -31,11 +29,6 @@
     "fb-init": "firebase init",
     "fb-deploy": "firebase deploy",
     "deploy": "npm run prod && npm run fb-deploy"
-  },
-  "babel": {
-    "presets": [
-      "es2015-loose"
-    ]
   },
   "dependencies": {
     "@fdaciuk/ajax": "2.1.2",
@@ -77,5 +70,19 @@
     "postcss-nested": "1.0.0",
     "vinyl-named": "1.1.0",
     "webpack-stream": "3.2.0"
+  },
+  "keywords": [
+    "makeup",
+    "markup",
+    "builder",
+    "gulp",
+    "webpack",
+    "babel",
+    "postcss"
+  ],
+  "babel": {
+    "presets": [
+      "es2015-loose"
+    ]
   }
 }

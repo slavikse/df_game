@@ -19,6 +19,8 @@ import './martyr/utility/kraken';
 import './martyr/utility/rev';
 import './martyr/utility/zip';
 
+const production = process.env.NODE_ENV === 'production';
+
 const buildTasks = [
   'audio',
   'audio_sprite', // #1
@@ -27,7 +29,7 @@ const buildTasks = [
   'resize',
   'service',
   'sprite', // #2
-  //'svg',
+  'svg',
   'view',
   'style', // собирает css из спрайта изображений (#2)
   'script' // собирает json из аудио спрайта (#1)
@@ -47,8 +49,6 @@ const developmentTasks = [
   'build',
   'bs'
 ];
-
-const production = process.env.NODE_ENV === 'production';
 
 gulp.task('build', gulp.series(...buildTasks));
 

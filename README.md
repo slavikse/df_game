@@ -12,7 +12,7 @@ cd my_martyr && npm i && node run dev
 ```
 # Запуск
 dev: ```$ node run dev```   
-production: ```$ node run production```   
+production: ```$ node run prod```   
 tunnel: ```$ node run tunnel```   
 deploy: ```$ node run deploy```   
 
