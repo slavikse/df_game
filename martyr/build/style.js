@@ -1,13 +1,12 @@
 import gulp from 'gulp';
 import plumber from 'gulp-plumber';
-import notify from 'gulp-notify';
+import error from './../utility/error';
 import postcss from 'gulp-postcss';
 import cached from 'postcss-cached';
 import atImport from 'postcss-import';
 import nested from 'postcss-nested';
 import media from 'postcss-media-minmax';
 import willChange from 'postcss-will-change'; // fallback
-import zIndex from 'postcss-zindex';
 import autoprefixer from 'autoprefixer';
 import csso from 'postcss-csso';
 import flexbugs from 'postcss-flexbugs-fixes';
@@ -27,7 +26,6 @@ const options = [
 if (production) {
   options.push(
     willChange,
-    zIndex,
     autoprefixer,
     csso,
     flexbugs
@@ -36,7 +34,7 @@ if (production) {
 
 gulp.task(name, () => {
   return gulp.src(files)
-  .pipe(plumber({errorHandler: notify.onError(name)}))
+  .pipe(plumber({errorHandler: error}))
   .pipe(postcss(options))
   .pipe(gulp.dest(there))
 });

@@ -11,6 +11,7 @@
     "fb-deploy": "firebase deploy",
     "deploy": "npm run prod && npm run fb-deploy",
     "clean": "npm prune && npm dedupe",
+    "line": "find source \\( -name '*.html' -or -name '*.css' -or -name '*.js'  \\) -type f -print0 | xargs -0 cat | wc -l",
     "critical": "gulp critical"
   },
   "dependencies": {
@@ -66,7 +67,6 @@
     "postcss-media-minmax": "2.1.2",
     "postcss-nested": "1.0.0",
     "postcss-will-change": "1.1.0",
-    "postcss-zindex": "2.2.0",
     "vinyl-named": "1.1.0",
     "webpack-stream": "3.2.0"
   },

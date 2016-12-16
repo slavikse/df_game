@@ -14,7 +14,7 @@ img[width height alt], a[title], template, пробел: &#32;
   Остальное
 
 Рекомендации:
-  mobile first! Поиск справа налево
+  mobile first `<`! Поиск селекторов справа налево
   layout: раскладка (width, left..), дорогая операция
   paint: отрисовка (color, opacity..), дешевая операция
   composite: компоновка, самая дешевая операция
@@ -48,7 +48,6 @@ svg4everybody();
 ---------------------------- ПРОЧЕЕ ---------------------------
 npmjs.com/package/opener
 npmjs.com/package/gulp-connect
-github.com/amireh/happypack
 
 Удалять не используемые глифы в шрифтах: fontforge
 

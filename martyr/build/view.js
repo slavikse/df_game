@@ -1,6 +1,6 @@
 import gulp from 'gulp';
 import plumber from 'gulp-plumber';
-import notify from 'gulp-notify';
+import error from './../utility/error';
 import include from 'gulp-file-include';
 import htmlmin from 'gulp-htmlmin';
 import util from 'gulp-util';
@@ -27,7 +27,7 @@ const options = {
 
 gulp.task(name, () => {
   return gulp.src(files)
-  .pipe(plumber({errorHandler: notify.onError(name)}))
+  .pipe(plumber({errorHandler: error}))
   .pipe(include({prefix: '@'}))
   .pipe(production ? htmlmin(options) : util.noop())
   .pipe(gulp.dest(there))

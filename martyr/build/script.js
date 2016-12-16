@@ -1,6 +1,6 @@
 import gulp from 'gulp';
 import plumber from 'gulp-plumber';
-import notify from 'gulp-notify';
+import error from './../utility/error';
 import named from 'vinyl-named';
 import HappyPack from 'happypack';
 import webpackStream from 'webpack-stream';
@@ -65,7 +65,7 @@ const options = {
 if (!production) {
   options.plugins.push(
     new webpack.NoErrorsPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
   )
 }
 
@@ -88,13 +88,13 @@ if (production) {
         //drop_console: true,
         //unsafe: true
       }
-    })
+    }),
   )
 }
 
 gulp.task(name, cb => {
   return gulp.src(files)
-  .pipe(plumber({errorHandler: notify.onError(name)}))
+  .pipe(plumber({errorHandler: error}))
   .pipe(named())
   .pipe(webpackStream(options, null, done))
   .pipe(gulp.dest(there))
