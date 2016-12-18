@@ -50,9 +50,11 @@ const options = {
   watchOptions: {aggregateTimeout: 20},
   devtool: production ? null : 'cheap-eval-source-map',
   plugins: [
-    new webpack.EnvironmentPlugin(['NODE_ENV']),
+    new webpack.EnvironmentPlugin('NODE_ENV'),
     new HappyPack({
-      loaders: ['babel', 'json']
+      loaders: ['babel', 'json'],
+      tempDir: 'temp/happypack',
+      cachePath: 'temp/happypack.json'
     }),
     // new webpack.optimize.CommonsChunkPlugin({
     //   name: 'common',

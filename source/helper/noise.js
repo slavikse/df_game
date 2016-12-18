@@ -27,11 +27,6 @@ function setParam(audio, params) {
   return audio;
 }
 
-function playEnd(audio) {
-  audio.pause();
-  audio = null;
-}
-
 function getRandom(params) {
   let param = params;
 
@@ -42,6 +37,11 @@ function getRandom(params) {
   }
 
   return param;
+}
+
+function playEnd(audio) {
+  audio.pause();
+  audio = null;
 }
 
 export default noise;
