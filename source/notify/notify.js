@@ -18,11 +18,7 @@ function notify(note) {
 }
 
 function getNoteHtml(note) {
-  return `
-    <div class='${note.type}'>
-      ${note.message}
-    </div>
-  `;
+  return `<div class='${note.type}'>${note.message}</div>`;
 }
 
 function noteHide(noteElement) {

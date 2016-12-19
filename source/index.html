@@ -2,15 +2,9 @@
 <html lang='ru'>
 <head>
   @include('./helper/meta.html')
-
   <title>dark | forest</title>
-
-  <link href='index.css'
-        rel='stylesheet'>
-
-  <link href='image/dark.forest.png'
-        rel='icon'
-        sizes='32x32'>
+  <link href='index.css' rel='stylesheet'>
+  <link href='image/dark.forest.png' rel='icon' sizes='32x32'>
 </head>
 <body>
 @include('./preload/preload.html')
@@ -30,15 +24,19 @@
 <div class='paddock'></div>
 <div class='boss-paddock'></div>
 
-<audio class='ambient'
-       src='audio/light_ambient.mp3'
-       autoplay
-       loop></audio>
+<audio class='ambient' src='audio/light_ambient.mp3' autoplay loop></audio>
+
+<!--
+<iframe frameborder='0'
+        allowtransparency='true'
+        scrolling='no'
+        src='https://money.yandex.ru/quickpay/shop-widget?account=410011000753520&quickpay=shop&payment-type-choice=off&mobile-payment-type-choice=on&writer=seller&targets=dark-forest&default-sum=100&button-text=03&successURL='
+        width='450'
+        height='198'></iframe>
+-->
 
 <!--<script src='common.js' defer></script>-->
-
-<script src='index.js'
-        defer></script>
+<script src='index.js' defer></script>
 </body>
 </html>
 

@@ -53,3 +53,9 @@ npmjs.com/package/gulp-connect
 
 Оформление незагруженных изображений:
 css-live.ru/articles/oformlenie-nezagruzhennyx-izobrazhenij.html
+
+Очистка кэша вк: vk.com/dev/pages.clearCache
+
+webApp:
+github.com/GoogleChrome/airhorn/blob/master/app/manifest.json
+github.com/GoogleChrome/airhorn/blob/master/app/manifest.webapp

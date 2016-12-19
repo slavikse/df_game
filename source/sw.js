@@ -24,6 +24,20 @@ const urlsToCache = [
   './image/sprite.png'
 ];
 
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cacheNames => {
+      cacheNames.keys().then(cache => {
+        cache.forEach(element => {
+          if (urlsToCache.indexOf(element) === -1) {
+            caches.delete(element);
+          }
+        });
+      });
+    })
+  );
+});
+
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
@@ -36,20 +50,6 @@ self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request).then(response => {
       return response || fetch(event.request);
-    })
-  );
-});
-
-self.addEventListener('activate', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(cacheNames => {
-      cacheNames.keys().then(cache => {
-        cache.forEach(element => {
-          if (urlsToCache.indexOf(element) === -1) {
-            caches.delete(element);
-          }
-        });
-      });
     })
   );
 });

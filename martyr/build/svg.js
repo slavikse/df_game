@@ -52,7 +52,7 @@ function createSvg() {
 
 /** 1. Удаляет лишний путь ../public/ из примера */
 function changeExample() {
-  return gulp.src('temp/sprite.symbol.*')
+  return gulp.src('temp/sprite.symbol.*') // на проде его нет, поэтому .*
   .pipe(replace(/\.\.\/public\//gi, '')) /* 1 */
   .pipe(gulp.dest(there))
 }

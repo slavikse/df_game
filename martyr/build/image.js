@@ -10,9 +10,7 @@ const there = 'public/image';
 const config = {'*': {width: '100%'}};
 const production = process.env.NODE_ENV === 'production';
 const param = {
-  quality: 80,
   progressive: true,
-  compressionLevel: 6,
   stats: false,
   silent: true,
   errorOnEnlargement: false,
