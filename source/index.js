@@ -11,7 +11,6 @@ import './boss/boss';
 import './result/result';
 import './statistic/statistic';
 
-
 /**
  * Загрузив игру, создаст событие,
  * которое слушает стартовый экран

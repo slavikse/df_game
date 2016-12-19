@@ -3,7 +3,9 @@
 Экранировать пользовательский ввод. Защита от CSRF
 img[width height alt], a[title], template, пробел: &#32;
 <link rel="dns-prefetch" href="https://URI.com">
+<link rel="preconnect" href="https://cdn.example.com">
 <link rel="prefetch" href="secondary.js">
+<link rel="prerender" href="http://example.com">
 
 -------------------------- СТИЛИ ----------------------------
 
@@ -59,3 +61,5 @@ css-live.ru/articles/oformlenie-nezagruzhennyx-izobrazhenij.html
 webApp:
 github.com/GoogleChrome/airhorn/blob/master/app/manifest.json
 github.com/GoogleChrome/airhorn/blob/master/app/manifest.webapp
+
+happypack пока что только для webpack1

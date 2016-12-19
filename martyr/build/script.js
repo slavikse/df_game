@@ -2,13 +2,12 @@ import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import error from './../utility/error';
 import named from 'vinyl-named';
-import HappyPack from 'happypack';
-import webpackStream from 'webpack-stream';
+import wpStream from 'webpack-stream';
+import webpack from 'webpack';
 
 const name = 'script';
 const files = 'source/*.js';
 const there = 'public';
-const webpack = webpackStream.webpack;
 const production = process.env.NODE_ENV === 'production';
 
 let firstBuildReady = false;
@@ -34,28 +33,23 @@ function buildReady(cb) {
 
 const options = {
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /firebase/,
-        cacheDirectory: true,
-        loader: 'babel'
+        loader: 'babel-loader'
       }, {
         test: /\.json$/,
-        loader: 'json'
+        loader: 'json-loader'
       }
     ]
   },
+  cache: true,
   watch: !production,
   watchOptions: {aggregateTimeout: 20},
-  devtool: production ? null : 'cheap-eval-source-map',
+  devtool: production ? false : 'eval',
   plugins: [
     new webpack.EnvironmentPlugin('NODE_ENV'),
-    new HappyPack({
-      loaders: ['babel', 'json'],
-      tempDir: 'temp/happypack',
-      cachePath: 'temp/happypack.json'
-    }),
     // new webpack.optimize.CommonsChunkPlugin({
     //   name: 'common',
     //   minChunks: 2
@@ -87,10 +81,10 @@ if (production) {
         unused: true,
         warnings: false,
         dead_code: true,
-        //drop_console: true,
-        //unsafe: true
+        drop_console: true,
+        unsafe: true
       }
-    }),
+    })
   )
 }
 
@@ -98,7 +92,7 @@ gulp.task(name, cb => {
   return gulp.src(files)
   .pipe(plumber({errorHandler: error}))
   .pipe(named())
-  .pipe(webpackStream(options, null, done))
+  .pipe(wpStream(options, webpack, done))
   .pipe(gulp.dest(there))
   .on('data', buildReady.bind(null, cb))
 });
