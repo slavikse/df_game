@@ -36,4 +36,4 @@ document.addEventListener('scoreDec', scoreDec);
 document.addEventListener('waveEnd', scoreShopDelay);
 document.addEventListener('gameOver', scoreStatistic);
 
-// scoreAdd({add: 500});
+//scoreAdd({add: 500});

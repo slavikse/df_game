@@ -3,17 +3,24 @@
 .grenade {
   position: relative;
   z-index: 1; /* в магазе */
+  margin-right: 6px;
   display: flex;
   align-items: flex-end;
   opacity: 0;
   transition: opacity 0.6s; /* после начала игры замещает револьвер */
   will-change: opacity;
 
-  &-count {
-    margin-left: -26px;
-    width: 30px;
-    color: white;
-    font-size: 2em;
-    will-change: contents;
+  /* при смене иконки перезаписывается класс */
+  & div {
+    margin: 0 -6px;
+    animation: 0.6s alternate; /* grenade-blink */
+    will-change: transform;
+  }
+}
+
+/* покупка грены */
+@keyframes grenade-blink {
+  0% {
+    transform: scale(1.3);
   }
 }

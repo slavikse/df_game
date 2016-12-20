@@ -14,7 +14,7 @@ const eventEnemyCreate = new Event('enemyCreate');
 const eventBossGone = new Event('bossGone');
 const eventScoreAdd = new Event('scoreAdd');
 
-let scoreBossKilled = 200;
+let scoreBossKilled = 100;
 // настройки босса: анимация, хп, иконка. порядок важен для setNodes
 const bossSettingDefault = [
   {health: [4, 6], animation: 'boss-body', icon: 'icon-boss_body'},
@@ -211,7 +211,7 @@ function levelUp(boss) {
     bossSettingDefault[i].health[1] += 2;
   }
 
-  scoreBossKilled += 200;
+  scoreBossKilled += 100;
 }
 
 function bossClear(boss) {

@@ -1,38 +1,71 @@
 import '../grenade_notice/grenade_notice';
 
-const $grenade = document.querySelector('.grenade');
-const $grenadeCount = $grenade.querySelector('.grenade-count');
+const $body = document.body;
+const $grenadeWrap = $body.querySelector('.grenade');
+const $grenade = $grenadeWrap.children;
+const grenadeFull = 1; // 0,1 (2) грены
+const grenadeStateClasses = [
+  'icon-grenade_empty',
+  'icon-grenade_full'
+];
 const eventGrenade = new Event('grenade');
+const eventGrenadeShop = new Event('grenadeShop');
 
-let grenadeCount = 1;
+let grenadeCount = grenadeFull;
 let grenadeCountStat = 0;
-
-changeCount();
-
-function changeCount(change = 0) {
-  grenadeCount += change;
-  $grenadeCount.textContent = `x${grenadeCount}`;
-}
 
 function grenade() {
 
   /** GOD MOD */
 
   if (window.god) {
-    grenadeCount = 2;
+    document.dispatchEvent(eventGrenade);
+    return;
   }
 
   /** / GOD MOD */
 
-  if (grenadeCount > 0) {
-    changeCount(-1);
-    grenadeCountStat += 1;
-    document.dispatchEvent(eventGrenade);
+  if (grenadeCount !== -1) { // значит грены НЕ кончились
+    grenadeBoom();
   }
 }
 
+function grenadeBoom() {
+  const grenade = $grenade[grenadeCount];
+
+  grenade.className = grenadeStateClasses[0];
+  grenadeBoomAnimate(grenade);
+  grenadeCount -= 1;
+
+  grenadeCountStat += 1;
+  document.dispatchEvent(eventGrenade);
+}
+
+function grenadeBoomAnimate(grenade) {
+  grenade.style.animationName = 'grenade-blink';
+  setTimeout(grenadeBoomAnimateEnd.bind(null, grenade), 600);
+}
+
+function grenadeBoomAnimateEnd(grenade) {
+  grenade.style.animationName = '';
+}
+
 function buyGrenade() {
-  changeCount(1);
+  if (grenadeCount < grenadeFull) {
+    grenadeCount += 1;
+
+    const grenade = $grenade[grenadeCount];
+    grenade.className = grenadeStateClasses[1];
+
+    grenadeBoomAnimate(grenade);
+  }
+}
+
+function grenadeShop() {
+  removeListenKey();
+
+  eventGrenadeShop.grenade = grenadeCount;
+  document.dispatchEvent(eventGrenadeShop);
 }
 
 function startGame() {
@@ -41,7 +74,7 @@ function startGame() {
 }
 
 function showGrenade() {
-  $grenade.style.opacity = 1;
+  $grenadeWrap.style.opacity = 1;
 }
 
 function gKeyHandler(e) {
@@ -72,5 +105,5 @@ function gameOver() {
 document.addEventListener('startGame', startGame);
 document.addEventListener('waveStart', addListenKey);
 document.addEventListener('buyGrenade', buyGrenade);
-document.addEventListener('waveEnd', removeListenKey);
+document.addEventListener('waveEnd', grenadeShop);
 document.addEventListener('gameOver', gameOver);

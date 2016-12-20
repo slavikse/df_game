@@ -5,25 +5,25 @@
   z-index: 1; /* в магазе */
   display: flex;
   flex-direction: column;
-  margin-left: 5px;
+  margin-left: 4px;
 }
 
 .first-aid {
   display: flex;
-  margin-bottom: 10px;
+  margin-bottom: 4px;
 
   /* при смене иконки перезаписывается класс */
   & div {
-    margin: 0 2px;
-    animation: 0.6s alternate both; /* first-aid-blink */
-    will-change: transform;
+    margin: 0 1px;
+    animation: 0.6s alternate; /* first-aid-blink */
+    will-change: opacity, transform;
   }
 }
 
-/* покупка хилки */
 @keyframes first-aid-blink {
   0% {
-    transform: scale(1.2);
+    opacity: 0;
+    transform: scale(1.3);
   }
 }
 
@@ -32,13 +32,12 @@
 
   /* при смене иконки перезаписывается класс */
   & div {
-    margin: 0 2px;
+    margin: 0 1px;
     animation: 0.6s alternate; /* health-blink */
     will-change: opacity, transform;
   }
 }
 
-/* получение урона */
 @keyframes health-blink {
   0% {
     opacity: 0;

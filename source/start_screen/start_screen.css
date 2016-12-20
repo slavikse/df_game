@@ -84,19 +84,20 @@
 .donate {
   position: absolute;
   z-index: 2; /* перекрыть логин форму */
-  bottom: 2px;
-  font-size: 1.8em;
+  bottom: 0;
   color: #fff;
-  text-shadow: 0 2px 1px #000, 0 -2px 1px #000;
+  text-shadow: 0 3px 2px #000, 0 -3px 2px #000;
 }
 
 .creator {
   left: 2px;
+  font-size: 1.8em;
   cursor: text;
   user-select: text;
 }
 
 .donate {
   right: 2px;
+  font-size: 2.2em;
   cursor: pointer;
 }

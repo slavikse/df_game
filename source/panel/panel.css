@@ -10,7 +10,7 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  margin-bottom: 5px;
+  margin-bottom: 2px;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -32,5 +32,6 @@
   & .ammo {
     position: relative;
     display: flex;
+    justify-content: flex-end;
   }
 }

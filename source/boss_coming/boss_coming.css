@@ -1,7 +1,7 @@
 .boss-coming {
   position: absolute;
   z-index: 1; /* в магазе */
-  top: 14px;
+  top: 12px;
   left: 0;
   width: 200px;
   height: 10px;

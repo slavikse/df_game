@@ -3,12 +3,12 @@
   z-index: 1; /* в магазе */
   width: 70px;
   color: white;
-  font-size: 2.5em;
+  font-size: 2.6em;
+  line-height: 0.8;
   will-change: contents;
 
   &::before {
-    margin-right: 2px;
-    font-size: 0.8em;
+    font-size: 0.6em;
     content: '$';
   }
 }

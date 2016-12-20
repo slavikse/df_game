@@ -21,7 +21,7 @@ const eventFirstAidShop = new Event('firstAidShop');
 
 let receivedDamageStat = 0;
 let firstAidUseStat = 0;
-let firstAid = firstAidFull;
+let firstAidCount = firstAidFull;
 let health = healthFull;
 let halfHealth = halfHealthFull;
 
@@ -64,16 +64,27 @@ function heartBeatEnd() {
 /** есть хилки и (не полное хп или не часть хп) */
 function useFirstAid() {
   if (
-    firstAid !== -1 && (
+    firstAidCount !== -1 && (
       health !== healthFull ||
       halfHealth !== halfHealthFull
     )
   ) {
-    $firstAid[firstAid].className = firstAidStateClasses[0];
-    firstAid -= 1;
+    const firstAid = $firstAid[firstAidCount];
+    firstAid.className = firstAidStateClasses[0];
+    firstAidCount -= 1;
 
+    firstAidAnimate(firstAid);
     regeneration();
   }
+}
+
+function firstAidAnimate(firstAid) {
+  firstAid.style.animationName = 'first-aid-blink';
+  setTimeout(firstAidAnimateEnd.bind(null, firstAid), 600); // анимация
+}
+
+function firstAidAnimateEnd(firstAid) {
+  firstAid.style.animationName = '';
 }
 
 function regeneration() {
@@ -95,22 +106,17 @@ function dontShootEnd() {
   $body.classList.remove('dont-shoot');
 }
 
-function addFirstAid() {
-  if (firstAid < firstAidFull) {
-    firstAid += 1;
-    $firstAid[firstAid].className = firstAidStateClasses[1];
-    $firstAid[firstAid].style.animationName = 'first-aid-blink';
+function buyFirstAid() {
+  if (firstAidCount < firstAidFull) {
+    firstAidCount += 1;
+    $firstAid[firstAidCount].className = firstAidStateClasses[1];
 
-    setTimeout(addFirstAidEnd, 600); // анимация
+    firstAidAnimate($firstAid[firstAidCount]);
   }
 }
 
-function addFirstAidEnd() {
-  $firstAid[firstAid].style.animationName = '';
-}
-
 function firstAidShop() {
-  eventFirstAidShop.firstAid = firstAid;
+  eventFirstAidShop.firstAid = firstAidCount;
   document.dispatchEvent(eventFirstAidShop);
 }
 
@@ -161,4 +167,4 @@ document.addEventListener('damage', damage);
 document.addEventListener('keyup', hKeyHandler);
 document.addEventListener('mousedown', cmbHandler);
 document.addEventListener('waveEnd', firstAidShop);
-document.addEventListener('buyFirstAid', addFirstAid);
+document.addEventListener('buyFirstAid', buyFirstAid);

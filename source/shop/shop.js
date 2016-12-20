@@ -9,8 +9,6 @@ const $store = $shop.querySelector('.store');
 const $drumItem = $store.querySelector('.drum-shop');
 const $grenadeItem = $store.querySelector('.grenade-shop');
 const $firstAidItem = $store.querySelector('.first-aid-shop');
-const items = [$drumItem, $grenadeItem]; // хилка уникальна
-const itemsLength = items.length;
 const $shopClose = $shop.querySelector('.shop-close');
 const audioBuyHover = audioSprite.buy_hover;
 const audioBuy = audioSprite.buy;
@@ -25,7 +23,8 @@ const eventWaveStart = new Event('waveStart');
 
 let costsStat = 0;
 let score; // деньги $
-let firstAid;
+let grenade; // кол-во грен
+let firstAid; // кол-во хилок
 let openShopDelayTimerID;
 
 $drumItem.shopDetail = {
@@ -35,18 +34,24 @@ $drumItem.shopDetail = {
 
 $grenadeItem.shopDetail = {
   type: 'grenade',
-  price: 50
+  price: 80
 };
 
 $firstAidItem.shopDetail = {
   type: 'first-aid',
-  price: 60
+  price: 100
 };
 
+const drumPrice = $drumItem.shopDetail.price;
+const grenadePrice = $grenadeItem.shopDetail.price;
 const firstAidPrice = $firstAidItem.shopDetail.price;
 
 function scoreShop(e) {
   score = e.score;
+}
+
+function grenadeShop(e) {
+  grenade = e.grenade;
 }
 
 function firstAidShop(e) {
@@ -67,18 +72,26 @@ function openShop() {
 }
 
 function buyLockUnlock() {
-  for (let i = 0, len = itemsLength; i < len; i++) {
-    const item = items[i];
-    const price = item.shopDetail.price;
-
-    if (price > score) {
-      item.classList.add('buy-block');
-    } else {
-      item.classList.remove('buy-block');
-    }
-  }
-
+  canBuyDrum();
+  canBuyGrenade();
   canBuyFirstAid();
+}
+
+function canBuyDrum() {
+  if (drumPrice > score) {
+    $drumItem.classList.add('buy-block');
+  } else {
+    $drumItem.classList.remove('buy-block');
+  }
+}
+
+/** максимально грен [0-1], т.е. 2 штуки */
+function canBuyGrenade() {
+  if (grenade === 1 || grenadePrice > score) {
+    $grenadeItem.classList.add('buy-block');
+  } else {
+    $grenadeItem.classList.remove('buy-block');
+  }
 }
 
 /** максимально аптечек [0-1], т.е. 2 штуки */
@@ -127,6 +140,10 @@ function buyDrum() {
 }
 
 function buyGrenade() {
+
+  console.log(grenade);
+
+  grenade += 1;
   document.dispatchEvent(eventBuyGrenade);
 }
 
@@ -186,6 +203,7 @@ function gameOver() {
 
 document.addEventListener('scoreShop', scoreShop);
 document.addEventListener('firstAidShop', firstAidShop);
+document.addEventListener('grenadeShop', grenadeShop);
 document.addEventListener('waveEnd', openShopDelay);
 document.addEventListener('regeneration', useFirstAid);
 $store.addEventListener('mouseenter', itemHandler);
