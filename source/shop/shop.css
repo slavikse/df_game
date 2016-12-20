@@ -20,7 +20,7 @@
     transform: scale(1);
 
     & .item {
-      /* для возможности покупать */
+      /* для возможности покупать когда магазин открыт */
       pointer-events: auto;
     }
   }
@@ -79,7 +79,6 @@
     display: flex;
     align-items: center;
     min-height: 70px;
-    pointer-events: none;
   }
 
   & .buy-block {

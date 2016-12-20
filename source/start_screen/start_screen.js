@@ -19,7 +19,7 @@ fb.auth().onAuthStateChanged(auth);
 
 function auth(user) {
   if (user && user.uid) {
-    db.ref(user.uid).once('value').then(bestScore);
+    db.ref(`user/${user.uid}`).once('value').then(bestScore);
   } else {
     $bestScore.textContent = localStorage.getItem('best-score') || 0;
   }
@@ -71,5 +71,5 @@ function hoverNewGame() {
   noise(audioURI, audioHover);
 }
 
-$newGame.addEventListener('mouseover', hoverNewGame);
+$newGame.addEventListener('mouseenter', hoverNewGame);
 $newGame.addEventListener('click', initGame);

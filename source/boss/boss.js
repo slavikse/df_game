@@ -189,6 +189,7 @@ function undocking(boss) {
 
 function bossGone(boss) {
   notify({type: 'info', message: `+${scoreBossKilled}$`});
+  notify({type: 'warn', message: 'level up'});
 
   document.removeEventListener('bossShoot', isDamage);
   document.removeEventListener('grenade', grenade);

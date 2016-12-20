@@ -61,7 +61,7 @@ const options = {
 if (!production) {
   options.plugins.push(
     new webpack.NoErrorsPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
+    new webpack.HotModuleReplacementPlugin()
   )
 }
 

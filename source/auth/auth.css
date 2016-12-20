@@ -38,7 +38,6 @@
 
   & .cogwheel {
     display: flex;
-    pointer-events: none;
     transform-origin: center 27px;
     transition: transform 0.4s;
     will-change: transform;
@@ -46,7 +45,6 @@
 
   & .letter {
     font-size: 4em;
-    pointer-events: none;
   }
 
   & .letter-o {

@@ -51,15 +51,18 @@ svg4everybody();
 npmjs.com/package/opener
 npmjs.com/package/gulp-connect
 
-Удалять не используемые глифы в шрифтах: fontforge
+Удалять не используемые глифы в шрифтах:
+fontforge
 
 Оформление незагруженных изображений:
 css-live.ru/articles/oformlenie-nezagruzhennyx-izobrazhenij.html
 
-Очистка кэша вк: vk.com/dev/pages.clearCache
+Очистка кэша вк:
+vk.com/dev/pages.clearCache
+
+Где залогинен посетитель:
+habrahabr.ru/post/312636
 
 webApp:
 github.com/GoogleChrome/airhorn/blob/master/app/manifest.json
 github.com/GoogleChrome/airhorn/blob/master/app/manifest.webapp
-
-happypack пока что только для webpack1

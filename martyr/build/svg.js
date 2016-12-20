@@ -3,9 +3,7 @@ import rename from 'gulp-rename';
 import replace from 'gulp-replace';
 import svgSprite from 'gulp-svg-sprite';
 
-/**
- * 1. Расположение svg спрайта
- */
+/** 1. Расположение svg спрайта */
 const name = 'svg';
 const files = 'source/**/svg/*';
 const there = 'temp';
@@ -19,15 +17,13 @@ const config = {
       sprite: '../public/image/sprite.svg', /* 1 */
       dest: '',
       example: true,
-      render: {
-        css: true
-      }
+      render: {css: true}
     }
   }
 };
 
 if (production) {
-  config.shape.transform = ['svgo'];
+  config.shape.transform = 'svgo';
   config.mode.symbol.example = false;
   config.mode.symbol.render.css = false;
   config.svg = {

@@ -1,7 +1,7 @@
 # Для чего?  
 /!\ Мученик - машина, а не человек! Современный стек технологий для сборки веб проектов /!\    
 **В составе:**
-gulp4, webpack + babel = ❤ es2015, postcss, png/jpg/svg/mp3 sprite, image resize, minify, live reload, rev, zip.
+npm scripts, gulp@4, webpack@2 + babel = ❤ es2015, postcss, png/jpg/svg/mp3 sprite, image resize, minify, live reload, rev, zip.
 
 # Установка
 ```sh

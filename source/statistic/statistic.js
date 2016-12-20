@@ -67,20 +67,24 @@ function getStatistic() {
 
 function getBestScore() {
   if (uid) {
-    db.ref(uid).once('value').then(bestScore);
+    db.ref(`user/${uid}`).once('value').then(bestScore);
   }
 }
 
 function bestScore(snapshot) {
-  const bestScore = snapshot.val().bestScore;
+  let bestScore = 0;
 
-  if (bestScore && score > bestScore) {
+  if (snapshot.val() && snapshot.val().bestScore) {
+    bestScore = snapshot.val().bestScore;
+  }
+
+  if (score > bestScore) {
     saveBestScore();
   }
 }
 
 function saveBestScore() {
-  db.ref(uid).set({bestScore: score});
+  db.ref(`user/${uid}`).set({bestScore: score});
 }
 
 function localSaveBestScore() {

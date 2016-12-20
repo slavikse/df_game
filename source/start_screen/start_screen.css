@@ -79,3 +79,24 @@
   background-image: url("image/forest_night.jpg");
 }
 }
+
+.creator,
+.donate {
+  position: absolute;
+  z-index: 2; /* перекрыть логин форму */
+  bottom: 2px;
+  font-size: 1.8em;
+  color: #fff;
+  text-shadow: 0 2px 1px #000, 0 -2px 1px #000;
+}
+
+.creator {
+  left: 2px;
+  cursor: text;
+  user-select: text;
+}
+
+.donate {
+  right: 2px;
+  cursor: pointer;
+}

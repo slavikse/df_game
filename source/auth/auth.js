@@ -39,7 +39,7 @@ function authChanged(user) {
 
   //Uncaught (in promise) DOMException: The play() request was interrupted
   //by a call to pause()
-  noise(audioURI, authAudio);
+  setTimeout(noise.bind(null, audioURI, authAudio), 150);
 
   $authOpener.classList.remove('auth-opener-on');
   $authLoader.classList.remove('loader');
@@ -229,6 +229,6 @@ function hoverAuthOpener() {
   noise(audioURI, audioAuthHover);
 }
 
-$authOpener.addEventListener('mouseover', hoverAuthOpener);
+$authOpener.addEventListener('mouseenter', hoverAuthOpener);
 $authLogout.addEventListener('click', fbLogout);
 document.addEventListener('startGame', getAuthBonus);

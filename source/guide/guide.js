@@ -32,6 +32,6 @@ function closeGuide() {
   $guideWrap.classList.remove('guide-wrap-show');
 }
 
-$guideHelp.addEventListener('mouseover', hoverGuide);
+$guideHelp.addEventListener('mouseenter', hoverGuide);
 $guideHelp.addEventListener('click', showGuide);
 document.addEventListener('closeGuide', closeGuide);
