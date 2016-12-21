@@ -12,7 +12,7 @@
     "fb-deploy": "firebase deploy",
     "deploy": "npm run prod && npm run fb-deploy",
     "npm-clean": "npm prune && npm dedupe",
-    "line": "martyr/utility/line.sh",
+    "row": "martyr/utility/row.sh",
     "critical": "gulp critical"
   },
   "dependencies": {
