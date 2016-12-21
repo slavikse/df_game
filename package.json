@@ -12,7 +12,7 @@
     "fb-deploy": "firebase deploy",
     "deploy": "npm run prod && npm run fb-deploy",
     "npm-clean": "npm prune && npm dedupe",
-    "line": "echo && echo 'html' && find source -name '*.html' -type f -print0 | xargs -0 cat | wc -l && echo && echo 'css' && find source -name '*.css' -type f -print0 | xargs -0 cat | wc -l && echo && echo 'js' && find source -name '*.js' -type f -print0 | xargs -0 cat | wc -l && echo",
+    "line": "martyr/utility/line.sh",
     "critical": "gulp critical"
   },
   "dependencies": {
