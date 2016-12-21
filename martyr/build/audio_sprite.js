@@ -13,12 +13,12 @@ const config = {
   path: 'audio',
   export: 'mp3',
   format: 'howler',
-  log: 'notice'
+  log: 'notice',
+  channels: 2
 };
 
 if (production) {
   config.bitrate = 80;
-  config.channels = 2;
 }
 
 gulp.task(name, cb => {

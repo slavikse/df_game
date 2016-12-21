@@ -56,13 +56,16 @@ function changeExample() {
 // оставляет только нужные подсказки к спрайту
 function cutString(cb) {
   const spritePath = 'temp/sprite.symbol.html';
-  const spriteString = fs.readFileSync(spritePath).toString();
-  const start = spriteString.indexOf('<h3>B)');
-  const startDeep = spriteString.indexOf('<svg', start);
-  const end = spriteString.indexOf('</div>', startDeep);
-  const newSpriteString = spriteString.slice(startDeep, end);
 
-  fs.writeFileSync(spritePath, newSpriteString);
+  if (fs.existsSync(spritePath)) {
+    const spriteString = fs.readFileSync(spritePath).toString();
+    const start = spriteString.indexOf('<h3>B)');
+    const startDeep = spriteString.indexOf('<svg', start);
+    const end = spriteString.indexOf('</div>', startDeep);
+    const newSpriteString = spriteString.slice(startDeep, end);
+
+    fs.writeFileSync(spritePath, newSpriteString);
+  }
 
   cb();
 }
