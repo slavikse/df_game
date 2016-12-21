@@ -140,9 +140,6 @@ function buyDrum() {
 }
 
 function buyGrenade() {
-
-  console.log(grenade);
-
   grenade += 1;
   document.dispatchEvent(eventBuyGrenade);
 }

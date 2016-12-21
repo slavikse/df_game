@@ -6,8 +6,8 @@
   margin-right: 6px;
   display: flex;
   align-items: flex-end;
-  opacity: 0;
-  transition: opacity 0.6s; /* после начала игры замещает револьвер */
+  opacity: 0; /* после начала игры замещает револьвер */
+  transition: opacity 0.6s;
   will-change: opacity;
 
   /* при смене иконки перезаписывается класс */

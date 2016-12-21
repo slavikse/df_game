@@ -2,6 +2,7 @@ import gulp from 'gulp';
 import rename from 'gulp-rename';
 import replace from 'gulp-replace';
 import svgSprite from 'gulp-svg-sprite';
+import fs from 'fs';
 
 /** 1. Расположение svg спрайта */
 const name = 'svg';
@@ -9,9 +10,7 @@ const files = 'source/**/svg/*';
 const there = 'temp';
 const production = process.env.NODE_ENV === 'production';
 const config = {
-  shape: {
-    transform: []
-  },
+  shape: {transform: []},
   mode: {
     symbol: {
       sprite: '../public/image/sprite.svg', /* 1 */
@@ -35,7 +34,8 @@ if (production) {
 gulp.task(name,
   gulp.series(
     createSvg,
-    changeExample
+    changeExample,
+    cutString
   )
 );
 
@@ -48,9 +48,23 @@ function createSvg() {
 
 /** 1. Удаляет лишний путь ../public/ из примера */
 function changeExample() {
-  return gulp.src('temp/sprite.symbol.*') // на проде его нет, поэтому .*
-  .pipe(replace(/\.\.\/public\//gi, '')) /* 1 */
+  return gulp.src('temp/sprite.symbol.*') // (html) на проде его нет, поэтому *
+  .pipe(replace(/\.\.\/public\//gmi, '')) /* 1 */
   .pipe(gulp.dest(there))
+}
+
+// оставляет только нужные подсказки к спрайту
+function cutString(cb) {
+  const spritePath = 'temp/sprite.symbol.html';
+  const spriteString = fs.readFileSync(spritePath).toString();
+  const start = spriteString.indexOf('<h3>B)');
+  const startDeep = spriteString.indexOf('<svg', start);
+  const end = spriteString.indexOf('</div>', startDeep);
+  const newSpriteString = spriteString.slice(startDeep, end);
+
+  fs.writeFileSync(spritePath, newSpriteString);
+
+  cb();
 }
 
 if (!production) {

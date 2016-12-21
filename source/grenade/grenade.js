@@ -34,19 +34,19 @@ function grenadeBoom() {
   const grenade = $grenade[grenadeCount];
 
   grenade.className = grenadeStateClasses[0];
-  grenadeBoomAnimate(grenade);
+  grenadeCountChangeAnimate(grenade);
   grenadeCount -= 1;
 
   grenadeCountStat += 1;
   document.dispatchEvent(eventGrenade);
 }
 
-function grenadeBoomAnimate(grenade) {
+function grenadeCountChangeAnimate(grenade) {
   grenade.style.animationName = 'grenade-blink';
-  setTimeout(grenadeBoomAnimateEnd.bind(null, grenade), 600);
+  setTimeout(grenadeCountChangeAnimateEnd.bind(null, grenade), 600);
 }
 
-function grenadeBoomAnimateEnd(grenade) {
+function grenadeCountChangeAnimateEnd(grenade) {
   grenade.style.animationName = '';
 }
 
@@ -57,7 +57,7 @@ function buyGrenade() {
     const grenade = $grenade[grenadeCount];
     grenade.className = grenadeStateClasses[1];
 
-    grenadeBoomAnimate(grenade);
+    grenadeCountChangeAnimate(grenade);
   }
 }
 

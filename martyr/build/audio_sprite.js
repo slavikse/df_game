@@ -21,8 +21,16 @@ if (production) {
   config.bitrate = 80;
 }
 
+gulp.task(name, () => {
+  return gulp.src(files)
+  .pipe(audioSprite(config))
+  .pipe(gulp.dest(there))
+  .on('end', shortenValues)
+  .pipe(notify(`restart: ${name}`))
+});
+
 // укорачивает длительность звуков до 2х знаков после запятой
-function shortenValues() {
+function shortenValues(cb) {
   const spriteFile = fs.readFileSync(spriteJsonPath);
   const json = JSON.parse(spriteFile); // со всем информацией
   const sprite = json.sprite; // только информация о звуках
@@ -36,15 +44,9 @@ function shortenValues() {
 
   json.sprite = sprite;
   fs.writeFileSync(spriteJsonPath, JSON.stringify(json));
-}
 
-gulp.task(name, () => {
-  return gulp.src(files)
-  .pipe(audioSprite(config))
-  .pipe(gulp.dest(there))
-  .on('end', shortenValues)
-  .pipe(notify(`restart: ${name}`))
-});
+  cb();
+}
 
 if (!production) {
   gulp.watch(files, gulp.parallel(name));
