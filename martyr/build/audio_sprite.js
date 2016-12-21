@@ -13,19 +13,19 @@ const config = {
   path: 'audio',
   export: 'mp3',
   format: 'howler',
-  log: 'notice',
-  channels: 2
+  log: 'notice'
 };
 
 if (production) {
   config.bitrate = 80;
+  config.channels = 2;
 }
 
-gulp.task(name, () => {
+gulp.task(name, cb => {
   return gulp.src(files)
   .pipe(audioSprite(config))
   .pipe(gulp.dest(there))
-  .on('end', shortenValues)
+  .on('end', shortenValues.bind(null, cb))
   .pipe(notify(`restart: ${name}`))
 });
 
@@ -37,8 +37,8 @@ function shortenValues(cb) {
   const spriteKeys = Object.keys(sprite);
 
   spriteKeys.forEach(key => {
-    // [ 2000, 235.10 ] = [ 2000, 235.10204081632668 ]
-    //         ^^^^^^             ^^^^^^^^^^^^^^^^^^
+    // [ 2000, 235.10204081632668 ] = [ 2000, 235.10 ]
+    //         ^^^^^^^^^^^^^^^^^^             ^^^^^^
     sprite[key][1] = +sprite[key][1].toFixed(2);
   });
 

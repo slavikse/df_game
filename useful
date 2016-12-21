@@ -66,3 +66,7 @@ habrahabr.ru/post/312636
 webApp:
 github.com/GoogleChrome/airhorn/blob/master/app/manifest.json
 github.com/GoogleChrome/airhorn/blob/master/app/manifest.webapp
+
+------------------------ NPM SCRIPTS --------------------------
+
+vinyl-fs, chokidar

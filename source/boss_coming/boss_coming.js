@@ -2,7 +2,7 @@ const $coming = document.querySelector('.boss-coming');
 const $progress = $coming.querySelector('.boss-progress');
 const $bossHead = $coming.querySelector('.boss-head');
 // 3 раза по 3 волны
-const wavesBeforeComingDefault = 1; // 3 * 3
+const wavesBeforeComingDefault = 9; // 3 * 3
 const shiftX = (100 / wavesBeforeComingDefault).toFixed(2);
 const eventBossCame = new Event('bossCame');
 
