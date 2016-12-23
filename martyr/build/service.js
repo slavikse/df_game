@@ -2,7 +2,10 @@ import gulp from 'gulp';
 import changed from 'gulp-changed';
 
 const name = 'service';
-const files = 'source/{robots.txt,sitemap.xml}';
+const files = [
+  'source/{robots.txt,sitemap.xml}',
+  'CNAME' // для github.io
+];
 const there = 'public';
 const production = process.env.NODE_ENV === 'production';
 

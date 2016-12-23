@@ -59,6 +59,7 @@ css-live.ru/articles/oformlenie-nezagruzhennyx-izobrazhenij.html
 
 Очистка кэша вк:
 vk.com/dev/pages.clearCache
+Размеры картинки: ~537x240
 
 Где залогинен посетитель:
 habrahabr.ru/post/312636
@@ -66,6 +67,9 @@ habrahabr.ru/post/312636
 webApp:
 github.com/GoogleChrome/airhorn/blob/master/app/manifest.json
 github.com/GoogleChrome/airhorn/blob/master/app/manifest.webapp
+
+github hosting - custom domain
+isizov.ru/kak-dobavit-domen-k-github-pages
 
 ------------------------ NPM SCRIPTS --------------------------
 

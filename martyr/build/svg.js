@@ -58,18 +58,22 @@ function cutString(cb) {
   const spritePath = 'temp/sprite.symbol.html';
 
   if (fs.existsSync(spritePath)) {
-    const spriteString = fs.readFileSync(spritePath).toString();
-    const start = spriteString.indexOf('<h3>B)');
-    const startDeep = spriteString.indexOf('<svg', start);
-    const end = spriteString.indexOf('</div>', startDeep);
-    const newSpriteString = spriteString.slice(startDeep, end);
-
-    fs.writeFileSync(spritePath, newSpriteString);
+    const svgBlocks = extractSvgBlock(spritePath);
+    fs.writeFileSync(spritePath, svgBlocks);
   }
 
   cb();
 }
 
+function extractSvgBlock(spritePath) {
+  const spriteString = fs.readFileSync(spritePath).toString();
+  const startSearch = spriteString.indexOf('<h3>B)'); // вхождение в секцию svg
+  const svgBlockStart = spriteString.indexOf('<svg', startSearch);
+  return spriteString.slice(svgBlockStart);
+}
+
 if (!production) {
   gulp.watch(files, gulp.parallel(name));
 }
+
+// не до конца

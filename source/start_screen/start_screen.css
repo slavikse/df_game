@@ -53,6 +53,24 @@
       color: #00fe23;
     }
   }
+
+  & .liked {
+    display: flex;
+    font-family: sans-serif;
+    font-size: 1.3em;
+    font-weight: bold;
+    line-height: 1.8;
+    letter-spacing: -1px;
+
+    color: #a3c3fa;
+    text-transform: uppercase;
+    text-shadow: 0 0 6px #000;
+  }
+
+  & .browser {
+    margin-left: 4px;
+    color: #4171d9;
+  }
 }
 
 @keyframes new-game {
