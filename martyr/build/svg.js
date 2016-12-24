@@ -3,6 +3,7 @@ import rename from 'gulp-rename';
 import replace from 'gulp-replace';
 import svgSprite from 'gulp-svg-sprite';
 import fs from 'fs';
+import cheerio from 'cheerio';
 
 /** 1. Расположение svg спрайта */
 const name = 'svg';
@@ -35,7 +36,7 @@ gulp.task(name,
   gulp.series(
     createSvg,
     changeExample,
-    cutString
+    cleanSvgHelper
   )
 );
 
@@ -54,26 +55,31 @@ function changeExample() {
 }
 
 // оставляет только нужные подсказки к спрайту
-function cutString(cb) {
+function cleanSvgHelper(cb) {
   const spritePath = 'temp/sprite.symbol.html';
 
   if (fs.existsSync(spritePath)) {
-    const svgBlocks = extractSvgBlock(spritePath);
-    fs.writeFileSync(spritePath, svgBlocks);
+    const spriteString = fs.readFileSync(spritePath).toString();
+    const svgBlock = extractSvg(spriteString);
+
+    fs.writeFileSync(spritePath, svgBlock);
   }
 
   cb();
 }
 
-function extractSvgBlock(spritePath) {
-  const spriteString = fs.readFileSync(spritePath).toString();
-  const startSearch = spriteString.indexOf('<h3>B)'); // вхождение в секцию svg
-  const svgBlockStart = spriteString.indexOf('<svg', startSearch);
-  return spriteString.slice(svgBlockStart);
+function extractSvg(spriteString) {
+  const $ = cheerio.load(spriteString);
+  const svgBlock = [];
+
+  // нужный svg содержится во втором блоке section внутри .icon-box
+  $('section').next().find('.icon-box').each((i, elem) => {
+    svgBlock.push($(elem).html());
+  });
+
+  return svgBlock;
 }
 
 if (!production) {
   gulp.watch(files, gulp.parallel(name));
 }
-
-// не до конца

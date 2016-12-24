@@ -1,12 +1,12 @@
 {
   "name": "martyr",
   "description": "Мученик - машина, а не человек! Современный стек технологий для сборки веб проектов",
-  "version": "3.12.5",
+  "version": "3.12.6",
   "scripts": {
     "clean": "rm -rf public temp && mkdir public temp",
     "dev": "gulp",
     "prod": "NODE_ENV=production BABEL_ENV=production gulp",
-    "git-deploy": "npm run prod && martyr/utility/git_push.sh",
+    "git-deploy": "npm run prod && martyr/utility/git_deploy.sh https://github.com/slavikse/df_game.git",
     "fb-init": "firebase login && firebase init",
     "fb-deploy": "npm run prod && firebase deploy",
     "tunnel": "NODE_ENV=tunnel gulp bs",
@@ -32,6 +32,7 @@
     "babel-plugin-transform-exponentiation-operator": "6.8.0",
     "babel-plugin-transform-strict-mode": "6.18.0",
     "browser-sync": "2.18.5",
+    "cheerio": "0.22.0",
     "del": "2.2.2",
     "firebase": "3.6.4",
     "firebase-tools": "3.2.1",

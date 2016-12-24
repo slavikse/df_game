@@ -115,3 +115,9 @@
   font-weight: normal;
   content: 'АПТЕЧКА';
 }
+
+.svg-mouse-dims {
+  width: 22px;
+  height: 37px;
+  fill: red;
+}

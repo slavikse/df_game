@@ -6,8 +6,8 @@ const name = 'kraken';
 const files = 'public/image/*';
 const production = process.env.NODE_ENV === 'production';
 const config = {
-  key: 'c0ca8787b8d2e283a3f4dfc4e8ec8344',
-  secret: '21dbaf82a2d652a5facaa690fefc9ffef6455353'
+  key: '82af123e95800fc29b6f30f7f8f6832c',
+  secret: 'c1bd01c6cf05160ad179eae976babdeaa571ffaf'
 };
 
 gulp.task(name, () => {

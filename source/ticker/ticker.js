@@ -3,7 +3,7 @@ import noise from './../helper/noise';
 
 const $ticker = document.querySelector('.ticker');
 const tickDefault = 4;
-const numberWaveDefault = 3; // 3
+const numberWaveDefault = 1; // 3
 const audioTick = audioSprite.tick;
 const eventEnemyCreate = new Event('enemyCreate');
 const eventWaveEnd = new Event('waveEnd');

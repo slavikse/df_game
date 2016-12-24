@@ -1,4 +1,4 @@
------------------------- РАЗМЕТКА ---------------------------
+-------------------------- РАЗМЕТКА -------------------------------
 
 Экранировать пользовательский ввод. Защита от CSRF
 img[width height alt], a[title], template, пробел: &#32;
@@ -7,7 +7,7 @@ img[width height alt], a[title], template, пробел: &#32;
 <link rel="prefetch" href="secondary.js">
 <link rel="prerender" href="http://example.com">
 
--------------------------- СТИЛИ ----------------------------
+---------------------------- СТИЛИ --------------------------------
 
 Сортировка стилей:
   Позиционирование
@@ -41,36 +41,30 @@ Responsive background image:
     }
   }
 
---------------------------- СКРИПТЫ ---------------------------
+--------------------------- СКРИПТЫ --------------------------------
 
 /** Support external SVG: IE 9-11 & Edge 12- */
 import svg4everybody from 'libs/svg4everybody';
 svg4everybody();
 
----------------------------- ПРОЧЕЕ ---------------------------
+------------------------ FOR NPM SCRIPTS ---------------------------
+
+vinyl-fs, chokidar
+
+---------------------------- ПРОЧЕЕ --------------------------------
+
 npmjs.com/package/opener
 npmjs.com/package/gulp-connect
 
-Удалять не используемые глифы в шрифтах:
-fontforge
+Удалять не используемые глифы в шрифтах: fontforge
+Где залогинен посетитель: habrahabr.ru/post/312636
+Оформление незагруженных изображений: css-live.ru/articles/oformlenie-nezagruzhennyx-izobrazhenij.html
+webApp: github.com/GoogleChrome/airhorn/blob/master/app/manifest.{json,webapp}
+Очистка кэша вк: vk.com/dev/pages.clearCache ; Размеры картинки: ~537x240
 
-Оформление незагруженных изображений:
-css-live.ru/articles/oformlenie-nezagruzhennyx-izobrazhenij.html
+----------------------- GITHUB.io DEPLOY ---------------------------
 
-Очистка кэша вк:
-vk.com/dev/pages.clearCache
-Размеры картинки: ~537x240
-
-Где залогинен посетитель:
-habrahabr.ru/post/312636
-
-webApp:
-github.com/GoogleChrome/airhorn/blob/master/app/manifest.json
-github.com/GoogleChrome/airhorn/blob/master/app/manifest.webapp
-
-github hosting - custom domain
-isizov.ru/kak-dobavit-domen-k-github-pages
-
------------------------- NPM SCRIPTS --------------------------
-
-vinyl-fs, chokidar
+1. В регистраторе добавить записи:
+  1.1. A - 192.30.252.153, A - 192.30.252.154
+  1.2. www CNAME slavikse.github.io.
+2. В файл ./CNAME прописать имя домена (PonyCode?)
