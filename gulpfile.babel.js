@@ -37,7 +37,7 @@ const buildTasks = [
 const productionTasks = [
   'del',
   'build',
-  'kraken', // лимит 100 Mb
+  'kraken',
   'rev',
   'gzip',
   'zip'

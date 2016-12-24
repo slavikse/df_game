@@ -16,7 +16,7 @@ img[width height alt], a[title], template, пробел: &#32;
   Остальное
 
 Рекомендации:
-  mobile first `<`! Поиск селекторов справа налево
+  mobile first `<`, Поиск селекторов справа налево
   layout: раскладка (width, left..), дорогая операция
   paint: отрисовка (color, opacity..), дешевая операция
   composite: компоновка, самая дешевая операция
@@ -68,3 +68,5 @@ webApp: github.com/GoogleChrome/airhorn/blob/master/app/manifest.{json,webapp}
   1.1. A - 192.30.252.153, A - 192.30.252.154
   1.2. www CNAME slavikse.github.io.
 2. В файл ./CNAME прописать имя домена (PonyCode?)
+
+--------------------------------------------------------------------

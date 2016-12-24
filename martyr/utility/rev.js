@@ -6,8 +6,8 @@ import del from 'del';
 
 const name = 'rev';
 const pathRevFiles = 'public/**/*.{html,css,js}';
-const revFiles = [/* 2 */
-  'public/**/*.*',
+const revFiles = [
+  'public/**/*.*', // файлы с расширением (!CNAME)
   '!public/*.{html,txt,xml}'
 ];
 const there = 'public';
@@ -22,17 +22,13 @@ gulp.task(name,
   )
 );
 
-/**
- * Собирает имена файлов в массив для удаления устаревших файлов
- */
+/** Собирает имена файлов в массив для удаления устаревших файлов */
 function getOldFileNames() {
   return gulp.src(revFiles)
   .pipe(named(file => delFiles.push(`${there}/${file.relative}`)))
 }
 
-/**
- * Версионирует файлы и создает манифест переименований
- */
+/** Версионирует файлы и создает манифест переименований */
 function revFilesFn() {
   return gulp.src(revFiles)
   .pipe(rev())
@@ -41,18 +37,14 @@ function revFilesFn() {
   .pipe(gulp.dest('temp'))
 }
 
-/**
- * Переименовывает имена файлов согласно манифесту переименования
- */
+/** Переименовывает имена файлов согласно манифесту переименования */
 function replace() {
   return gulp.src(pathRevFiles)
   .pipe(revReplace({manifest: gulp.src('temp/rev-manifest.json')}))
   .pipe(gulp.dest(there))
 }
 
-/**
- * Удаляет устаревшие (после версионирования) файлы
- */
+/** Удаляет устаревшие (после версионирования) файлы */
 function delFilesFn() {
   return del(delFiles);
 }

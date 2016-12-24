@@ -1,6 +1,36 @@
 @import "./../auth/auth.css";
 @import "./../guide/guide.css";
 
+.browser-like {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  display: flex;
+  font-family: sans-serif;
+  font-size: 1.3em;
+  font-weight: bold;
+  line-height: 1.8;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  color: #4171d9;
+
+  & .icon-chromium {
+    margin-left: 2px;
+    animation: browser-like-rotate 1s linear infinite both;
+    will-change: transform;
+  }
+
+  & .name {
+    color: #a3c3fa;
+  }
+}
+
+@keyframes browser-like-rotate {
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
 .start-screen {
   position: absolute;
   width: 100%;
@@ -53,23 +83,6 @@
       color: #00fe23;
     }
   }
-
-  & .liked {
-    display: flex;
-    font-family: sans-serif;
-    font-size: 1.3em;
-    font-weight: bold;
-    line-height: 1.8;
-    letter-spacing: -1px;
-    color: #a3c3fa;
-    text-transform: uppercase;
-    text-shadow: 0 0 6px #000;
-  }
-
-  & .browser {
-    margin-left: 4px;
-    color: #4171d9;
-  }
 }
 
 @keyframes new-game {
@@ -108,13 +121,16 @@
 
 .creator {
   left: 2px;
-  font-size: 1.8em;
+  font-size: 1.4em;
   cursor: text;
-  user-select: text;
+
+  & .text {
+    user-select: text;
+  }
 }
 
 .donate {
   right: 2px;
-  font-size: 2.2em;
+  font-size: 2.4em;
   cursor: pointer;
 }

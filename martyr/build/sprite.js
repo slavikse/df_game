@@ -28,10 +28,7 @@ function spriteCreate(cb) {
   cb();
 }
 
-/**
- * Спрайт отлично жмет кракен.
- * Используемые средства сжатия не жмут вообще
- */
+/** спрайт отлично жмет кракен, другие средства сжатия не жмут вообще */
 function imageStream() {
   return spriteData.img
   .pipe(gulp.dest(thereImage))

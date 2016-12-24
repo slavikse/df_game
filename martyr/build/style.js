@@ -13,7 +13,7 @@ import flexbugs from 'postcss-flexbugs-fixes';
 
 const name = 'style';
 const files = 'source/*.css';
-const wFiles = '{source,temp}/**/*.css';
+const wFiles = '{source,temp}/**/*.css'; // temp: стили от спрайта
 const there = 'public';
 const production = process.env.NODE_ENV === 'production';
 const options = [
@@ -24,14 +24,12 @@ const options = [
 ];
 const browsers = [
   'ie >= 10',
-  'ie_mob >= 10',
   'ff >= 30',
   'chrome >= 34',
   'safari >= 7',
   'opera >= 23',
   'ios >= 7',
-  'android >= 4.4',
-  'bb >= 10'
+  'android >= 4.4'
 ];
 
 if (production) {

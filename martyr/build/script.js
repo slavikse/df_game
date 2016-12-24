@@ -82,7 +82,7 @@ if (production) {
         warnings: false,
         dead_code: true,
         drop_console: true,
-        unsafe: true
+        unsafe: true // безопасно???
       }
     })
   )

@@ -20,7 +20,7 @@ gulp.task(name, cb => {
   penthouse({
     url: htmlFiles,
     css: cssFiles,
-    width: 1200,
+    width: 999999, // вся ширина
     height: 800
   }, critical => {
     gulp.src(htmlFiles)

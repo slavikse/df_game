@@ -25,33 +25,38 @@ gulp.task(name, cb => {
   return gulp.src(files)
   .pipe(audioSprite(config))
   .pipe(gulp.dest(there))
-  .on('end', shortenValues.bind(null, cb))
+  .on('end', shortenPrepare.bind(null, cb))
   .pipe(notify(`restart: ${name}`))
 });
 
 // укорачивает длительность звуков до 2х знаков после запятой
-function shortenValues(cb) {
-  const spriteFile = fs.readFileSync(spriteJsonPath);
+function shortenPrepare(cb) {
+  if (fs.existsSync(spriteJsonPath)) {
+    const spriteFile = fs.readFileSync(spriteJsonPath);
+    const json = shortenValues(spriteFile);
+    fs.writeFileSync(spriteJsonPath, JSON.stringify(json));
+  }
+
+  cb();
+}
+
+function shortenValues(spriteFile) {
   const json = JSON.parse(spriteFile); // со всем информацией
   const sprite = json.sprite; // только информация о звуках
-  const spriteKeys = Object.keys(sprite);
 
-  spriteKeys.forEach(key => {
+  Object.keys(sprite).forEach(key => {
     // [ 2000, 235.10204081632668 ] = [ 2000, 235.10 ]
     //         ^^^^^^^^^^^^^^^^^^             ^^^^^^
     sprite[key][1] = +sprite[key][1].toFixed(2);
   });
 
   json.sprite = sprite;
-  fs.writeFileSync(spriteJsonPath, JSON.stringify(json));
-
-  cb();
+  return json;
 }
 
 if (!production) {
   gulp.watch(files, gulp.parallel(name));
 }
 
-/**TODO
- * 1. Обновление звукового спрайта. Все звуки сдвигаются.
+/**TODO Обновление звукового спрайта. Все звуки сдвигаются.
  * возможно проблема в обновлении json файла в скриптах */

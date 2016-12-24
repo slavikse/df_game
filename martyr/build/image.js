@@ -7,15 +7,15 @@ import util from 'gulp-util';
 const name = 'image';
 const files = 'source/**/image/*';
 const there = 'public/image';
-const config = {'*': {width: '100%'}};
 const production = process.env.NODE_ENV === 'production';
+const config = {'*': {width: '100%'}};
 const param = {
-  progressive: true,
   stats: false,
   silent: true,
   errorOnEnlargement: false,
   errorOnUnusedConfig: false,
-  withoutEnlargement: false
+  withoutEnlargement: false,
+  progressive: true
 };
 
 gulp.task(name, () => {
