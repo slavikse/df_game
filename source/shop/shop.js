@@ -203,7 +203,7 @@ document.addEventListener('firstAidShop', firstAidShop);
 document.addEventListener('grenadeShop', grenadeShop);
 document.addEventListener('waveEnd', openShopDelay);
 document.addEventListener('regeneration', useFirstAid);
-$store.addEventListener('mouseenter', itemHandler);
+$store.addEventListener('mouseover', itemHandler);
 $store.addEventListener('click', itemBuy);
 $shopClose.addEventListener('mouseenter', hoverShopClose);
 $shopClose.addEventListener('click', shopClose);

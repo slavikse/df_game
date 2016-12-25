@@ -3,7 +3,7 @@ import '../grenade_notice/grenade_notice';
 const $body = document.body;
 const $grenadeWrap = $body.querySelector('.grenade');
 const $grenade = $grenadeWrap.children;
-const grenadeFull = 1; // 0,1 (2) грены
+const grenadeFull = 2; // 0,1,2 (3) грены
 const grenadeStateClasses = [
   'icon-grenade_empty',
   'icon-grenade_full'
@@ -11,7 +11,7 @@ const grenadeStateClasses = [
 const eventGrenade = new Event('grenade');
 const eventGrenadeShop = new Event('grenadeShop');
 
-let grenadeCount = grenadeFull;
+let grenadeCount = 0; // 1 грена в начале игры (нулевая)
 let grenadeCountStat = 0;
 
 function grenade() {

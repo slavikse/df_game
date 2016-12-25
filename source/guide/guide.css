@@ -47,8 +47,7 @@
   justify-content: space-around;
   align-items: center;
   margin: 0 auto;
-  max-width: 900px;
-  fill: #fff; /* для мыши */
+  max-width: 800px;
 }
 
 .guide-keys {
@@ -79,7 +78,6 @@
   left: -17px;
   color: #fff;
   font-size: 0.8em;
-  font-weight: normal;
   white-space: nowrap;
   content: 'ВЫБОР ОРУЖИЯ';
 }
@@ -102,7 +100,6 @@
   bottom: -20px;
   color: #fff;
   font-size: 0.8em;
-  font-weight: normal;
   content: 'ГРАНАТА';
 }
 
@@ -112,11 +109,54 @@
   left: 0;
   color: #fff;
   font-size: 0.8em;
-  font-weight: normal;
   content: 'АПТЕЧКА';
 }
 
-.svg-mouse-dims {
+.guide-mouse {
+  position: relative;
+  top: 16px;
+
+  & .button {
+    position: absolute;
+    font-family: sans-serif;
+    font-weight: bold;
+  }
+
+  & .button-0 {
+    top: 48px;
+    left: -74px;
+  }
+
+  & .button-1 {
+    top: -4px;
+    left: -10px;
+    text-align: center;
+  }
+
+  & .button-2 {
+    top: 48px;
+    right: -54px;
+  }
+
+  & .action {
+    color: red;
+    font-size: 0.9em;
+  }
+
+  & .action-0 {
+    text-align: right;
+  }
+
+  & .reaction {
+    color: white;
+  }
+
+  & .reaction-0 {
+    text-align: right;
+  }
+}
+
+.svg-guide_mouse-dims {
   width: 100px;
   fill: white;
 }

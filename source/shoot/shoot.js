@@ -75,11 +75,13 @@ function shootDelegate(e) {
 function shootEnemy(target) {
   eventEnemyShoot.enemy = target;
   document.dispatchEvent(eventEnemyShoot);
+
   shootCountInTargetStatistic();
 }
 
 function shootCat() {
   document.dispatchEvent(eventCatShoot);
+
   shootCountInTargetStatistic();
   shootCountInCatStatistic();
 }
@@ -87,6 +89,7 @@ function shootCat() {
 function shootBossNode(target) {
   eventBossShoot.bossNode = target;
   document.dispatchEvent(eventBossShoot);
+
   shootCountInTargetStatistic();
   shootCountInBossStatistic();
 }

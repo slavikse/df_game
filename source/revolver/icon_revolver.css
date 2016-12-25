@@ -1,5 +1,6 @@
 .icon-revolver {
   position: absolute;
+  right: -8px;
   transition: opacity 0.6s;
   will-change: opacity;
 }

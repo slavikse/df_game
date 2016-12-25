@@ -7,17 +7,20 @@
   right: 4px;
   display: flex;
   font-family: sans-serif;
-  font-size: 1.3em;
   font-weight: bold;
-  line-height: 1.8;
+  line-height: 2.5;
   letter-spacing: -1px;
   text-transform: uppercase;
   color: #4171d9;
 
   & .icon-chromium {
     margin-left: 2px;
-    animation: browser-like-rotate 1s linear infinite both;
+    animation: browser-like-rotate 0.4s linear infinite both paused;
     will-change: transform;
+  }
+
+  &:hover .icon-chromium {
+    animation-play-state: running;
   }
 
   & .name {
@@ -121,10 +124,10 @@
 
 .creator {
   left: 2px;
-  font-size: 1.4em;
+  font-size: 1.5em;
   cursor: text;
 
-  & .text {
+  & .email-link {
     user-select: text;
   }
 }

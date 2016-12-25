@@ -1,7 +1,7 @@
 {
   "name": "martyr",
   "description": "Мученик - машина, а не человек! Современный стек технологий для сборки веб проектов",
-  "version": "3.12.7",
+  "version": "3.12.8",
   "scripts": {
     "clean": "rm -rf public temp && mkdir public temp",
     "dev": "gulp",

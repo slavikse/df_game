@@ -1,5 +1,4 @@
 .ticker {
-  margin-left: 20px; /* чтобы по центру был */
   display: flex;
   align-items: center;
   justify-content: center;

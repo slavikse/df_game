@@ -3,7 +3,10 @@ import kraken from 'gulp-kraken';
 import util from 'gulp-util';
 
 const name = 'kraken';
-const files = 'public/image/*';
+const files = [
+  'public/image/*',
+  '!public/image/*.svg' // чтобы не удалял ID
+];
 const production = process.env.NODE_ENV === 'production';
 /** обновлять ключи при достижении трафика в 100мб
  * https://kraken.io/account?q=%2Faccount */
