@@ -114,7 +114,6 @@
 
 .guide-mouse {
   position: relative;
-  top: 30px;
 
   & .button {
     position: absolute;
@@ -122,20 +121,27 @@
     font-weight: bold;
   }
 
-  & .button-0 {
-    top: 45px;
-    left: -30px;
-  }
-
   & .button-1 {
-    top: -38px;
-    left: 14px;
+    top: -6px;
+    left: 29px;
     text-align: center;
   }
 
   & .button-2 {
-    top: 59px;
-    right: -54px;
+    top: 47px;
+    left: -30px;
+    text-align: right;
+  }
+
+  & .button-3 {
+    top: 48px;
+    right: -32px;
+  }
+
+  & .button-4 {
+    bottom: -4px;
+    left: 15px;
+    text-align: center;
   }
 
   & .action {
@@ -143,17 +149,9 @@
     font-size: 0.9em;
   }
 
-  & .action-0 {
-    text-align: right;
-  }
-
   & .reaction {
-    margin-top: 4px;
+    margin-top: 2px;
     color: white;
-  }
-
-  & .reaction-0 {
-    text-align: right;
   }
 }
 

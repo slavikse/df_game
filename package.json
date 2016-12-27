@@ -4,8 +4,8 @@
   "version": "3.13.0",
   "scripts": {
     "clean": "rm -rf public temp && mkdir public temp",
-    "dev": "npm run clean & gulp",
-    "prod": "npm run clean & NODE_ENV=production BABEL_ENV=production gulp",
+    "dev": "npm run clean && gulp",
+    "prod": "npm run clean && NODE_ENV=production BABEL_ENV=production gulp",
     "git": "npm run prod && martyr/utility/git.sh https://github.com/slavikse/df_game.git",
     "fb-init": "firebase login && firebase init",
     "fb": "npm run prod && firebase deploy",

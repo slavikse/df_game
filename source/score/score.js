@@ -9,10 +9,12 @@ let score = 0;
 let scoreStat = 0;
 
 function scoreAdd(e) {
-  score += e.add;
+  const addScore = e.add;
+
+  score += addScore;
   scoreChange();
 
-  scoreStat += score;
+  scoreStat += addScore;
 }
 
 function scoreDec(e) {
