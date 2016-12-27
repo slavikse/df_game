@@ -22,9 +22,9 @@ const dieAudios = [
 const playingFieldResize = throttle(playingField, 500);
 const enemyDec = 1;
 let scoreAdd = 5;
-let enemyCloneCount = 4;
+const enemyCloneCount = 4;
 const enemyHealth = [1, 2];
-const enemyDamageTime = [3, 8];
+const enemyDamageTime = [4, 6];
 const enemyWidth = 200;
 const enemyHeight = 200;
 /** для доанимирования врагов и подчищаем остатки (актуально для конца игры) */
@@ -198,15 +198,15 @@ function grenade() {
 
 function levelUp() {
   scoreAdd += 2;
-  enemyCloneCount += 2;
+  //enemyCloneCount += 2;
 
   // увеличение хп монстра
   enemyHealth[0] += 1;
   enemyHealth[1] += 1;
 
-  // уменьшение таймера для укуса
-  //enemyDamageTime[0] -= 1;
-  //enemyDamageTime[1] -= 1;
+  // увеличение времени таймера урона
+  enemyDamageTime[0] += 1;
+  enemyDamageTime[1] += 1;
 }
 
 // начисление очков за использование грены

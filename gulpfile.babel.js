@@ -14,7 +14,6 @@ import './martyr/build/view';
 
 import './martyr/utility/bs';
 import './martyr/utility/critical'; // дописывать пути: .html и .css
-import './martyr/utility/del';
 import './martyr/utility/gzip';
 import './martyr/utility/kraken';
 import './martyr/utility/rev';
@@ -35,7 +34,6 @@ const buildTasks = [
   'script' // собирает json из аудио спрайта (#1)
 ];
 const productionTasks = [
-  'del',
   'build',
   'kraken',
   'rev',
@@ -43,7 +41,6 @@ const productionTasks = [
   'zip'
 ];
 const developmentTasks = [
-  'del',
   'build',
   'bs'
 ];

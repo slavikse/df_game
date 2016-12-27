@@ -114,7 +114,7 @@
 
 .guide-mouse {
   position: relative;
-  top: 16px;
+  top: 30px;
 
   & .button {
     position: absolute;
@@ -123,18 +123,18 @@
   }
 
   & .button-0 {
-    top: 48px;
-    left: -74px;
+    top: 45px;
+    left: -30px;
   }
 
   & .button-1 {
-    top: -4px;
-    left: -10px;
+    top: -38px;
+    left: 14px;
     text-align: center;
   }
 
   & .button-2 {
-    top: 48px;
+    top: 59px;
     right: -54px;
   }
 
@@ -148,6 +148,7 @@
   }
 
   & .reaction {
+    margin-top: 4px;
     color: white;
   }
 

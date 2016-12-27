@@ -1,4 +1,5 @@
 import fb from './../helper/fb';
+import getBossKilled from './boss_killed';
 import getCosts from './costs';
 import getDiscardedBullet from './discarded_bullet';
 import getDrumReloadCount from './drum_reload_count';
@@ -26,6 +27,7 @@ function auth(user) {
 function getStatistic() {
   score = getScore();
 
+  const bossKilled = getBossKilled();
   const costs = getCosts();
   const discardedBullet = getDiscardedBullet();
   const drumReload = getDrumReloadCount();
@@ -38,21 +40,20 @@ function getStatistic() {
     inTarget,
     miss,
     inTargetPercent,
-    shootCat,
-    shootBoss
+    shootCat
   } = getShootCount();
   const waveCount = getWaveCount();
   const data = {
     'Время игры': `${minutes}м ${second}с`,
-    'Волн пройдено': waveCount,
-    'Доп волн': shootCat,
-    'Боль Боссу!': shootBoss,
+    'Пройдено волн': waveCount,
+    'Сверх волн': shootCat,
+    'Боссов убито': bossKilled,
     'Заработано': `$${score}`,
     'Расходы': `$${costs}`,
     'Перезарядок': drumReload,
     'Пуль выброшено': discardedBullet,
     'Получено урона': receivedDamage,
-    'Лечения': firstAid,
+    'Аптечек': firstAid,
     'Выстрелов': shoots,
     'В цель': inTarget,
     'Промахов': miss,

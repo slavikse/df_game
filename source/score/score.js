@@ -6,10 +6,13 @@ const eventScoreShop = new Event('scoreShop');
 const scoreEvent = new Event('score');
 
 let score = 0;
+let scoreStat = 0;
 
 function scoreAdd(e) {
   score += e.add;
   scoreChange();
+
+  scoreStat += score;
 }
 
 function scoreDec(e) {
@@ -27,7 +30,7 @@ function scoreShop() {
 }
 
 function scoreStatistic() {
-  scoreEvent.score = score;
+  scoreEvent.score = scoreStat;
   document.dispatchEvent(scoreEvent);
 }
 

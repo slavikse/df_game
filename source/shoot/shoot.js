@@ -15,7 +15,6 @@ const eventBossShoot = new Event('bossShoot');
 let shootCountTotalStat = 0;
 let shootCountInTargetStat = 0;
 let shootCountInCatStat = 0;
-let shootCountInBossStat = 0;
 let shootMoveTimerID;
 let shootDownTimerID;
 
@@ -91,7 +90,6 @@ function shootBossNode(target) {
   document.dispatchEvent(eventBossShoot);
 
   shootCountInTargetStatistic();
-  shootCountInBossStatistic();
 }
 
 // уведомляет оружие о выстреле
@@ -157,10 +155,6 @@ function shootCountInCatStatistic() {
   shootCountInCatStat += 1;
 }
 
-function shootCountInBossStatistic() {
-  shootCountInBossStat += 1;
-}
-
 function gameOver() {
   shootEnd();
   shootStatistic();
@@ -172,7 +166,6 @@ function shootStatistic() {
   shootCountEvent.shootCountTotal = shootCountTotalStat;
   shootCountEvent.shootCountInTarget = shootCountInTargetStat;
   shootCountEvent.shootCountInCat = shootCountInCatStat;
-  shootCountEvent.shootCountInBoss = shootCountInBossStat;
 
   document.dispatchEvent(shootCountEvent);
 }

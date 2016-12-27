@@ -13,8 +13,6 @@ const bossHeight = 280;
 const eventEnemyCreate = new Event('enemyCreate');
 const eventBossGone = new Event('bossGone');
 const eventScoreAdd = new Event('scoreAdd');
-
-let scoreBossKilled = 100;
 // настройки босса: анимация, хп, иконка. порядок важен для setNodes
 const bossSettingDefault = [
   {health: [4, 6], animation: 'boss-body', icon: 'icon-boss_body'},
@@ -24,8 +22,10 @@ const bossSettingDefault = [
   {health: [2, 4], animation: 'boss-leg-r', icon: 'icon-boss_leg_r'}
 ];
 
+let scoreBossKilled = 100;
 let playingFieldWidth;
 let playingFieldHeight;
+let bossKilledStat = 0;
 
 playingField();
 
@@ -189,7 +189,6 @@ function undocking(boss) {
 
 function bossGone(boss) {
   notify({type: 'info', message: `+${scoreBossKilled}$`});
-  notify({type: 'warn', message: 'level up'});
 
   document.removeEventListener('bossShoot', isDamage);
   document.removeEventListener('grenade', grenade);
@@ -198,6 +197,7 @@ function bossGone(boss) {
   document.dispatchEvent(eventScoreAdd);
   document.dispatchEvent(eventBossGone);
 
+  bossKilledStat += 1;
   levelUp(boss);
   setTimeout(bossClear.bind(null, boss), 2000);
 }
@@ -212,6 +212,7 @@ function levelUp(boss) {
   }
 
   scoreBossKilled += 100;
+  notify({type: 'warn', message: 'level up'});
 }
 
 function bossClear(boss) {
@@ -229,6 +230,12 @@ function grenade(boss) {
   }
 }
 
+function bossKilledStatistic() {
+  const bossKilledEvent = new Event('bossKilled');
+  bossKilledEvent.bossKilled = bossKilledStat;
+  document.dispatchEvent(bossKilledEvent);
+}
+
 function playingField() {
   const panelHeight = 100;
 
@@ -238,3 +245,4 @@ function playingField() {
 
 document.addEventListener('boss', cloneBoss);
 window.addEventListener('resize', playingFieldResize);
+document.addEventListener('gameOver', bossKilledStatistic);

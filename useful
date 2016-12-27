@@ -5,6 +5,7 @@ img[width height alt], a[title], template, пробел: &#32;
 <link rel="dns-prefetch" href="https://URI.com">
 <link rel="preconnect" href="https://cdn.example.com">
 <link rel="prefetch" href="secondary.js">
+<link rel="preload" href="secondary.js">
 <link rel="prerender" href="http://example.com">
 
 ---------------------------- СТИЛИ --------------------------------

@@ -1,8 +1,8 @@
 import gulp from 'gulp';
 import named from 'vinyl-named';
-import rev from 'gulp-rev';
+import grev from 'gulp-rev';
 import revReplace from 'gulp-rev-replace';
-import del from 'del';
+import {exec} from 'child_process';
 
 const name = 'rev';
 const pathRevFiles = 'public/**/*.{html,css,js}';
@@ -16,9 +16,9 @@ const delFiles = [];
 gulp.task(name,
   gulp.series(
     getOldFileNames,
-    revFilesFn,
+    rev,
     replace,
-    delFilesFn
+    del
   )
 );
 
@@ -29,11 +29,11 @@ function getOldFileNames() {
 }
 
 /** Версионирует файлы и создает манифест переименований */
-function revFilesFn() {
+function rev() {
   return gulp.src(revFiles)
-  .pipe(rev())
+  .pipe(grev())
   .pipe(gulp.dest(there))
-  .pipe(rev.manifest())
+  .pipe(grev.manifest())
   .pipe(gulp.dest('temp'))
 }
 
@@ -45,6 +45,6 @@ function replace() {
 }
 
 /** Удаляет устаревшие (после версионирования) файлы */
-function delFilesFn() {
-  return del(delFiles);
+function del() {
+  return exec(`rm -f ${delFiles.join(' ')}`);
 }

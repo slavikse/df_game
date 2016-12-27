@@ -74,7 +74,6 @@
     position: relative;
     z-index: 1;
     font-size: 5em;
-    line-height: 0.7;
     color: #ff0;
     text-shadow: 2px 2px 0 black;
     cursor: pointer;
