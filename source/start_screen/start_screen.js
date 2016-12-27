@@ -18,16 +18,19 @@ const eventStartGame = new Event('startGame');
 fb.auth().onAuthStateChanged(auth);
 
 function auth(user) {
-  if (user && user.uid) {
-    db.ref(`user/${user.uid}`).once('value').then(bestScore);
+  if (user && user.email) {
+    const name = user.email.replace('@', ':').replace('.', ':');
+    db.ref(`user/${name}`).once('value').then(bestScore);
   } else {
-    $bestScore.textContent = localStorage.getItem('best-score') || 0;
+    $bestScore.textContent = localStorage.getItem('score') || 0;
   }
 }
 
 function bestScore(snapshot) {
-  if (snapshot.val() && snapshot.val().bestScore) {
-    $bestScore.textContent = snapshot.val().bestScore;
+  if (snapshot.val() && snapshot.val().score) {
+    $bestScore.textContent = snapshot.val().score;
+  } else {
+    $bestScore.textContent = 0;
   }
 }
 

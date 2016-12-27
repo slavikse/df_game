@@ -188,9 +188,12 @@ function enemyHideDelay(clone) {
 function grenade() {
   additionPoints();
   allEnemyCurrent = 0;
-
-  $paddock.remove();
+  cleanPaddock();
   createPaddock();
+}
+
+function cleanPaddock() {
+  $paddock.remove();
 
   enemyTimerID.forEach(clearTimer);
   enemyTimerID = [];
@@ -254,4 +257,4 @@ document.addEventListener('grenade', grenade);
 document.addEventListener('waveEnd', grenadeDelay);
 document.addEventListener('bossGone', levelUp);
 window.addEventListener('resize', playingFieldResize);
-document.addEventListener('gameOver', grenade);
+document.addEventListener('gameOver', cleanPaddock);

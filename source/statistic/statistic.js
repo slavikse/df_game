@@ -13,14 +13,14 @@ import getWaveCount from './wave_count';
 
 const db = fb.database();
 
-let uid;
+let userEmail;
 let score;
 
 fb.auth().onAuthStateChanged(auth);
 
 function auth(user) {
-  if (user && user.uid) {
-    uid = user.uid;
+  if (user && user.email) {
+    userEmail = user.email.replace('@', ':').replace('.', ':');
   }
 }
 
@@ -67,16 +67,16 @@ function getStatistic() {
 }
 
 function getBestScore() {
-  if (uid) {
-    db.ref(`user/${uid}`).once('value').then(bestScore);
+  if (userEmail) {
+    db.ref(`user/${userEmail}`).once('value').then(bestScore);
   }
 }
 
 function bestScore(snapshot) {
   let bestScore = 0;
 
-  if (snapshot.val() && snapshot.val().bestScore) {
-    bestScore = snapshot.val().bestScore;
+  if (snapshot.val() && snapshot.val().score) {
+    bestScore = snapshot.val().score;
   }
 
   if (score > bestScore) {
@@ -85,14 +85,14 @@ function bestScore(snapshot) {
 }
 
 function saveBestScore() {
-  db.ref(`user/${uid}`).set({bestScore: score});
+  db.ref(`user/${userEmail}`).set({score: score});
 }
 
 function localSaveBestScore() {
-  const bestScore = localStorage.getItem('best-score') || 0;
+  const bestScore = localStorage.getItem('score') || 0;
 
   if (score > bestScore) {
-    localStorage.setItem('best-score', score);
+    localStorage.setItem('score', score);
   }
 }
 
