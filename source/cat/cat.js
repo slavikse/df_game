@@ -88,6 +88,7 @@ function playingField() {
 }
 
 function gameOver() {
+  stop();
   $cat.remove();
 }
 

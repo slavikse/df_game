@@ -2,6 +2,7 @@ import fb from './../helper/fb';
 import {audioURI, audioSprite} from './../helper/audio_sprite';
 import noise from './../helper/noise';
 import notify from './../notify/notify';
+import range from 'libs/range';
 
 const $startScreen = document.querySelector('.start-screen');
 const $authShow = $startScreen.querySelector('.auth-show');
@@ -17,6 +18,8 @@ const audioAuthShow = audioSprite.auth_show;
 const audioAuthIn = audioSprite.auth_in;
 const audioAuthOut = audioSprite.auth_out;
 const audioCancel = audioSprite.cancel;
+const authSymbols = ['⇝', '☀', '☄', '☆', '☘', '☢', '☣', '♊', '♒', '♕', '♔', '⚔', '⚘'];
+const authSymbolsLength = authSymbols.length - 1;
 const eventAuthBonus = new Event('authBonus');
 const eventCloseGuide = new Event('closeGuide');
 
@@ -85,13 +88,12 @@ function getUserName(user) {
 function authShowToggle() {
   if (isAuthShow) {
     isAuthShow = false;
-    showUserName(userName);
   } else {
     isAuthShow = true;
+    document.dispatchEvent(eventCloseGuide); // закроет гайд если открыт auth
     $authEmail.focus();
   }
 
-  document.dispatchEvent(eventCloseGuide); // закроет гайд если открыт
   noise(audioURI, audioAuthShow);
 
   $startScreen.classList.toggle('start-screen-open');
@@ -101,21 +103,30 @@ function authShowToggle() {
 
 function showUserName(userName) {
   if (userName) {
+    $authShow.classList.add('auth-show-open'); // вспомогательнай
     $authOpener.style.display = 'none';
-    $authUserName.textContent = `Хaй ${userName}!`;
+    $authUserName.textContent = getRandomSymbol() + userName;
   } else {
+    $authShow.classList.remove('auth-show-open');
     $authOpener.style.display = 'flex';
     $authUserName.textContent = '';
   }
 }
 
+function getRandomSymbol() {
+  const random = range(0, authSymbolsLength);
+  return authSymbols[random];
+}
+
 function auth(e) {
   e.preventDefault();
 
-  if (isAuthProgress) {
-    return;
+  if (!isAuthProgress) {
+    canAuth();
   }
+}
 
+function canAuth() {
   const form = document.forms.auth;
   const email = form.email.value;
   const password = form.password.value;
@@ -144,7 +155,7 @@ function dataCorrect(email, password) {
 
 function dataInCorrect() {
   noise(audioURI, audioCancel);
-  notify({type: 'warn', message: 'Исправь данные!'});
+  notify({type: 'warn', message: '♿ исправь ♿'});
   submitAnimate('auth-submit-error');
 }
 
@@ -163,7 +174,7 @@ function authSuccess() {
   submitAnimateEnd();
   authLoginAnimate();
 
-  notify({type: 'info', message: 'Привет!'});
+  notify({type: 'info', message: '☺ привет ☺'});
   submitAnimate('auth-submit-success');
 
   setTimeout(authShowToggle, 1200);
@@ -181,7 +192,7 @@ function authWrong() {
   isAuthProgress = false;
 
   noise(audioURI, audioCancel);
-  notify({type: 'error', message: 'Данные заняты!'});
+  notify({type: 'error', message: '☝ не твоё ☝'});
   submitAnimate('auth-submit-error');
 }
 
@@ -209,7 +220,7 @@ function authLoginAnimateEnd() {
 
 function getAuthBonus() {
   if (isGetAuthBonus) {
-    notify({type: 'info', message: '+1 обойма!'});
+    notify({type: 'info', message: '⚡ + обойма ⚡'});
     document.dispatchEvent(eventAuthBonus);
   }
 }
@@ -222,7 +233,7 @@ function fbLogout() {
 function fbLogoutEnd() {
   fb.auth().signOut();
   $authShow.classList.remove('auth-show-logout');
-  notify({type: 'info', message: 'Пока!'});
+  notify({type: 'info', message: '☹ пока ☹'});
 }
 
 function hoverAuthOpener() {

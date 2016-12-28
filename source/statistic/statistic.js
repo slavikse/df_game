@@ -20,7 +20,7 @@ fb.auth().onAuthStateChanged(auth);
 
 function auth(user) {
   if (user && user.email) {
-    userEmail = user.email.replace('@', ':').replace('.', ':');
+    userEmail = user.email.replace(/@/g, ':').replace(/\./g, ':');
   }
 }
 
@@ -43,7 +43,7 @@ function getStatistic() {
     shootCat
   } = getShootCount();
   const waveCount = getWaveCount();
-  const data = {
+  const statistic = {
     'Время игры': `${minutes}м ${second}с`,
     'Пройдено волн': waveCount,
     'Сверх волн': shootCat,
@@ -63,7 +63,7 @@ function getStatistic() {
 
   getBestScore();
   localSaveBestScore();
-  resultStatistic(data);
+  resultStatistic(statistic);
 }
 
 function getBestScore() {
@@ -96,9 +96,9 @@ function localSaveBestScore() {
   }
 }
 
-function resultStatistic(data) {
+function resultStatistic(statistic) {
   const statisticEvent = new Event('statistic');
-  statisticEvent.statistic = data;
+  statisticEvent.statistic = statistic;
   document.dispatchEvent(statisticEvent);
 }
 

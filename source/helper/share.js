@@ -28,6 +28,13 @@
 //  Share.popup(url)
 //},
 
+/**
+ * Соцшара
+ * @param uri ссылка для перехода
+ * @param title название цели
+ * @param desc опиание цели
+ * @param image изображение
+ */
 function shareVK({uri, title, desc, image}) {
   const target = 'https://vk.com/share.php?' +
     'url=' + encodeURIComponent(uri) +

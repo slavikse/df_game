@@ -19,7 +19,7 @@ fb.auth().onAuthStateChanged(auth);
 
 function auth(user) {
   if (user && user.email) {
-    const name = user.email.replace('@', ':').replace('.', ':');
+    const name = user.email.replace(/@/g, ':').replace(/\./g, ':');
     db.ref(`user/${name}`).once('value').then(bestScore);
   } else {
     $bestScore.textContent = localStorage.getItem('score') || 0;
