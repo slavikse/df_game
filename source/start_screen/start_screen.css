@@ -67,8 +67,7 @@
   & .best-score {
     display: flex;
     justify-content: center;
-    width: 70px;
-    height: 44px; /* чтобы после loader не дергался */
+    width: 60px;
   }
 
   & .new-game {
@@ -114,27 +113,66 @@
 }
 }
 
-.creator,
-.donate {
+.creators {
   position: absolute;
   z-index: 2; /* перекрыть логин форму */
   bottom: 0;
+  left: 4px;
   color: #fff;
+  font-size: 1.6em;
   text-shadow: 0 3px 2px #000, 0 -3px 2px #000;
 }
 
-.creator {
-  left: 2px;
-  font-size: 1.5em;
+.creator-email {
   cursor: text;
+  user-select: text;
+}
 
-  & .email-link {
-    user-select: text;
+.cat-donate-wrap {
+  position: absolute;
+  z-index: 2; /* перекрыть логин форму */
+  right: 0;
+  bottom: 20px;
+  width: 100px; /* ? */
+  height: 115px; /* ? */
+
+  &:hover .cat-donate-coin-wrap {
+    transform: translateY(40px);
+    filter: brightness(40%);
+  }
+
+  &:hover .cat-donate-coin {
+    animation-play-state: paused;
   }
 }
 
-.donate {
-  right: 2px;
-  font-size: 2.4em;
-  cursor: pointer;
+.cat-donate {
+  position: absolute;
+}
+
+.cat-donate-sack {
+  position: absolute;
+  bottom: -38px;
+  left: -19px;
+  z-index: 1;
+}
+
+.cat-donate-coin-wrap {
+  position: absolute;
+  bottom: 40px;
+  left: 20px;
+  transition: transform 0.6s, filter 0.6s; /* опускает монету в мешок / в cat-donate-wrap:hover */
+  will-change: transform;
+}
+
+.cat-donate-coin {
+  animation: 0.8s cat-donate-coin-bobber ease-in-out infinite alternate; /* монета как поплавок */
+  will-change: transform;
+}
+
+@keyframes cat-donate-coin-bobber {
+  100% {
+    transform: translateY(14px);
+    filter: brightness(40%);
+  }
 }

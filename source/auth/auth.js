@@ -12,13 +12,13 @@ const $authOpener = $authShow.querySelector('.auth-opener');
 const $authLogout = $authShow.querySelector('.auth-logout');
 const $authWrap = $startScreen.querySelector('.auth-wrap');
 const $authEmail = $startScreen.querySelector('.auth-email');
-const $authSubmit = $startScreen.querySelector('.auth-submit');
+const $authSubmitWrap = $startScreen.querySelector('.auth-submit-wrap');
 const audioAuthHover = audioSprite.hover_menu;
 const audioAuthShow = audioSprite.auth_show;
 const audioAuthIn = audioSprite.auth_in;
 const audioAuthOut = audioSprite.auth_out;
 const audioCancel = audioSprite.cancel;
-const authSymbols = ['⇝', '☀', '☄', '☆', '☘', '☢', '☣', '♊', '♒', '♕', '♔', '⚔', '⚘'];
+const authSymbols = ['⇝', '☀', '☄', '☆', '☘', '☢', '☣', '♒', '♕', '♔', '⚔', '⚘'];
 const authSymbolsLength = authSymbols.length - 1;
 const eventAuthBonus = new Event('authBonus');
 const eventCloseGuide = new Event('closeGuide');
@@ -54,7 +54,7 @@ function login(user) {
   authAudio = audioAuthIn;
   $authLogout.style.display = 'inline-block';
 
-  $authSubmit.removeEventListener('click', auth);
+  $authSubmitWrap.removeEventListener('click', auth);
   $authOpener.removeEventListener('click', authShowToggle);
 
   userName = getUserName(user);
@@ -67,7 +67,7 @@ function logout() {
   authAudio = audioAuthOut;
   $authLogout.style.display = '';
 
-  $authSubmit.addEventListener('click', auth);
+  $authSubmitWrap.addEventListener('click', auth);
   $authOpener.addEventListener('click', authShowToggle);
 
   userName = '';
@@ -197,16 +197,16 @@ function authWrong() {
 }
 
 function submitAnimateWaited() {
-  $authSubmit.style.animationName = 'auth-submit-waited';
+  $authSubmitWrap.style.animationName = 'auth-submit-waited';
 }
 
 function submitAnimate(animate) {
-  $authSubmit.style.animationName = animate;
+  $authSubmitWrap.style.animationName = animate;
   setTimeout(submitAnimateEnd, 400);
 }
 
 function submitAnimateEnd() {
-  $authSubmit.style.animationName = '';
+  $authSubmitWrap.style.animationName = '';
 }
 
 function authLoginAnimate() {

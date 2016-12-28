@@ -1,11 +1,11 @@
 .notify {
   position: absolute;
+  top: 80px;
   right: 0;
   z-index: 3;
   display: flex;
   height: 100%;
   flex-direction: column;
-  justify-content: center;
 
   & .note {
     margin: 4px 0;
