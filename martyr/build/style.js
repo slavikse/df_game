@@ -13,7 +13,7 @@ import flexbugs from 'postcss-flexbugs-fixes';
 
 const name = 'style';
 const files = 'source/*.css';
-const wFiles = '{source,temp}/**/*.css'; // temp: стили от спрайта
+const wFiles = '{source,temp}/**/*.css'; // temp: стили для спрайта
 const there = 'public';
 const production = process.env.NODE_ENV === 'production';
 const options = [

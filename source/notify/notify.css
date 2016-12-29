@@ -1,24 +1,24 @@
 .notify {
   position: absolute;
+  z-index: 3;
   top: 80px;
   right: 0;
-  z-index: 3;
   display: flex;
-  height: 100%;
   flex-direction: column;
+  height: 100%;
 
   & .note {
     margin: 4px 0;
-    padding: 6px 0 6px 8px;
-    width: 200px;
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
+    padding: 6px 0 6px 8px;
+    width: 200px;
     font-size: 1.6em;
-    background-color: rgba(0, 0, 0, 0.6);
-    opacity: 0;
-    animation: note-show 0.4s both;
     transition: transform 0.4s;
     transform-origin: right;
+    animation: note-show 0.4s both;
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.6);
     will-change: opacity, transform;
   }
 

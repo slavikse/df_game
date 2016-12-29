@@ -3,7 +3,7 @@
   z-index: 3;
   top: -16.5px; /* моделька огонька по центру */
   left: -16.5px;
-  opacity: 0;
   pointer-events: none;
+  opacity: 0;
   will-change: opacity, transform; /* выстрел */
 }

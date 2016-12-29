@@ -1,15 +1,15 @@
 .cat-position {
   position: absolute;
-  opacity: 0;
-  pointer-events: none;
   /* opacity - появление/скрытие, transform - перемещение по полю */
   transition: opacity 0.4s, transform 0.4s;
+  pointer-events: none;
+  opacity: 0;
   will-change: opacity, transform;
 }
 
 .cat-show {
-  opacity: 1;
   pointer-events: auto;
+  opacity: 1;
 }
 
 .cat {
@@ -32,19 +32,19 @@
   align-items: center;
   width: 100%;
   height: 100%;
-  color: red;
   font-size: 6em;
-  background-color: rgba(73, 0, 0, 0.7);
-  opacity: 0;
-  pointer-events: none;
+  color: red;
   animation: 1.4s; /* to-bad */
+  pointer-events: none;
+  opacity: 0;
+  background-color: rgba(73, 0, 0, 0.7);
   will-change: opacity, transform;
 }
 
 @keyframes to-bad {
   40% {
-    opacity: 1;
     transform: scale(1.4);
+    opacity: 1;
   }
 
   100% {

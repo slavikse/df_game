@@ -1,12 +1,12 @@
 -------------------------- РАЗМЕТКА -------------------------------
 
-Экранировать пользовательский ввод. Защита от CSRF
-img[width height alt], a[title], template, пробел: &#32;
+Экранировать ввод, Защита от CSRF
+img[width height alt], template, пробел: &#32;
 <link rel="dns-prefetch" href="https://URI.com">
-<link rel="preconnect" href="https://cdn.example.com">
-<link rel="prefetch" href="secondary.js">
-<link rel="preload" href="secondary.js">
-<link rel="prerender" href="http://example.com">
+<link rel="preconnect" href="https://URI.com">
+<link rel="prefetch" href="script.js">
+<link rel="preload" href="script.js">
+<link rel="prerender" href="http://URI.com">
 
 ---------------------------- СТИЛИ --------------------------------
 
@@ -21,7 +21,7 @@ img[width height alt], a[title], template, пробел: &#32;
   layout: раскладка (width, left..), дорогая операция
   paint: отрисовка (color, opacity..), дешевая операция
   composite: компоновка, самая дешевая операция
-  will-change: opacity, transform: самые дешевые операции
+  will-change (GPU): opacity, transform
 
 Ширины экранов (основано на bstp4):
   xs = 544px
@@ -48,22 +48,19 @@ Responsive background image:
 import svg4everybody from 'libs/svg4everybody';
 svg4everybody();
 
------------------------- FOR NPM SCRIPTS ---------------------------
+----------------------------- NPM ----------------------------------
 
-vinyl-fs, chokidar
+vinyl-fs, chokidar, opener, connect
 
 ---------------------------- ПРОЧЕЕ --------------------------------
-
-npmjs.com/package/opener
-npmjs.com/package/gulp-connect
 
 Удалять не используемые глифы в шрифтах: fontforge
 Где залогинен посетитель: habrahabr.ru/post/312636
 Оформление незагруженных изображений: css-live.ru/articles/oformlenie-nezagruzhennyx-izobrazhenij.html
 webApp: github.com/GoogleChrome/airhorn/blob/master/app/manifest.{json,webapp}
-Очистка кэша вк: vk.com/dev/pages.clearCache ; Размеры картинки: ~537x240
+Очистка кэша вк: vk.com/dev/pages.clearCache ; Размеры картинки для og: ~537x240
 
------------------------ GITHUB.io DEPLOY ---------------------------
+------------------------ GITHUB DEPLOY -----------------------------
 
 1. В регистраторе добавить записи:
   A      @    192.30.252.153

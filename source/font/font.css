@@ -1,17 +1,17 @@
 @font-face {
   font-family: 'beermoney';
+  font-weight: 400;
+  font-style: normal;
   src: local('font/beermoney'),
   url('font/beermoney.woff2') format('woff2'),
   url('font/beermoney.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
 }
 
 @font-face {
   font-family: 'gun_store';
+  font-weight: 400;
+  font-style: normal;
   src: local('font/gun_store'),
   url('font/gun_store.woff2') format('woff2'),
   url('font/gun_store.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
 }

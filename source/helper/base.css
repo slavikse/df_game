@@ -8,17 +8,16 @@ body {
 }
 
 body {
-  font-family: 'beermoney', sans-serif;
-  background: url("image/forest_day_mobile.jpg") 50% 50% / cover no-repeat;
   overflow: hidden; /* мобы могут появляться на краю */
+  font-family: 'beermoney', sans-serif;
   cursor: crosshair;
+  background: url("image/forest_day_mobile.jpg") 50% 50% / cover no-repeat;
 
   @media (544px <= width <= 992px) {
     background-image: url("image/forest_day_tablet.jpg");
   } @media (width > 992px) {
   background-image: url("image/forest_day.jpg");
 }
-
   &.dont-shoot {
     cursor: cell;
   }

@@ -81,5 +81,5 @@ function extractSvg(spriteString) {
 }
 
 if (!production) {
-  gulp.watch(files, gulp.parallel(name));
+  gulp.watch(files, gulp.series(name));
 }

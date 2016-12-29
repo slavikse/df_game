@@ -1,10 +1,10 @@
 .enemy-position {
   position: absolute;
   display: flex;
-  align-items: center;
   justify-content: center;
-  opacity: 0;
+  align-items: center;
   animation: 0.4s enemy-position-show both;
+  opacity: 0;
   will-change: opacity;
 }
 
@@ -21,23 +21,23 @@
 .enemy-warning {
   position: absolute;
   z-index: 1;
-  opacity: 0;
   pointer-events: none;
+  opacity: 0;
   will-change: opacity;
 }
 
 .enemy-damage {
   position: absolute;
   z-index: 1;
-  pointer-events: none;
   animation: 0.15s linear enemy-damage both paused;
+  pointer-events: none;
   will-change: opacity, transform;
 }
 
 @keyframes enemy-damage {
   0% {
-    opacity: 0;
     transform: translate(20%, -20%);
+    opacity: 0;
   }
 
   20%,
@@ -46,32 +46,32 @@
   }
 
   100% {
-    opacity: 0;
     transform: translate(-20%, 20%);
+    opacity: 0;
   }
 }
 
 .enemy {
-  backface-visibility: visible;
   animation: 0.6s both; /* enemy-kill */
+  backface-visibility: visible;
   will-change: opacity, transform;
 }
 
 @keyframes enemy-kill {
   100% {
-    opacity: 0;
     transform: rotateY(810deg);
+    opacity: 0;
   }
 }
 
 .enemy-health {
   position: absolute;
-  padding: 1px 3px;
   border-radius: 50%;
-  color: white;
+  padding: 1px 3px;
   font-family: sans-serif;
   font-size: 0.8em;
-  background-color: #b90000;
+  color: white;
   pointer-events: none;
+  background-color: #b90000;
   will-change: opacity;
 }

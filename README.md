@@ -1,7 +1,7 @@
 # Для чего?  
 /!\ Мученик - машина, а не человек! Современный стек технологий для сборки веб проектов /!\    
 **В составе:**
-npm scripts, gulp@4, posthtml, postcss, webpack@2 + babel = ❤ es2015, png/jpg/svg/mp3 sprite, image resize, minify, live reload, rev, zip, github/firebase hosting.
+npm scripts, gulp@4, postcss, webpack@2 + babel = ❤ es2015, png/jpg/svg/mp3 sprite, image resize, minify, live reload, rev, zip, github/firebase hosting.
 
 # Установка
 ```sh
@@ -13,20 +13,24 @@ cd my_martyr && npm i && node run dev
 # Запуск
 dev: ```$ node run dev```   
 production: ```$ node run prod```   
-deploy fb: ```$ node run fb```
-deploy git: ```$ node run git```
+deploy git: ```$ node run git```   
+deploy fb: ```$ node run fb```   
 tunnel: ```$ node run tunnel```   
 
 # Модульность
 **Правила**:   
-* **Module**: #1: не вкладывать директории, остальное сделает fs.   
-  *Имя папки (module_name) === Имена файлов в папке:*   
-  **ex:** module_name/{module_name.html,module_name.css,module_name.js}
+* **Module**:   
+  \#1: директория == *модуль*   
+  \#2: *не вкладывать* модули, линейное расположение в fs   
+  \#3: *единственный корневой элемент* в view и класс в style (scope в модуле)   
+  \#4: для манипуляций с элементом в script, *добавлять в конце -js* к классу    
+  *Имя модуля (module_name) === Имена файлов в модуле:*   
+  **ex:** module_name/{module_name.html,module_name.css,module_name.js}   
 
-* **View**: модульность за счет @include.   
+* **View**: @include   
   **ex:** @include('./module_name/module_name.html')   
 
-* **Style**: каскад и #1 = ❤ инкапсуляция стилей   
+* **Style**: каскад и правило **Module** = ❤ инкапсуляция стилей   
   **ex:** .module-name .text {...}   
 
 * **Script**: webpack, babel   
@@ -45,10 +49,11 @@ tunnel: ```$ node run tunnel```
   **ex:** стили для использования: ```temp/sprite.css```   
     и пример использования: ```temp/sprite.symbol.html```
 
-* **Audio**: в модуле: ```module_name/audio/```
+* **Audio**: в модуле: ```module_name/audio/```   
+  **ex:** подключение: ```audio/module_name_cat.mp3```
 
 * **Audio Sprite**: в модуле: ```module_name/audio_sprite/```   
-  **ex:** информация о спрайте: ```temp/audio/audio_sprite.json```
+  **ex:** информация о спрайте: ```temp/audio/audio_sprite.json```   
 
 * **Font**: расположение ```font/```   
 

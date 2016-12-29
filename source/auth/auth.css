@@ -1,7 +1,7 @@
 .auth-show {
   position: relative;
-  margin-bottom: 6px;
   display: flex;
+  margin-bottom: 6px;
   height: 44px; /* чтобы не прыгал при смене loader на счет */
   transition: filter 0.3s;
 
@@ -27,12 +27,12 @@
   position: absolute;
   top: -36px;
   left: 44px;
-  transform: rotate(20deg);
-  color: #fff;
   font-size: 2em;
+  color: #fff;
   white-space: nowrap;
   text-shadow: 2px 2px 0 black;
   transition: opacity 0.2s;
+  transform: rotate(20deg);
   will-change: opacity;
 
   &::before {
@@ -41,10 +41,10 @@
     left: 50px;
     display: inline-block;
     text-shadow: none;
-    animation: auth-call 0.6s infinite alternate;
-    transform: rotate(-90deg) translateX(0);
-    will-change: transform;
     content: '☚';
+    transform: rotate(-90deg) translateX(0);
+    animation: auth-call 0.6s infinite alternate;
+    will-change: transform;
   }
 }
 
@@ -64,8 +64,8 @@
   display: none;
   color: #51d83f;
   line-height: 0.5;
-  cursor: pointer;
   text-shadow: 2px 2px 0 black;
+  cursor: pointer;
   transition: color 0.2s;
 
   &:hover {
@@ -74,8 +74,8 @@
 
   & .cogwheel {
     display: flex;
-    transform-origin: center 27px;
     transition: transform 0.4s;
+    transform-origin: center 27px;
     will-change: transform;
   }
 
@@ -98,8 +98,8 @@
   }
 
   & .letter-s {
-    transform: rotate(70deg);
     transition: transform 0.4s;
+    transform: rotate(70deg);
     will-change: transform;
   }
 
@@ -117,10 +117,10 @@
 }
 
 .auth-logout {
-  margin-left: 8px;
   position: relative;
   z-index: 1;
   display: none;
+  margin-left: 8px;
   cursor: pointer;
   filter: saturate(0);
 
@@ -133,24 +133,24 @@
   position: absolute;
   top: 0; /* ff fix */
   left: 0; /* ff fix */
-  padding-top: 60px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding-top: 60px;
   width: 100%;
   height: 100%;
+  transition: opacity 0.4s, transform 0.4s;
+  transform: scale(0.6);
+  pointer-events: none;
   opacity: 0;
   background-color: rgba(0, 0, 0, 0.6);
-  pointer-events: none;
-  transform: scale(0.6);
-  transition: opacity 0.4s, transform 0.4s;
   will-change: opacity, transform;
 
   &-show {
     z-index: 2;
-    opacity: 1;
-    pointer-events: auto;
     transform: scale(1);
+    pointer-events: auto;
+    opacity: 1;
   }
 }
 
@@ -162,14 +162,14 @@
 
 .auth-email,
 .auth-password {
-  width: 100%;
   border-bottom: 2px solid rgba(0, 0, 0, 0.6);
-  color: #fff;
+  width: 100%;
   font-size: 2.6em;
+  color: #fff;
   text-align: center;
   text-shadow: 2px 2px 0 black;
-  background-color: rgba(0, 0, 0, 0.2);
   transition: border-color 0.4s;
+  background-color: rgba(0, 0, 0, 0.2);
 
   &::-webkit-input-placeholder {
     color: #fff;
@@ -197,14 +197,14 @@
 }
 
 .auth-submit-wrap {
-  width: 100%;
   padding: 6px 0;
-  color: #51d83f;
+  width: 100%;
   font-size: 2.8em;
+  color: #51d83f;
   text-align: center;
   cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.5);
   animation: 0.4s infinite alternate both; /* auth-submit-* */
+  background-color: rgba(0, 0, 0, 0.5);
   will-change: transform;
 
   &:hover {
@@ -213,8 +213,8 @@
 
   & .auth-submit {
     color: inherit;
-    cursor: inherit;
     text-shadow: 2px 2px 0 black;
+    cursor: inherit;
   }
 
   & .left {

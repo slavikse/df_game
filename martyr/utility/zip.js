@@ -9,10 +9,10 @@ const time = new Date().toLocaleString('ru');
 
 gulp.task(name, () => {
   gulp.src(sourceFolder)
-  .pipe(zip(`source_${time}.zip`))
+  .pipe(zip(`${time}_source.zip`))
   .pipe(gulp.dest(there));
 
   return gulp.src(publicFolder)
-  .pipe(zip(`public_${time}.zip`))
+  .pipe(zip(`${time}_public.zip`))
   .pipe(gulp.dest(there));
 });

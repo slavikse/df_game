@@ -5,8 +5,8 @@
   & .drum {
     position: relative;
     z-index: 1; /* в магазе */
-    animation: 0.7s both ease-out; /* drum-rotate */
     transition: transform 0.2s; /* поворот при выстреле */
+    animation: 0.7s both ease-out; /* drum-rotate */
     will-change: transform;
   }
 
@@ -27,13 +27,13 @@
   }
 
   & .bullet3 {
-    bottom: 16px;
     right: 6px;
+    bottom: 16px;
   }
 
   & .bullet4 {
-    bottom: 3px;
     right: 30px;
+    bottom: 3px;
   }
 
   & .bullet5 {
@@ -48,12 +48,12 @@
 
   & .drum-count {
     position: relative;
-    margin-left: -30px;
-    margin-bottom: -6px;
     z-index: 1; /* в магазе */
+    margin-bottom: -6px;
+    margin-left: -30px;
     width: 34px;
-    color: white;
     font-size: 2em;
+    color: white;
     will-change: contents;
   }
 }

@@ -7,21 +7,20 @@
   align-items: center;
   width: 100%;
   height: 100%;
-  opacity: 0;
   text-shadow: 2px 2px 0 black;
-  background-color: rgba(0, 0, 0, 0.7);
-  pointer-events: none;
-  transform: scale(0.6);
   transition: opacity 0.4s, transform 0.4s;
+  transform: scale(0.6);
+  pointer-events: none;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.7);
   will-change: opacity, transform;
 
   &-open {
-    opacity: 1;
     transform: scale(1);
+    opacity: 1;
 
     & .item {
-      /* для возможности покупать когда магазин открыт */
-      pointer-events: auto;
+      pointer-events: auto; /* для возможности покупать когда магазин открыт */
     }
   }
 
@@ -57,18 +56,18 @@
   }
 
   & .item {
-    margin: 6px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-width: 85px;
-    padding-bottom: 4px;
+    margin: 6px;
     border: 3px dashed #2d9b00;
-    color: #fff;
+    padding-bottom: 4px;
+    min-width: 85px;
     font-size: 2em;
-    box-shadow: inset 0 0 10px black;
-    background-color: rgba(5, 123, 0, 0.4);
+    color: #fff;
     cursor: pointer;
+    background-color: rgba(5, 123, 0, 0.4);
+    box-shadow: inset 0 0 10px black;
 
     &:hover {
       background-color: rgba(3, 103, 0, 0.6);
@@ -85,9 +84,9 @@
   & .buy-block {
     border: 3px dashed #888;
     color: #bbb;
+    cursor: no-drop;
     background-color: rgba(99, 100, 100, 0.4);
     filter: saturate(0);
-    cursor: no-drop;
 
     &:hover {
       background-color: rgba(79, 81, 81, 0.6);

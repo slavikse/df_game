@@ -55,7 +55,7 @@ function shortenValues(spriteFile) {
 }
 
 if (!production) {
-  gulp.watch(files, gulp.parallel(name));
+  gulp.watch(files, gulp.series(name));
 }
 
 /**TODO Обновление звукового спрайта. Все звуки сдвигаются.

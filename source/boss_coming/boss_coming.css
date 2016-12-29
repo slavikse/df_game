@@ -3,30 +3,30 @@
   z-index: 1; /* в магазе */
   top: 12px;
   left: 0;
+  border-top-right-radius: 16px;
   width: 200px;
   height: 10px;
-  border-top-right-radius: 16px;
+  transition: opacity 1.5s;
+  pointer-events: none;
   opacity: 0; /* появится по началу игры */
   background: linear-gradient(rgb(6, 17, 0), rgb(21, 71, 0));
   box-shadow: 0 0 6px #32a500;
-  transition: opacity 1.5s;
-  pointer-events: none;
   will-change: opacity;
 
   &-show {
-    opacity: 1;
     pointer-events: auto;
+    opacity: 1;
   }
 }
 
 .boss-progress {
   position: absolute;
+  border-top-right-radius: 16px;
   width: 200px;
   height: 10px;
-  border-top-right-radius: 16px;
-  background: linear-gradient(rgb(76, 255, 0), rgb(0, 88, 12));
-  transform: translateX(-100%);
   transition: transform 0.6s; /* движение по X */
+  transform: translateX(-100%);
+  background: linear-gradient(rgb(76, 255, 0), rgb(0, 88, 12));
   will-change: transform;
 
   &::before {
@@ -34,11 +34,11 @@
     top: 10px;
     right: 0;
     display: block;
+    border-bottom-right-radius: 6px;
     width: 100%;
     height: 4px;
-    border-bottom-right-radius: 6px;
-    background: linear-gradient(rgb(0, 81, 11), rgb(41, 140, 0));
     content: '';
+    background: linear-gradient(rgb(0, 81, 11), rgb(41, 140, 0));
   }
 }
 
