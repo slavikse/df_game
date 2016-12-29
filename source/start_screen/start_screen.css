@@ -133,8 +133,8 @@
   z-index: 2; /* перекрыть логин форму */
   right: 0;
   bottom: 20px;
-  width: 100px; /* ? */
-  height: 115px; /* ? */
+  width: 100px;
+  height: 115px;
 
   &:hover .cat-donate-coin-wrap {
     transform: translateY(40px);
@@ -152,8 +152,8 @@
 
 .cat-donate-sack {
   position: absolute;
-  bottom: -38px;
-  left: -19px;
+  bottom: -19px;
+  left: -7px;
   z-index: 1;
 }
 

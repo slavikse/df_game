@@ -1,7 +1,7 @@
 # Для чего?  
 /!\ Мученик - машина, а не человек! Современный стек технологий для сборки веб проектов /!\    
 **В составе:**
-npm scripts, gulp@4, webpack@2 + babel = ❤ es2015, postcss, png/jpg/svg/mp3 sprite, image resize, minify, live reload, rev, zip, github/firebase hosting.
+npm scripts, gulp@4, posthtml, postcss, webpack@2 + babel = ❤ es2015, png/jpg/svg/mp3 sprite, image resize, minify, live reload, rev, zip, github/firebase hosting.
 
 # Установка
 ```sh
@@ -13,7 +13,8 @@ cd my_martyr && npm i && node run dev
 # Запуск
 dev: ```$ node run dev```   
 production: ```$ node run prod```   
-deploy: ```$ node run git-deploy```
+deploy fb: ```$ node run fb```
+deploy git: ```$ node run git```
 tunnel: ```$ node run tunnel```   
 
 # Модульность

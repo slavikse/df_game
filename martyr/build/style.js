@@ -6,7 +6,7 @@ import cached from 'postcss-cached';
 import atImport from 'postcss-import';
 import nested from 'postcss-nested';
 import media from 'postcss-media-minmax';
-import willChange from 'postcss-will-change'; // fallback
+import willChange from 'postcss-will-change'; // fallback will-change
 import autoprefixer from 'autoprefixer';
 import csso from 'postcss-csso';
 import flexbugs from 'postcss-flexbugs-fixes';

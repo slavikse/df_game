@@ -66,6 +66,7 @@
     "postcss-media-minmax": "2.1.2",
     "postcss-nested": "1.0.0",
     "postcss-will-change": "1.1.0",
+    "stats-webpack-plugin": "0.4.2",
     "vinyl-named": "1.1.0",
     "webpack": "2.2.0-rc.1",
     "webpack-stream": "3.2.0"

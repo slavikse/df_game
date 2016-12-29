@@ -2,12 +2,17 @@ import gulp from 'gulp';
 import zip from 'gulp-zip';
 
 const name = 'zip';
-const folder = 'public/**';
+const sourceFolder = 'source/**';
+const publicFolder = 'public/**';
 const there = 'zip';
 const time = new Date().toLocaleString('ru');
 
 gulp.task(name, () => {
-  return gulp.src(folder)
-  .pipe(zip(`${time}.zip`))
-  .pipe(gulp.dest(there))
+  gulp.src(sourceFolder)
+  .pipe(zip(`source_${time}.zip`))
+  .pipe(gulp.dest(there));
+
+  return gulp.src(publicFolder)
+  .pipe(zip(`public_${time}.zip`))
+  .pipe(gulp.dest(there));
 });

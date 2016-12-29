@@ -4,6 +4,7 @@ import error from './../utility/error';
 import named from 'vinyl-named';
 import wpStream from 'webpack-stream';
 import webpack from 'webpack';
+import StatsPlugin from 'stats-webpack-plugin';
 
 const name = 'script';
 const files = 'source/*.js';
@@ -61,7 +62,8 @@ const options = {
 if (!production) {
   options.plugins.push(
     new webpack.NoErrorsPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    //new StatsPlugin('stats.json', {chunkModules: true})
   )
 }
 

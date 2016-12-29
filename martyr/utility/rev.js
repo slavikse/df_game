@@ -7,7 +7,7 @@ import {exec} from 'child_process';
 const name = 'rev';
 const pathRevFiles = 'public/**/*.{html,css,js}';
 const revFiles = [
-  'public/**/*.*', // файлы с расширением (!CNAME)
+  'public/**/*.*', // исключая файлы без расширения: CNAME
   '!public/*.{html,txt,xml}'
 ];
 const there = 'public';
