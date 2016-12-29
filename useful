@@ -1,7 +1,8 @@
 -------------------------- РАЗМЕТКА -------------------------------
 
-Экранировать ввод, Защита от CSRF
+Экранировать ввод. Защита от CSRF
 img[width height alt], template, пробел: &#32;
+
 <link rel="dns-prefetch" href="https://URI.com">
 <link rel="preconnect" href="https://URI.com">
 <link rel="prefetch" href="script.js">
@@ -11,13 +12,12 @@ img[width height alt], template, пробел: &#32;
 ---------------------------- СТИЛИ --------------------------------
 
 Сортировка стилей:
-  Позиционирование
-  Блочная модель
-  Оформление
-  Остальное
+  Позиционирование: (position, z-index, top, right, bottom, left..)
+  Блочная модель: (margin, border, padding, content..)
+  Оформление: (font, color, background..)
+  Остальное: (transition, animation, box-shadow, text-shadow..)
 
 Рекомендации:
-  mobile first `<`, Поиск селекторов справа налево
   layout: раскладка (width, left..), дорогая операция
   paint: отрисовка (color, opacity..), дешевая операция
   composite: компоновка, самая дешевая операция
