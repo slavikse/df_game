@@ -1,15 +1,15 @@
 import fb from 'helper/fb';
-import getBossKilled from './boss_killed';
-import getCosts from './costs';
-import getDiscardedBullet from './discarded_bullet';
-import getDrumReloadCount from './drum_reload_count';
-import getFirstAidUse from './first_aid_use';
-import gameTimeEnd from './game_time';
-import getGrenade from './grenade';
-import getReceivedDamage from './received_damage';
-import getScore from './score';
-import getShootCount from './shoot_count';
-import getWaveCount from './wave_count';
+import getBossKilled from 'boss_killed';
+import getCosts from 'costs';
+import getDiscardedBullet from 'discarded_bullet';
+import getDrumReloadCount from 'drum_reload_count';
+import getFirstAidUse from 'first_aid_use';
+import gameTimeEnd from 'game_time';
+import getGrenade from 'grenade';
+import getReceivedDamage from 'received_damage';
+import getScore from 'score';
+import getShootCount from 'shoot_count';
+import getWaveCount from 'wave_count';
 
 const db = fb.database();
 

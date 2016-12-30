@@ -79,8 +79,8 @@ const options = {
     }]
   },
   resolve: {
-    modules: ['source', 'public', 'node_modules']
-    //                   ^^^^^^ - тут json от аудио спрайта
+    modules: ['.', 'source', 'public', 'node_modules']
+    //                        ^^^^^^ - тут json от аудио спрайта
   },
   cache: true,
   watch: !production,

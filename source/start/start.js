@@ -1,9 +1,9 @@
 import fb from 'helper/fb';
 import {audioSprite, audioURI} from 'helper/audios';
 import noise from 'helper/noise';
-import './auth/auth';
-import './guide/guide';
-import './donate/donate';
+import 'auth/auth';
+import 'guide/guide';
+import 'donate/donate';
 
 const db = fb.database();
 const $body = document.body;
