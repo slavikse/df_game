@@ -1,18 +1,18 @@
-import fb from './../helper/fb';
-import './../auth/auth';
-import './../guide/guide';
-import {audioURI, audioSprite} from './../helper/audio_sprite';
-import noise from './../helper/noise';
+import fb from 'helper/fb';
+import {audioSprite, audioURI} from 'helper/audios';
+import noise from 'helper/noise';
+import './auth/auth';
+import './guide/guide';
+import './donate/donate';
 
 const db = fb.database();
 const $body = document.body;
-const $startScreen = $body.querySelector('.start-screen');
-const $bestScore = $startScreen.querySelector('.best-score');
-const $newGame = $startScreen.querySelector('.new-game');
-const $forestNight = $body.querySelector('.forest-night');
+const $start = $body.querySelector('.start');
+const $bestScore = $start.querySelector('.best-score');
+const $newGame = $start.querySelector('.new-game');
 const $ambient = $body.querySelector('.ambient');
 const audioHover = audioSprite.hover_menu;
-const audioIntro = audioSprite.intro;
+const audioIntro = audioSprite.start_intro;
 const eventStartGame = new Event('startGame');
 
 fb.auth().onAuthStateChanged(auth);
@@ -49,25 +49,20 @@ function initGame() {
 
   $newGame.removeEventListener('click', initGame);
 
-  $startScreen.classList.add('start-screen-no-events');
+  $start.classList.add('start-screen-no-events');
   $newGame.style.animationName = 'new-game';
 
   noise(audioURI, audioIntro);
-  changeBackground();
+  $start.style.opacity = 0;
 
-  document.dispatchEvent(eventStartGame);
   setTimeout(changeAmbient, 4000);
-}
-
-function changeBackground() {
-  $startScreen.style.opacity = 0;
-  $forestNight.style.opacity = 1;
+  document.dispatchEvent(eventStartGame);
 }
 
 function changeAmbient() {
   $body.style.backgroundImage = 'none'; // освобождаем память
-  $ambient.setAttribute('src', 'audio/dark_ambient.mp3');
-  $startScreen.remove();
+  $ambient.setAttribute('src', 'audio/start_ambient.mp3');
+  $start.remove();
 }
 
 function hoverNewGame() {

@@ -1,0 +1,48 @@
+.donate {
+  position: absolute;
+  z-index: 2; /* перекрыть логин форму */
+  right: 0;
+  bottom: 20px;
+  width: 100px;
+  height: 115px;
+}
+
+.donate:hover .donate__coin {
+  transform: translateY(40px);
+  filter: brightness(40%);
+}
+
+.donate:hover .donate__coin-el {
+  animation-play-state: paused;
+}
+
+.donate__cat {
+  position: absolute;
+}
+
+.donate__sack {
+  position: absolute;
+  z-index: 1;
+  bottom: -19px;
+  left: -7px;
+}
+
+.donate__coin {
+  position: absolute;
+  bottom: 40px;
+  left: 20px;
+  transition: transform 0.6s, filter 0.6s; /* опускает монету в мешок */
+  will-change: transform;
+}
+
+.donate__coin-el {
+  animation: 0.8s donate-coin-bobber ease-in-out infinite alternate; /* монета как поплавок */
+  will-change: transform;
+}
+
+@keyframes donate-coin-bobber {
+  100% {
+    transform: translateY(14px);
+    filter: brightness(50%);
+  }
+}

@@ -1,4 +1,4 @@
-import '../health_notice/health_notice';
+import 'health_notice/health_notice';
 
 const $body = document.body;
 const $healthWrap = $body.querySelector('.health-wrap');

@@ -4,12 +4,19 @@ import error from './../utility/error';
 import named from 'vinyl-named';
 import wpStream from 'webpack-stream';
 import webpack from 'webpack';
-import StatsPlugin from 'stats-webpack-plugin';
+//import StatsPlugin from 'stats-webpack-plugin';
 
 const name = 'script';
 const files = 'source/*.js';
 const there = 'public';
 const production = process.env.NODE_ENV === 'production';
+const plugins = [
+  new webpack.EnvironmentPlugin('NODE_ENV'),
+  // new webpack.optimize.CommonsChunkPlugin({
+  //   name: 'common',
+  //   minChunks: 2
+  // })
+];
 
 let firstBuildReady = false;
 
@@ -25,51 +32,21 @@ function done(error) {
     return null;
   }
 }
-
 function buildReady(cb) {
   if (firstBuildReady) {
     cb();
   }
 }
 
-const options = {
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /firebase/,
-        loader: 'babel-loader'
-      }, {
-        test: /\.json$/,
-        loader: 'json-loader'
-      }
-    ]
-  },
-  cache: true,
-  watch: !production,
-  watchOptions: {aggregateTimeout: 20},
-  devtool: production ? false : 'eval',
-  plugins: [
-    new webpack.EnvironmentPlugin('NODE_ENV'),
-    // new webpack.optimize.CommonsChunkPlugin({
-    //   name: 'common',
-    //   minChunks: 2
-    // })
-  ]
-};
-
-// dev
 if (!production) {
-  options.plugins.push(
+  plugins.push(
     new webpack.NoErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     //new StatsPlugin('stats.json', {chunkModules: true})
   )
-}
-
-// prod
+} // dev
 if (production) {
-  options.plugins.push(
+  plugins.push(
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
@@ -88,7 +65,29 @@ if (production) {
       }
     })
   )
-}
+} // prod
+
+const options = {
+  module: {
+    rules: [{
+      test: /\.js$/,
+      exclude: /firebase/,
+      loader: 'babel-loader'
+    }, {
+      test: /\.json$/,
+      loader: 'json-loader'
+    }]
+  },
+  resolve: {
+    modules: ['source', 'public', 'node_modules']
+    //                   ^^^^^^ - тут json от аудио спрайта
+  },
+  cache: true,
+  watch: !production,
+  watchOptions: {aggregateTimeout: 50},
+  devtool: production ? false : 'eval',
+  plugins: plugins
+};
 
 gulp.task(name, cb => {
   return gulp.src(files)

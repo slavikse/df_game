@@ -1,8 +1,8 @@
-import './../boss_coming/boss_coming';
 import throttle from 'libs/throttle';
 import range from 'libs/range';
 import clone from 'libs/clone';
-import notify from '../notify/notify';
+import notify from 'notify/notify';
+import 'boss_coming/boss_coming';
 
 const $body = document.body;
 const $paddock = $body.querySelector('.boss-paddock');

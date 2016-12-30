@@ -1,23 +1,31 @@
-import './helper/error';
-import {shareVK} from './helper/share';
-import './preload/preload';
-import './helper/audio_sprite';
-import './notify/notify';
-import './start_screen/start_screen';
-import './shoot/shoot';
-import './cat/cat';
-import './enemy/enemy';
-import './panel/panel';
-import './shop/shop';
-import './boss/boss';
-import './result/result';
-import './statistic/statistic';
-import './social/social';
+import 'helper/error';
+import {shareVK} from 'helper/share';
+import 'helper/audios';
+import 'preload/preload';
+import 'start/start';
+import 'notify/notify';
+import 'shoot/shoot';
+import 'cat/cat';
+import 'enemy/enemy';
+import 'panel/panel';
+import 'shop/shop';
+import 'boss/boss';
+import 'result/result';
+import 'statistic/statistic';
+import 'social/social';
 
-/**
- * Загрузив игру, создаст событие,
- * которое слушает стартовый экран
- */
+/** игра загрузившись, создает событие,
+ * которое слушает стартовый экран,
+ * он же запускает игру создавания событие startGame */
+
+const $forestNight = document.querySelector('.forest-night');
+
+function startGame() {
+  $forestNight.style.opacity = 1;
+}
+
+document.addEventListener('startGame', startGame);
+
 
 const obj = {
   uri: 'https://money.yandex.ru/to/410011000753520/100',

@@ -1,4 +1,4 @@
-import '../grenade_notice/grenade_notice';
+import 'grenade_notice/grenade_notice';
 
 const $body = document.body;
 const $grenadeWrap = $body.querySelector('.grenade');

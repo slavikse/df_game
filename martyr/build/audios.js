@@ -3,13 +3,13 @@ import audioSprite from 'gulp-audiosprite';
 import fs from 'fs';
 import notify from 'gulp-notify';
 
-const name = 'audio_sprite';
-const files = 'source/**/audio_sprite/*';
+const name = 'audios';
+const files = 'source/**/audios/*';
 const there = 'public/audio';
-const spriteJsonPath = 'public/audio/audio_sprite.json';
+const spriteJsonPath = 'public/audio/audios.json';
 const production = process.env.NODE_ENV === 'production';
 const config = {
-  output: 'audio_sprite',
+  output: 'audios',
   path: 'audio',
   export: 'mp3',
   format: 'howler',
@@ -29,9 +29,9 @@ gulp.task(name, cb => {
   .pipe(notify(`restart: ${name}`))
 });
 
-// укорачивает длительность звуков до 2х знаков после запятой
+// на прод укорачивает длительность звуков до 2х знаков после запятой
 function shortenPrepare(cb) {
-  if (fs.existsSync(spriteJsonPath)) {
+  if (production && fs.existsSync(spriteJsonPath)) {
     const spriteFile = fs.readFileSync(spriteJsonPath);
     const json = shortenValues(spriteFile);
     fs.writeFileSync(spriteJsonPath, JSON.stringify(json));

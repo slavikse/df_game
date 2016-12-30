@@ -5,7 +5,6 @@ import postcss from 'gulp-postcss';
 import cached from 'postcss-cached';
 import atImport from 'postcss-import';
 import nested from 'postcss-nested';
-import media from 'postcss-media-minmax';
 import willChange from 'postcss-will-change'; // fallback will-change
 import autoprefixer from 'autoprefixer';
 import csso from 'postcss-csso';
@@ -13,14 +12,14 @@ import flexbugs from 'postcss-flexbugs-fixes';
 
 const name = 'style';
 const files = 'source/*.css';
+//TODO что если не будет в temp стилей?
 const wFiles = '{source,temp}/**/*.css'; // temp: стили для спрайта
 const there = 'public';
 const production = process.env.NODE_ENV === 'production';
 const options = [
   cached,
   atImport,
-  nested,
-  media
+  nested
 ];
 const browsers = [
   'ie >= 10',

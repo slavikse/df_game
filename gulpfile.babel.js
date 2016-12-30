@@ -1,7 +1,7 @@
 import gulp from 'gulp';
 
 import './martyr/build/audio';
-import './martyr/build/audio_sprite';
+import './martyr/build/audios';
 import './martyr/build/font';
 import './martyr/build/image';
 import './martyr/build/resize';
@@ -22,7 +22,7 @@ import './martyr/utility/zip';
 const production = process.env.NODE_ENV === 'production';
 const buildTasks = [
   'audio',
-  'audio_sprite', // #1
+  'audios', // #1
   'font',
   'image',
   'resize',

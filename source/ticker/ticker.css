@@ -8,64 +8,62 @@
   transform: rotateY(90deg); /* начинается с паузы || */
   transform-style: preserve-3d;
   will-change: transform;
+}
 
-  & .edge {
-    position: absolute;
-    width: 1em;
-    height: 1em;
-    font-size: 3em;
-    color: white;
-    text-align: center;
-    background-color: black;
-    box-shadow: inset 0 0 8px white;
-  }
+.ticker__edge {
+  position: absolute;
+  width: 1em;
+  height: 1em;
+  font-size: 3em;
+  color: white;
+  text-align: center;
+  background-color: black;
+  box-shadow: inset 0 0 8px white;
+}
 
-  & .edge-left { /* || */
-    line-height: 1.15;
-    transform: translateX(-0.5em) rotateY(90deg);
-  }
+.ticker__edge-left { /* || */
+  line-height: 1.15;
+  transform: translateX(-0.5em) rotateY(90deg);
+}
 
-  & .edge-front { /* :: */
-    line-height: 0.85;
-    transform: translateZ(0.5em);
-  }
+.ticker__edge-front { /* :: */
+  line-height: 0.85;
+  transform: translateZ(0.5em);
+}
 
-  & .edge-top { /* :. */
-    position: relative;
-    line-height: 0.6;
-    transform: translateY(-0.5em) rotateX(90deg);
+.ticker__edge-top { /* :. */
+  position: relative;
+  line-height: 0.6;
+  transform: translateY(-0.5em) rotateX(90deg);
+}
 
-    &::before,
-    &::after {
-      position: absolute;
-      content: '.';
-    }
+.ticker__edge-top::before {
+  position: absolute;
+  content: '.';
+  top: -9px;
+  left: 7px;
+}
 
-    &::before {
-      top: -9px;
-      left: 7px;
-    }
+.ticker__edge-top::after {
+  position: absolute;
+  content: '.';
+  right: 7px;
+  bottom: 11px;
+}
 
-    &::after {
-      right: 7px;
-      bottom: 11px;
-    }
-  }
+.ticker__edge-back { /* : */
+  line-height: 0.9;
+  transform: translateZ(-0.5em);
+}
 
-  & .edge-back { /* : */
-    line-height: 0.9;
-    transform: translateZ(-0.5em);
-  }
+.ticker__edge-bottom { /* . */
+  line-height: 0.6;
+  transform: translateY(0.5em) rotateX(90deg);
+}
 
-  & .edge-bottom { /* . */
-    line-height: 0.6;
-    transform: translateY(0.5em) rotateX(90deg);
-  }
-
-  & .edge-right { /* + */
-    line-height: 0.9;
-    transform: translateX(0.5em) rotateY(90deg);
-  }
+.ticker__edge-right { /* + */
+  line-height: 0.9;
+  transform: translateX(0.5em) rotateY(90deg);
 }
 
 /*

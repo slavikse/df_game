@@ -1,7 +1,7 @@
 {
   "name": "martyr",
   "description": "Мученик - машина, а не человек! Современный стек технологий для сборки веб проектов",
-  "version": "3.13.1",
+  "version": "3.13.2",
   "scripts": {
     "clean": "rm -rf public temp && mkdir public temp",
     "dev": "npm run clean && gulp",
@@ -63,7 +63,6 @@
     "postcss-csso": "1.1.2",
     "postcss-flexbugs-fixes": "2.1.0",
     "postcss-import": "9.0.0",
-    "postcss-media-minmax": "2.1.2",
     "postcss-nested": "1.0.0",
     "postcss-will-change": "1.1.0",
     "stats-webpack-plugin": "0.4.2",

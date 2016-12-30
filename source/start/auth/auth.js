@@ -1,18 +1,18 @@
-import fb from './../helper/fb';
-import {audioURI, audioSprite} from './../helper/audio_sprite';
-import noise from './../helper/noise';
-import notify from './../notify/notify';
+import fb from 'helper/fb';
+import {audioSprite, audioURI} from 'helper/audios';
+import noise from 'helper/noise';
+import notify from 'notify/notify';
 import range from 'libs/range';
 
-const $startScreen = document.querySelector('.start-screen');
-const $authShow = $startScreen.querySelector('.auth-show');
+const $start = document.querySelector('.start');
+const $authShow = $start.querySelector('.auth-show');
 const $authLoader = $authShow.querySelector('.auth-loader-js');
 const $authUserName = $authShow.querySelector('.auth-user-name');
 const $authOpener = $authShow.querySelector('.auth-opener');
 const $authLogout = $authShow.querySelector('.auth-logout');
-const $authWrap = $startScreen.querySelector('.auth-wrap');
-const $authEmail = $startScreen.querySelector('.auth-email');
-const $authSubmitWrap = $startScreen.querySelector('.auth-submit-wrap');
+const $authWrap = $start.querySelector('.auth-wrap');
+const $authEmail = $start.querySelector('.auth-email');
+const $authSubmitWrap = $start.querySelector('.auth-submit-wrap');
 const audioAuthHover = audioSprite.hover_menu;
 const audioAuthShow = audioSprite.auth_show;
 const audioAuthIn = audioSprite.auth_in;
@@ -96,7 +96,7 @@ function authShowToggle() {
 
   noise(audioURI, audioAuthShow);
 
-  $startScreen.classList.toggle('start-screen-open');
+  $start.classList.toggle('start-screen-open');
   $authWrap.classList.toggle('auth-wrap-show');
   $authOpener.classList.toggle('auth-opener-on');
 }

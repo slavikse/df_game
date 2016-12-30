@@ -1,5 +1,5 @@
-import {audioURI, audioSprite} from './../helper/audio_sprite';
-import noise from './../helper/noise';
+import {audioSprite, audioURI} from 'helper/audios';
+import noise from 'helper/noise';
 
 const $guideHelp = document.querySelector('.guide-help');
 const $guideWrap = document.querySelector('.guide-wrap');

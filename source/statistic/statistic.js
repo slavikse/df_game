@@ -1,4 +1,4 @@
-import fb from './../helper/fb';
+import fb from 'helper/fb';
 import getBossKilled from './boss_killed';
 import getCosts from './costs';
 import getDiscardedBullet from './discarded_bullet';

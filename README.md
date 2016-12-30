@@ -18,21 +18,15 @@ deploy fb: ```node run fb```
 tunnel: ```node run tunnel```   
 
 # Правила модульности
-* **Module**:   
-  \#1: директория == *модуль*   
-  \#2: *не вкладывать* модули, линейное расположение в fs   
-  \#3: *единственный корневой элемент* в view и класс в style (scope в модуле)   
-  \#4: для манипуляций с элементом в script, *добавлять в конце -js* к классу    
-  
-  *имя модуля (module_name) === имена файлов в модуле:*   
+* **Module**: директория == модуль | модули можно вкладывать (ЧТОБЫ НЕ БЫЛО СНАРУЖИ ТАКИХ ЖЕ ИМЕН)   
   **use:** module_name/{module_name.html,module_name.css,module_name.js}   
 
 * **View use:** @include('./module_name/module_name.html')   
 
-* **Style**: каскад и правило **Module** = ❤ инкапсуляция стилей   
-  **use:** .module-name .text {}   
+* **Style**: BEM нотация   
+  **use:** .module-name .module-name__text.module-name__text--error {}   
 
-* **Script**: webpack, babel   
+* **Script**:  babel, es2015   
 
 * **Image**: в модуле: ```module_name/image/module_name_cat.jpg```  
   **use:** ```image/module_name_cat.jpg```

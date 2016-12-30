@@ -1,6 +1,6 @@
-import {audioURI, audioSprite} from './../helper/audio_sprite';
-import noise from './../helper/noise';
-import '../shop_time/shop_time';
+import {audioSprite, audioURI} from 'helper/audios';
+import noise from 'helper/noise';
+import 'shop_time/shop_time';
 
 const $body = document.body;
 const $ambient = $body.querySelector('.ambient');
@@ -170,7 +170,7 @@ function hoverShopClose() {
 }
 
 function shopClose() {
-  $ambient.setAttribute('src', 'audio/dark_ambient.mp3');
+  $ambient.setAttribute('src', 'audio/start_ambient.mp3');
   noise(audioURI, audioNextWave);
 
   $body.classList.remove('dont-shoot');

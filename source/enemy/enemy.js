@@ -1,8 +1,8 @@
 import range from 'libs/range';
 import throttle from 'libs/throttle';
 import delay from 'libs/delay';
-import {audioURI, audioSprite} from './../helper/audio_sprite';
-import noise from './../helper/noise';
+import {audioSprite, audioURI} from 'helper/audios';
+import noise from 'helper/noise';
 
 const $body = document.body;
 const $enemyPosition = $body.querySelector('.enemy-position');

@@ -1,8 +1,8 @@
 const $preLoaderWrap = document.querySelector('.pre-loader-wrap');
 const resource = {
   audios: [
-    'audio/audio_sprite.mp3',
-    'audio/dark_ambient.mp3',
+    'audio/audios.mp3',
+    'audio/start_ambient.mp3',
     //'audio/light_ambient.mp3', // брауз запрашивает сам
     'audio/shop_ambient.mp3'
   ],

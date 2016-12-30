@@ -1,5 +1,5 @@
-import {audioURI, audioSprite} from '../helper/audio_sprite';
-import noise from '../helper/noise';
+import {audioSprite, audioURI} from 'helper/audios';
+import noise from 'helper/noise';
 
 const $healthDamage = document.querySelector('.health-damage');
 const $healthRegeneration = document.querySelector('.health-regeneration');

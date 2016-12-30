@@ -4,8 +4,8 @@ const urlsToCache = [
   './index.css',
   './index.js',
 
-  './audio/audio_sprite.mp3',
-  './audio/dark_ambient.mp3',
+  './audio/audios.mp3',
+  './audio/start_ambient.mp3',
   './audio/light_ambient.mp3',
   './audio/shop_ambient.mp3',
 
@@ -18,9 +18,9 @@ const urlsToCache = [
   './image/forest_day.jpg',
   './image/forest_day_mobile.jpg',
   './image/forest_day_tablet.jpg',
-  './image/forest_night.jpg',
-  './image/forest_night_mobile.jpg',
-  './image/forest_night_tablet.jpg',
+  './image/start_forest_night.jpg',
+  './image/start_forest_night_mobile.jpg',
+  './image/start_forest_night_tablet.jpg',
   './image/sprite.png'
 ];
 
