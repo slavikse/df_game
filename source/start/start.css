@@ -1,7 +1,3 @@
-@import "./auth/auth.css";
-@import "./guide/guide.css";
-@import "./donate/donate.css";
-
 .start {
   position: absolute;
   display: flex;

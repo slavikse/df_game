@@ -1,10 +1,12 @@
 @import 'helper/reset.css';
 @import 'helper/base.css';
 @import 'font/font.css';
-
 @import 'preload/preload.css';
 @import 'helper/loader.css';
 @import 'start/start.css';
+@import 'auth/auth.css';
+@import 'guide/guide.css';
+@import 'donate/donate.css';
 @import 'notify/notify.css';
 @import 'shoot/shoot.css';
 @import '../temp/sprite.png.css';
@@ -22,17 +24,17 @@
   height: 100%;
   transition: 3s opacity;
   opacity: 0;
-  background: url("image/start_forest_night_mobile.jpg") 50% 50% / cover no-repeat;
+  background: url('image/start_forest_night_mobile.jpg') 50% 50% / cover no-repeat;
 }
 
 @media (min-width: 544px) and (max-width: 992px) {
   .forest-night {
-    background-image: url("image/start_forest_night_tablet.jpg");
+    background-image: url('image/start_forest_night_tablet.jpg');
   }
 }
 
 @media (min-width: 993px) {
   .forest-night {
-    background-image: url("image/start_forest_night.jpg");
+    background-image: url('image/start_forest_night.jpg');
   }
 }

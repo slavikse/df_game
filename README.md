@@ -1,7 +1,6 @@
-# Для чего?  
-/!\ Мученик - машина, а не человек! Современный стек технологий для сборки веб проектов /!\   
+# Мученик - машина, а не человек! Автоматизация задач фронтенда /!\ UNIX only /!\   
 **В составе:**
-npm scripts, gulp@4, postcss, webpack@2 + babel = ❤ es2015, png/jpg/svg/mp3 sprite, image resize, live reload, minify, rev, zip, github/firebase hosting.
+npm scripts, gulp@4, posthtml, postcss, webpack@2 + babel = ❤ es2015, png/jpg/svg/mp3 sprite, image resize, live reload, minify, rev, zip, github/firebase hosting
 
 # Установка
 ```sh
@@ -18,22 +17,22 @@ deploy fb: ```node run fb```
 tunnel: ```node run tunnel```   
 
 # Правила модульности
-* **Module**: директория == модуль | модули можно вкладывать (ЧТОБЫ НЕ БЫЛО СНАРУЖИ ТАКИХ ЖЕ ИМЕН)   
-  **use:** module_name/{module_name.html,module_name.css,module_name.js}   
+* **Module**: это директория | fs: НЕ вкладывать | поиск (html, js) в source/   
+  **use:** module_name/{module_name.css,module_name.html,module_name.js}   
 
 * **View use:** <include src='module_name/module_name.html'></include>   
 
 * **Style**: BEM нотация   
-  **use:** .module-name .module-name__text.module-name__text--error {}   
+  **use:** .module-name .module-name__text {}   
 
-* **Script**:  babel, es2015   
+* **Script**: babel, es2015   
 
 * **Image**: в модуле: ```module_name/image/module_name_cat.jpg```  
   **use:** ```image/module_name_cat.jpg```
   
-* **Resize**: в модуле: ```module_name/resize/module_name_big_cat.jpg```   
+* **Resize**: в модуле: ```module_name/resize/module_name_cat.jpg```   
   Из большого изображения создаются 2 меньших: для tablet и mobile    
-  **use:** ```image/module_name_cat{_big,_table,_mobile}.jpg```
+  **use:** ```image/module_name_cat{`original`,_table,_mobile}.jpg```
   
 * **Sprite png**: в модуле: ```module_name/sprite/```   
   **use:** ```temp/sprite.png.css```
@@ -44,8 +43,8 @@ tunnel: ```node run tunnel```
 * **Audio**: в модуле: ```module_name/audio/```   
   **use:** ```audio/module_name_cat.mp3```
 
-* **Audio Sprite**: в модуле: ```module_name/audio_sprite/```   
-  **use:** ```temp/audio/audio_sprite.json```   
+* **Audios**: в модуле: ```module_name/audios/```   
+  **use:** ```temp/audio/audios.json```   
 
 * **Font**: расположение ```font/```   
 
@@ -57,7 +56,7 @@ source/
     helper/
     header/
         audio/
-        audio_sprite/
+        audios/
         image/
         resize/
         sprite/

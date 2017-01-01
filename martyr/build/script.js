@@ -21,7 +21,7 @@ const module = {
   }]
 };
 const resolve = {
-  modules: ['.', 'node_modules'],
+  modules: ['source', 'node_modules'],
   extensions: ['.js']
 };
 const plugins = [
@@ -105,7 +105,7 @@ const options = {
   cache: true,
   watch: !production,
   watchOptions: {aggregateTimeout: 50},
-  //devtool: production ? false : 'eval',
+  devtool: production ? false : 'eval',
   plugins: plugins
 };
 

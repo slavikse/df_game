@@ -1,7 +1,7 @@
 {
   "name": "martyr",
-  "description": "Мученик - машина, а не человек! Современный стек технологий для сборки веб проектов",
-  "version": "3.14.3",
+  "description": "Мученик - машина, а не человек! Автоматизация задач фронтенда /!\\ UNIX only /!\\",
+  "version": "3.15.0",
   "scripts": {
     "clean": "rm -rf public temp && mkdir public temp",
     "dev": "npm run clean && gulp",
@@ -95,9 +95,10 @@
     "markup",
     "builder",
     "gulp",
+    "posthtml",
+    "postcss",
     "webpack",
     "babel",
-    "postcss",
     "npm-scripts"
   ]
 }
