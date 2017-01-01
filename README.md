@@ -1,5 +1,4 @@
-# Мученик - машина, а не человек!
-# Автоматизация задач фронтенда /!\ UNIX only /!\   
+# Мученик - машина, а не человек!   Автоматизация задач фронтенда /!\ UNIX only /!\   
 **В составе:**
 npm scripts, gulp@4, posthtml, postcss, webpack@2 + babel = ❤ es2015, png/jpg/svg/mp3 sprite, image resize, live reload, minify, rev, zip, github/firebase hosting
 
