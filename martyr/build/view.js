@@ -1,7 +1,8 @@
 import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import error from './../utility/error';
-import include from 'gulp-file-include';
+import posthtml from 'gulp-posthtml';
+import include from 'posthtml-include';
 import htmlmin from 'gulp-htmlmin';
 import util from 'gulp-util';
 
@@ -10,6 +11,7 @@ const files = 'source/*.html';
 const wFiles = 'source/**/*.html';
 const there = 'public';
 const production = process.env.NODE_ENV === 'production';
+const plugins = [include({root: 'source'})];
 const options = {
   collapseBooleanAttributes: true,
   collapseInlineTagWhitespace: true, // spaces collapsing between display:inline
@@ -28,7 +30,7 @@ const options = {
 gulp.task(name, () => {
   return gulp.src(files)
   .pipe(plumber({errorHandler: error}))
-  .pipe(include({prefix: '@'}))
+  .pipe(posthtml(plugins))
   .pipe(production ? htmlmin(options) : util.noop())
   .pipe(gulp.dest(there))
 });

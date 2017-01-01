@@ -9,6 +9,10 @@ const files = 'source/**/audio/*';
 const there = 'public/audio';
 const production = process.env.NODE_ENV === 'production';
 
+function config(audio) {
+  return audio.audioBitrate(80);
+}
+
 gulp.task(name, () => {
   return gulp.src(files)
   .pipe(rename({dirname: ''}))
@@ -16,10 +20,6 @@ gulp.task(name, () => {
   .pipe(production ? ffmpeg('mp3', config) : util.noop())
   .pipe(gulp.dest(there))
 });
-
-function config(audio) {
-  return audio.audioBitrate(80);
-}
 
 if (!production) {
   gulp.watch(files, gulp.series(name));

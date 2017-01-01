@@ -4,18 +4,34 @@ import error from './../utility/error';
 import named from 'vinyl-named';
 import wpStream from 'webpack-stream';
 import webpack from 'webpack';
-//import StatsPlugin from 'stats-webpack-plugin';
+import StatsPlugin from 'stats-webpack-plugin';
 
 const name = 'script';
 const files = 'source/*.js';
 const there = 'public';
 const production = process.env.NODE_ENV === 'production';
+const module = {
+  rules: [{
+    test: /\.js$/,
+    exclude: /firebase/,
+    loader: 'babel-loader'
+  }, {
+    test: /\.json$/,
+    loader: 'json-loader'
+  }]
+};
+const resolve = {
+  modules: ['.', 'node_modules'],
+  extensions: ['.js']
+};
 const plugins = [
   new webpack.EnvironmentPlugin('NODE_ENV'),
-  // new webpack.optimize.CommonsChunkPlugin({
-  //   name: 'common',
-  //   minChunks: 2
-  // })
+  new webpack.optimize.CommonsChunkPlugin({
+    children: true,
+    async: true,
+    //name: 'common',
+    //minChunks: 2
+  })
 ];
 
 let firstBuildReady = false;
@@ -38,54 +54,58 @@ function buildReady(cb) {
   }
 }
 
-if (!production) {
-  plugins.push(
-    new webpack.NoErrorsPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    //new StatsPlugin('stats.json', {chunkModules: true})
-  )
-} // dev
 if (production) {
   plugins.push(
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false
+    }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
       beautify: false,
-      comments: false,
+      output: {comments: false},
       compress: {
-        sequences: true,
+        properties: true,
+        dead_code: true,
+        unsafe: true, // безопасно???
+        conditionals: true,
+        //unsafe_comps: true,
+        //comparisons: true,
+        evaluate: true,
         booleans: true,
         loops: true,
         unused: true,
+        hoist_funs: true,
+        hoist_vars: true,
+        if_return: true,
+        join_vars: true,
+        cascade: true,
+        collapse_vars: true,
+        reduce_vars: true,
         warnings: false,
-        dead_code: true,
-        drop_console: true,
-        unsafe: true // безопасно???
+        negate_iife: true,
+        sequences: true,
+        drop_console: true
       }
     })
   )
-} // prod
+} else {
+  plugins.push(
+    new webpack.NoErrorsPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    //new StatsPlugin('stats.json', {chunkModules: true})
+  )
+}
 
 const options = {
-  module: {
-    rules: [{
-      test: /\.js$/,
-      exclude: /firebase/,
-      loader: 'babel-loader'
-    }, {
-      test: /\.json$/,
-      loader: 'json-loader'
-    }]
-  },
-  resolve: {
-    modules: ['.', 'source', 'public', 'node_modules']
-    //                        ^^^^^^ - тут json от аудио спрайта
-  },
+  module: module,
+  resolve: resolve,
   cache: true,
   watch: !production,
   watchOptions: {aggregateTimeout: 50},
-  devtool: production ? false : 'eval',
+  //devtool: production ? false : 'eval',
   plugins: plugins
 };
 

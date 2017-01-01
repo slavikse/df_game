@@ -1,5 +1,5 @@
 import gulp from 'gulp';
-import audioSprite from 'gulp-audiosprite';
+import audios from 'gulp-audiosprite';
 import fs from 'fs';
 import notify from 'gulp-notify';
 
@@ -23,7 +23,7 @@ if (production) {
 
 gulp.task(name, cb => {
   return gulp.src(files)
-  .pipe(audioSprite(config))
+  .pipe(audios(config))
   .pipe(gulp.dest(there))
   .on('end', shortenPrepare.bind(null, cb))
   .pipe(notify(`restart: ${name}`))
@@ -51,6 +51,7 @@ function shortenValues(spriteFile) {
   });
 
   json.sprite = sprite;
+
   return json;
 }
 

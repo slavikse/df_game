@@ -21,7 +21,7 @@ tunnel: ```node run tunnel```
 * **Module**: директория == модуль | модули можно вкладывать (ЧТОБЫ НЕ БЫЛО СНАРУЖИ ТАКИХ ЖЕ ИМЕН)   
   **use:** module_name/{module_name.html,module_name.css,module_name.js}   
 
-* **View use:** @include('./module_name/module_name.html')   
+* **View use:** <include src='module_name/module_name.html'></include>   
 
 * **Style**: BEM нотация   
   **use:** .module-name .module-name__text.module-name__text--error {}   

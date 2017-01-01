@@ -17,6 +17,7 @@ import './martyr/utility/critical'; // дописывать пути: .html и .
 import './martyr/utility/gzip';
 import './martyr/utility/kraken';
 import './martyr/utility/rev';
+import './martyr/utility/symbol';
 import './martyr/utility/zip';
 
 const production = process.env.NODE_ENV === 'production';

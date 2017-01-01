@@ -12,14 +12,13 @@ import flexbugs from 'postcss-flexbugs-fixes';
 
 const name = 'style';
 const files = 'source/*.css';
-//TODO что если не будет в temp стилей?
 const wFiles = '{source,temp}/**/*.css'; // temp: стили для спрайта
 const there = 'public';
 const production = process.env.NODE_ENV === 'production';
 const options = [
   cached,
   atImport,
-  nested
+  nested /* TODO избавиться */
 ];
 const browsers = [
   'ie >= 10',
@@ -48,5 +47,5 @@ gulp.task(name, () => {
 });
 
 if (!production) {
-  gulp.watch(wFiles, gulp.parallel(name));
+  gulp.watch(wFiles, gulp.series(name));
 }

@@ -1,7 +1,7 @@
 import notify from 'gulp-notify';
 
 function error(err) {
-  notify().write('-- Ошибка в console --');
+  notify().write('ERROR! Check console');
   console.log(err.toString());
 }
 
