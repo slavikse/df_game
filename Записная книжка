@@ -32,13 +32,17 @@ img[width height alt], template, пробел: &#32;
 Responsive background image:
   .home-bg {
     background: url("image/home_bg_mobile.jpg") 50% 50% / cover no-repeat;
+  }
 
-    @media (544px <= width <= 992px) {
-      background-image: url("image/home_bg_tablet.jpg");
+  @media (min-width: 544px) and (max-width: 992px) {
+    .home-bg {
+      background-image: url('image/home_bg_tablet.jpg');
     }
+  }
 
-    @media (width > 992px) {
-      background-image: url("image/home_bg.jpg");
+  @media (min-width: 993px) {
+    .home-bg {
+      background-image: url('image/home_bg.jpg');
     }
   }
 

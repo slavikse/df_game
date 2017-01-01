@@ -1,5 +1,5 @@
 # Мученик - машина, а не человек!
-## Автоматизация задач фронтенда /!\ UNIX only /!\
+## /!\ UNIX ONLY /!\ Автоматизация задач фронтенда
 
 **В составе:**
 npm scripts, gulp@4, posthtml, postcss, webpack@2 + babel = ❤ es2015, png/jpg/svg/mp3 sprite, image resize, live reload, minify, rev, zip, github/firebase hosting
@@ -22,7 +22,7 @@ tunnel: ```node run tunnel```
 * **Module**: это директория | fs: НЕ вкладывать | поиск (html, js) в source/   
   **use:** module_name/{module_name.css,module_name.html,module_name.js}   
 
-* **View use:** <include src='module_name/module_name.html'></include>   
+* **View use:** &lt;include src='module_name/module_name.html'&gt;&lt;/include&gt;   
 
 * **Style**: BEM нотация   
   **use:** .module-name .module-name__text {}   

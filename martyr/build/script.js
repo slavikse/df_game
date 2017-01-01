@@ -20,10 +20,6 @@ const module = {
     loader: 'json-loader'
   }]
 };
-const resolve = {
-  modules: ['source', 'node_modules'],
-  extensions: ['.js']
-};
 const plugins = [
   new webpack.EnvironmentPlugin('NODE_ENV'),
   new webpack.optimize.CommonsChunkPlugin({
@@ -101,7 +97,10 @@ if (production) {
 
 const options = {
   module: module,
-  resolve: resolve,
+  resolve: {
+    modules: ['source', 'node_modules'],
+    extensions: ['.js', '.json']
+  },
   cache: true,
   watch: !production,
   watchOptions: {aggregateTimeout: 50},

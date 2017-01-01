@@ -1,15 +1,16 @@
 @import 'helper/reset.css';
 @import 'helper/base.css';
 @import 'font/font.css';
+/*********************************/
 @import 'preload/preload.css';
 @import 'helper/loader.css';
+@import '../temp/sprite.png.css';
 @import 'start/start.css';
 @import 'auth/auth.css';
 @import 'guide/guide.css';
 @import 'donate/donate.css';
 @import 'notify/notify.css';
 @import 'shoot/shoot.css';
-@import '../temp/sprite.png.css';
 @import 'cat/cat.css';
 @import 'enemy/enemy.css';
 @import 'panel/panel.css';

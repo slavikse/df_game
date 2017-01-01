@@ -4,7 +4,7 @@ import error from './../utility/error';
 import postcss from 'gulp-postcss';
 import cached from 'postcss-cached';
 import atImport from 'postcss-import';
-import nested from 'postcss-nested';
+import nested from 'postcss-nested'; // TODO избавиться
 import willChange from 'postcss-will-change'; // fallback will-change
 import autoprefixer from 'autoprefixer';
 import csso from 'postcss-csso';
@@ -17,8 +17,8 @@ const there = 'public';
 const production = process.env.NODE_ENV === 'production';
 const options = [
   cached,
-  atImport,
-  nested /* TODO избавиться */
+  atImport({path: ['source']}),
+  nested
 ];
 const browsers = [
   'ie >= 10',

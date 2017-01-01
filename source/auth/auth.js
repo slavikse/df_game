@@ -18,7 +18,7 @@ const audioAuthShow = audioSprite.auth_show;
 const audioAuthIn = audioSprite.auth_in;
 const audioAuthOut = audioSprite.auth_out;
 const audioCancel = audioSprite.cancel;
-const authSymbols = ['⇝', '☀', '☄', '☆', '☘', '☢', '☣', '♒', '♕', '♔', '⚔', '⚘'];
+const authSymbols = ['⇝', '☀', '☄', '☆', '☘', '✥', '✤', '☢', '☣', '♒', '♕', '♔', '⚔', '⚘', '✽', '✾', '❀', '✿', '❁', '❈', 'ꕥ', '✭', '⚝', '✫', '⍣'];
 const authSymbolsLength = authSymbols.length - 1;
 const eventAuthBonus = new Event('authBonus');
 const eventCloseGuide = new Event('closeGuide');
@@ -155,7 +155,7 @@ function dataCorrect(email, password) {
 
 function dataInCorrect() {
   noise(audioURI, audioCancel);
-  notify({type: 'warn', message: '♿ исправь ♿'});
+  notify({type: 'warn', message: '😾 исправь 😾'});
   submitAnimate('auth-submit-error');
 }
 
@@ -174,7 +174,7 @@ function authSuccess() {
   submitAnimateEnd();
   authLoginAnimate();
 
-  notify({type: 'info', message: '☺ привет ☺'});
+  notify({type: 'info', message: '😸 привет 😸'});
   submitAnimate('auth-submit-success');
 
   setTimeout(authShowToggle, 1200);
@@ -192,7 +192,7 @@ function authWrong() {
   isAuthProgress = false;
 
   noise(audioURI, audioCancel);
-  notify({type: 'error', message: '☝ не твоё ☝'});
+  notify({type: 'error', message: '😱 не твоё 😱'});
   submitAnimate('auth-submit-error');
 }
 
@@ -220,7 +220,7 @@ function authLoginAnimateEnd() {
 
 function getAuthBonus() {
   if (isGetAuthBonus) {
-    notify({type: 'info', message: '⚡ + обойма ⚡'});
+    notify({type: 'info', message: '😼 + обойма 😼'});
     document.dispatchEvent(eventAuthBonus);
   }
 }
@@ -233,7 +233,7 @@ function fbLogout() {
 function fbLogoutEnd() {
   fb.auth().signOut();
   $authShow.classList.remove('auth-show-logout');
-  notify({type: 'info', message: '☹ пока ☹'});
+  notify({type: 'info', message: '🙀 пока 🙀'});
 }
 
 function hoverAuthOpener() {
