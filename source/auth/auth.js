@@ -4,7 +4,6 @@ import noise from 'helper/noise';
 import notify from 'notify/notify';
 import range from 'libs/range';
 
-const $start = document.querySelector('.start'); // для скрытия контролов
 const $authOpener = document.querySelector('.auth-opener');
 const $authLoader = $authOpener.querySelector('.auth-opener__loader--js');
 const $authUserName = $authOpener.querySelector('.auth-opener__user-name');
@@ -13,6 +12,7 @@ const $authLogout = $authOpener.querySelector('.auth-opener__logout');
 const $auth = document.querySelector('.auth');
 const $authEmail = $auth.querySelector('.auth__email--js');
 const $authSubmit = $auth.querySelector('.auth__submit-button');
+const $start = document.querySelector('.start'); // для скрытия контролов
 const audioAuthShow = audioSprite.auth_show;
 const audioAuthIn = audioSprite.auth_in;
 const audioAuthOut = audioSprite.auth_out;
@@ -101,11 +101,11 @@ function authShowToggle() {
 
 function showUserName(userName) {
   if (userName) {
-    $authOpenerButton.classList.add('auth__show'); // вспомогательнай
+    $authOpener.classList.add('auth-opener__login'); // для скрытия call при авторизованном
     $authOpenerButton.style.display = 'none';
     $authUserName.textContent = getRandomSymbol() + userName;
   } else {
-    $authOpenerButton.classList.remove('auth__show');
+    $authOpener.classList.remove('auth-opener__login');
     $authOpenerButton.style.display = 'flex';
     $authUserName.textContent = '';
   }
@@ -224,13 +224,13 @@ function getAuthBonus() {
 }
 
 function fbLogout() {
-  $authOpener.classList.add('auth-opener__logout');
+  $authOpener.classList.add('auth-opener__logout-now');
   setTimeout(fbLogoutEnd, 300);
 }
 
 function fbLogoutEnd() {
   fb.auth().signOut();
-  $authOpener.classList.remove('auth-opener__logout');
+  $authOpener.classList.remove('auth-opener__logout-now');
   notify({type: 'info', message: '🙀 пока 🙀'});
 }
 

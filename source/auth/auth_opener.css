@@ -15,7 +15,7 @@
   text-shadow: 2px 2px 0 black;
 }
 
-/* временно после захода */
+/* временно после выхода */
 .auth-opener__user-login {
   color: #060;
   text-shadow: 2px 2px 0 #ff0, -2px -2px 0 #ff0;
@@ -52,18 +52,19 @@
   }
 }
 
-.auth__show .auth-opener__call {
+.auth__show .auth-opener__call,
+.auth-opener__login .auth-opener__call {
   opacity: 0;
 }
 
-.auth-opener__logout {
+.auth-opener__logout-now {
   filter: blur(3px);
 }
 
 .auth-opener__button {
   position: relative;
   z-index: 4;
-  display: flex;
+  display: none;
   color: #51d83f;
   line-height: 0.5;
   text-shadow: 2px 2px 0 black;
