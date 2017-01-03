@@ -1,4 +1,4 @@
-.pre-loader-wrap {
+.preload {
   position: absolute;
   z-index: 1;
   display: flex;
@@ -11,13 +11,7 @@
   will-change: opacity;
 }
 
-.pre-loader-svg { /* FF bug fix */
-  position: absolute;
-  z-index: -1;
-  pointer-events: none;
-}
-
-.pre-loader {
+.preload__wrap {
   position: relative;
   width: 100%;
   max-width: 500px;
@@ -25,23 +19,23 @@
   transform: translateY(40%);
   -webkit-filter: url("#goo");
   filter: url("#goo");
-
-  &::after {
-    position: absolute;
-    top: 30px;
-    left: 195px;
-    display: block;
-    border-radius: 50%;
-    width: 90px;
-    height: 20px;
-    content: '';
-    animation: pre-loader-pulse 1.6s ease-in-out infinite;
-    background: #044800;
-    will-change: transform;
-  }
 }
 
-@keyframes pre-loader-pulse {
+.preload__wrap::after {
+  position: absolute;
+  top: 30px;
+  left: 195px;
+  display: block;
+  border-radius: 50%;
+  width: 90px;
+  height: 20px;
+  content: '';
+  animation: preload-pulse 1.6s ease-in-out infinite;
+  background: #044800;
+  will-change: transform;
+}
+
+@keyframes preload-pulse {
   10% {
     transform: scale(1);
   }
@@ -55,38 +49,38 @@
   }
 }
 
-.pre-loader-elem {
+.preload__elem {
   position: absolute;
   top: -10px;
   left: 235px;
   border-radius: 50%;
   width: 22px;
   height: 22px;
-  animation: pre-loader-move 1.6s ease-in-out infinite alternate;
+  animation: preload-move 1.6s ease-in-out infinite alternate;
   background: #06b700;
   will-change: transform;
-
-  &::after,
-  &::before {
-    position: absolute;
-    display: block;
-    border-radius: 50%;
-    width: 22px;
-    height: 22px;
-    content: '';
-    background: #06b700;
-  }
-
-  &::before {
-    left: -75px;
-  }
-
-  &::after {
-    left: 75px;
-  }
 }
 
-@keyframes pre-loader-move {
+.preload__elem::after,
+.preload__elem::before {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  content: '';
+  background: #06b700;
+}
+
+.preload__elem::before {
+  left: -75px;
+}
+
+.preload__elem::after {
+  left: 75px;
+}
+
+@keyframes preload-move {
   0% {
     transform: translateX(-120px);
   }
@@ -94,4 +88,10 @@
   100% {
     transform: translateX(100px);
   }
+}
+
+.preload__svg { /* FF bug fix */
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
 }

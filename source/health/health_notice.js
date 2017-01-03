@@ -1,30 +1,30 @@
 import {audioSprite, audioURI} from 'helper/audios';
 import noise from 'helper/noise';
 
-const $healthDamage = document.querySelector('.health-damage');
-const $healthRegeneration = document.querySelector('.health-regeneration');
-const $healthGameOver = document.querySelector('.health-game-over');
-const audioHeartBeat = audioSprite.heart_beat;
+const $healthDamage = document.querySelector('.health-notice__damage');
+const $healthRegeneration = document.querySelector('.health-notice__regeneration');
+const $healthGameOver = document.querySelector('.health-notice__game-over');
+const audioHeartBeat = audioSprite.health_heart_beat;
 const audioDamage = [
-  audioSprite.damage1,
-  audioSprite.damage2,
-  audioSprite.damage3
+  audioSprite.health_damage1,
+  audioSprite.health_damage2,
+  audioSprite.health_damage3
 ];
 const audioHeal = [
-  audioSprite.heal1,
-  audioSprite.heal2
+  audioSprite.health_heal1,
+  audioSprite.health_heal2
 ];
 
 let healthNoticeTimerID;
 
 function damage() {
-  healthAnimation($healthDamage, 'health-damage');
+  healthAnimation($healthDamage, 'health-notice-damage');
   noise(audioURI, audioHeartBeat);
   noise(audioURI, audioDamage);
 }
 
 function regeneration() {
-  healthAnimation($healthRegeneration, 'health-regeneration');
+  healthAnimation($healthRegeneration, 'health-notice-regeneration');
   noise(audioURI, audioHeal);
 }
 
@@ -39,10 +39,10 @@ function healthAnimationEnd(node) {
 }
 
 function gameOver() {
-  noise(audioURI, audioSprite.death);
+  noise(audioURI, audioSprite.health_death);
   clearTimeout(healthNoticeTimerID);
 
-  $healthGameOver.style.animationName = 'health-game-over';
+  $healthGameOver.style.animationName = 'health-notice-game-over';
 }
 
 document.addEventListener('damage', damage);

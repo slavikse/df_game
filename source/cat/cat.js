@@ -4,10 +4,10 @@ import {audioSprite, audioURI} from 'helper/audios';
 import noise from 'helper/noise';
 
 const $body = document.body;
-const $catPosition = $body.querySelector('.cat-position');
-const $cat = $catPosition.querySelector('.cat');
-const $toBad = $body.querySelector('.to-bad');
-const audioToBad = audioSprite.to_bad;
+const $cat = $body.querySelector('.cat');
+const $catIcon = $cat.querySelector('.cat__icon');
+const $toBad = $body.querySelector('.cat__to-bad');
+const audioToBad = audioSprite.cat_to_bad;
 const playingFieldResize = throttle(playingField, 500);
 const moveTime = 5000;
 const eventEnemyCreate = new Event('enemyCreate');
@@ -33,12 +33,12 @@ function move() {
   const x = range(0, playingFieldWidth);
   const y = range(0, playingFieldHeight);
 
-  $catPosition.style.transform = `translate(${x}px, ${y}px)`;
+  $cat.style.transform = `translate(${x}px, ${y}px)`;
   moveTimerID = setTimeout(move, moveTime);
 }
 
 function show() {
-  $catPosition.classList.add('cat-show');
+  $cat.classList.add('cat__show');
 }
 
 function hide() {
@@ -47,7 +47,7 @@ function hide() {
 }
 
 function stop() {
-  $catPosition.classList.remove('cat-show');
+  $cat.classList.remove('cat__show');
 
   clearTimeout(moveTimerID);
   clearTimeout(showTimerID);
@@ -66,15 +66,15 @@ function toBad() {
   noise(audioURI, audioToBad);
 
   $body.classList.add('dont-shoot');
-  $cat.style.animationName = 'cat-flip';
-  $toBad.style.animationName = 'to-bad';
+  $catIcon.style.animationName = 'cat-icon-flip';
+  $toBad.style.animationName = 'cat-to-bad';
 
   setTimeout(toBadEnd, 1400); // анимация
 }
 
 function toBadEnd() {
   $body.classList.remove('dont-shoot');
-  $cat.style.animationName = '';
+  $catIcon.style.animationName = '';
   $toBad.style.animationName = '';
 }
 

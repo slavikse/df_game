@@ -12,67 +12,67 @@
   opacity: 0;
   background-color: #000;
   will-change: opacity;
+}
 
-  &-show {
-    opacity: 1;
+.result__show {
+  opacity: 1;
+}
 
-    & .statistic-show,
-    & .restart {
-      pointer-events: auto;
-    }
-  }
+.result__show .result__statistic-show,
+.result__show .result__restart {
+  pointer-events: auto;
+}
 
-  & .title {
-    font-size: 3.5em;
-    color: red;
-  }
+.result__title {
+  font-size: 3.5em;
+  color: red;
+}
 
-  & .statistic-show {
-    font-size: 3em;
-    color: #ffeb3b;
-    cursor: pointer;
-    outline: 0;
+.result__statistic-show {
+  font-size: 3em;
+  color: #ffeb3b;
+  cursor: pointer;
+  outline: 0;
+}
 
-    &:focus ~ .statistic {
-      transform: translateX(0);
-    }
-  }
+.result__statistic-show:focus ~ .result__statistic {
+  transform: translateX(0);
+}
 
-  & .statistic {
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-right: 4px dashed white;
-    height: 100%;
-    overflow-y: auto;
-    transition: transform 0.4s;
-    transform: translateX(-100%);
-    pointer-events: auto;
-    outline: 0;
-    background-color: #000;
-    will-change: transform;
+.result__statistic {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-right: 4px dashed white;
+  height: 100%;
+  overflow-y: auto;
+  transition: transform 0.4s;
+  transform: translateX(-100%);
+  pointer-events: auto;
+  outline: 0;
+  background-color: #000;
+  will-change: transform;
+}
 
-    &:focus {
-      transform: translateX(0);
-    }
-  }
+.result__statistic:focus {
+  transform: translateX(0);
+}
 
-  & .item {
-    display: flex;
-    justify-content: space-between;
-  }
+.result__item {
+  display: flex;
+  justify-content: space-between;
+}
 
-  & .key,
-  & .value {
-    margin: 4px 8px;
-    font-family: sans-serif;
-    font-size: 1.3em;
-    color: white;
-  }
+.result__key,
+.result__value {
+  margin: 4px 8px;
+  font-family: sans-serif;
+  font-size: 1.3em;
+  color: white;
+}
 
-  & .restart {
-    font-size: 3.2em;
-    color: #06d600;
-    cursor: pointer;
-  }
+.result__restart {
+  font-size: 3.2em;
+  color: #06d600;
+  cursor: pointer;
 }

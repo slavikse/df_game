@@ -6,9 +6,9 @@
   color: white;
   line-height: 0.8;
   will-change: contents;
+}
 
-  &::before {
-    font-size: 0.6em;
-    content: '$';
-  }
+.score::before {
+  font-size: 0.6em;
+  content: '$';
 }

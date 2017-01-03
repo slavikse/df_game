@@ -1,4 +1,4 @@
-@import "../boss_coming/boss_coming.css";
+@import './boss_coming.css';
 
 .boss {
   position: absolute;
@@ -6,31 +6,31 @@
   pointer-events: none;
   opacity: 0;
   will-change: opacity, transform;
-
-  & .no-crash {
-    color: black;
-  }
-
-  & .crash {
-    pointer-events: none;
-  }
-
-  &.boss-docking {
-    pointer-events: auto;
-    opacity: 1;
-
-    & .boss-node {
-      animation-play-state: running;
-    }
-  }
-
-  &.boss-undocking .boss-node {
-    animation-timing-function: ease-out;
-    animation-delay: 0s;
-  }
 }
 
-.boss-node {
+.boss__no-crash {
+  color: black;
+}
+
+.boss__part-crash {
+  pointer-events: none;
+}
+
+.boss.boss__docking {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.boss.boss__docking .boss__node {
+  animation-play-state: running;
+}
+
+.boss.boss__undocking .boss__node {
+  animation-timing-function: ease-out;
+  animation-delay: 0s;
+}
+
+.boss__node {
   position: absolute;
   display: flex;
   justify-content: center;
@@ -39,68 +39,68 @@
   /* общая для всех анимация сборки */
   animation: 1s cubic-bezier(1, 0.04, 0.72, 1.38) both paused;
   will-change: opacity, transform;
-
-  &-health {
-    position: relative;
-    border-radius: 50%;
-    padding: 2px 3px;
-    font-family: sans-serif;
-    pointer-events: none;
-    background-color: rgba(128, 0, 0, 0.6);
-  }
 }
 
-.boss-body {
+.boss__node-health {
+  position: relative;
+  border-radius: 50%;
+  padding: 2px 3px;
+  font-family: sans-serif;
+  pointer-events: none;
+  background-color: rgba(128, 0, 0, 0.6);
+}
+
+.boss__body {
   z-index: 2;
   animation-name: boss-body;
   animation-delay: 0.2s;
 }
 
-.boss-body-health {
+.boss__body-health {
   top: 36px;
   left: 9px;
 }
 
-.boss-hand-l {
+.boss__hand-l {
   z-index: 2;
   animation-name: boss-hand-l;
   animation-delay: 1s;
 }
 
-.boss-hand-l-health {
+.boss__hand-l-health {
   top: 28px;
   left: 10px;
 }
 
-.boss-hand-r {
+.boss__hand-r {
   z-index: 1;
   animation-name: boss-hand-r;
   animation-delay: 1.4s;
 }
 
-.boss-hand-r-health {
+.boss__hand-r-health {
   top: 20px;
   left: 3px;
 }
 
-.boss-leg-l {
+.boss__leg-l {
   z-index: 1;
   animation-name: boss-leg-l;
   animation-delay: 1.8s;
 }
 
-.boss-leg-l-health {
+.boss__leg-l-health {
   top: -4px;
   left: 13px;
 }
 
-.boss-leg-r {
+.boss__leg-r {
   z-index: 1;
   animation-name: boss-leg-r;
   animation-delay: 2.2s;
 }
 
-.boss-leg-r-health {
+.boss__leg-r-health {
   top: -28px;
   left: -10px;
 }

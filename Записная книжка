@@ -1,15 +1,9 @@
--------------------------- РАЗМЕТКА -------------------------------
+---------------------------------- РАЗМЕТКА ------------------------------------
 
 Экранировать ввод. Защита от CSRF
 img[width height alt], template, пробел: &#32;
 
-<link rel="dns-prefetch" href="https://URI.com">
-<link rel="preconnect" href="https://URI.com">
-<link rel="prefetch" href="script.js">
-<link rel="preload" href="script.js">
-<link rel="prerender" href="http://URI.com">
-
----------------------------- СТИЛИ --------------------------------
+------------------------------------ СТИЛИ -------------------------------------
 
 Сортировка стилей:
   Позиционирование: (position, z-index, top, right, bottom, left..)
@@ -31,7 +25,7 @@ img[width height alt], template, пробел: &#32;
 
 Responsive background image:
   .home-bg {
-    background: url("image/home_bg_mobile.jpg") 50% 50% / cover no-repeat;
+    background: url('image/home_bg_mobile.jpg') 50% 50% / cover no-repeat;
   }
 
   @media (min-width: 544px) and (max-width: 992px) {
@@ -46,17 +40,15 @@ Responsive background image:
     }
   }
 
---------------------------- СКРИПТЫ --------------------------------
+----------------------------------- СКРИПТЫ ------------------------------------
 
-/** Support external SVG: IE 9-11 & Edge 12- */
-import svg4everybody from 'libs/svg4everybody';
-svg4everybody();
+libs/svg4everybody // Support external SVG: IE 9-11 & Edge 12-
 
------------------------------ NPM ----------------------------------
+------------------------------------- NPM --------------------------------------
 
 vinyl-fs, chokidar, opener, connect
 
----------------------------- ПРОЧЕЕ --------------------------------
+----------------------------------- ПРОЧЕЕ -------------------------------------
 
 Удалять не используемые глифы в шрифтах: fontforge
 Где залогинен посетитель: habrahabr.ru/post/312636
@@ -64,7 +56,7 @@ vinyl-fs, chokidar, opener, connect
 webApp: github.com/GoogleChrome/airhorn/blob/master/app/manifest.{json,webapp}
 Очистка кэша вк: vk.com/dev/pages.clearCache ; Размеры картинки для og: ~537x240
 
------------------------- GITHUB DEPLOY -----------------------------
+-------------------------------- GITHUB DEPLOY ---------------------------------
 
 1. В регистраторе добавить записи:
   A      @    192.30.252.153
@@ -72,4 +64,4 @@ webApp: github.com/GoogleChrome/airhorn/blob/master/app/manifest.{json,webapp}
   CNAME  www  slavikse.github.io.
 2. В файл ./CNAME прописать имя домена (PonyCode?)
 
---------------------------------------------------------------------
+--------------------------------------------------------------------------------

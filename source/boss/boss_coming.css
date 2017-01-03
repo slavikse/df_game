@@ -12,14 +12,14 @@
   background: linear-gradient(rgb(6, 17, 0), rgb(21, 71, 0));
   box-shadow: 0 0 6px #32a500;
   will-change: opacity;
-
-  &-show {
-    pointer-events: auto;
-    opacity: 1;
-  }
 }
 
-.boss-progress {
+.boss-coming__show {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.boss-coming__progress {
   position: absolute;
   border-top-right-radius: 16px;
   width: 200px;
@@ -28,29 +28,29 @@
   transform: translateX(-100%);
   background: linear-gradient(rgb(76, 255, 0), rgb(0, 88, 12));
   will-change: transform;
-
-  &::before {
-    position: absolute;
-    top: 10px;
-    right: 0;
-    display: block;
-    border-bottom-right-radius: 6px;
-    width: 100%;
-    height: 4px;
-    content: '';
-    background: linear-gradient(rgb(0, 81, 11), rgb(41, 140, 0));
-  }
 }
 
-.boss-head {
+.boss-coming__progress::before {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  display: block;
+  border-bottom-right-radius: 6px;
+  width: 100%;
+  height: 4px;
+  content: '';
+  background: linear-gradient(rgb(0, 81, 11), rgb(41, 140, 0));
+}
+
+.boss-coming__head {
   position: absolute;
   top: -10px;
   right: -32px;
-  animation: ease-in-out boss-head-twitch alternate infinite;
+  animation: ease-in-out boss-coming-head-twitch alternate infinite;
   will-change: transform;
 }
 
-@keyframes boss-head-twitch {
+@keyframes boss-coming-head-twitch {
   0%,
   20%,
   40%,

@@ -1,12 +1,12 @@
-import 'grenade_notice/grenade_notice';
+import './grenade_notice';
 
 const $body = document.body;
 const $grenadeWrap = $body.querySelector('.grenade');
 const $grenade = $grenadeWrap.children;
 const grenadeFull = 2; // 0,1,2 (3) грены
 const grenadeStateClasses = [
-  'icon-grenade_empty',
-  'icon-grenade_full'
+  'grenade__empty',
+  'grenade__full'
 ];
 const eventGrenade = new Event('grenade');
 const eventGrenadeShop = new Event('grenadeShop');

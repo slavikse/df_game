@@ -1,64 +1,66 @@
-.revolver-drum {
+@import 'icon_revolver.css';
+
+.revolver {
   display: flex;
   align-items: flex-end;
-
-  & .drum {
-    position: relative;
-    z-index: 1; /* в магазе */
-    transition: transform 0.2s; /* поворот при выстреле */
-    animation: 0.7s both ease-out; /* drum-rotate */
-    will-change: transform;
-  }
-
-  & .bullet {
-    position: absolute;
-    transition: opacity 0.2s;
-    will-change: opacity;
-  }
-
-  & .bullet1 {
-    top: 4px;
-    left: 29px;
-  }
-
-  & .bullet2 {
-    top: 17px;
-    right: 6px;
-  }
-
-  & .bullet3 {
-    right: 6px;
-    bottom: 16px;
-  }
-
-  & .bullet4 {
-    right: 30px;
-    bottom: 3px;
-  }
-
-  & .bullet5 {
-    bottom: 16px;
-    left: 6px;
-  }
-
-  & .bullet6 {
-    top: 18px;
-    left: 6px;
-  }
-
-  & .drum-count {
-    position: relative;
-    z-index: 1; /* в магазе */
-    margin-bottom: -6px;
-    margin-left: -30px;
-    width: 34px;
-    font-size: 2em;
-    color: white;
-    will-change: contents;
-  }
 }
 
-@keyframes drum-rotate {
+.revolver__drum {
+  position: relative;
+  z-index: 1; /* в магазе */
+  transition: transform 0.2s; /* поворот при выстреле */
+  animation: 0.7s both ease-out; /* revolver-drum-rotate */
+  will-change: transform;
+}
+
+.revolver__bullet {
+  position: absolute;
+  transition: opacity 0.2s;
+  will-change: opacity;
+}
+
+.revolver__bullet1 {
+  top: 4px;
+  left: 29px;
+}
+
+.revolver__bullet2 {
+  top: 17px;
+  right: 6px;
+}
+
+.revolver__bullet3 {
+  right: 6px;
+  bottom: 16px;
+}
+
+.revolver__bullet4 {
+  right: 30px;
+  bottom: 3px;
+}
+
+.revolver__bullet5 {
+  bottom: 16px;
+  left: 6px;
+}
+
+.revolver__bullet6 {
+  top: 18px;
+  left: 6px;
+}
+
+.revolver__drum-count {
+  position: relative;
+  z-index: 1; /* в магазе */
+  margin-bottom: -6px;
+  margin-left: -30px;
+  width: 34px;
+  font-size: 2em;
+  color: white;
+  will-change: contents;
+}
+
+@keyframes revolver-drum-rotate {
   100% {
     transform: rotate(360deg);
   }

@@ -6,7 +6,7 @@ const $body = document.body;
 const $shoot = $body.querySelector('.shoot');
 const fireRate = 166.6;
 const shootFire = debounce(isShoot, fireRate);
-const audioIdle = audioSprite.idle;
+const audioIdle = audioSprite.shoot_idle;
 const shootEvent = new Event('shoot');
 const eventCatShoot = new Event('catShoot');
 const eventEnemyShoot = new Event('enemyShoot');
@@ -62,11 +62,11 @@ function shootHide() {
 function shootDelegate(e) {
   const target = e.target;
 
-  if (target.classList.contains('enemy')) {
+  if (target.classList.contains('enemy__icon')) {
     shootEnemy(target);
-  } else if (target.classList.contains('cat')) {
+  } else if (target.classList.contains('cat__icon')) {
     shootCat();
-  } else if (target.classList.contains('boss-node')) {
+  } else if (target.classList.contains('boss__node')) {
     shootBossNode(target);
   }
 }

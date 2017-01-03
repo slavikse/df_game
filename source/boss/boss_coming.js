@@ -1,6 +1,6 @@
 const $coming = document.querySelector('.boss-coming');
-const $progress = $coming.querySelector('.boss-progress');
-const $bossHead = $coming.querySelector('.boss-head');
+const $progress = $coming.querySelector('.boss-coming__progress');
+const $bossHead = $coming.querySelector('.boss-coming__head');
 // 3 раза по 3 волны
 const wavesBeforeComingDefault = 9; // 3 * 3
 const shiftX = (100 / wavesBeforeComingDefault).toFixed(2);
@@ -10,7 +10,7 @@ let wavesBeforeComing = wavesBeforeComingDefault;
 
 function bossComingShow() {
   bossHeadTwitch();
-  $coming.classList.add('boss-coming-show');
+  $coming.classList.add('boss-coming__show');
 }
 
 function bossHeadTwitch() {

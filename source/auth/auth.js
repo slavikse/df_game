@@ -4,19 +4,19 @@ import noise from 'helper/noise';
 import notify from 'notify/notify';
 import range from 'libs/range';
 
-const $start = document.querySelector('.start');
-const $authShow = $start.querySelector('.auth-show');
-const $authLoader = $authShow.querySelector('.auth-loader-js');
-const $authUserName = $authShow.querySelector('.auth-user-name');
-const $authOpener = $authShow.querySelector('.auth-opener');
-const $authLogout = $authShow.querySelector('.auth-logout');
-const $authWrap = $start.querySelector('.auth-wrap');
-const $authEmail = $start.querySelector('.auth-email');
-const $authSubmitWrap = $start.querySelector('.auth-submit-wrap');
-const audioAuthHover = audioSprite.hover_menu;
+const $start = document.querySelector('.start'); // для скрытия контролов
+const $authOpener = document.querySelector('.auth-opener');
+const $authLoader = $authOpener.querySelector('.auth-opener__loader--js');
+const $authUserName = $authOpener.querySelector('.auth-opener__user-name');
+const $authOpenerButton = $authOpener.querySelector('.auth-opener__button');
+const $authLogout = $authOpener.querySelector('.auth-opener__logout');
+const $auth = document.querySelector('.auth');
+const $authEmail = $auth.querySelector('.auth__email--js');
+const $authSubmit = $auth.querySelector('.auth__submit-button');
 const audioAuthShow = audioSprite.auth_show;
 const audioAuthIn = audioSprite.auth_in;
 const audioAuthOut = audioSprite.auth_out;
+const audioAuthHover = audioSprite.hover_menu;
 const audioCancel = audioSprite.cancel;
 const authSymbols = ['⇝', '☀', '☄', '☆', '☘', '✥', '✤', '☢', '☣', '♒', '♕', '♔', '⚔', '⚘', '✽', '✾', '❀', '✿', '❁', '❈', 'ꕥ', '✭', '⚝', '✫', '⍣'];
 const authSymbolsLength = authSymbols.length - 1;
@@ -40,11 +40,9 @@ function authChanged(user) {
     logout();
   }
 
-  //Uncaught (in promise) DOMException: The play() request was interrupted
-  //by a call to pause()
-  setTimeout(noise.bind(null, audioURI, authAudio), 150);
+  noise(audioURI, authAudio);
 
-  $authOpener.classList.remove('auth-opener-on');
+  $authOpenerButton.classList.remove('auth__show');
   $authLoader.classList.remove('loader');
 }
 
@@ -54,8 +52,8 @@ function login(user) {
   authAudio = audioAuthIn;
   $authLogout.style.display = 'inline-block';
 
-  $authSubmitWrap.removeEventListener('click', auth);
-  $authOpener.removeEventListener('click', authShowToggle);
+  $authSubmit.removeEventListener('click', auth);
+  $authOpenerButton.removeEventListener('click', authShowToggle);
 
   userName = getUserName(user);
   showUserName(userName);
@@ -67,8 +65,8 @@ function logout() {
   authAudio = audioAuthOut;
   $authLogout.style.display = '';
 
-  $authSubmitWrap.addEventListener('click', auth);
-  $authOpener.addEventListener('click', authShowToggle);
+  $authSubmit.addEventListener('click', auth);
+  $authOpenerButton.addEventListener('click', authShowToggle);
 
   userName = '';
   showUserName(userName);
@@ -96,19 +94,19 @@ function authShowToggle() {
 
   noise(audioURI, audioAuthShow);
 
-  $start.classList.toggle('start-screen-open');
-  $authWrap.classList.toggle('auth-wrap-show');
-  $authOpener.classList.toggle('auth-opener-on');
+  $start.classList.toggle('auth__show');
+  $auth.classList.toggle('auth__show');
+  $authOpenerButton.classList.toggle('auth__show');
 }
 
 function showUserName(userName) {
   if (userName) {
-    $authShow.classList.add('auth-show-open'); // вспомогательнай
-    $authOpener.style.display = 'none';
+    $authOpenerButton.classList.add('auth__show'); // вспомогательнай
+    $authOpenerButton.style.display = 'none';
     $authUserName.textContent = getRandomSymbol() + userName;
   } else {
-    $authShow.classList.remove('auth-show-open');
-    $authOpener.style.display = 'flex';
+    $authOpenerButton.classList.remove('auth__show');
+    $authOpenerButton.style.display = 'flex';
     $authUserName.textContent = '';
   }
 }
@@ -197,25 +195,25 @@ function authWrong() {
 }
 
 function submitAnimateWaited() {
-  $authSubmitWrap.style.animationName = 'auth-submit-waited';
+  $authSubmit.style.animationName = 'auth-submit-waited';
 }
 
 function submitAnimate(animate) {
-  $authSubmitWrap.style.animationName = animate;
+  $authSubmit.style.animationName = animate;
   setTimeout(submitAnimateEnd, 400);
 }
 
 function submitAnimateEnd() {
-  $authSubmitWrap.style.animationName = '';
+  $authSubmit.style.animationName = '';
 }
 
 function authLoginAnimate() {
-  $authUserName.classList.add('auth-user-name-login');
+  $authUserName.classList.add('auth-opener__user-login');
   setTimeout(authLoginAnimateEnd, 600);
 }
 
 function authLoginAnimateEnd() {
-  $authUserName.classList.remove('auth-user-name-login');
+  $authUserName.classList.remove('auth-opener__user-login');
 }
 
 function getAuthBonus() {
@@ -226,13 +224,13 @@ function getAuthBonus() {
 }
 
 function fbLogout() {
-  $authShow.classList.add('auth-show-logout');
+  $authOpener.classList.add('auth-opener__logout');
   setTimeout(fbLogoutEnd, 300);
 }
 
 function fbLogoutEnd() {
   fb.auth().signOut();
-  $authShow.classList.remove('auth-show-logout');
+  $authOpener.classList.remove('auth-opener__logout');
   notify({type: 'info', message: '🙀 пока 🙀'});
 }
 
@@ -240,6 +238,6 @@ function hoverAuthOpener() {
   noise(audioURI, audioAuthHover);
 }
 
-$authOpener.addEventListener('mouseenter', hoverAuthOpener);
+$authOpenerButton.addEventListener('mouseenter', hoverAuthOpener);
 $authLogout.addEventListener('click', fbLogout);
 document.addEventListener('startGame', getAuthBonus);

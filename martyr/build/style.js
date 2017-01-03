@@ -2,9 +2,7 @@ import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import error from './../utility/error';
 import postcss from 'gulp-postcss';
-import cached from 'postcss-cached';
 import atImport from 'postcss-import';
-import nested from 'postcss-nested'; // TODO избавиться
 import willChange from 'postcss-will-change'; // fallback will-change
 import autoprefixer from 'autoprefixer';
 import csso from 'postcss-csso';
@@ -16,9 +14,7 @@ const wFiles = '{source,temp}/**/*.css'; // temp: стили для спрайт
 const there = 'public';
 const production = process.env.NODE_ENV === 'production';
 const options = [
-  cached,
-  atImport({path: ['source']}),
-  nested
+  atImport({path: ['source']})
 ];
 const browsers = [
   'ie >= 10',

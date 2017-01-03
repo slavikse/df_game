@@ -1,0 +1,130 @@
+.auth-opener {
+  position: relative;
+  z-index: 3; /* перекрытие auth */
+  display: flex;
+  margin-bottom: 6px;
+  height: 44px; /* чтобы не прыгал при смене loader на счет */
+  transition: filter 0.3s;
+}
+
+.auth-opener__user-name {
+  position: relative;
+  z-index: 3;
+  font-size: 3.6em;
+  color: #51d83f;
+  text-shadow: 2px 2px 0 black;
+}
+
+/* временно после захода */
+.auth-opener__user-login {
+  color: #060;
+  text-shadow: 2px 2px 0 #ff0, -2px -2px 0 #ff0;
+}
+
+.auth-opener__call {
+  position: absolute;
+  top: -36px;
+  left: 44px;
+  font-size: 2em;
+  color: #fff;
+  white-space: nowrap;
+  text-shadow: 2px 2px 0 black;
+  transition: opacity 0.2s;
+  transform: rotate(20deg);
+  will-change: opacity;
+}
+
+.auth-opener__call::before {
+  position: relative;
+  top: 22px;
+  left: 50px;
+  display: inline-block;
+  text-shadow: none;
+  content: '☚';
+  transform: rotate(-90deg) translateX(0);
+  animation: auth-opener-call 0.6s infinite alternate;
+  will-change: transform;
+}
+
+@keyframes auth-opener-call {
+  100% {
+    transform: rotate(-90deg) translateX(-16px);
+  }
+}
+
+.auth__show .auth-opener__call {
+  opacity: 0;
+}
+
+.auth-opener__logout {
+  filter: blur(3px);
+}
+
+.auth-opener__button {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  color: #51d83f;
+  line-height: 0.5;
+  text-shadow: 2px 2px 0 black;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.auth-opener__button:hover {
+  color: #ff0;
+}
+
+.auth-opener__cogwheel {
+  display: flex;
+  transition: transform 0.4s;
+  transform-origin: center 27px;
+  will-change: transform;
+}
+
+.auth-opener__letter {
+  font-size: 4em;
+}
+
+.auth-opener__letter-o {
+  letter-spacing: 2px;
+}
+
+.auth-opener__letter-cl {
+  letter-spacing: -4px;
+  transform: rotate(180deg);
+}
+
+.auth-opener__letter-e {
+  transition: transform 0.4s;
+  will-change: transform;
+}
+
+.auth-opener__letter-s {
+  transition: transform 0.4s;
+  transform: rotate(70deg);
+  will-change: transform;
+}
+
+.auth__show .auth-opener__cogwheel-1,
+.auth__show .auth-opener__letter-e,
+.auth__show .auth-opener__letter-s {
+  transform: rotate(180deg);
+}
+
+.auth__show .auth-opener__cogwheel-2 {
+  transform: rotate(-180deg);
+}
+
+.auth-opener__logout {
+  position: relative;
+  z-index: 1;
+  display: none;
+  margin-left: 8px;
+  cursor: pointer;
+  filter: saturate(0);
+}
+
+.auth-opener__logout:hover {
+  filter: saturate(100%);
+}

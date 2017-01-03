@@ -1,6 +1,6 @@
 const $result = document.querySelector('.result');
-const $statistic = $result.querySelector('.statistic');
-const $restart = $result.querySelector('.restart');
+const $statistic = $result.querySelector('.result__statistic');
+const $restart = $result.querySelector('.result__restart');
 
 let statistic;
 
@@ -11,13 +11,13 @@ function templateCompile(e) {
   const template = statsKey.map(getTemplate).join('');
 
   $statistic.insertAdjacentHTML('afterBegin', template);
-  $result.classList.add('result-show');
+  $result.classList.add('result__show');
 }
 
 function getTemplate(key) {
-  return "<div class='item'>" +
-    "<div class='key'>" + key + "</div>" +
-    "<div class='value'>" + statistic[key] + "</div></div>";
+  return "<div class='result__item'>" +
+    "<div class='result__key'>" + key + "</div>" +
+    "<div class='result__value'>" + statistic[key] + "</div></div>";
 }
 
 function restart() {

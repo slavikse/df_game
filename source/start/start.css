@@ -1,3 +1,7 @@
+@import 'auth/auth.css';
+@import 'guide/guide.css';
+@import 'donate/donate.css';
+
 .start {
   position: absolute;
   display: flex;
@@ -8,51 +12,51 @@
   height: 100%;
   transition: opacity 1s;
   will-change: opacity;
-
-  &-no-events {
-    pointer-events: none !important;
-  }
-
-  &-open .best-score-wrap,
-  &-open .new-game {
-    opacity: 0;
-  }
-
-  & .best-score-wrap {
-    display: flex;
-    font-size: 2.8em;
-    color: #fff;
-    line-height: 1.2;
-    text-shadow: 2px 2px 0 black;
-    transition: opacity 0.4s;
-    will-change: opacity;
-  }
-
-  & .best-score {
-    display: flex;
-    justify-content: center;
-    width: 60px;
-  }
-
-  & .new-game {
-    position: relative;
-    z-index: 1;
-    font-size: 5em;
-    color: #ff0;
-    line-height: 0.6;
-    text-shadow: 2px 2px 0 black;
-    cursor: pointer;
-    transition: opacity 0.4s;
-    animation: 0.2s; /* new-game */
-    will-change: opacity, transform;
-
-    &:hover {
-      color: #00fe23;
-    }
-  }
 }
 
-@keyframes new-game {
+.start__no-events {
+  pointer-events: none !important;
+}
+
+.auth__show .start__best-score,
+.auth__show .start__new-game {
+  opacity: 0;
+}
+
+.start__best-score {
+  display: flex;
+  font-size: 2.8em;
+  color: #fff;
+  line-height: 1.2;
+  text-shadow: 2px 2px 0 black;
+  transition: opacity 0.4s;
+  will-change: opacity;
+}
+
+.start__best-score-value {
+  display: flex;
+  justify-content: center;
+  width: 60px;
+}
+
+.start__new-game {
+  position: relative;
+  z-index: 1;
+  font-size: 5em;
+  color: #ff0;
+  line-height: 0.6;
+  text-shadow: 2px 2px 0 black;
+  cursor: pointer;
+  transition: opacity 0.4s;
+  animation: 0.2s; /* start-new-game */
+  will-change: opacity, transform;
+}
+
+.start__new-game:hover {
+  color: #00fe23;
+}
+
+@keyframes start-new-game {
   0% {
     transform: scale(0.9);
   }
@@ -62,7 +66,7 @@
   }
 }
 
-.browser-like {
+.start__like {
   position: absolute;
   top: 4px;
   right: 4px;
@@ -73,29 +77,29 @@
   line-height: 2.5;
   letter-spacing: -1px;
   text-transform: uppercase;
-
-  & .icon-chromium {
-    margin-left: 2px;
-    animation: browser-like-rotate 1s linear infinite both;
-    will-change: transform;
-  }
-
-  &:hover .icon-chromium {
-    animation-duration: 0.4s;
-  }
-
-  & .name {
-    color: #a3c3fa;
-  }
 }
 
-@keyframes browser-like-rotate {
+.start__like:hover .start__icon {
+  animation-duration: 0.4s;
+}
+
+.start__browser {
+  color: #a3c3fa;
+}
+
+.start__chromium {
+  margin-left: 2px;
+  animation: start-icon 1s linear infinite both;
+  will-change: transform;
+}
+
+@keyframes start-icon {
   100% {
     transform: rotate(-360deg);
   }
 }
 
-.creators {
+.start__creators {
   position: absolute;
   z-index: 2; /* перекрыть логин форму */
   bottom: 0;
@@ -105,7 +109,7 @@
   text-shadow: 0 3px 2px #000, 0 -3px 2px #000;
 }
 
-.creator-email {
+.start__creator-email {
   cursor: text;
   user-select: text;
 }

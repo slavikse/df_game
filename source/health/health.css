@@ -1,6 +1,6 @@
-@import '../health_notice/health_notice.css';
+@import './health_notice.css';
 
-.health-wrap {
+.health {
   position: relative;
   z-index: 1; /* в магазе */
   display: flex;
@@ -8,34 +8,34 @@
   margin-left: 4px;
 }
 
-.first-aid {
+.health__first-aid {
   display: flex;
   margin-bottom: 4px;
-
-  /* при смене иконки перезаписывается класс */
-  & div {
-    margin: 0 1px;
-    animation: 0.6s alternate; /* first-aid-blink */
-    will-change: opacity, transform;
-  }
 }
 
-@keyframes first-aid-blink {
+/* при смене иконки перезаписывается класс */
+.health__first-aid div {
+  margin: 0 1px;
+  animation: 0.6s alternate; /* health-first-aid-blink */
+  will-change: opacity, transform;
+}
+
+@keyframes health-first-aid-blink {
   0% {
     transform: scale(1.3);
     opacity: 0;
   }
 }
 
-.health {
+.health__wrap {
   display: flex;
+}
 
-  /* при смене иконки перезаписывается класс */
-  & div {
-    margin: 0 1px;
-    animation: 0.6s alternate; /* health-blink */
-    will-change: opacity, transform;
-  }
+/* при смене иконки перезаписывается класс */
+.health__wrap div {
+  margin: 0 1px;
+  animation: 0.6s alternate; /* health-blink */
+  will-change: opacity, transform;
 }
 
 @keyframes health-blink {

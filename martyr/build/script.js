@@ -4,7 +4,7 @@ import error from './../utility/error';
 import named from 'vinyl-named';
 import wpStream from 'webpack-stream';
 import webpack from 'webpack';
-import StatsPlugin from 'stats-webpack-plugin';
+//import StatsPlugin from 'stats-webpack-plugin';
 
 const name = 'script';
 const files = 'source/*.js';
@@ -19,6 +19,10 @@ const module = {
     test: /\.json$/,
     loader: 'json-loader'
   }]
+};
+const resolve = {
+  modules: ['source', 'node_modules'],
+  extensions: ['.js', '.json']
 };
 const plugins = [
   new webpack.EnvironmentPlugin('NODE_ENV'),
@@ -65,7 +69,7 @@ if (production) {
       compress: {
         properties: true,
         dead_code: true,
-        unsafe: true, // безопасно???
+        unsafe: true, // безопасно ???
         conditionals: true,
         //unsafe_comps: true,
         //comparisons: true,
@@ -97,10 +101,7 @@ if (production) {
 
 const options = {
   module: module,
-  resolve: {
-    modules: ['source', 'node_modules'],
-    extensions: ['.js', '.json']
-  },
+  resolve: resolve,
   cache: true,
   watch: !production,
   watchOptions: {aggregateTimeout: 50},

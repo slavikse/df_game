@@ -1,7 +1,7 @@
 const $shopTime = document.querySelector('.shop-time');
 const shopTextDefault = ['ЗАКУП', 'В БОЙ!'];
 const textLength = shopTextDefault.length;
-const bossStyleTextDefault = 'boss-time-text';
+const bossStyleTextDefault = 'shop-time__boss';
 const bossTextDefault = ['BOSS', 'FIGHT!'];
 
 let currentTextIndex = 0;

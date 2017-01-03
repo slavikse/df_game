@@ -1,24 +1,22 @@
-.enemy-position {
+@import './enemy_count.css';
+
+.enemy {
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: 0.4s enemy-position-show both;
+  animation: 0.4s enemy-show both;
   opacity: 0;
   will-change: opacity;
 }
 
-@keyframes enemy-position-show {
+@keyframes enemy-show {
   100% {
     opacity: 1;
   }
 }
 
-.enemy-events-none {
-  pointer-events: none;
-}
-
-.enemy-warning {
+.enemy__warning {
   position: absolute;
   z-index: 1;
   pointer-events: none;
@@ -26,7 +24,7 @@
   will-change: opacity;
 }
 
-.enemy-damage {
+.enemy__damage {
   position: absolute;
   z-index: 1;
   animation: 0.15s linear enemy-damage both paused;
@@ -51,20 +49,20 @@
   }
 }
 
-.enemy {
-  animation: 0.6s both; /* enemy-kill */
+.enemy__icon {
+  animation: 0.6s both; /* enemy-icon-flip */
   backface-visibility: visible;
   will-change: opacity, transform;
 }
 
-@keyframes enemy-kill {
+@keyframes enemy-icon-flip {
   100% {
     transform: rotateY(810deg);
     opacity: 0;
   }
 }
 
-.enemy-health {
+.enemy__health {
   position: absolute;
   border-radius: 50%;
   padding: 1px 3px;
@@ -74,4 +72,8 @@
   pointer-events: none;
   background-color: #b90000;
   will-change: opacity;
+}
+
+.enemy__no-events {
+  pointer-events: none;
 }

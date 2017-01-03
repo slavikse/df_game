@@ -1,47 +1,25 @@
-<div class='auth-show'>
-  <!-- auth-loader-js - анимация убирается путем удаления loader -->
-  <div class='loader auth-loader-js'></div>
-  <div class='auth-user-name'></div>
+<include src='auth/auth_opener.html'></include>
 
-  <div class='auth-call'>обойма за вход</div>
+<form class='auth' name='auth' autocomplete='off'>
+  <input class='auth__input auth__email--js'
+         name='email'
+         type='email'
+         pattern='^.{1,20}@.{1,6}\..{2,6}$'
+         placeholder='✍ email'
+         title='придумай или введи свой'
+         required>
 
-  <div class='auth-opener'>
-    <div class='cogwheel cogwheel-1'>
-      <div class='letter letter-o'>o</div>
-      <div class='letter letter-cl'>cl</div>
-    </div>
-    <div class='cogwheel cogwheel-2'>
-      <div class='letter letter-e'>e</div>
-      <div class='letter letter-s'>s</div>
-    </div>
+  <input class='auth__input'
+         name='password'
+         type='password'
+         pattern='^.{6,30}$'
+         placeholder='✍ пароль'
+         title='придумай или введи свой'
+         required>
+
+  <div class='auth__submit-button'>
+    <span>➲</span>
+    <input class='auth__submit' type='submit' value='войти'>
+    <span class='auth__arrow'>➲</span>
   </div>
-
-  <div class='auth-logout icon-auth_logout'></div>
-</div>
-
-<div class='auth-wrap'>
-  <form class='auth-form' name='auth' autocomplete='off'>
-
-    <input class='auth-email'
-           name='email'
-           type='email'
-           pattern='^.{1,20}@.{1,6}\..{2,6}$'
-           placeholder='✍ email'
-           title='придумай или введи свой'
-           required>
-
-    <input class='auth-password'
-           name='password'
-           type='password'
-           pattern='^.{6,30}$'
-           placeholder='✍ пароль'
-           title='придумай или введи свой'
-           required>
-
-    <div class='auth-submit-wrap'>
-      <span>➲</span>
-      <input class='auth-submit' type='submit' value='войти'>
-      <span class='left'>➲</span>
-    </div>
-  </form>
-</div>
+</form>

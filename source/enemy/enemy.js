@@ -3,9 +3,10 @@ import throttle from 'libs/throttle';
 import delay from 'libs/delay';
 import {audioSprite, audioURI} from 'helper/audios';
 import noise from 'helper/noise';
+import './enemy_count';
 
 const $body = document.body;
-const $enemyPosition = $body.querySelector('.enemy-position');
+const $enemy = $body.querySelector('.enemy');
 const imagesClasses = [
   'icon-enemy1',
   'icon-enemy2',
@@ -58,7 +59,7 @@ function cloneCreate(cloneCount) {
   const fragment = document.createDocumentFragment();
 
   for (let i = 0; i < cloneCount; i++) {
-    const clone = $enemyPosition.cloneNode(true);
+    const clone = $enemy.cloneNode(true);
 
     setNodes(clone);
     setPosition(clone);
@@ -74,10 +75,10 @@ function cloneCreate(cloneCount) {
 }
 
 function setNodes(clone) {
-  const warningNode = clone.querySelector('.enemy-warning');
-  const damageNode = clone.querySelector('.enemy-damage');
-  const enemyNode = clone.querySelector('.enemy');
-  const healthNode = clone.querySelector('.enemy-health');
+  const warningNode = clone.querySelector('.enemy__warning');
+  const damageNode = clone.querySelector('.enemy__damage');
+  const enemyNode = clone.querySelector('.enemy__icon');
+  const healthNode = clone.querySelector('.enemy__health');
 
   // сохраняем для последующего использования
   clone.nodes = {warningNode, damageNode, enemyNode, healthNode};
@@ -172,9 +173,9 @@ function enemyHide(clone) {
 
   nodes.warningNode.style.opacity = 0;
   nodes.healthNode.style.opacity = 0;
-  nodes.enemyNode.style.animationName = 'enemy-kill';
+  nodes.enemyNode.style.animationName = 'enemy-icon-flip';
 
-  clone.classList.add('enemy-events-none'); // блокируем от выстрелов
+  clone.classList.add('enemy__no-events');
 
   allEnemyCurrent -= 1;
   document.dispatchEvent(eventEnemyDec);

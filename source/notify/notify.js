@@ -10,7 +10,7 @@ function notify(note) {
   const noteElement = document.createElement('div');
   const noteHtml = getNoteHtml(note);
 
-  noteElement.classList.add('note');
+  noteElement.classList.add('notify__note');
   noteElement.insertAdjacentHTML('afterBegin', noteHtml);
 
   $notify.appendChild(noteElement);
@@ -18,11 +18,11 @@ function notify(note) {
 }
 
 function getNoteHtml(note) {
-  return `<div class='${note.type}'>${note.message}</div>`;
+  return `<div class='notify__${note.type}'>${note.message}</div>`;
 }
 
 function noteHide(noteElement) {
-  noteElement.classList.add('hide');
+  noteElement.classList.add('notify__hide');
   setTimeout(noteRemove.bind(null, noteElement), 400);
 }
 

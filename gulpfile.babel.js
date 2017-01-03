@@ -13,7 +13,6 @@ import './martyr/build/svg';
 import './martyr/build/view';
 
 import './martyr/utility/bs';
-import './martyr/utility/critical'; //TODO доделывать
 import './martyr/utility/gzip';
 import './martyr/utility/kraken';
 import './martyr/utility/rev';

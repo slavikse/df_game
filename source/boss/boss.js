@@ -2,11 +2,11 @@ import throttle from 'libs/throttle';
 import range from 'libs/range';
 import clone from 'libs/clone';
 import notify from 'notify/notify';
-import 'boss_coming/boss_coming';
+import './boss_coming';
 
 const $body = document.body;
-const $paddock = $body.querySelector('.boss-paddock');
 const $boss = $body.querySelector('.boss');
+const $paddock = $body.querySelector('.boss__paddock');
 const playingFieldResize = throttle(playingField, 500);
 const bossWidth = 280;
 const bossHeight = 280;
@@ -43,11 +43,11 @@ function cloneBoss() {
 }
 
 function setNodes(boss) {
-  const bodyNode = boss.querySelector('.boss-body');
-  const handLNode = boss.querySelector('.boss-hand-l');
-  const handRNode = boss.querySelector('.boss-hand-r');
-  const legLNode = boss.querySelector('.boss-leg-l');
-  const legRNode = boss.querySelector('.boss-leg-r');
+  const bodyNode = boss.querySelector('.boss__body');
+  const handLNode = boss.querySelector('.boss__hand-l');
+  const handRNode = boss.querySelector('.boss__hand-r');
+  const legLNode = boss.querySelector('.boss__leg-l');
+  const legRNode = boss.querySelector('.boss__leg-r');
 
   // порядок node важен для bossSetting
   const nodes = {bodyNode, handLNode, handRNode, legLNode, legRNode};
@@ -92,7 +92,7 @@ function setSettingNode(node, setting) {
 
 function setBodyNoCrash(bodyNode) {
   bodyNode.isCrash = false; // торс в последнюю очередь
-  bodyNode.classList.add('no-crash');
+  bodyNode.classList.add('boss__no-crash');
 }
 
 /** -1, торс разрушается в последнюю очередь
@@ -106,7 +106,7 @@ function setQueueCrash(boss) {
 /*************** СБОРКА ***************/
 
 function docking(boss) {
-  boss.classList.add('boss-docking');
+  boss.classList.add('boss__docking');
 
   document.addEventListener('bossShoot', isDamage);
   document.addEventListener('grenade', grenade.bind(null, boss));
@@ -153,7 +153,7 @@ function crash(node) {
 }
 
 function nodeCrash(node) {
-  node.classList.add('crash');
+  node.classList.add('boss__part-crash');
   node.isCrash = false; // уже разрушен. хватит
 }
 
@@ -170,14 +170,14 @@ function bodyCrash(boss) {
   const bodyNode = boss.nodes.bodyNode;
 
   bodyNode.isCrash = true;
-  bodyNode.classList.remove('no-crash');
+  bodyNode.classList.remove('boss__no-crash');
 }
 
 function undocking(boss) {
   const nodes = boss.nodes;
   const nodeKeys = boss.nodeKeys;
 
-  boss.classList.add('boss-undocking');
+  boss.classList.add('boss__undocking');
 
   for (let i = 0, len = nodeKeys.length; i < len; i++) {
     const node = nodes[nodeKeys[i]];

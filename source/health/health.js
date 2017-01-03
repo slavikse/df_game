@@ -1,19 +1,19 @@
-import 'health_notice/health_notice';
+import './health_notice';
 
 const $body = document.body;
-const $healthWrap = $body.querySelector('.health-wrap');
-const $firstAid = $healthWrap.querySelector('.first-aid').children;
+const $healthWrap = $body.querySelector('.health');
+const $firstAid = $healthWrap.querySelector('.health__first-aid').children;
 const firstAidFull = 1; // 0,1 (2) аптечки
 const firstAidStateClasses = [
-  'icon-first_aid_empty',
-  'icon-first_aid_full'
+  'icon-health_first_aid_empty',
+  'icon-health_first_aid_full'
 ];
-const $health = $healthWrap.querySelector('.health').children;
+const $health = $healthWrap.querySelector('.health__wrap').children;
 const healthFull = 2; // 0,1,2 (3) сердечка
 const healthStateClasses = [
-  'icon-heart_empty',
-  'icon-heart_half',
-  'icon-heart_full'
+  'icon-health_heart_empty',
+  'icon-health_heart_half',
+  'icon-health_heart_full'
 ];
 const halfHealthFull = 1; // 0,1 (2) состояния сердечка. (3) полное
 const eventRegeneration = new Event('regeneration');
@@ -79,7 +79,7 @@ function useFirstAid() {
 }
 
 function firstAidAnimate(firstAid) {
-  firstAid.style.animationName = 'first-aid-blink';
+  firstAid.style.animationName = 'health-first-aid-blink';
   setTimeout(firstAidAnimateEnd.bind(null, firstAid), 600); // анимация
 }
 

@@ -1,10 +1,8 @@
-@import '../health/health.css';
-@import '../score/score.css';
-@import '../ticker/ticker.css';
-@import '../enemy_count/enemy_count.css';
-@import '../grenade/grenade.css';
-@import "../revolver/icon_revolver.css";
-@import '../revolver/revolver.css';
+@import 'health/health.css';
+@import 'score/score.css';
+@import 'ticker/ticker.css';
+@import 'grenade/grenade.css';
+@import 'revolver/revolver.css';
 
 .panel {
   position: absolute;
@@ -16,22 +14,22 @@
   margin-bottom: 2px;
   width: 100%;
   text-shadow: 2px 2px 0 black;
-  opacity: 0;
   transition: 1.5s opacity;
   pointer-events: none;
+  opacity: 0;
+}
 
-  &-show {
-    opacity: 1;
-  }
+.panel__show {
+  opacity: 1;
+}
 
-  & .gun {
-    display: flex;
-  }
+.panel__gun {
+  display: flex;
+}
 
-  & .weapon,
-  & .ammo {
-    position: relative;
-    display: flex;
-    justify-content: flex-end;
-  }
+.panel__weapon,
+.panel__ammo {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
 }

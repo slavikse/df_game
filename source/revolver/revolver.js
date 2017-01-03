@@ -2,19 +2,19 @@ import {audioSprite, audioURI} from 'helper/audios';
 import noise from 'helper/noise';
 
 const $body = document.body;
-const $revolverDrum = $body.querySelector('.revolver-drum');
+const $revolver = $body.querySelector('.revolver');
 const $iconRevolver = $body.querySelector('.icon-revolver');
-const $drum = $revolverDrum.querySelector('.drum');
-const $bullets = $drum.querySelectorAll('.bullet');
-const $drumCount = $revolverDrum.querySelector('.drum-count');
+const $drum = $revolver.querySelector('.revolver__drum');
+const $bullets = $drum.querySelectorAll('.revolver__bullet');
+const $drumCount = $revolver.querySelector('.revolver__drum-count');
 const bulletDrum = 6;
 const audioShoots = [
-  audioSprite.shoot1,
-  audioSprite.shoot2,
-  audioSprite.shoot3,
-  audioSprite.shoot4
+  audioSprite.revolver_shoot1,
+  audioSprite.revolver_shoot2,
+  audioSprite.revolver_shoot3,
+  audioSprite.revolver_shoot4
 ];
-const audioReload = audioSprite.reload;
+const audioReload = audioSprite.revolver_reload;
 
 let discardedBulletStat = 0;
 let drumReloadCountStat = 0;
@@ -62,7 +62,7 @@ function drumRotate() {
     noise(audioURI, audioReload);
 
     $body.classList.add('nothing-shoot');
-    $drum.style.animationName = 'drum-rotate';
+    $drum.style.animationName = 'revolver-drum-rotate';
 
     drumReload();
   }

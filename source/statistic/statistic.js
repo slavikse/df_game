@@ -89,10 +89,10 @@ function saveBestScore() {
 }
 
 function localSaveBestScore() {
-  const bestScore = localStorage.getItem('score') || 0;
+  const bestScore = localStorage.getItem('best-score') || 0;
 
   if (score > bestScore) {
-    localStorage.setItem('score', score);
+    localStorage.setItem('best-score', score);
   }
 }
 

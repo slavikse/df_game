@@ -1,20 +1,20 @@
 import {audioSprite, audioURI} from 'helper/audios';
 import noise from 'helper/noise';
-import 'shop_time/shop_time';
+import './shop_time';
 
 const $body = document.body;
-const $ambient = $body.querySelector('.ambient');
 const $shop = $body.querySelector('.shop');
-const $store = $shop.querySelector('.store');
-const $drumItem = $store.querySelector('.drum-shop');
-const $grenadeItem = $store.querySelector('.grenade-shop');
-const $firstAidItem = $store.querySelector('.first-aid-shop');
-const $shopClose = $shop.querySelector('.shop-close');
-const audioBuyHover = audioSprite.buy_hover;
-const audioBuy = audioSprite.buy;
-const audioCancel = audioSprite.cancel;
+const $store = $shop.querySelector('.shop__store');
+const $drumItem = $store.querySelector('.shop__drum');
+const $grenadeItem = $store.querySelector('.shop__grenade');
+const $firstAidItem = $store.querySelector('.shop__first-aid');
+const $shopClose = $shop.querySelector('.shop__close');
+const $ambient = $body.querySelector('.ambient');
+const audioBuyHover = audioSprite.shop_buy_hover;
+const audioBuy = audioSprite.shop_buy;
+const audioNextWave = audioSprite.shop_next_wave;
 const audioClick = audioSprite.hover_menu;
-const audioNextWave = audioSprite.next_wave;
+const audioCancel = audioSprite.cancel;
 const eventBuyDrum = new Event('buyDrum');
 const eventBuyGrenade = new Event('buyGrenade');
 const eventBuyFirstAid = new Event('buyFirstAid');
@@ -65,7 +65,7 @@ function openShopDelay() {
 
 function openShop() {
   $body.classList.add('dont-shoot');
-  $shop.classList.add('shop-open');
+  $shop.classList.add('shop__open');
 
   $ambient.setAttribute('src', 'audio/shop_ambient.mp3');
   buyLockUnlock();
@@ -79,34 +79,34 @@ function buyLockUnlock() {
 
 function canBuyDrum() {
   if (drumPrice > score) {
-    $drumItem.classList.add('buy-block');
+    $drumItem.classList.add('shop__buy-lock');
   } else {
-    $drumItem.classList.remove('buy-block');
+    $drumItem.classList.remove('shop__buy-lock');
   }
 }
 
 /** максимально грен [0-1], т.е. 2 штуки */
 function canBuyGrenade() {
   if (grenade === 1 || grenadePrice > score) {
-    $grenadeItem.classList.add('buy-block');
+    $grenadeItem.classList.add('shop__buy-lock');
   } else {
-    $grenadeItem.classList.remove('buy-block');
+    $grenadeItem.classList.remove('shop__buy-lock');
   }
 }
 
 /** максимально аптечек [0-1], т.е. 2 штуки */
 function canBuyFirstAid() {
   if (firstAid === 1 || firstAidPrice > score) {
-    $firstAidItem.classList.add('buy-block');
+    $firstAidItem.classList.add('shop__buy-lock');
   } else {
-    $firstAidItem.classList.remove('buy-block');
+    $firstAidItem.classList.remove('shop__buy-lock');
   }
 }
 
 function itemBuy(e) {
   const target = e.target;
 
-  if (target.classList.contains('buy-block')) {
+  if (target.classList.contains('shop__buy-lock')) {
     noise(audioURI, audioCancel);
 
     /** GOD MOD */
@@ -170,11 +170,11 @@ function hoverShopClose() {
 }
 
 function shopClose() {
-  $ambient.setAttribute('src', 'audio/start_ambient.mp3');
+  $ambient.setAttribute('src', 'audio/start_dark_ambient.mp3');
   noise(audioURI, audioNextWave);
 
   $body.classList.remove('dont-shoot');
-  $shop.classList.remove('shop-open');
+  $shop.classList.remove('shop__open');
 
   document.dispatchEvent(eventWaveStart);
 }

@@ -1,4 +1,4 @@
-@import "../shop_time/shop_time.css";
+@import './shop_time.css';
 
 .shop {
   position: absolute;
@@ -14,82 +14,82 @@
   opacity: 0;
   background-color: rgba(0, 0, 0, 0.7);
   will-change: opacity, transform;
+}
 
-  &-open {
-    transform: scale(1);
-    opacity: 1;
+.shop__open {
+  transform: scale(1);
+  opacity: 1;
+}
 
-    & .item {
-      pointer-events: auto; /* для возможности покупать когда магазин открыт */
-    }
-  }
+.shop__open .shop__item {
+  pointer-events: auto; /* для возможности покупать когда магазин открыт */
+}
 
-  & .title {
-    position: absolute;
-    top: 0;
-    font-family: gun_store, sans-serif;
-    font-size: 2.6em;
-    color: #32ac00;
-  }
+.shop__title {
+  position: absolute;
+  top: 0;
+  font-family: gun_store, sans-serif;
+  font-size: 2.6em;
+  color: #32ac00;
+}
 
-  &-close {
-    position: absolute;
-    top: -10px;
-    right: 2px;
-    font-size: 3em;
-    color: #ff0;
-    cursor: pointer;
+.shop__close {
+  position: absolute;
+  top: -10px;
+  right: 2px;
+  font-size: 3em;
+  color: #ff0;
+  cursor: pointer;
+}
 
-    &:hover {
-      color: #00fe23;
-    }
-  }
+.shop__close:hover {
+  color: #00fe23;
+}
 
-  &-open &-close {
-    pointer-events: auto;
-  }
+.shop__open .shop__close {
+  pointer-events: auto;
+}
 
-  & .store {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.shop__store {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  & .item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 6px;
-    border: 3px dashed #2d9b00;
-    padding-bottom: 4px;
-    min-width: 85px;
-    font-size: 2em;
-    color: #fff;
-    cursor: pointer;
-    background-color: rgba(5, 123, 0, 0.4);
-    box-shadow: inset 0 0 10px black;
+.shop__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 6px;
+  border: 3px dashed #2d9b00;
+  padding-bottom: 4px;
+  min-width: 85px;
+  font-size: 2em;
+  color: #fff;
+  cursor: pointer;
+  background-color: rgba(5, 123, 0, 0.4);
+  box-shadow: inset 0 0 10px black;
+}
 
-    &:hover {
-      background-color: rgba(3, 103, 0, 0.6);
-    }
-  }
+.shop__item:hover {
+  background-color: rgba(3, 103, 0, 0.6);
+}
 
-  & .item-icon {
-    display: flex;
-    align-items: center;
-    min-height: 70px;
-    pointer-events: none;
-  }
+.shop__item-icon {
+  display: flex;
+  align-items: center;
+  min-height: 70px;
+  pointer-events: none;
+}
 
-  & .buy-block {
-    border: 3px dashed #888;
-    color: #bbb;
-    cursor: no-drop;
-    background-color: rgba(99, 100, 100, 0.4);
-    filter: saturate(0);
+.shop__buy-lock {
+  border: 3px dashed #888;
+  color: #bbb;
+  cursor: no-drop;
+  background-color: rgba(99, 100, 100, 0.4);
+  filter: saturate(0);
+}
 
-    &:hover {
-      background-color: rgba(79, 81, 81, 0.6);
-    }
-  }
+.shop__buy-lock:hover {
+  background-color: rgba(79, 81, 81, 0.6);
 }

@@ -1,4 +1,4 @@
-.guide-help {
+.guide__help {
   position: relative;
   z-index: 1;
   margin-top: 30px;
@@ -13,50 +13,45 @@
   transition: opacity 0.2s;
   box-shadow: 0 0 6px black;
   will-change: opacity;
-
-  &:hover {
-    background-color: rgba(4, 130, 0, 0.6);
-  }
 }
 
-/* при открытии формы логина */
-.start-screen-open .guide-help {
-  opacity: 0;
+.guide__help:hover {
+  background-color: rgba(4, 130, 0, 0.6);
 }
 
-.guide-wrap {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  border-top: 4px solid black;
-  padding: 30px 0;
-  width: 100%;
-  transition: opacity 0.4s;
-  pointer-events: none;
+.auth__show .guide__help {
   opacity: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  will-change: opacity;
-
-  &-show {
-    opacity: 1;
-  }
 }
 
 .guide {
+  position: absolute;
+  bottom: 0;
+  left: 0;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  margin: 0 auto;
-  max-width: 800px;
+  width: 100%;
+  border-top: 4px solid black;
+  padding: 30px 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  background-color: rgba(0, 0, 0, 0.8);
+  will-change: opacity;
 }
 
-.guide-keys {
+.guide__show {
+  opacity: 1;
+}
+
+.guide__keys {
   display: flex;
-  flex-basis: 96px;
   flex-wrap: wrap;
+  flex-basis: 96px;
+  margin: 0 80px;
 }
 
-.guide-key {
+.guide__key {
   position: relative;
   display: flex;
   justify-content: center;
@@ -72,7 +67,7 @@
   background-color: #fff;
 }
 
-.guide-key-1::after {
+.guide__key-1::after {
   position: absolute;
   top: -20px;
   left: -17px;
@@ -82,7 +77,7 @@
   content: 'ВЫБОР ОРУЖИЯ';
 }
 
-.guide-key-9::after {
+.guide__key-9::after {
   position: absolute;
   z-index: 1;
   top: 20px;
@@ -94,7 +89,7 @@
   background-color: #000;
 }
 
-.guide-key-g::after {
+.guide__key-g::after {
   position: absolute;
   right: 0;
   bottom: -20px;
@@ -103,7 +98,7 @@
   content: 'ГРАНАТА';
 }
 
-.guide-key-h::after {
+.guide__key-h::after {
   position: absolute;
   bottom: -20px;
   left: 0;
@@ -112,47 +107,48 @@
   content: 'АПТЕЧКА';
 }
 
-.guide-mouse {
+.guide__mouse {
   position: relative;
+  margin: 0 80px;
+}
 
-  & .button {
-    position: absolute;
-    font-family: sans-serif;
-    font-weight: bold;
-  }
+.guide__button {
+  position: absolute;
+  font-family: sans-serif;
+  font-weight: bold;
+}
 
-  & .button-1 {
-    top: -6px;
-    left: 29px;
-    text-align: center;
-  }
+.guide__button-1 {
+  top: -6px;
+  left: 29px;
+  text-align: center;
+}
 
-  & .button-2 {
-    top: 47px;
-    left: -30px;
-    text-align: right;
-  }
+.guide__button-2 {
+  top: 47px;
+  left: -30px;
+  text-align: right;
+}
 
-  & .button-3 {
-    top: 48px;
-    right: -32px;
-  }
+.guide__button-3 {
+  top: 48px;
+  right: -32px;
+}
 
-  & .button-4 {
-    bottom: -4px;
-    left: 15px;
-    text-align: center;
-  }
+.guide__button-4 {
+  bottom: -4px;
+  left: 15px;
+  text-align: center;
+}
 
-  & .action {
-    font-size: 0.9em;
-    color: red;
-  }
+.guide__action {
+  font-size: 0.9em;
+  color: red;
+}
 
-  & .reaction {
-    margin-top: 2px;
-    color: white;
-  }
+.guide__reaction {
+  margin-top: 2px;
+  color: white;
 }
 
 .svg-guide_mouse-dims {

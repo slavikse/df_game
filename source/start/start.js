@@ -8,8 +8,8 @@ import 'donate/donate';
 const db = fb.database();
 const $body = document.body;
 const $start = $body.querySelector('.start');
-const $bestScore = $start.querySelector('.best-score');
-const $newGame = $start.querySelector('.new-game');
+const $bestScore = $start.querySelector('.start__best-score-value');
+const $newGame = $start.querySelector('.start__new-game');
 const $ambient = $body.querySelector('.ambient');
 const audioHover = audioSprite.hover_menu;
 const audioIntro = audioSprite.start_intro;
@@ -22,7 +22,7 @@ function auth(user) {
     const name = user.email.replace(/@/g, ':').replace(/\./g, ':');
     db.ref(`user/${name}`).once('value').then(bestScore);
   } else {
-    $bestScore.textContent = localStorage.getItem('score') || 0;
+    $bestScore.textContent = localStorage.getItem('best-score') || 0;
   }
 }
 
@@ -39,7 +39,7 @@ function initGame() {
 
   window.god = false;
 
-  document.addEventListener('keyup', e => {
+  document.addEventListener('keyup', function(e) {
     if (e.keyCode === 191) { // ?
       window.god = true;
     }
@@ -49,8 +49,8 @@ function initGame() {
 
   $newGame.removeEventListener('click', initGame);
 
-  $start.classList.add('start-screen-no-events');
-  $newGame.style.animationName = 'new-game';
+  $start.classList.add('start__no-events');
+  $newGame.style.animationName = 'start-new-game';
 
   noise(audioURI, audioIntro);
   $start.style.opacity = 0;
@@ -61,7 +61,7 @@ function initGame() {
 
 function changeAmbient() {
   $body.style.backgroundImage = 'none'; // освобождаем память
-  $ambient.setAttribute('src', 'audio/start_ambient.mp3');
+  $ambient.setAttribute('src', 'audio/start_dark_ambient.mp3');
   $start.remove();
 }
 

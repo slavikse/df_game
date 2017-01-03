@@ -1,5 +1,5 @@
 # Мученик - машина, а не человек!
-## /!\ UNIX ONLY /!\ Автоматизация задач фронтенда
+## /!\ UNIX ONLY /!\ Автоматизация задач для веб проектов
 
 **В составе:**
 npm scripts, gulp@4, posthtml, postcss, webpack@2 + babel = ❤ es2015, png/jpg/svg/mp3 sprite, image resize, live reload, minify, rev, zip, github/firebase hosting
@@ -19,12 +19,12 @@ deploy fb: ```node run fb```
 tunnel: ```node run tunnel```   
 
 # Правила модульности
-* **Module**: это директория | fs: НЕ вкладывать | поиск (html, js) в source/   
+* **Module**: это директория | вкладывать только под модули | поиск: ./ и source/   
   **use:** module_name/{module_name.css,module_name.html,module_name.js}   
 
-* **View use:** &lt;include src='module_name/module_name.html'&gt;&lt;/include&gt;   
+* **View use:** \<include src='module_name/module_name.html'\>\</include\>   
 
-* **Style**: BEM нотация   
+* **Style**: BEM нотация | имя модуля === имя блока   
   **use:** .module-name .module-name__text {}   
 
 * **Script**: babel, es2015   
@@ -52,10 +52,12 @@ tunnel: ```node run tunnel```
 
 ```
 source/
-    font/
-    image/
-    resize/
     helper/
+        audio/
+        audios/
+        font/
+        image/
+        resize/
     header/
         audio/
         audios/

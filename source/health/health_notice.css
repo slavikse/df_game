@@ -1,6 +1,4 @@
-.health-damage,
-.health-regeneration,
-.health-game-over {
+.health-notice {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -10,36 +8,36 @@
   will-change: opacity;
 }
 
-.health-damage {
+.health-notice__damage {
   background-color: rgba(255, 0, 0, 0.2);
   box-shadow: inset 0 0 30px red;
 }
 
-@keyframes health-damage {
+@keyframes health-notice-damage {
   0% {
     opacity: 1;
   }
 }
 
-.health-regeneration {
+.health-notice__regeneration {
   background-color: rgba(255, 255, 255, 0.2);
   box-shadow: inset 0 0 30px #fff;
 }
 
-@keyframes health-regeneration {
+@keyframes health-notice-regeneration {
   0% {
     opacity: 1;
   }
 }
 
-.health-game-over {
+.health-notice__game-over {
   z-index: 2;
   animation-duration: 2s;
   background-color: black;
   animation-fill-mode: both;
 }
 
-@keyframes health-game-over {
+@keyframes health-notice-game-over {
   100% {
     opacity: 1;
   }

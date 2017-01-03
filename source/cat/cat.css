@@ -1,4 +1,4 @@
-.cat-position {
+.cat {
   position: absolute;
   /* opacity - появление/скрытие, transform - перемещение по полю */
   transition: opacity 0.4s, transform 0.4s;
@@ -7,24 +7,24 @@
   will-change: opacity, transform;
 }
 
-.cat-show {
+.cat__show {
   pointer-events: auto;
   opacity: 1;
 }
 
-.cat {
-  animation: 0.8s both; /* cat-flip */
+.cat__icon {
+  animation: 0.8s both; /* cat-icon-flip */
   backface-visibility: visible;
   will-change: transform;
 }
 
-@keyframes cat-flip {
+@keyframes cat-icon-flip {
   0% {
     transform: rotateY(720deg);
   }
 }
 
-.to-bad {
+.cat__to-bad {
   position: absolute;
   z-index: 2;
   display: flex;
@@ -34,14 +34,14 @@
   height: 100%;
   font-size: 6em;
   color: red;
-  animation: 1.4s; /* to-bad */
+  animation: 1.4s; /* cat-to-bad */
   pointer-events: none;
   opacity: 0;
   background-color: rgba(73, 0, 0, 0.7);
   will-change: opacity, transform;
 }
 
-@keyframes to-bad {
+@keyframes cat-to-bad {
   40% {
     transform: scale(1.4);
     opacity: 1;
