@@ -3,7 +3,7 @@
 Экранировать ввод. Защита от CSRF
 img[width height alt], template, пробел: &#32;
 
------------------------------------- СТИЛИ -------------------------------------
+----------------------------------- СТИЛИ --------------------------------------
 
 Сортировка стилей:
   Позиционирование: (position, z-index, top, right, bottom, left..)
@@ -23,23 +23,6 @@ img[width height alt], template, пробел: &#32;
   md = 992px
   lg = 1200px
 
-Responsive background image:
-  .home-bg {
-    background: url('image/home_bg_mobile.jpg') 50% 50% / cover no-repeat;
-  }
-
-  @media (min-width: 544px) and (max-width: 992px) {
-    .home-bg {
-      background-image: url('image/home_bg_tablet.jpg');
-    }
-  }
-
-  @media (min-width: 993px) {
-    .home-bg {
-      background-image: url('image/home_bg.jpg');
-    }
-  }
-
 ----------------------------------- СКРИПТЫ ------------------------------------
 
 libs/svg4everybody // Support external SVG: IE 9-11 & Edge 12-
@@ -50,9 +33,9 @@ vinyl-fs, chokidar, opener, connect
 
 ----------------------------------- ПРОЧЕЕ -------------------------------------
 
+14кб - 1 пакет
 Удалять не используемые глифы в шрифтах: fontforge
 Где залогинен посетитель: habrahabr.ru/post/312636
-Оформление незагруженных изображений: css-live.ru/articles/oformlenie-nezagruzhennyx-izobrazhenij.html
 webApp: github.com/GoogleChrome/airhorn/blob/master/app/manifest.{json,webapp}
 Очистка кэша вк: vk.com/dev/pages.clearCache ; Размеры картинки для og: ~537x240
 

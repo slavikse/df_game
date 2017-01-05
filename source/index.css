@@ -1,6 +1,6 @@
 @import 'helper/reset.css';
 @import 'helper/base.css';
-@import 'helper/font/font.css';
+@import 'helper/font.css';
 /******************************************************************************/
 @import 'helper/loader.css';
 @import 'preload/preload.css';

@@ -29,12 +29,12 @@ function startGame() {
 document.addEventListener('startGame', startGame);
 
 
-const obj = {
-  uri: 'https://money.yandex.ru/to/410011000753520/100',
-  title: 'Статистика из Темного Леса',
-  desc: 'Подробная статистика по переходу...',
-  image: 'https://vk.com/images/stickers/3097/128.png'
-};
+//const obj = {
+//  uri: 'https://money.yandex.ru/to/410011000753520/100',
+//  title: 'Статистика из Темного Леса',
+//  desc: 'Подробная статистика по переходу...',
+//  image: 'https://vk.com/images/stickers/3097/128.png'
+//};
 
 //shareVK({
 //  uri: 'https://money.yandex.ru/to/410011000753520/100',

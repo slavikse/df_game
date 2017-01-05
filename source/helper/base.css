@@ -11,18 +11,18 @@ body {
   overflow: hidden; /* мобы могут появляться на краю */
   font-family: 'beermoney', sans-serif;
   cursor: crosshair;
-  background: url("image/forest_day_mobile.jpg") 50% 50% / cover no-repeat;
+  background: url('image/forest_day_mobile.jpg') 50% 50% / cover no-repeat;
 }
 
 @media (min-width: 544px) and (max-width: 992px) {
   body {
-    background-image: url("image/forest_day_tablet.jpg");
+    background-image: url('image/forest_day_tablet.jpg');
   }
 }
 
 @media (min-width: 993px) {
   body {
-    background-image: url("image/forest_day.jpg");
+    background-image: url('image/forest_day.jpg');
   }
 }
 
