@@ -27,7 +27,7 @@ tunnel: ```node run tunnel```
 * **Style**: BEM нотация | имя модуля === имя блока   
   **use:** .module-name .module-name__text {}   
 
-* **Script**: babel, es2015   
+* **Script**: babel, es2015, BEM нотация в именах событий   
 
 * **Image**: в модуле: ```module_name/image/module_name_cat.jpg```  
   **use:** ```image/module_name_cat.jpg```

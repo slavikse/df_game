@@ -207,8 +207,8 @@ function levelUp(boss) {
   const nodeKeys = boss.nodeKeys;
 
   for (let i = 0, len = nodeKeys.length; i < len; i++) {
-    bossSettingDefault[i].health[0] += 2;
-    bossSettingDefault[i].health[1] += 2;
+    bossSettingDefault[i].health[0] += 1;
+    bossSettingDefault[i].health[1] += 1;
   }
 
   scoreBossKilled += 100;

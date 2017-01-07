@@ -1,9 +1,9 @@
 'use strict';
 
-import gulp from 'gulp';
-import rename from 'gulp-rename';
-import changed from 'gulp-changed';
-import responsive from 'gulp-responsive';
+const gulp = require('gulp');
+const rename = require('gulp-rename');
+const changed = require('gulp-changed');
+const responsive = require('gulp-responsive');
 
 const name = 'resize';
 const files = 'source/**/resize/*';
@@ -39,7 +39,7 @@ if (production) {
   param.compressionLevel = 0;
 }
 
-gulp.task(name, () => {
+gulp.task(name, function() {
   return gulp.src(files)
   .pipe(rename({dirname: ''}))
   .pipe(changed(there))

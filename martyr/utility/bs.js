@@ -1,7 +1,7 @@
 'use strict';
 
-import gulp from 'gulp';
-import bs from 'browser-sync';
+const gulp = require('gulp');
+const bs = require('browser-sync');
 
 const name = 'bs';
 const folder = 'public';
@@ -9,7 +9,7 @@ const tunnel = process.env.NODE_ENV === 'tunnel';
 
 bs.create();
 
-gulp.task(name, cb => {
+gulp.task(name, function(cb) {
   bs.init({
     server: folder,
     tunnel: tunnel,

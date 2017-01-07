@@ -1,10 +1,10 @@
 'use strict';
 
-import gulp from 'gulp';
-import named from 'vinyl-named';
-import grev from 'gulp-rev';
-import revReplace from 'gulp-rev-replace';
-import {exec} from 'child_process';
+const gulp = require('gulp');
+const named = require('vinyl-named');
+const grev = require('gulp-rev');
+const revReplace = require('gulp-rev-replace');
+const exec = require('child_process');
 
 const name = 'rev';
 const pathRevFiles = 'public/**/*.{html,css,js}';

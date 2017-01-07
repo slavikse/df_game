@@ -1,9 +1,9 @@
 'use strict';
 
-import gulp from 'gulp';
-import audios from 'gulp-audiosprite';
-import fs from 'fs';
-import notify from 'gulp-notify';
+const gulp = require('gulp');
+const audios = require('gulp-audiosprite');
+const fs = require('fs');
+const notify = require('gulp-notify');
 
 const name = 'audios';
 const files = 'source/**/audios/*';
@@ -23,7 +23,7 @@ if (production) {
   config.bitrate = 80;
 }
 
-gulp.task(name, cb => {
+gulp.task(name, function(cb) {
   return gulp.src(files)
   .pipe(audios(config))
   .pipe(gulp.dest(there))
@@ -46,7 +46,7 @@ function shortenValues(spriteFile) {
   const json = JSON.parse(spriteFile); // со всем информацией
   const sprite = json.sprite; // только информация о звуках
 
-  Object.keys(sprite).forEach(key => {
+  Object.keys(sprite).forEach(function(key) {
     // [ 2000, 235.10204081632668 ] = [ 2000, 235.10 ]
     //         ^^^^^^^^^^^^^^^^^^             ^^^^^^
     sprite[key][1] = +sprite[key][1].toFixed(2);

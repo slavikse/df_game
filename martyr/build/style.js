@@ -1,23 +1,21 @@
 'use strict';
 
-import gulp from 'gulp';
-import plumber from 'gulp-plumber';
-import error from './../utility/error';
-import postcss from 'gulp-postcss';
-import atImport from 'postcss-import';
-import willChange from 'postcss-will-change'; // fallback will-change
-import autoprefixer from 'autoprefixer';
-import csso from 'postcss-csso';
-import flexbugs from 'postcss-flexbugs-fixes';
+const gulp = require('gulp');
+const plumber = require('gulp-plumber');
+const error = require('./../utility/error');
+const postcss = require('gulp-postcss');
+const atImport = require('postcss-import');
+const willChange = require('postcss-will-change'); // fallback will-change
+const autoprefixer = require('autoprefixer');
+const csso = require('postcss-csso');
+const flexbugs = require('postcss-flexbugs-fixes');
 
 const name = 'style';
 const files = 'source/*.css';
 const wFiles = '{source,temp}/**/*.css'; // temp: стили для спрайта
 const there = 'public';
 const production = process.env.NODE_ENV === 'production';
-const options = [
-  atImport({path: ['source']})
-];
+const options = [atImport({path: ['source']})];
 const browsers = [
   'ie >= 10',
   'ff >= 30',
@@ -37,7 +35,7 @@ if (production) {
   )
 }
 
-gulp.task(name, () => {
+gulp.task(name, function() {
   return gulp.src(files)
   .pipe(plumber({errorHandler: error}))
   .pipe(postcss(options))

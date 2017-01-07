@@ -1,7 +1,7 @@
 'use strict';
 
-import gulp from 'gulp';
-import changed from 'gulp-changed';
+const gulp = require('gulp');
+const changed = require('gulp-changed');
 
 const name = 'service';
 const files = [
@@ -11,7 +11,7 @@ const files = [
 const there = 'public';
 const production = process.env.NODE_ENV === 'production';
 
-gulp.task(name, () => {
+gulp.task(name, function() {
   return gulp.src(files)
   .pipe(changed(there))
   .pipe(gulp.dest(there))

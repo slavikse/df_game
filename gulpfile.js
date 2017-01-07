@@ -1,25 +1,25 @@
 'use strict';
 
-import gulp from 'gulp';
+const gulp = require('gulp');
 
-import './martyr/build/audio';
-import './martyr/build/audios';
-import './martyr/build/font';
-import './martyr/build/image';
-import './martyr/build/resize';
-import './martyr/build/script';
-import './martyr/build/service';
-import './martyr/build/sprite';
-import './martyr/build/style';
-import './martyr/build/svg';
-import './martyr/build/view';
+require('./martyr/build/audio');
+require('./martyr/build/audios');
+require('./martyr/build/font');
+require('./martyr/build/image');
+require('./martyr/build/resize');
+require('./martyr/build/script');
+require('./martyr/build/service');
+require('./martyr/build/sprite');
+require('./martyr/build/style');
+require('./martyr/build/svg');
+require('./martyr/build/view');
 
-import './martyr/utility/bs';
-import './martyr/utility/gzip';
-import './martyr/utility/kraken';
-import './martyr/utility/rev';
-//import './martyr/utility/symbol'; // выводит используемые глифы (*.html)
-import './martyr/utility/zip';
+require('./martyr/utility/bs');
+require('./martyr/utility/gzip');
+require('./martyr/utility/kraken');
+require('./martyr/utility/rev');
+require('./martyr/utility/symbol'); // выводит используемые глифы (*.html)
+require('./martyr/utility/zip');
 
 const production = process.env.NODE_ENV === 'production';
 const buildTasks = [

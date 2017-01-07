@@ -1,11 +1,11 @@
 'use strict';
 
-import gulp from 'gulp';
-import rename from 'gulp-rename';
-import replace from 'gulp-replace';
-import svgSprite from 'gulp-svg-sprite';
-import fs from 'fs';
-import cheerio from 'cheerio';
+const gulp = require('gulp');
+const rename = require('gulp-rename');
+const replace = require('gulp-replace');
+const svgSprite = require('gulp-svg-sprite');
+const fs = require('fs');
+const cheerio = require('cheerio');
 
 /** 1. Расположение svg спрайта */
 const name = 'svg';
@@ -75,7 +75,7 @@ function extractSvg(spriteString) {
   const svgBlock = [];
 
   // нужный svg содержится во втором блоке section внутри .icon-box
-  $('section').next().find('.icon-box').each((i, elem) => {
+  $('section').next().find('.icon-box').each(function(i, elem) {
     svgBlock.push($(elem).html());
   });
 

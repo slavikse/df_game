@@ -1,12 +1,12 @@
 'use strict';
 
-import gulp from 'gulp';
-import plumber from 'gulp-plumber';
-import error from './../utility/error';
-import named from 'vinyl-named';
-import wpStream from 'webpack-stream';
-import webpack from 'webpack';
-//import StatsPlugin from 'stats-webpack-plugin';
+const gulp = require('gulp');
+const plumber = require('gulp-plumber');
+const error = require('./../utility/error');
+const named = require('vinyl-named');
+const wpStream = require('webpack-stream');
+const webpack = require('webpack');
+//const StatsPlugin = require('stats-webpack-plugin');
 
 const name = 'script';
 const files = 'source/*.js';
@@ -33,8 +33,38 @@ function buildReady(cb) {
   }
 }
 
+const options = {
+  module: {
+    rules: [{
+      test: /\.js$/,
+      exclude: /firebase/,
+      loader: 'babel-loader'
+    }, {
+      test: /\.json$/,
+      loader: 'json-loader'
+    }]
+  },
+  resolve: {
+    modules: ['source', 'node_modules'],
+    extensions: ['.js', '.json']
+  },
+  cache: true,
+  watch: !production,
+  watchOptions: {aggregateTimeout: 100},
+  devtool: production ? false : 'eval',
+  plugins: [
+    new webpack.EnvironmentPlugin('NODE_ENV'),
+    new webpack.optimize.CommonsChunkPlugin({
+      children: true,
+      async: true,
+      //name: 'common',
+      //minChunks: 2
+    })
+  ]
+};
+
 if (production) {
-  plugins.push(
+  options.plugins.push(
     new webpack.LoaderOptionsPlugin({
       minimize: true,
       debug: false
@@ -71,44 +101,14 @@ if (production) {
     })
   )
 } else {
-  plugins.push(
+  options.plugins.push(
     new webpack.NoErrorsPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
+    new webpack.HotModuleReplacementPlugin()
     //new StatsPlugin('stats.json', {chunkModules: true})
   )
 }
 
-const options = {
-  module: {
-    rules: [{
-      test: /\.js$/,
-      exclude: /firebase/,
-      loader: 'babel-loader'
-    }, {
-      test: /\.json$/,
-      loader: 'json-loader'
-    }]
-  },
-  resolve: {
-    modules: ['source', 'node_modules'],
-    extensions: ['.js', '.json']
-  },
-  cache: true,
-  watch: !production,
-  watchOptions: {aggregateTimeout: 100},
-  devtool: production ? false : 'eval',
-  plugins: [
-    new webpack.EnvironmentPlugin('NODE_ENV'),
-    new webpack.optimize.CommonsChunkPlugin({
-      children: true,
-      async: true,
-      //name: 'common',
-      //minChunks: 2
-    })
-  ]
-};
-
-gulp.task(name, cb => {
+gulp.task(name, function (cb) {
   return gulp.src(files)
   .pipe(plumber({errorHandler: error}))
   .pipe(named())

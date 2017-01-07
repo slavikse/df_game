@@ -1,8 +1,8 @@
 'use strict';
 
-import gulp from 'gulp';
-import spritesmith from 'gulp.spritesmith';
-import notify from 'gulp-notify';
+const gulp = require('gulp');
+const spritesmith = require('gulp.spritesmith');
+const notify = require('gulp-notify');
 
 const name = 'sprite';
 const files = 'source/**/sprite/*';

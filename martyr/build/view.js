@@ -1,12 +1,12 @@
 'use strict';
 
-import gulp from 'gulp';
-import plumber from 'gulp-plumber';
-import error from './../utility/error';
-import posthtml from 'gulp-posthtml';
-import include from 'posthtml-include';
-import htmlmin from 'gulp-htmlmin';
-import util from 'gulp-util';
+const gulp = require('gulp');
+const plumber = require('gulp-plumber');
+const error = require('./../utility/error');
+const posthtml = require('gulp-posthtml');
+const include = require('posthtml-include');
+const htmlmin = require('gulp-htmlmin');
+const util = require('gulp-util');
 
 const name = 'view';
 const files = 'source/*.html';
@@ -29,7 +29,7 @@ const options = {
   sortClassName: true
 };
 
-gulp.task(name, () => {
+gulp.task(name, function() {
   return gulp.src(files)
   .pipe(plumber({errorHandler: error}))
   .pipe(posthtml(plugins))

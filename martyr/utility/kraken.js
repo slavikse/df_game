@@ -1,8 +1,8 @@
 'use strict';
 
-import gulp from 'gulp';
-//import imagemin from 'gulp-imagemin';
-import kraken from 'gulp-kraken';
+const gulp = require('gulp');
+//const imagemin = require('gulp-imagemin');
+const kraken = require('gulp-kraken');
 
 const name = 'kraken';
 const files = [
@@ -19,14 +19,10 @@ const config = {
   concurrency: 16
 };
 
-gulp.task(name, () => {
+gulp.task(name, function() {
   return gulp.src(files)
   .pipe(kraken(config))
 });
-
-// kraken   - 497,0 kb
-// imagemin - 546,9 kb
-// original - 563,7 kb
 
 /** на случай если кракен умрет... */
 //.pipe(imagemin({
@@ -35,3 +31,7 @@ gulp.task(name, () => {
 //  interlaced: true
 //}))
 //.pipe(gulp.dest('public/image'))
+
+// kraken   - 497,0 kb
+// imagemin - 546,9 kb
+// original - 563,7 kb

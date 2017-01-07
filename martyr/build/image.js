@@ -1,10 +1,10 @@
 'use strict';
 
-import gulp from 'gulp';
-import rename from 'gulp-rename';
-import changed from 'gulp-changed';
-import responsive from 'gulp-responsive';
-import util from 'gulp-util';
+const gulp = require('gulp');
+const rename = require('gulp-rename');
+const changed = require('gulp-changed');
+const responsive = require('gulp-responsive');
+const util = require('gulp-util');
 
 const name = 'image';
 const files = 'source/**/image/*';
@@ -20,7 +20,7 @@ const param = {
   progressive: true
 };
 
-gulp.task(name, () => {
+gulp.task(name, function() {
   return gulp.src(files)
   .pipe(rename({dirname: ''}))
   .pipe(changed(there))

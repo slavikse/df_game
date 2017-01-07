@@ -1,10 +1,10 @@
 'use strict';
 
-import gulp from 'gulp';
-import rename from 'gulp-rename';
-import changed from 'gulp-changed';
-import ffmpeg from 'gulp-fluent-ffmpeg';
-import util from 'gulp-util';
+const gulp = require('gulp');
+const rename = require('gulp-rename');
+const changed = require('gulp-changed');
+const ffmpeg = require('gulp-fluent-ffmpeg');
+const util = require('gulp-util');
 
 const name = 'audio';
 const files = 'source/**/audio/*';
@@ -15,7 +15,7 @@ function config(audio) {
   return audio.audioBitrate(80);
 }
 
-gulp.task(name, () => {
+gulp.task(name, function() {
   return gulp.src(files)
   .pipe(rename({dirname: ''}))
   .pipe(changed(there))
