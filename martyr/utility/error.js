@@ -1,3 +1,5 @@
+'use strict';
+
 import notify from 'gulp-notify';
 
 function error(err) {

@@ -1,3 +1,5 @@
+'use strict';
+
 import gulp from 'gulp';
 import rename from 'gulp-rename';
 import replace from 'gulp-replace';

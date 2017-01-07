@@ -1,5 +1,5 @@
 # Мученик - машина, а не человек!
-## /!\ UNIX ONLY /!\ Автоматизация задач для веб проектов
+## /!\ UNIX ONLY /!\ Автоматизация задач для веб проектов.
 
 **В составе:**
 npm scripts, gulp@4, posthtml, postcss, webpack@2 + babel = ❤ es2015, png/jpg/svg/mp3 sprite, image resize, live reload, minify, rev, zip, github/firebase hosting

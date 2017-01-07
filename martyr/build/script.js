@@ -1,3 +1,5 @@
+'use strict';
+
 import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import error from './../utility/error';
@@ -10,29 +12,6 @@ const name = 'script';
 const files = 'source/*.js';
 const there = 'public';
 const production = process.env.NODE_ENV === 'production';
-const module = {
-  rules: [{
-    test: /\.js$/,
-    exclude: /firebase/,
-    loader: 'babel-loader'
-  }, {
-    test: /\.json$/,
-    loader: 'json-loader'
-  }]
-};
-const resolve = {
-  modules: ['source', 'node_modules'],
-  extensions: ['.js', '.json']
-};
-const plugins = [
-  new webpack.EnvironmentPlugin('NODE_ENV'),
-  new webpack.optimize.CommonsChunkPlugin({
-    children: true,
-    async: true,
-    //name: 'common',
-    //minChunks: 2
-  })
-];
 
 let firstBuildReady = false;
 
@@ -100,13 +79,33 @@ if (production) {
 }
 
 const options = {
-  module: module,
-  resolve: resolve,
+  module: {
+    rules: [{
+      test: /\.js$/,
+      exclude: /firebase/,
+      loader: 'babel-loader'
+    }, {
+      test: /\.json$/,
+      loader: 'json-loader'
+    }]
+  },
+  resolve: {
+    modules: ['source', 'node_modules'],
+    extensions: ['.js', '.json']
+  },
   cache: true,
   watch: !production,
-  watchOptions: {aggregateTimeout: 50},
+  watchOptions: {aggregateTimeout: 100},
   devtool: production ? false : 'eval',
-  plugins: plugins
+  plugins: [
+    new webpack.EnvironmentPlugin('NODE_ENV'),
+    new webpack.optimize.CommonsChunkPlugin({
+      children: true,
+      async: true,
+      //name: 'common',
+      //minChunks: 2
+    })
+  ]
 };
 
 gulp.task(name, cb => {

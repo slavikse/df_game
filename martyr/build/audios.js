@@ -1,3 +1,5 @@
+'use strict';
+
 import gulp from 'gulp';
 import audios from 'gulp-audiosprite';
 import fs from 'fs';

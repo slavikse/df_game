@@ -1,3 +1,5 @@
+'use strict';
+
 import gulp from 'gulp';
 import named from 'vinyl-named';
 import grev from 'gulp-rev';

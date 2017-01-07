@@ -1,3 +1,5 @@
+'use strict';
+
 import gulp from 'gulp';
 //import imagemin from 'gulp-imagemin';
 import kraken from 'gulp-kraken';

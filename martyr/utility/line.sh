@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 view=$(find source -name '*.html' -type f -print0 | xargs -0 cat | wc -l)
 style=$(find source -name '*.css' -type f -print0 | xargs -0 cat | wc -l)

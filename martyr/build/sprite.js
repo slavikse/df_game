@@ -1,3 +1,5 @@
+'use strict';
+
 import gulp from 'gulp';
 import spritesmith from 'gulp.spritesmith';
 import notify from 'gulp-notify';

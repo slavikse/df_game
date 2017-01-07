@@ -1,3 +1,5 @@
+'use strict';
+
 import gulp from 'gulp';
 import plumber from 'gulp-plumber';
 import error from './../utility/error';

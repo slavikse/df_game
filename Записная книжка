@@ -1,7 +1,7 @@
 ---------------------------------- РАЗМЕТКА ------------------------------------
 
 Экранировать ввод. Защита от CSRF
-img[width height alt], template, пробел: &#32;
+img[width,height,alt], template, пробел: &#32;
 
 ----------------------------------- СТИЛИ --------------------------------------
 
@@ -11,11 +11,11 @@ img[width height alt], template, пробел: &#32;
   Оформление: (font, color, background..)
   Остальное: (transition, animation, box-shadow, text-shadow..)
 
-Рекомендации:
+Производительность:
   layout: раскладка (width, left..), дорогая операция
   paint: отрисовка (color, opacity..), дешевая операция
   composite: компоновка, самая дешевая операция
-  will-change (GPU): opacity, transform
+  will-change: opacity, transform
 
 Ширины экранов (основано на bstp4):
   xs = 544px
@@ -27,17 +27,11 @@ img[width height alt], template, пробел: &#32;
 
 libs/svg4everybody // Support external SVG: IE 9-11 & Edge 12-
 
-------------------------------------- NPM --------------------------------------
-
-vinyl-fs, chokidar, opener, connect
-
 ----------------------------------- ПРОЧЕЕ -------------------------------------
 
-14кб - 1 пакет
 Удалять не используемые глифы в шрифтах: fontforge
-Где залогинен посетитель: habrahabr.ru/post/312636
 webApp: github.com/GoogleChrome/airhorn/blob/master/app/manifest.{json,webapp}
-Очистка кэша вк: vk.com/dev/pages.clearCache ; Размеры картинки для og: ~537x240
+Очистка кэша вк: vk.com/dev/pages.clearCache, Размеры картинки для og: ~537x240
 
 -------------------------------- GITHUB DEPLOY ---------------------------------
 
@@ -45,6 +39,6 @@ webApp: github.com/GoogleChrome/airhorn/blob/master/app/manifest.{json,webapp}
   A      @    192.30.252.153
   A      @    192.30.252.154
   CNAME  www  slavikse.github.io.
-2. В файл ./CNAME прописать имя домена (PonyCode?)
+2. В файл ./CNAME прописать имя домена (PonyCode)
 
 --------------------------------------------------------------------------------

@@ -1,3 +1,5 @@
+'use strict';
+
 import gulp from 'gulp';
 import size from 'gulp-size';
 
