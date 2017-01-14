@@ -37,7 +37,7 @@ const options = {
   module: {
     rules: [{
       test: /\.js$/,
-      exclude: /firebase/,
+      exclude: /node_modules/,
       loader: 'babel-loader'
     }, {
       test: /\.json$/,
