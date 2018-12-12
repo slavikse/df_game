@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: http://xn----itbboldh0bb7g.xn--p1acf/sitemap.xml
